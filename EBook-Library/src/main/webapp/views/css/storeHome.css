@@ -1,0 +1,159 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+img {
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.introduce {
+    position: relative;
+    background-image: url("/img/background/changpass.jpg");
+    border-radius: 10px;
+    width: 100%;
+    height: 150px;
+}
+
+.nameStore {
+    margin-top: 20px;
+    margin-left: 10px;
+    color: azure;
+}
+
+.nameStore>p {
+    max-height: 3.6em;
+    overflow: hidden;
+    font-family: 'Times New Roman', Times, serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.introduce-store {
+    display: flex;
+}
+
+.subscribe-message {
+    position: absolute;
+    left: 14%;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-left: 0px; */
+}
+
+.subscribe {
+    border: 1px solid azure;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.subscribe>a {
+    /* margin: 5px; */
+    color: azure;
+    text-decoration: none;
+}
+
+.message {
+    margin-left: 10px;
+    border: 1px solid azure;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.message>a {
+    /* margin: 5px; */
+    color: azure;
+    text-decoration: none;
+
+}
+
+.sales-information {
+    margin: 20px;
+}
+
+.sales-information>.row-1,
+.row-2,
+.row-3>.row>.col-md-6>p {
+    font-size: 17px;
+}
+
+.sales-information>.row-1>.row>.col-md-6>p>span {
+    color: rgb(245, 12, 12);
+}
+
+.sales-information>.row-2>.row>.col-md-6>p>span {
+    color: rgb(245, 12, 12);
+}
+
+.sales-information>.row-3>.row>.col-md-6>p>span {
+    color: rgb(245, 12, 12);
+}
+
+
+/* san pham */
+
+.card .row {
+    padding-left: 20px;
+}
+
+.col-md-3 .card {
+    margin-bottom: 10px;
+    width: 274px;
+}
+
+
+.card .heard {
+    padding: 20px 10px;
+    font-size: 1.8rem;
+    color: red;
+}
+
+.SP .card-title {
+    margin: 20px 0px;
+}
+
+.image-container img {
+    height: 250px;
+    width: auto;
+}
+
+.card:hover .default-img {
+    opacity: 0;
+}
+
+.card:hover .hover-img {
+    opacity: 1;
+}
+
+.card:hover {
+    background-color: white;
+    box-shadow: 0px 5px 8px rgb(203, 203, 203);
+}
+
+.image-container {
+    position: relative;
+}
+
+.hover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-toolbar {
+    margin: 30px 0px;
+}
