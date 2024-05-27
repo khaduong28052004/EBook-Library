@@ -95,9 +95,7 @@
 			<version>2.0.1</version> <!-- Thay đổi phiên bản tùy theo yêu cầu của
 			bạn -->
 		</dependency>
-
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
