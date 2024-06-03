@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ChangePassController {
 	@RequestMapping("changePass")
 	public String getChangePass() {
-		return "layout/account/changPass";
+		return "html/account/changPass";
 	}
 
 }

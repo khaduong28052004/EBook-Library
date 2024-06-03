@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SearchBuyBookController {
 	@RequestMapping("searchBuyBook")
 	public String get() {
-		return "layout/user/SearchBuyBook";
+		return "html/user/SearchBuyBook";
 	}
 }

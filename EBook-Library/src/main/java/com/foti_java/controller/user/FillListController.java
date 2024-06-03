@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FillListController {
 	@RequestMapping("fillList")
 	public String get() {
-		return "layout/user/fillList";
+		return "html/user/fillList";
 	}
 }

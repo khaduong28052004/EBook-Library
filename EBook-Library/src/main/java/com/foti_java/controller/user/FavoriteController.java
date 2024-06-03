@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FavoriteController {
 	@RequestMapping("favorite")
 	public String get() {
-		return "layout/user/favoriteBooks";
+		return "html/user/favoriteBooks";
 	}
 }
