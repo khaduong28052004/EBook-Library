@@ -1,5 +1,6 @@
 package com.foti_java.model;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -23,14 +24,36 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Roles")
-public class Role {
+//@Table(name = "Bills")
+public class Bill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	String name;
+	double totalPrice;
+	int quantity;
+	boolean status;
+	String address;
+	double priceShipping;
 	
-	@OneToMany(mappedBy = "role")
-	List<RoleDetail> roleDetails;
-
+	@OneToMany(mappedBy = "bill")
+	List<BillDetail> billDetails;
+	
+	@ManyToOne
+	@JoinColumn(name = "voucher_id")
+	Voucher voucher;
+//	
+//	@OneToMany(mappedBy = "bill")
+//	List<ReturnBook> returnBooks;
+	
+	@ManyToOne
+	@JoinColumn(name = "orderStatuses_id")
+	OrderStatus orderStatuses;
+	
+	@ManyToOne
+	@JoinColumn(name = "paymentMethod_id")
+	PaymentMethod paymentMethod;
+	
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	Account account;
 }

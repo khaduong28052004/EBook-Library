@@ -23,14 +23,21 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Roles")
-public class Role {
+//@Table(name = "Evalues")
+public class Evalue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	String name;
+	Account account;
+	String quality;
+	String checkDescription;
+	int star;
+	String content;
 	
-	@OneToMany(mappedBy = "role")
-	List<RoleDetail> roleDetails;
-
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	Product product;
+	
+	@OneToMany(mappedBy = "evalue")
+	List<ImageEvalue> imageEvalues;
 }

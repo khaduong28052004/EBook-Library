@@ -23,14 +23,20 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Roles")
-public class Role {
+//@Table(name = "Districts")
+public class District {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String name;
 	
-	@OneToMany(mappedBy = "role")
-	List<RoleDetail> roleDetails;
-
+	@ManyToOne
+	@JoinColumn(name = "provinces_id")
+	Province province;
+	
+	@OneToMany(mappedBy = "district")
+	List<Commun> communes;
+	
+	@OneToMany(mappedBy = "district")
+	List<Address> addresses;
 }
