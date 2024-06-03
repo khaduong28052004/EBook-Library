@@ -23,12 +23,12 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Evalues")
+@Table(name = "Evalues")
 public class Evalue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	Account account;
+	int account;
 	String quality;
 	String checkDescription;
 	int star;

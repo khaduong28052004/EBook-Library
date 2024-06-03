@@ -24,7 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "ReturnBooks")
+@Table(name = "ReturnBooks")
 public class ReturnBook {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

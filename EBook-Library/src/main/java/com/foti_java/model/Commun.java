@@ -23,7 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Communes")
+@Table(name = "Communes")
 public class Commun {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

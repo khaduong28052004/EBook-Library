@@ -20,12 +20,12 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Likes")
+@Table(name = "Likes")
 public class Like {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	Account account;
+	int account;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id")

@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Followers")
+@Table(name = "Followers")
 public class Follower {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

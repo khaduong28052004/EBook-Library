@@ -20,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "VoucherDetails")
+@Table(name = "VoucherDetails")
 public class VoucherDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -23,7 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Districts")
+@Table(name = "Districts")
 public class District {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

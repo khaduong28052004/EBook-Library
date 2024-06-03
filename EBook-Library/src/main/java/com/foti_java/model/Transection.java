@@ -24,7 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Transections")
+@Table(name = "Transections")
 public class Transection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

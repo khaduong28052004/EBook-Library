@@ -20,13 +20,13 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "Shares")
+@Table(name = "Shares")
 public class Share {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String email;
-	Account account;
+	int account;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")

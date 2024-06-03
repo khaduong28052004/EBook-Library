@@ -21,7 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-//@Table(name = "typeOfVouchers")
+@Table(name = "typeOfVouchers")
 public class typeOfVoucher {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
