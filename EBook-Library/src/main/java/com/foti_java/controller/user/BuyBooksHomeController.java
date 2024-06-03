@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BuyBooksHomeController {
 	@RequestMapping("buyBookHome")
 	public String get() {
-		return "layout/user/buyBooksHome";
+		return "html/user/buyBooksHome";
 	}
 }

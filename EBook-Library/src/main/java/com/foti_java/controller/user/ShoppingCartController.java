@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShoppingCartController {
 	@RequestMapping("shoppingCart")
 	public String get() {
-		return "layout/user/shoppingCart";
+		return "html/user/shoppingCart";
 	}
 }

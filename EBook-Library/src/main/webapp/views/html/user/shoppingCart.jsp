@@ -1,4 +1,24 @@
-<link rel="stylesheet" href="/css/shoppingCart.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<style type="text/css">
+<%@ include file="/views/css/home.css"%></style>
+	
+</head>
+<body>
+<%@include file="/views/layout/common/header.jsp" %>
+<link rel="stylesheet" href="/views/css/shoppingCart.css">
 <div class="container-fluid" style="background-color: rgba(128, 128, 128, 0.055); padding: 0px;margin: 0px;">
     <div class="row" style="margin: 50px;">
         <div class="col-md-12" style="margin-top: 30px;">
@@ -143,3 +163,13 @@
 </div>
 
 </div>
+<%@include file="/views/layout/common/footer.jsp" %>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+</html>

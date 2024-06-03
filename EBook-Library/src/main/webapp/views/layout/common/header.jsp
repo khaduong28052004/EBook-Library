@@ -1,13 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+	integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-<header class="container  sticky-top">
+	<header class="container  sticky-top">
 		<div class="page-content rounded-2 "
 			style="padding-top: 0px; padding-bottom: 0px;">
 
@@ -19,7 +30,8 @@
 				<div
 					class="collapse navbar-collapse row d-flex justify-content-center"
 					id="navbarScroll">
-					<a class="col-md-1" aria-current="page" href="#!home"> <img
+					<a class="col-md-1" aria-current="page"
+						href="/Ebook/user/buyBookHome"> <img
 						src="/views/img/logo/V.jpg" alt="" width="70%" height="70%">
 					</a>
 					<div class="col-md-5">
@@ -31,28 +43,36 @@
 								<ul class="dropdown-menu" style="width: 500px;">
 									<div class=" row">
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Sách giáo khoa</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Sách
+												giáo khoa</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Đề thi tốt nghiệp</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Đề
+												thi tốt nghiệp</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Truyện tranh</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
+												tranh</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Truyện ngôn tình</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
+												ngôn tình</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Sách giáo khoa</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Sách
+												giáo khoa</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Đề thi tốt nghiệp</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Đề
+												thi tốt nghiệp</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Truyện tranh</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
+												tranh</a></li>
 										<li class="col-md-6 align-items-center"><a
-											class="dropdown-item" href="#!category">Truyện ngôn tình</a></li>
+											class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
+												ngôn tình</a></li>
 									</div>
 								</ul></li>
 							<li class="nav-item"></li>
 							<li class="nav-item"><a class="nav-link" aria-current="page"
-								href="#!buyBook"> Mua sách</a></li>
+								href="/Ebook/user/buyBookHome"> Mua sách</a></li>
 							<li class="nav-item"><a class="nav-link" aria-current="page"
-								href="#!buyBook"> Yêu Thích</a></li>
+								href="/Ebook/user/favorite"> Yêu Thích</a></li>
 						</ul>
 					</div>
 					<div class="col-md-4">
@@ -71,17 +91,16 @@
 									class="fa-solid fa-user" style="color: green;"></i> Tài khoản
 								</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="#!changePass">Đổi
-											mật khẩu</a></li>
 									<li><a class="dropdown-item"
-										href="/html/account/updateProfile.html">Cập nhật tài khoản</a></li>
+										href="/Ebook/account/changePass">Đổi mật khẩu</a></li>
 									<li><a class="dropdown-item"
-										href="/html/user/postBooks.html">Đăng bài</a></li>
+										href="/Ebook/account/changePass">Cập nhật tài khoản</a></li>
 									<li><a class="dropdown-item"
-										href="/html/user/postBooks.html">Đăng ký bán sách</a></li>
+										href="/Ebook/user/registerSell/registerSell01">Đăng ký bán
+											sách</a></li>
 									<!-- <hr> -->
-									<li><a class="dropdown-item"
-										href="html/account/login.html">Đăng xuất</a></li>
+									<li><a class="dropdown-item" href="/Ebook/account/login">Đăng
+											xuất</a></li>
 								</ul>
 							</div>
 						</ul>
@@ -93,6 +112,6 @@
 		</nav>
 		</div>
 	</header>
-	
+
 </body>
 </html>
