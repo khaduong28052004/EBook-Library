@@ -1,40 +1,19 @@
-<!doctype html>
-<html lang="en">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <head>
-  <title>Title</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Bootstrap CSS v5.2.1 -->
+<meta charset="UTF-8">
+<title>Bill Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/billDetails.css">
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <style type="text/css">
+  <%@include file="/views/css/billDetails.css"%>
+  </style>
 </head>
-
 <body>
-  <header class="sticky-top">
-    <!-- <nav class="navbar bg-body-tertiary"> -->
-    <div class="navbar navbar-expand-lg bd-navbar container-fluid  justify-content-center align-items-center">
-      <a class="navbar-brand " href="/index.html"><img src="/img/logo/V-white.png" alt=""></a>
-      <form class="d-flex" role="search">
-        <button type="button" class="btnSeacrh" data-bs-toggle="modal" data-bs-target="#btnSeacrh">Seacrh</button>
-      </form>
-      <div class="nav-item dropdown">
-        <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img width="24px" height="24px" class="sunHeader" src="/img/icon/user.png" alt="">
-        </a>
-      </div>
-    </div>
-
-    <div class="container-fluid" style="background-color: white;">
-      <form class="d-flex" role="search">
-        <button type="button" style="background-color: white; color: white; border: none;" data-bs-toggle="modal"
-          data-bs-target="#btnSeacrh">Seacrh</button>
-      </form>
-    </div>
-    <!-- </nav> -->
-  </header>
+<%@include file="/views/layout/account/header.jsp"%>
   <main class="container" style="margin: 0px; max-width: 2000px;">
     <div class="row">
       <aside class="col-md-2">
@@ -42,11 +21,11 @@
           <div class="menu-item">
             <a class="text-nav" href="javascript:void(0);" onclick="toggleSubmenu()">Thông Tin Cá Nhân</a>
             <div class="submenu">
-              <a class="text-subnav" href="/html/account/viewProfile.html">Xem Hồ Sơ</a>
-              <a class="text-subnav" href="/html/account/banks.html">Ngân Hàng</a>
+              <a class="text-subnav" href="/Ebook/account/updateProfile">Xem Hồ Sơ</a>
+              <a class="text-subnav" href="/Ebook/account/banks">Ngân Hàng</a>
             </div>
           </div>
-          <a class="activeMenu2" href="/html/user/bill.html">Đơn Hàng</a>
+          <a class="activeMenu2" href="/account/bill">Đơn Hàng</a>
         </nav>
       </aside>
       <aside class="col-md-10">
@@ -54,8 +33,8 @@
           <div class="col-9 menuNgangNe">
             <div class="nav navbar">
               <div class="card-header headerTrangThai" style="background-color: white;">
-                <p class="tenNguoiBan"><img width="24" height="24" src="https://img.icons8.com/ios/50/back--v1.png"
-                    alt="back--v1" alt="left-squared" /> Trở lại</p>
+                <a href="/Ebook/account/bill"><p class="tenNguoiBan"  style="color: black"/><img width="24" height="24" src="https://img.icons8.com/ios/50/back--v1.png"
+                    alt="back--v1" alt="left-squared" > Trở lại</p></a>
                 <p class="noiDungPhai"> <span class="trangThai">MÃ ĐƠN HÀNG: 2307261DPW87TD</span> | <span
                     class="danhGia">ĐƠN HÀNG ĐÃ HOÀN THÀNH</span></p>
               </div>
@@ -65,32 +44,32 @@
         <div style="height: 70px;"></div>
 
         <div class="circle-container">
-          <div class="circle"><img width="36" height="36" src="/img/icon/bill.png" alt="bill" />
+          <div class="circle"><img width="36" height="36" src="/views/img/icon/bill.png" alt="bill" />
             <div class="text">
               <p>Đơn Hàng Đã Đặt</p>
               <p class="ngay">12:00 01/01/2024</p>
             </div>
           </div>
-          <div class="circle"><img width="36" height="36" src="/img/icon/tick.png" alt="bill" />
+          <div class="circle"><img width="36" height="36" src="/views/img/icon/tick.png" alt="bill" />
             <div class="text">
               <p>Đang Chờ Đơn Vị Vận Chuyển</p>
               <p class="ngay">13:00 01/01/2024</p>
             </div>
           </div>
-          <div class="circle"><img width="36" height="36" src="/img/icon/truck.png" alt="bill" />
+          <div class="circle"><img width="36" height="36" src="/views/img/icon/truck.png" alt="bill" />
             <div class="text">
               <p>Đã Giao Cho Đơn Vị Vận Chuyển
               </p>
               <p class="ngay">16:00 01/01/2024</p>
             </div>
           </div>
-          <div class="circle"><img width="36" height="36" src="/img/icon/box.png" alt="bill" />
+          <div class="circle"><img width="36" height="36" src="/views/img/icon/box.png" alt="bill" />
             <div class="text">
               <p>Đã Nhận Được Hàng</p>
               <p class="ngay">23:00 02/01/2024</p>
             </div>
           </div>
-          <div class="circle"><img width="36" height="36" src="/img/icon/star.png" alt="bill" />
+          <div class="circle"><img width="36" height="36" src="/views/img/icon/star.png" alt="bill" />
             <div class="text">
               <p>Đơn Hàng Đã Hoàn Thành</p>
               <p class="ngay">6:00 03/01/2024</p>
@@ -140,7 +119,7 @@
                 <table class="table table-vanChuyen">
                   <thead>
                     <tr>
-                      <td scope="col"><img width="24" height="24" src="/img/icon/tick.png" alt="bill" /></td>
+                      <td scope="col"><img width="24" height="24" src="/views/img/icon/tick.png" alt="bill" /></td>
                       <td scope="col">17:15 30-07-2023</td>
                       <td scope="col">
                         <span class="trangThai-vanChuyen">Đã giao</span>
@@ -151,7 +130,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><img width="24" height="24" src="/img/icon/tick.png" alt="bill" /></td>
+                      <td><img width="24" height="24" src="/views/img/icon/tick.png" alt="bill" /></td>
                       <td>09:25 30-07-2023</td>
                       <td>
                         <span class="trangThai-vanChuyen">Đang giao hàng</span>
@@ -159,7 +138,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><img width="24" height="24" src="/img/icon/tick.png" alt="bill" /></td>
+                      <td><img width="24" height="24" src="/views/img/icon/tick.png" alt="bill" /></td>
                       <td>15:08 26-07-2023</td>
                       <td>
                         <span class="trangThai-vanChuyen">Đang được chuẩn bị</span>
@@ -167,7 +146,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><img width="24" height="24" src="/img/icon/tick.png" alt="bill" /></td>
+                      <td><img width="24" height="24" src="/views/img/icon/tick.png" alt="bill" /></td>
                       <td>12:38 26-07-2023</td>
                       <td>
                         <span class="trangThai-vanChuyen">Đặt hàng thành công</span>
@@ -184,14 +163,14 @@
         <div class="card cardProduct">
           <div class="card-header cardProduct-header">
             <p class="tenNguoiBan">
-              <img width="24px" height="24px" src="/img/icon/user.png" alt="">
+              <img width="24px" height="24px" src="/views/img/icon/user.png" alt="">
               <span>Bạch Ngọc Sách</span>
             </p>
           </div>
           <div class="card-body cardProduct-body">
             <div class="list-book">
               <div class="book">
-                <img src="/img/books/Truyen/NgoiSaoHiVong.webp" alt="">
+                <img src="/views/img/books/Truyen/NhanThuong.jpg" alt="">
                 <div class="book-content">
                   <a href="">Ngôi Sao Hy Vọng</a>
 
@@ -199,6 +178,13 @@
                     của làng túc cầu Thế...</div>
                   <div class="row info">
                     <div class="col-6 info-book">
+                       <a class="rating-container" href="/Ebook/user/evaluate" style="color: yellow; font-size: 10px;">
+                      <span class="star" data-value="1"><i class="fa-solid fa-star"></i></span>
+                      <span class="star" data-value="2"><i class="fa-solid fa-star"></i></span>
+                      <span class="star" data-value="3"><i class="fa-solid fa-star"></i></span>
+                      <span class="star" data-value="4"><i class="fa-solid fa-star"></i></span>
+                      <span class="star" data-value="5"><i class="fa-solid fa-star"></i></span>
+                      </a>
                       <p class="gia">300.000đ</p>
                       <p class="soLuong">x1</p>
                     </div>
@@ -241,49 +227,24 @@
           </div>
         </div>
 
-
+</aside>
     </div>
   </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <!-- Modal -->
-  <div class="modal fade" id="btnSeacrh" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
-
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
-
-  <script src="/js/donHang.js">
-
-  </script>
-  <script>
-    function toggleSubmenu() {
-      var menuItem = document.querySelector('.menu-item');
-      if (menuItem) {
-        menuItem.classList.toggle('open');
-      }
+<script type="text/javascript">
+<%@include file="/views/js/donHang.js"%>
+function toggleSubmenu() {
+    var menuItem = document.querySelector('.menu-item');
+    if (menuItem) {
+      menuItem.classList.toggle('open');
     }
-  </script>
-
+  }
+</script>
 </body>
-
 </html>

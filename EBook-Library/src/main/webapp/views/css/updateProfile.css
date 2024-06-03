@@ -1,9 +1,142 @@
-@charset "UTF-8";
+body{
+    min-width: 1200px;
+}
+body {
+    margin: 0;
+    font-family:  Helvetica , Arial, sans-serif;
+    font-size: .9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;    
+    text-align: left;
+    background-color: #fff;
+}
+header{
+    background-color: green;
+}
+.navbar-brand img{
+    position: absolute;
+left: 30px; 
+top: 8px;
+}
+.btnSeacrh{
+    border: solid 1px white;
+    border-radius: 10px;
+    width: 350px;
+    height: 40px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+}
+.btnSeacrh:hover{
+    background-color: rgb(3, 104, 3); 
+}
+.sunHeader{
+    position: absolute;
+    right: -550px;
+    top: -10px;
+}
+.sunMenu{
+    margin-top: 200px;
+    margin-left: 330px;
+}
+.sunMenu{
+    padding: 10px;
+}
+.iconMenu{
+    margin-right: 5px;
+}
+.dropdown-itemMenu{
+text-align: center;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+.activeMenu1{
+    color: white;
+    font-weight: bold;
+    background-color: green;
+    border-radius: 5px;
+}
+.search{
+    border: solid 2px  green;
+}
+.menuNgangNe{
+    position: fixed;
+    /* overflow-y: auto; */
+    z-index: 999; 
+    background-color: white;
+}
+.col-9{
+margin-left: -19px;
+}
+.vertical-menu {
+    width: 200px;
+    position: fixed;
+    overflow-y: hidden;  
+    margin-left: 20px;   
+}
+
+.vertical-menu .text-nav {
+    color: black;
+    padding: 10px; 
+    display: block; 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+.text-nav:hover {
+    color: green;
+    font-weight: bold;
+}
+
 .activeMenu2 {
     font-weight: bold;
     background-color: green;
     border-radius: 5px;
     color: white;
+    padding: 10px; 
+    display: block; 
+    text-decoration: none; 
+}
+
+.menu-item {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    flex-direction: column;
+
+
+}
+
+.submenu a {
+    padding-left: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.submenu .activeMenuCon {
+    padding-left: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+    background-color: green;
+    border-radius: 5px;
+}
+
+.text-subnav:hover {
+    color: green;
+}
+
+.menu-item.open .submenu {
+    display: flex;
 }
 
 .nav-item button {
@@ -21,20 +154,6 @@
     text-decoration: none;
     color: black;
     font-weight: bolder;
-}
-
-.nav-linkMenu.activeMenu3 {
-    text-decoration: underline 2px green;
-    color: green;
-}
-
-.nav-linkMenu:hover {
-    text-decoration: underline 2px green;
-    color: green;
-}
-
-main>aside>article {
-    background-color: #333;
 }
 
 main aside>article>.title>p {
@@ -57,7 +176,7 @@ main aside>aside .showImgBia>img {
     height: 160px;
     border-radius: 10px;
 }
-main aside>aside .showImgAvt>img{
+main aside aside .showImgAvt>img{
     position: absolute;
     top: 90px;
     right: 320px;
@@ -65,12 +184,12 @@ main aside>aside .showImgAvt>img{
     border: 1px solid rgb(202, 201, 201);
     width: 100px;
     height: 100px;
-}main aside>aside .title-TenShop{
+}main aside aside .title-TenShop{
     position: absolute;
     top: 110px;
     left: 81%;
 }
-main aside>aside .title-TenShop>p{
+main aside aside .title-TenShop>p{
 font-size: 1.6rem;
 color: white;
 font-weight: bold;

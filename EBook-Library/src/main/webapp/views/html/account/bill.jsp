@@ -1,58 +1,34 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <!-- Bootstrap CSS v5.2.1 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bill</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="/css/bill.css">
-    </head>
-
-    <body >
-        <header class=" sticky-top">
-            <!-- <nav class="navbar bg-body-tertiary"> -->
-                <div class="navbar navbar-expand-lg bd-navbar container-fluid  justify-content-center align-items-center">
-                  <a class="navbar-brand " href="/index.html"><img src="/img/logo/V-white.png" alt=""></a>
-                  <form class="d-flex" role="search">
-                    <button type="button" class="btnSeacrh" data-bs-toggle="modal" data-bs-target="#btnSeacrh">Seacrh</button> 
-                  </form>
-                  <div class="nav-item dropdown">
-                    <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img width="24px" height="24px" class="sunHeader" src="/img/icon/user.png" alt="">
-                    </a>
-                  </div>
-                </div>
-
-                <div class="container-fluid" style="background-color: white;">
-                    <form class="d-flex" role="search">
-                      <button type="button" style="background-color: white; color: white; border: none;" data-bs-toggle="modal" data-bs-target="#btnSeacrh">Seacrh</button> 
-                    </form>
-                    </div>
-              <!-- </nav> -->
-          </header>
-        <main class="container" style="margin: 0px; max-width: 2000px;">
+        <style type="text/css">
+        <%@include file="/views/css/bill.css"%>
+        </style>
+</head>
+<body>
+        <%@include file="/views/layout/account/header.jsp"%>
+ <main class="container" style="margin: 0px; max-width: 2000px;">
 <div class="row">
     <aside class="col-md-2">
         <nav class="vertical-menu">
             <div class="menu-item">
                 <a class="text-nav" href="javascript:void(0);" onclick="toggleSubmenu()">Thông Tin Cá Nhân</a>
                 <div class="submenu">
-                    <a class="text-subnav" href="/html/account/viewProfile.html">Xem Hồ Sơ</a>
-                    <a class="text-subnav" href="/html/account/banks.html">Ngân Hàng</a>
+                    <a class="text-subnav" href="/Ebook/account/updateProfile">Xem Hồ Sơ</a>
+                    <a class="text-subnav" href="/Ebook/account/banks">Ngân Hàng</a>
                 </div>
             </div>
-            <a class="activeMenu2" href="/html/user/bill.html">Đơn Hàng</a>
+            <a class="activeMenu2" href="/Ebook/account/bill">Đơn Hàng</a>
         </nav>
     </aside>
     <aside class="col-md-10" >
@@ -84,7 +60,7 @@
         <div class="card">
             <div class="card-header">
               <p class="tenNguoiBan">
-              <img width="24px" height="24px" src="/img/icon/user.png" alt="">
+              <img width="24px" height="24px" src="/views/img/icon/user.png" alt="">
               <span>Bạch Ngọc Sách</span>
             </p>    
 
@@ -93,9 +69,9 @@
             <div class="card-body">
                 <div class="list-book">
                             <div class="book">
-                                <img src="/img/books/Truyen/NgoiSaoHiVong.webp" alt="">
+                                <img src="/views/img/books/Truyen/NhanThuong.jpg" alt="">
                                 <div class="book-content">
-                                    <a href="/html/user/billDetails.html">Ngôi Sao Hy Vọng</a>
+                                    <a href="/Ebook/account/billDetails">Ngôi Sao Hy Vọng</a>
 
                                     <div class="content">Nguyễn Thanh Tùng đứng trước chiếc cúp danh giá nhất
                                         của làng túc cầu Thế...</div>
@@ -124,7 +100,7 @@
         <div class="card">
             <div class="card-header">
               <p class="tenNguoiBan">
-              <img width="24px" height="24px" src="/img/icon/user.png" alt="">
+              <img width="24px" height="24px" src="/views/img/icon/user.png" alt="">
               <span>Bạch Ngọc Sách</span>
             </p>    
 
@@ -133,9 +109,9 @@
             <div class="card-body">
                 <div class="list-book">
                             <div class="book">
-                                <img src="/img/books/Truyen/NgoiSaoHiVong.webp" alt="">
+                                <img src="/views/img/books/Truyen/NhanThuong.jpg" alt="">
                                 <div class="book-content">
-                                    <a href="/html/user/billDetails.html"">Ngôi Sao Hy Vọng</a>
+                                    <a href="/Ebook/account/billDetails">Ngôi Sao Hy Vọng</a>
 
                                     <div class="content">Nguyễn Thanh Tùng đứng trước chiếc cúp danh giá nhất
                                         của làng túc cầu Thế...</div>
@@ -163,7 +139,7 @@
         <div class="card">
             <div class="card-header">
               <p class="tenNguoiBan">
-              <img width="24px" height="24px" src="/img/icon/user.png" alt="">
+              <img width="24px" height="24px" src="/views/img/icon/user.png" alt="">
               <span>Bạch Ngọc Sách</span>
             </p>    
 
@@ -172,9 +148,9 @@
             <div class="card-body">
                 <div class="list-book">
                             <div class="book">
-                                <img src="/img/books/Truyen/NgoiSaoHiVong.webp" alt="">
+                                <img src="/views/img/books/Truyen/NhanThuong.jpg"" alt="">
                                 <div class="book-content">
-                                    <a href="/html/user/billDetails.html"">Ngôi Sao Hy Vọng</a>
+                                    <a href="/Ebook/account/billDetails">Ngôi Sao Hy Vọng</a>
 
                                     <div class="content">Nguyễn Thanh Tùng đứng trước chiếc cúp danh giá nhất
                                         của làng túc cầu Thế...</div>
@@ -188,9 +164,9 @@
                             </div>
 
                             <div class="book">
-                                <img src="/img/books/Truyen/NgoiSaoHiVong.webp" alt="">
+                                <img src="/views/img/books/Truyen/NhanThuong.jpg" alt="">
                                 <div class="book-content">
-                                    <a href="/html/user/billDetails.html"">Ngôi Sao Hy Vọng</a>
+                                    <a href="/Ebook/account/billDetails">Ngôi Sao Hy Vọng</a>
 
                                     <div class="content">Nguyễn Thanh Tùng đứng trước chiếc cúp danh giá nhất
                                         của làng túc cầu Thế...</div>
@@ -217,27 +193,7 @@
     </aside>
 </div>
         </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-<!-- Modal -->
-<div class="modal fade" id="btnSeacrh" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-            <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
-            
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-
-      </div>
-    </div>
-  </div>
-        
-        <script
+                <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"
@@ -248,18 +204,14 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
-
-        <script src="/js/donHang.js">
-            
+        <script type="text/javascript">
+        <%@include file="/views/js/donHang.js"%>
+        function toggleSubmenu() {
+            var menuItem = document.querySelector('.menu-item');
+            if (menuItem) {
+                menuItem.classList.toggle('open');
+            }
+        }
         </script>
-        <script>
-function toggleSubmenu() {
-    var menuItem = document.querySelector('.menu-item');
-    if (menuItem) {
-        menuItem.classList.toggle('open');
-    }
-}
-        </script>
-
-    </body>
+</body>
 </html>
