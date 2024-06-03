@@ -1,0 +1,70 @@
+.navbar-nav {
+  padding-left: 10px;
+}
+
+a.nav-link {
+  padding: 10px 20px !important;
+}
+
+.navbar-nav .nav-link {
+  background-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 400;
+  height: 50px;
+  /* font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" */
+  ;
+}
+ a{
+  text-decoration: none;
+  font-size: 19px;
+}
+.input-group input{
+  color: rgb(255, 255, 255);
+}
+
+
+/* breadcrumb */
+.breadcrumb-item a {
+  color: rgba(33, 37, 41, 0.75);
+  text-decoration: none;
+}
+
+.container-manage-products {
+  /* background-color: whitesmoke; */
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+/* TẤT CẢ SẢN PHẨM  */
+/* Button */
+.LSP-col-edit {
+  display: flex;
+  justify-content: end;
+}
+
+.btn-chinh-sua {
+  margin-right: 10px;
+}
+
+/* Table */
+.container-table {
+  /* display: flex; */
+  /* justify-content: space-around; */
+  font-size: 10px;
+  padding: 0px 20px;
+  /* background-color: white; */
+}
+
+.col-info {
+  padding-top: 35px !important;
+  padding-bottom: 35px !important;
+  line-height: 30px !important;
+}
+
+
+/* CLICK */
+.clickable-cell:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,158 @@
+
+.container-manage-products {
+    padding-top: 0px;
+  }
+
+  /* TẤT CẢ SẢN PHẨM  */
+  /* Button */
+  .button-active {
+    display: flex;
+    margin: 20px 0px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px rgba(217, 217, 217, 0.629);
+    justify-content: space-around;
+    background-color: white;
+  }
+
+  #product-home {}
+
+  .button-tim-kiem {
+    width: 1300px;
+  }
+
+  .button-tim-kiem button {
+    font-size: 10px !important;
+  }
+
+  .button-them button {
+    width: 100px;
+    font-size: 10px;
+    padding: 8px 5px;
+    margin-right: 11px;
+  }
+
+
+  /* TITLE */
+  .title-manage-products {
+    padding-top: 20px;
+    margin-bottom: 30px;
+  }
+
+
+  /* Table */
+  .container-table {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+    font-size: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px rgba(217, 217, 217, 0.629);
+  }
+
+  .col-img {
+    width: 150px;
+    padding: 10px 35px !important;
+  }
+
+  .col-img img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .col-edit {
+    width: 160px;
+    padding-top: 35px !important;
+    padding-bottom: 35px !important;
+    line-height: 30px !important;
+  }
+
+  .col-edit-button {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .col-edit .icon-xoa {
+    color: red;
+  }
+
+  .col-edit button:hover .icon-xoa,
+  .col-edit button:hover .icon-chinh-sua {
+    color: white;
+  }
+
+  .col-info {
+    padding-top: 35px !important;
+    padding-bottom: 35px !important;
+    line-height: 30px !important;
+  }
+
+
+  /* LOẠI SẢN PHẨM */
+
+  /* Table */
+  .LSP-col-info {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+    line-height: 0px !important;
+  }
+
+  /* click row table */
+  .clickable-row {
+    cursor: pointer;
+
+  }
+
+  /* Button */
+  .LSP-col-edit {
+    width: 160px;
+  }
+
+  .LSP-button {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .LSP-col-edit .icon-xoa {
+    color: red;
+  }
+
+  .LSP-col-edit btn-chinh-sua,
+  .LSP-col-edit btn-xoa {
+    width: 50px;
+  }
+
+  .LSP-col-edit button:hover .icon-xoa,
+  .LSP-col-edit button:hover .icon-chinh-sua {
+    color: white;
+  }
+
+  /* Modal */
+  .row-them-loaiSP {
+    margin: 10px 0px;
+  }
+
+  .row-them-loaiSP label {
+    margin-bottom: 5px;
+  }
+
+
+
+  /* Nút điều hướng */
+  .pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding: 20px 0px
+  }
+
+  .pagination a.page-link {
+    color: white!important;
+  }
+
+  .pagination span {
+    color: white;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+  }
