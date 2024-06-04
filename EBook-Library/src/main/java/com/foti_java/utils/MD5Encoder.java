@@ -3,6 +3,9 @@ package com.foti_java.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MD5Encoder {
 	public static String encode(String input) {
 		try {

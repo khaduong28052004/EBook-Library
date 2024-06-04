@@ -16,7 +16,7 @@
           alt="User Image">
       </div>
       <div class="info">
-        <a href="/seller/home" class="d-block">VanKha</a>
+        <a href="/Ebook/seller/home" class="d-block">VanKha</a>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
         <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
-          <a href="/seller/home" class="nav-link active">
+          <a href="/Ebook/seller/home" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Trang chủ
@@ -146,19 +146,19 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/seller/productmanager" class="nav-link">
+              <a href="/Ebook/seller/productmanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Sản phẩm</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/seller/ordermanager" class="nav-link">
+              <a href="/Ebook/seller/ordermanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Đơn Hàng</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/seller/vouchermanager" class="nav-link">
+              <a href="/Ebook/seller/vouchermanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Voucher</p>
               </a>
@@ -175,7 +175,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/seller/orderstatistical" class="nav-link">
+              <a href="/Ebook/seller/orderstatistical" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Đơn hàng</p>
               </a>

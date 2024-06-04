@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("seller")
+@RequestMapping("Ebook/seller")
 public class SellerProductManagerController {
 @RequestMapping("/productmanager")
 public String productManafer() {

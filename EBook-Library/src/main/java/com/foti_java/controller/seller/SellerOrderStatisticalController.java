@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("seller")
+@RequestMapping("Ebook/seller")
 public class SellerOrderStatisticalController {
 @RequestMapping("orderstatistical")
 public String orderStatistical() {

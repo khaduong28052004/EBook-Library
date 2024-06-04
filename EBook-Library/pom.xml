@@ -94,18 +94,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>jakarta.mail</groupId>
-			<artifactId>jakarta.mail-api</artifactId>
-			<version>2.0.0</version> <!-- Thay đổi phiên bản tùy theo yêu cầu của
-			bạn -->
-		</dependency>
-		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>jakarta.mail</artifactId>
-			<version>2.0.1</version> <!-- Thay đổi phiên bản tùy theo yêu cầu của
-			bạn -->
-		</dependency>
-
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>

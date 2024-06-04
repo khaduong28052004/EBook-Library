@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("Ebook/admin")
 public class AdminProductManagerController {
 	@RequestMapping("productmanager")
 	public String productManager() {
