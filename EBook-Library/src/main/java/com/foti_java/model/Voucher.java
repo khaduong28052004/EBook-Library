@@ -47,8 +47,8 @@ public class Voucher {
 	List<VoucherDetail> voucherDetails;
 	
 	@ManyToOne
-	@JoinColumn(name = "typeOfVourcher_id")
-	typeOfVoucher typeOfVourcher;
+	@JoinColumn(name = "typeVourcher_id")
+	TypeVoucher typeVoucher;
 	
 	@OneToMany(mappedBy = "voucher")
 	List<Bill> bills;

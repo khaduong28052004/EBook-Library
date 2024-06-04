@@ -35,7 +35,7 @@ public class District {
 	Province province;
 	
 	@OneToMany(mappedBy = "district")
-	List<Commun> communes;
+	List<Commune> communes;
 	
 	@OneToMany(mappedBy = "district")
 	List<Address> addresses;

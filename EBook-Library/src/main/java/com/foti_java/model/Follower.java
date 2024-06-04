@@ -28,7 +28,7 @@ public class Follower {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	boolean status;
-	int shop_id;
+	int follower_id;
 	
 	@ManyToOne
 	@JoinColumn(name = "account_id")

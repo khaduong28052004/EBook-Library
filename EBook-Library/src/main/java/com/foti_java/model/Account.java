@@ -54,16 +54,13 @@ public class Account {
 	List<Address> addresses;
 
 	@OneToMany(mappedBy = "account")
-	List<BankNumber> banksNumbers;
-
-	@OneToMany(mappedBy = "account")
 	List<Chat> chats;
 
 	@OneToMany(mappedBy = "account")
 	List<Follower> followers;
 	
 	@OneToMany(mappedBy = "account")
-	List<Transection> transections;
+	List<Transaction> transections;
 	
 	@OneToMany(mappedBy = "account")
 	List<Bill> bills;

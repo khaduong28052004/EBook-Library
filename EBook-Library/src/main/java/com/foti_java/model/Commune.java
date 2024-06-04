@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,12 +23,17 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "Banks")
-public class Bank {
+@Table(name = "Communes")
+public class Commune {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String name;
-	String accountNumber;
 
+	@ManyToOne
+	@JoinColumn(name = "districts_id")
+	District district;
+
+	@OneToMany(mappedBy = "commune")
+	List<Address> addresses;
 }

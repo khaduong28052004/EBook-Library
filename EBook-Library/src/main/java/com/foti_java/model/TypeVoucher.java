@@ -21,12 +21,13 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "Banks")
-public class Bank {
+@Table(name = "TypeVouchers")
+public class TypeVoucher {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String name;
-	String accountNumber;
-
+	
+	@OneToMany(mappedBy = "typeVoucher")
+	List<Voucher> vouchers;
 }

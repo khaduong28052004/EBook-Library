@@ -45,5 +45,5 @@ public class Address {
 	
 	@ManyToOne
 	@JoinColumn(name = "communes_id")
-	Commun commune;
+	Commune commune;
 }
