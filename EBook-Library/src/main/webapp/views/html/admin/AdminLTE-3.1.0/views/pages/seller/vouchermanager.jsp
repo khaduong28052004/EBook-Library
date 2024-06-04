@@ -51,7 +51,8 @@
 	href="/views/html/admin/AdminLTE-3.1.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet"
 	href="/views/html/admin/AdminLTE-3.1.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -78,9 +79,6 @@
 				<div class="container-fluid">
 					<!-- Main row -->
 					<div class="row">
-
-
-
 						<!-- full col -->
 
 						<!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -165,13 +163,16 @@
 																		style="font-family: 'Times New Roman', Times, serif;">
 																		<th>Mã voucher</th>
 																		<th>Tên voucher</th>
-
+																		<th>Điều kiện</th>
+																		<th>Sale</th>
+																		<th>Số lượng</th>
 																		<th>Ngày bắt đầu</th>
 																		<th>Ngày kết thúc</th>
 																		<th>Loại voucher</th>
 																		<th>Trạng thái</th>
-																		<th>Tên người mua</th>
-																		<th>Còn lại</th>
+																		<th>Số lượng còn lại</th>
+																		<th>Xem người mua</th>
+
 																		<th></th>
 																	</tr>
 																</thead>
@@ -179,13 +180,19 @@
 																	<tr>
 																		<td>1</td>
 																		<td>Miễn phí vận chuyển 20.000đ</td>
-
+																		<td>Tổng bill > 200k</td>
+																		<td>10%</td>
+																		<td>100</td>
 																		<td>23/05/2024</td>
 																		<td>23/7/2024</td>
 																		<td>Vận chuyển</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
+																		<td>Đang hoạt động</td>
 																		<td>30</td>
+																		<td><a class="btn btn-success" type="text"
+																			href="/Ebook/seller/vouchermanager/details"
+																			style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
+																				<i class="bi bi-list-ul" style="color: #ffffff;"></i>
+																		</a></td>
 																		<td>
 																			<button class="btn btn-success" type="text"
 																				data-bs-toggle="modal"
@@ -196,126 +203,7 @@
 																			</button>
 																		</td>
 																	</tr>
-																	<tr>
-																		<td>2</td>
-																		<td>Giảm 8%</td>
 
-																		<td>23/05/2024</td>
-																		<td>23/7/2024</td>
-																		<td>Giảm giá</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
-																		<td>20</td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>2</td>
-																		<td>Giảm 8%</td>
-
-																		<td>23/05/2024</td>
-																		<td>23/7/2024</td>
-																		<td>Giảm giá</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
-																		<td>20</td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>2</td>
-																		<td>Giảm 8%</td>
-
-																		<td>23/05/2024</td>
-																		<td>23/7/2024</td>
-																		<td>Giảm giá</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
-																		<td>20</td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>2</td>
-																		<td>Giảm 8%</td>
-
-																		<td>23/05/2024</td>
-																		<td>23/7/2024</td>
-																		<td>Giảm giá</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
-																		<td>20</td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>2</td>
-																		<td>Giảm 8%</td>
-
-																		<td>23/05/2024</td>
-																		<td>23/7/2024</td>
-																		<td>Giảm giá</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
-																		<td>20</td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>3</td>
-																		<td>Miễn phí vận chuyển 40.000đ</td>
-
-																		<td>23/07/2024</td>
-																		<td>23/9/2024</td>
-																		<td>Vận chuyển</td>
-																		<td>Còn hạn</td>
-																		<td>Ly</td>
-																		<td>40</td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
 																</tbody>
 															</table>
 														</div>
@@ -339,41 +227,53 @@
 													<button type="button" class="btn-close"
 														data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
-												<div class="modal-body">
+											<div class="modal-body">
 													<div class="row g-2">
 														<div class="col-md">
 															<div class="form-floating">
 																<input type="text" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="1"> <label for="floatingInputGrid">Mã
+																	value="1"> <label for="floatingInputGrid">Tên
 																	voucher</label>
 															</div>
 														</div>
 														<div class="col-md">
 															<div class="form-floating">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="Miễn phí vận chuyển"> <label
-																	for="floatingInputGrid">Tên voucher</label>
+																<select class="form-select"
+																	aria-label="Default select example">
+																	<option selected>Loại voucher</option>
+																	<option value="1">One</option>
+																	<option value="2">Two</option>
+																	<option value="3">Three</option>
+																</select>
 															</div>
 														</div>
 													</div>
 													<!-- 2 -->
 													<div class="row g-2">
 														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="date" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="23/05/2024"> <label
-																	for="floatingInputGrid">Ngày bắt đầu</label>
+															<div class="form-floating row"
+																style="margin-top: 25px; margin-left: 10px">
+																<div class="form-check col-md-6">
+																	<input class="form-check-input" type="radio"
+																		name="dieuKien" id="dieuKien1"> <label
+																		class="form-check-label" for="dieuKien1"> Sản
+																		phẩm </label>
+																</div>
+																<div class="form-check col-md-6">
+																	<input class="form-check-input" type="radio"
+																		name="dieuKien" id="dieuKien2"> <label
+																		class="form-check-label" for="dieuKien2"> Tổng
+																		bill </label>
+																</div>
 															</div>
 														</div>
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
-																<input type="date" class="form-control"
+																<input type="text" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="23/05/2024"> <label
-																	for="floatingInputGrid">Ngày kết thúc</label>
+																	value=">100"> <label for="floatingInputGrid">Điều
+																	kiện</label>
 															</div>
 														</div>
 													</div>
@@ -381,18 +281,18 @@
 													<div class="row g-2">
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
+																<input type="date" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="Vận chuyển"> <label
-																	for="floatingInputGrid">Loại voucher</label>
+																	value=""> <label for="floatingInputGrid">Ngày
+																	bắt đầu</label>
 															</div>
 														</div>
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
+																<input type="date" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="Miễn phí vận chuyển"> <label
-																	for="floatingInputGrid">Còn hạn</label>
+																	value=""> <label for="floatingInputGrid">Ngày
+																	kết thúc</label>
 															</div>
 														</div>
 													</div>
@@ -400,40 +300,24 @@
 													<div class="row g-2">
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
+																<input type="number" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="Ly"> <label for="floatingInputGrid">Tên
-																	người mua</label>
+																	value="200" min="1"> <label
+																	for="floatingInputGrid">Số lượng</label>
 															</div>
 														</div>
 														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="30"> <label for="floatingInputGrid">Còn
-																	lại</label>
+															<div class="form-floating input-group"
+																style="margin-top: 10px;">
+																<input type="number" class="form-control"
+																	id="floatingInputGrid" value="20"
+																	aria-label="Dollar amount (with dot and two decimal places)">
+																<span class="input-group-text">%</span> <label
+																	for="floatingInputGrid">Sale</label>
 															</div>
 														</div>
 													</div>
-													<!-- 5 -->
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="300.000"> <label for="floatingInputGrid">Giá
-																	sản phẩm: </label>
-															</div>
-														</div>
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="300.000"> <label for="floatingInputGrid">Tổng
-																	hóa đơn:</label>
-															</div>
-														</div>
-													</div>
+											
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
@@ -468,23 +352,54 @@
 												<div class="modal-body">
 													<div class="row g-2">
 														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
+															<div class="form-floating">
 																<input type="text" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Mã
+																	value="1"> <label for="floatingInputGrid">Tên
 																	voucher</label>
+															</div>
+														</div>
+														<div class="col-md">
+															<div class="form-floating">
+																<select class="form-select"
+																	aria-label="Default select example">
+																	<option selected>Loại voucher</option>
+																	<option value="1">One</option>
+																	<option value="2">Two</option>
+																	<option value="3">Three</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<!-- 2 -->
+													<div class="row g-2">
+														<div class="col-md">
+															<div class="form-floating row"
+																style="margin-top: 25px; margin-left: 10px">
+																<div class="form-check col-md-6">
+																	<input class="form-check-input" type="radio"
+																		name="dieuKien" id="dieuKien1"> <label
+																		class="form-check-label" for="dieuKien1"> Sản
+																		phẩm </label>
+																</div>
+																<div class="form-check col-md-6">
+																	<input class="form-check-input" type="radio"
+																		name="dieuKien" id="dieuKien2"> <label
+																		class="form-check-label" for="dieuKien2"> Tổng
+																		bill </label>
+																</div>
 															</div>
 														</div>
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
 																<input type="text" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Tên
-																	voucher</label>
+																	value=">100"> <label for="floatingInputGrid">Điều
+																	kiện</label>
 															</div>
 														</div>
 													</div>
-													<!-- 2 -->
+													<!-- 3 -->
 													<div class="row g-2">
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
@@ -503,63 +418,28 @@
 															</div>
 														</div>
 													</div>
-													<!-- 3 -->
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Loại
-																	voucher</label>
-															</div>
-														</div>
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Còn
-																	hạn</label>
-															</div>
-														</div>
-													</div>
 													<!-- 4 -->
 													<div class="row g-2">
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
+																<input type="number" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Tên
-																	người mua</label>
+																	value="" min="1"> <label
+																	for="floatingInputGrid">Số lượng</label>
 															</div>
 														</div>
 														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Còn
-																	lại</label>
+															<div class="form-floating input-group"
+																style="margin-top: 10px;">
+																<input type="number" class="form-control"
+																	id="floatingInputGrid"
+																	aria-label="Dollar amount (with dot and two decimal places)">
+																<span class="input-group-text">VNĐ</span> <label
+																	for="floatingInputGrid">Sale</label>
 															</div>
 														</div>
 													</div>
-													<!-- 5 -->
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Giá
-																	sản phẩm: </label>
-															</div>
-														</div>
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Tổng
-																	hóa đơn:</label>
-															</div>
-														</div>
-													</div>
+											
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
