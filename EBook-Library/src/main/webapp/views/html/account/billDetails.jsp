@@ -13,7 +13,7 @@
   </style>
 </head>
 <body>
-<%@include file="/views/layout/common/header.jsp"%>
+<%@include file="/views/layout/account/header.jsp"%>
   <main class="container" style="margin: 0px; max-width: 2000px;">
     <div class="row">
       <aside class="col-md-2">
