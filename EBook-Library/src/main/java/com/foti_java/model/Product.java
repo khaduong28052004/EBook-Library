@@ -3,6 +3,8 @@ package com.foti_java.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,9 +35,13 @@ public class Product {
 	Integer id;
 	double price;
 	int sale;
+	@Nationalized
 	String name;
+	@Nationalized
 	String introduce;
+	@Nationalized
 	String writerName;
+	@Nationalized
 	String publishingCompany;
 	@Temporal(TemporalType.DATE)
 	Date date;

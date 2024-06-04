@@ -3,6 +3,8 @@ package com.foti_java.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +34,7 @@ public class Bill {
 	double totalPrice;
 	int quantity;
 	boolean status;
+	@Nationalized
 	String address;
 	double priceShipping;
 	
@@ -56,4 +59,7 @@ public class Bill {
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
+	
+	@OneToMany(mappedBy = "bill")
+	List<ReturnBook> returnBooks;
 }
