@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,67 +97,74 @@
 											<div class="col-md-12">
 												<div class="row">
 													<div class="col-md-2">
-														<div class="card">
-															<div class="card-body">
-																<h5 class="card-title">
-																	<p>
-																		<strong
-																			style="font-family: 'Times New Roman', Times, serif;">Loại
-																			Voucher</strong>
+														<form action="/Ebook/seller/vouchermanager" method="get">
+															<div class="card">
+																<div class="card-body">
+																	<h5 class="card-title">
+																		<p>
+																			<strong
+																				style="font-family: 'Times New Roman', Times, serif;">Loại
+																				Voucher</strong>
+																		</p>
+																	</h5>
+																	<p class="card-text">
+																		<c:forEach var="typeVoucher" items="${typeVouchers}">
+																			<div class="form-check">
+																				<input class="form-check-input" type="radio"
+																					name="typeVoucher" value="${typeVoucher.id }"
+																					id="${typeVoucher.id }"> <label
+																					class="form-check-label" for="${typeVoucher.id }">
+																					${typeVoucher.name } </label>
+																			</div>
+																		</c:forEach>
 																	</p>
-																</h5>
-																<p class="card-text">
-																<div class="form-check">
-																	<input class="form-check-input" type="radio"
-																		name="flexRadioDefault" id="flexRadioDefault1">
-																	<label class="form-check-label" for="flexRadioDefault1">
-																		Giảm giá </label>
 																</div>
-																<div class="form-check">
-																	<input class="form-check-input" type="radio"
-																		name="flexRadioDefault" id="flexRadioDefault2" checked>
-																	<label class="form-check-label" for="flexRadioDefault2">
-																		Vận chuyển </label>
-																</div>
-																</p>
 															</div>
-														</div>
-														<!-- TRẠNG THÁI -->
-														<div class="card" style="margin-top: 25px;">
-															<div class="card-body">
-																<h5 class="card-title">
-																	<p>
-																		<strong
-																			style="font-family: 'Times New Roman', Times, serif;">Trạng
-																			thái</strong>
+															<!-- TRẠNG THÁI -->
+															<div class="card" style="margin-top: 25px;">
+																<div class="card-body">
+																	<h5 class="card-title">
+																		<p>
+																			<strong
+																				style="font-family: 'Times New Roman', Times, serif;">Trạng
+																				thái</strong>
+																		</p>
+																	</h5>
+																	<p class="card-text">
+																	<div class="form-check">
+																		<input class="form-check-input" type="radio"
+																			name="status" value="ON" id="flexRadioDefault3">
+																		<label class="form-check-label"
+																			for="flexRadioDefault3"> Đang hoạt động </label>
+																	</div>
+																	<div class="form-check">
+																		<input class="form-check-input" type="radio"
+																			name="status" value="OFF" id="flexRadioDefault4">
+																		<label class="form-check-label"
+																			for="flexRadioDefault4"> Hết hạn </label>
+																	</div>
 																	</p>
-																</h5>
-																<p class="card-text">
-																<div class="form-check">
-																	<input class="form-check-input" type="radio"
-																		name="flexRadioDefault1" id="flexRadioDefault3">
-																	<label class="form-check-label" for="flexRadioDefault3">
-																		Còn hạn </label>
 																</div>
-																<div class="form-check">
-																	<input class="form-check-input" type="radio"
-																		name="flexRadioDefault1" id="flexRadioDefault4"
-																		checked> <label class="form-check-label"
-																		for="flexRadioDefault4"> Hết hạn </label>
-																</div>
-																</p>
 															</div>
-														</div>
-
+															<div class="card" style="margin-top: 20px;">
+																<button class="btn btn-success" type="submit">Lọc</button>
+															</div>
+														</form>
 													</div>
 													<div class="col-md-10">
-														<button class="btn btn-success" type="text"
-															data-bs-toggle="modal" data-bs-target="#exampleModal1"
+														<!-- <button class="btn btn-success" data-bs-toggle="modal"
+															data-bs-target="#exampleModal1"
 															style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
 															<i class="fa-solid fa-plus"
 																style="color: #ffffff; margin-right: 5px;"></i> Thêm
 															voucher
-														</button>
+														</button> -->
+														<a href="./vouchermanager/insert" class="btn btn-success"
+															style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
+															<i class="fa-solid fa-plus"
+															style="color: #ffffff; margin-right: 5px;"></i> Thêm
+															voucher
+														</a>
 														<!-- <div class="card"> -->
 														<div style="margin-top: 20px;">
 															<table class="table">
@@ -177,35 +187,58 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
-																		<td>1</td>
-																		<td>Miễn phí vận chuyển 20.000đ</td>
-																		<td>Tổng bill > 200k</td>
-																		<td>10%</td>
-																		<td>100</td>
-																		<td>23/05/2024</td>
-																		<td>23/7/2024</td>
-																		<td>Vận chuyển</td>
-																		<td>Đang hoạt động</td>
-																		<td>30</td>
-																		<td><a class="btn btn-success" type="text"
-																			href="/Ebook/seller/vouchermanager/details"
-																			style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="bi bi-list-ul" style="color: #ffffff;"></i>
-																		</a></td>
-																		<td>
-																			<button class="btn btn-success" type="text"
-																				data-bs-toggle="modal"
-																				data-bs-target="#exampleModal"
-																				style="color: rgb(67, 73, 228); cursor: pointer; color: white;">
-																				<i class="fa-solid fa-pen-to-square"
-																					style="color: #ffffff;"></i> Sửa
-																			</button>
-																		</td>
-																	</tr>
-
+																	<c:forEach var="voucher" items="${vouchers }">
+																		<tr>
+																			<td>${voucher.id }</td>
+																			<td>${voucher.name }</td>
+																			<td><c:choose>
+																					<c:when test="${voucher.priceProduct > 0}">
+											            							Sản phẩm > ${voucher.priceProduct}
+																			        </c:when>
+																					<c:otherwise>
+																			            Tổng bill > ${voucher.totalPriceOrder}
+																			        </c:otherwise>
+																				</c:choose></td>
+																			<td>${voucher.sale }%</td>
+																			<td>${voucher.originalNumber }</td>
+																			<td>${voucher.dateStart }</td>
+																			<td>${voucher.dateEnd }</td>
+																			<td>${voucher.typeVoucher.name }</td>
+																			<td>${voucher.status ?'Đang hoạt động':'Hết hạn'}</td>
+																			<td>${voucher.quantity }</td>
+																			<td>
+																				<form action="/Ebook/seller/vouchermanager/details"
+																					method="get">
+																					<input type="hidden" name="voucherId"
+																						value="${voucher.id}" />
+																					<button type="submit" class="btn btn-success"
+																						style="color: white;">
+																						<i class="bi bi-list-ul" style="color: #ffffff;"></i>
+																					</button>
+																				</form>
+																			</td>
+																			<td><a
+																				href="/Ebook/seller/vouchermanager/update/${voucher.id }"
+																				class="btn btn-success" style="color: white;"> <i
+																					class="bi bi-pencil-fill"></i></i>
+																			</a></td>
+																		</tr>
+																	</c:forEach>
 																</tbody>
 															</table>
+															<div class="d-flex justify-content-center">
+																<div class="btn-group me-2" role="group"
+																	aria-label="First group">
+																	<c:forEach var="i" begin="0" end="${totalPages - 1}">
+																		<a
+																			href="?page=${i}&status=${param.status}&typeVoucher=${param.typeVoucher}">
+																			<button type="button"
+																				class="btn btn-success ${currentPage == i ? 'active' : ''}">${i + 1}</button>
+																		</a>
+																	</c:forEach>
+																</div>
+															</div>
+
 														</div>
 														<!-- </div> -->
 													</div>
@@ -227,11 +260,11 @@
 													<button type="button" class="btn-close"
 														data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
-											<div class="modal-body">
+												<div class="modal-body">
 													<div class="row g-2">
 														<div class="col-md">
 															<div class="form-floating">
-																<input type="text" class="form-control"
+																<input name="name_UP" type="text" class="form-control"
 																	id="floatingInputGrid" placeholder="name@example.com"
 																	value="1"> <label for="floatingInputGrid">Tên
 																	voucher</label>
@@ -239,12 +272,11 @@
 														</div>
 														<div class="col-md">
 															<div class="form-floating">
-																<select class="form-select"
+																<select name="typeVoucher_UP" class="form-select"
 																	aria-label="Default select example">
-																	<option selected>Loại voucher</option>
-																	<option value="1">One</option>
-																	<option value="2">Two</option>
-																	<option value="3">Three</option>
+																	<c:forEach var="voucherItem" items="${typeVouchers }">
+																		<option value="${voucherItem.id }">${voucherItem.name }</option>
+																	</c:forEach>
 																</select>
 															</div>
 														</div>
@@ -256,13 +288,15 @@
 																style="margin-top: 25px; margin-left: 10px">
 																<div class="form-check col-md-6">
 																	<input class="form-check-input" type="radio"
-																		name="dieuKien" id="dieuKien1"> <label
+																		name="dieuKien_UP" ${dieuKien_UP?'checked':'' }
+																		value="" id="dieuKien1"> <label
 																		class="form-check-label" for="dieuKien1"> Sản
 																		phẩm </label>
 																</div>
 																<div class="form-check col-md-6">
 																	<input class="form-check-input" type="radio"
-																		name="dieuKien" id="dieuKien2"> <label
+																		name="dieuKien_UP" ${dieuKien_UP?'':'checked' }
+																		value="false" id="dieuKien2"> <label
 																		class="form-check-label" for="dieuKien2"> Tổng
 																		bill </label>
 																</div>
@@ -271,9 +305,9 @@
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
 																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=">100"> <label for="floatingInputGrid">Điều
-																	kiện</label>
+																	name="PriceDK_UP" id="floatingInputGrid"
+																	placeholder="name@example.com"> <label
+																	for="floatingInputGrid">Điều kiện</label>
 															</div>
 														</div>
 													</div>
@@ -282,17 +316,17 @@
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
 																<input type="date" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Ngày
-																	bắt đầu</label>
+																	name="dateStart_UP" id="floatingInputGrid"
+																	placeholder="name@example.com" value=""> <label
+																	for="floatingInputGrid">Ngày bắt đầu</label>
 															</div>
 														</div>
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
 																<input type="date" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Ngày
-																	kết thúc</label>
+																	name="dateEnd_UP" id="floatingInputGrid"
+																	placeholder="name@example.com" value=""> <label
+																	for="floatingInputGrid">Ngày kết thúc</label>
 															</div>
 														</div>
 													</div>
@@ -301,23 +335,23 @@
 														<div class="col-md">
 															<div class="form-floating" style="margin-top: 10px;">
 																<input type="number" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="200" min="1"> <label
-																	for="floatingInputGrid">Số lượng</label>
+																	name="quantity_UP" id="floatingInputGrid"
+																	placeholder="name@example.com" value="1" min="1">
+																<label for="floatingInputGrid">Số lượng</label>
 															</div>
 														</div>
 														<div class="col-md">
 															<div class="form-floating input-group"
 																style="margin-top: 10px;">
 																<input type="number" class="form-control"
-																	id="floatingInputGrid" value="20"
+																	name="priceSale_UP" id="floatingInputGrid"
 																	aria-label="Dollar amount (with dot and two decimal places)">
 																<span class="input-group-text">%</span> <label
 																	for="floatingInputGrid">Sale</label>
 															</div>
 														</div>
 													</div>
-											
+
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
@@ -343,115 +377,123 @@
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Thông
-														tin voucher</h5>
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<div class="modal-body">
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="1"> <label for="floatingInputGrid">Tên
-																	voucher</label>
-															</div>
-														</div>
-														<div class="col-md">
-															<div class="form-floating">
-																<select class="form-select"
-																	aria-label="Default select example">
-																	<option selected>Loại voucher</option>
-																	<option value="1">One</option>
-																	<option value="2">Two</option>
-																	<option value="3">Three</option>
-																</select>
-															</div>
-														</div>
+												<form action="/Ebook/seller/vouchermanager/insert"
+													method="get">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Thông
+															tin voucher</h5>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
 													</div>
-													<!-- 2 -->
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating row"
-																style="margin-top: 25px; margin-left: 10px">
-																<div class="form-check col-md-6">
-																	<input class="form-check-input" type="radio"
-																		name="dieuKien" id="dieuKien1"> <label
-																		class="form-check-label" for="dieuKien1"> Sản
-																		phẩm </label>
+													<div class="modal-body">
+														<div class="row g-2">
+															<div class="col-md">
+																<div class="form-floating">
+																	<input name="name_IS" type="text" class="form-control"
+																		id="floatingInputGrid" placeholder="name@example.com">
+																	<label for="floatingInputGrid">Tên voucher</label>
+																	<p class="text-danger">${errorName }</p>
 																</div>
-																<div class="form-check col-md-6">
-																	<input class="form-check-input" type="radio"
-																		name="dieuKien" id="dieuKien2"> <label
-																		class="form-check-label" for="dieuKien2"> Tổng
-																		bill </label>
+															</div>
+															<div class="col-md">
+																<div class="form-floating">
+																	<select name="voucher_IS" class="form-select"
+																		aria-label="Default select example">
+																		<c:forEach var="voucherItem" items="${typeVouchers }">
+																			<option value="${voucherItem.id}">${voucherItem.name }</option>
+																		</c:forEach>
+																	</select>
 																</div>
 															</div>
 														</div>
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="text" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=">100"> <label for="floatingInputGrid">Điều
-																	kiện</label>
+														<!-- 2 -->
+														<div class="row g-2">
+															<div class="col-md">
+																<div class="form-floating row"
+																	style="margin-top: 25px; margin-left: 10px">
+																	<div class="form-check col-md-6">
+																		<input checked class="form-check-input" type="radio"
+																			value="true" name="dieuKien_IS" id="dieuKien1">
+																		<label class="form-check-label" for="dieuKien1">
+																			Sản phẩm </label>
+																	</div>
+																	<div class="form-check col-md-6">
+																		<input class="form-check-input" type="radio"
+																			value="false" name="dieuKien_IS" id="dieuKien2">
+																		<label class="form-check-label" for="dieuKien2">
+																			Tổng bill </label>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md">
+																<div class="form-floating" style="margin-top: 10px;">
+																	<input name="PriceDK_IS" type="number" min="0"
+																		class="form-control" id="floatingInputGrid"
+																		placeholder="name@example.com" value="100"> <label
+																		for="floatingInputGrid">Điều kiện</label>
+																	<p class="text-danger">${errorDKPrice }</p>
+																</div>
 															</div>
 														</div>
+														<!-- 3 -->
+														<div class="row g-2">
+															<div class="col-md">
+																<div class="form-floating" style="margin-top: 10px;">
+																	<input name="dateStart_IS" type="date" required
+																		class="form-control" id="floatingInputGrid"
+																		placeholder="name@example.com" value=""> <label
+																		for="floatingInputGrid">Ngày bắt đầu</label>
+																	<p class="text-danger">${errorDateStart }</p>
+																</div>
+															</div>
+															<div class="col-md">
+																<div class="form-floating" style="margin-top: 10px;">
+																	<input name="dateEnd_IS" type="date"
+																		class="form-control" required id="floatingInputGrid"
+																		placeholder="name@example.com" value=""> <label
+																		for="floatingInputGrid">Ngày kết thúc</label>
+																	<p class="text-danger">${errorDateEnd }</p>
+																</div>
+															</div>
+														</div>
+														<!-- 4 -->
+														<div class="row g-2">
+															<div class="col-md">
+																<div class="form-floating" style="margin-top: 10px;">
+																	<input name="quantity_IS" type="number"
+																		class="form-control" id="floatingInputGrid"
+																		placeholder="name@example.com" min="1" value="1">
+																	<label for="floatingInputGrid">Số lượng</label>
+																	<p class="text-danger">${errorSL }</p>
+																</div>
+															</div>
+															<div class="col-md">
+																<div class="form-floating input-group"
+																	style="margin-top: 10px;">
+																	<input name="priceSale_IS" type="number" min="0"
+																		max="100" value="10" class="form-control"
+																		id="floatingInputGrid"
+																		aria-label="Dollar amount (with dot and two decimal places)">
+																	<span class="input-group-text">%</span> <label
+																		for="floatingInputGrid">Sale</label>
+																	<p class="text-danger">${errorPriceSale }</p>
+																</div>
+															</div>
+														</div>
+
 													</div>
-													<!-- 3 -->
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="date" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Ngày
-																	bắt đầu</label>
-															</div>
-														</div>
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="date" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value=""> <label for="floatingInputGrid">Ngày
-																	kết thúc</label>
-															</div>
-														</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-bs-dismiss="modal">
+															<i class="fa-solid fa-circle-xmark"
+																style="color: #ffffff; margin-right: 5px;"></i>Đóng
+														</button>
+														<button type="submit" class="btn btn-success">
+															<i class="fa-solid fa-plus"
+																style="color: #ffffff; margin-right: 5px;"></i>Thêm
+														</button>
 													</div>
-													<!-- 4 -->
-													<div class="row g-2">
-														<div class="col-md">
-															<div class="form-floating" style="margin-top: 10px;">
-																<input type="number" class="form-control"
-																	id="floatingInputGrid" placeholder="name@example.com"
-																	value="" min="1"> <label
-																	for="floatingInputGrid">Số lượng</label>
-															</div>
-														</div>
-														<div class="col-md">
-															<div class="form-floating input-group"
-																style="margin-top: 10px;">
-																<input type="number" class="form-control"
-																	id="floatingInputGrid"
-																	aria-label="Dollar amount (with dot and two decimal places)">
-																<span class="input-group-text">VNĐ</span> <label
-																	for="floatingInputGrid">Sale</label>
-															</div>
-														</div>
-													</div>
-											
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">
-														<i class="fa-solid fa-circle-xmark"
-															style="color: #ffffff; margin-right: 5px;"></i>Đóng
-													</button>
-													<button type="button" class="btn btn-success">
-														<i class="fa-solid fa-plus"
-															style="color: #ffffff; margin-right: 5px;"></i>Thêm
-													</button>
-												</div>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -540,5 +582,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
 		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>
