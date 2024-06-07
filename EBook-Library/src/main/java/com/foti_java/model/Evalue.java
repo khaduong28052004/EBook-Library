@@ -2,6 +2,8 @@ package com.foti_java.model;
 
 import java.util.List;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,9 +31,12 @@ public class Evalue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
+	@Nationalized
 	String quality;
+	@Nationalized
 	String checkDescription;
 	int star;
+	@Nationalized
 	String content;
 
 	@ManyToOne

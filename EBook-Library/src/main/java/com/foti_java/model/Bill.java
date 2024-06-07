@@ -26,7 +26,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "Bills")
 public class Bill {
@@ -34,7 +33,7 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	double totalPrice;
-	double giamGia;
+	double discount;
 	int quantity;
 	boolean status;
 	@Temporal(TemporalType.TIMESTAMP)

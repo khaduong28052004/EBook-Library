@@ -74,8 +74,8 @@ public class Account {
 	@OneToMany(mappedBy = "account")
 	List<Bank> banks;
 
-	@OneToOne(mappedBy = "account")
-	Cart cart;
+	@OneToMany(mappedBy = "account")
+	List<CartDetail> cartDetails;
 
 	@OneToMany(mappedBy = "account")
 	List<Evalue> evalues;
