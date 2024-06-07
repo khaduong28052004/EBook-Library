@@ -3,11 +3,14 @@ package com.foti_java.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -32,6 +35,7 @@ public class Account {
 	String username;
 	String password;
 	String avatar;
+	@Nationalized
 	String fullname;
 	boolean gender;
 	String email;
@@ -39,7 +43,9 @@ public class Account {
 	Date birthday;
 	String phone;
 	String background;
+	@Nationalized
 	String shopName;
+	boolean status;
 	String numberCitizenIdentification;
 	String beforeCitizenIdentification;
 	String afterCitizenIdentification;
@@ -58,10 +64,22 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	List<Follower> followers;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Transaction> transections;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Bill> bills;
+
+	@OneToMany(mappedBy = "account")
+	List<Bank> banks;
+
+	@OneToOne(mappedBy = "account")
+	Cart cart;
+
+	@OneToMany(mappedBy = "account")
+	List<Evalue> evalues;
+
+	@OneToMany(mappedBy = "account")
+	List<Like> likes;
 }

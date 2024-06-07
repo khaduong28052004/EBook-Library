@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminSellerManagerController {
 @RequestMapping("sellermanager")
 public String requestMethodName() {
-    return "html/admin/AdminLTE-3.1.0/views/pages/sellermanager";
+    return "admin/pages/sellermanager";
     }
 
 }

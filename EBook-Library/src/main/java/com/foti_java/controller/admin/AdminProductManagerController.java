@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminProductManagerController {
 	@RequestMapping("productmanager")
 	public String productManager() {
-		return "html/admin/AdminLTE-3.1.0/views/pages/productmanager";
+		return "admin/pages/productmanager";
 	}
 }

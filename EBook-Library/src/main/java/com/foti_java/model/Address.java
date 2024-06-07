@@ -2,6 +2,8 @@ package com.foti_java.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,20 +31,22 @@ public class Address {
 	Integer id;
 	boolean status;
 	String phone;
-	
-	
+	String nameAddress;
+	@Nationalized
+	String fullNameAddress;
+
 	@ManyToOne
 	@JoinColumn(name = "acount_id ")
 	Account account;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "provinces_id")
 	Province province;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "districts_id")
 	District district;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "communes_id")
 	Commune commune;

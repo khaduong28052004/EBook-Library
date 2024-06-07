@@ -32,10 +32,9 @@ public class Chat {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String content;
-	int idTo;
+	Integer idTo;
 	@Temporal(TemporalType.DATE)
 	Date date;
-
 	@ManyToOne
 	@JoinColumn(name = "idFrom")
 	Account account;

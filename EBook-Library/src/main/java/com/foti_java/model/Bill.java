@@ -3,6 +3,8 @@ package com.foti_java.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -30,29 +34,33 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	double totalPrice;
+	double giamGia;
 	int quantity;
 	boolean status;
+	@Temporal(TemporalType.TIMESTAMP)
+	Date dateBuy = new Date();
+	@Nationalized
 	String address;
 	double priceShipping;
-	
+
 	@OneToMany(mappedBy = "bill")
 	List<BillDetail> billDetails;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "voucher_id")
 	Voucher voucher;
 //	
 //	@OneToMany(mappedBy = "bill")
 //	List<ReturnBook> returnBooks;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "orderStatuses_id")
 	OrderStatus orderStatuses;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "paymentMethod_id")
 	PaymentMethod paymentMethod;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;

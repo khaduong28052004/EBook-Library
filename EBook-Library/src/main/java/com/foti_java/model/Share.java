@@ -26,7 +26,9 @@ public class Share {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String email;
-	int account;
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	Account account;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")

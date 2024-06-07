@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminVoucherManagerController {
 	@RequestMapping("vouchermanager")
 	public String voucherManager() {
-		return "html/admin/AdminLTE-3.1.0/views/pages/vouchermanager";
+		return "admin/pages/vouchermanager";
 	}
 
 }
