@@ -18,9 +18,14 @@ public class AdminAccountManagerController {
 	List<Account> listAccount;
 
 	@RequestMapping("accountmanager")
+<<<<<<< HEAD
 	public String accountManager(Model model) {
 		listAccount = accountRepository.findAll();
 		model.addAttribute("listAccount", listAccount);
 		return "html/admin/AdminLTE-3.1.0/views/pages/accountmanager";
+=======
+	public String accountManager() {
+		return "admin/pages/accountmanager";
+>>>>>>> devTest
 	}
 }

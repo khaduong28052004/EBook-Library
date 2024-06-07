@@ -13,6 +13,7 @@ import com.foti_java.repository.AccountRepositoty;
 @Controller
 @RequestMapping("Ebook/admin")
 public class AdminSellerManagerController {
+<<<<<<< HEAD
 	@Autowired
 	AccountRepositoty accountRepository;
 	List<Account> listAccount;
@@ -23,5 +24,11 @@ public class AdminSellerManagerController {
 		model.addAttribute("listAccount", listAccount);
 		return "html/admin/AdminLTE-3.1.0/views/pages/sellermanager";
 	}
+=======
+@RequestMapping("sellermanager")
+public String requestMethodName() {
+    return "admin/pages/sellermanager";
+    }
+>>>>>>> devTest
 
 }

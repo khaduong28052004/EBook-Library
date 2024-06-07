@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("Ebook/seller")
 public class SellerVoucherManagerController {
+<<<<<<< HEAD
 	@Autowired
 	HttpServletRequest req;
 	@Autowired
@@ -107,6 +108,11 @@ public class SellerVoucherManagerController {
 		model.addAttribute("currentPage", page.getNumber());
 	    model.addAttribute("totalPages", page.getTotalPages());
 		return "html/admin/AdminLTE-3.1.0/views/pages/seller/vouchermanager";
+=======
+	@RequestMapping("vouchermanager")
+	public String voucherManager() {
+		return "seller/pages/vouchermanager";
+>>>>>>> devTest
 	}
 
 	@GetMapping("vouchermanager/details")

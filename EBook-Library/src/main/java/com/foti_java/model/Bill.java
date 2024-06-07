@@ -34,32 +34,38 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	double totalPrice;
+	double giamGia;
 	int quantity;
 	boolean status;
+<<<<<<< HEAD
 	@Temporal(TemporalType.DATE)
 	Date date;
+=======
+	@Temporal(TemporalType.TIMESTAMP)
+	Date dateBuy = new Date();
+>>>>>>> devTest
 	@Nationalized
 	String address;
 	double priceShipping;
-	
+
 	@OneToMany(mappedBy = "bill")
 	List<BillDetail> billDetails;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "voucher_id")
 	Voucher voucher;
 //	
 //	@OneToMany(mappedBy = "bill")
 //	List<ReturnBook> returnBooks;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "orderStatuses_id")
 	OrderStatus orderStatuses;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "paymentMethod_id")
 	PaymentMethod paymentMethod;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;

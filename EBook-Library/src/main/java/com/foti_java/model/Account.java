@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -50,7 +51,11 @@ public class Account {
 	String background;
 	@Nationalized
 	String shopName;
+<<<<<<< HEAD
 	@Nationalized
+=======
+	boolean status;
+>>>>>>> devTest
 	String numberCitizenIdentification;
 	@Nationalized
 	String beforeCitizenIdentification;
@@ -71,16 +76,31 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	List<Follower> followers;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Transaction> transections;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Bill> bills;
+<<<<<<< HEAD
 	
 	@OneToMany(mappedBy = "account")
 	List<Bank> banks;
 	
 	@OneToMany(mappedBy = "account")
 	List<Product> products;
+=======
+
+	@OneToMany(mappedBy = "account")
+	List<Bank> banks;
+
+	@OneToOne(mappedBy = "account")
+	Cart cart;
+
+	@OneToMany(mappedBy = "account")
+	List<Evalue> evalues;
+
+	@OneToMany(mappedBy = "account")
+	List<Like> likes;
+>>>>>>> devTest
 }

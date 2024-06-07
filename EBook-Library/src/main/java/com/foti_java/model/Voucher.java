@@ -35,6 +35,8 @@ public class Voucher {
 	Integer id;
 	@Nationalized
 	String name;
+	@Nationalized
+	String note;
 	double priceProduct;
 	double totalPriceOrder;
 	int sale;

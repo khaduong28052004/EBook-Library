@@ -26,7 +26,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "Products")
 public class Product {
@@ -34,7 +33,12 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	double price;
+<<<<<<< HEAD
 	int sale;
+=======
+	double discount;
+	boolean discountType;
+>>>>>>> devTest
 	@Nationalized
 	String name;
 	@Nationalized
@@ -47,32 +51,32 @@ public class Product {
 	Date date;
 	boolean status;
 	int quantity;
+	int quantitySell;
 	boolean active;
 
-	
 	@OneToMany(mappedBy = "product")
 	List<ImageProduct> imageProducts;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	Category category;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
-	
+
 	@OneToMany(mappedBy = "product")
 	List<CartDetail> cartDetail;
-	
+
 	@OneToMany(mappedBy = "product")
 	List<BillDetail> billDetails;
-	
+
 	@OneToMany(mappedBy = "product")
 	List<Evalue> evalues;
-	
+
 	@OneToMany(mappedBy = "product")
 	List<Share> shares;
-	
+
 	@OneToMany(mappedBy = "product")
 	List<Like> likes;
 }
