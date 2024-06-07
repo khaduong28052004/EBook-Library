@@ -41,7 +41,7 @@ public class Bill {
 	@Nationalized
 	String address;
 	double priceShipping;
-
+	Date finishDay;
 	@OneToMany(mappedBy = "bill")
 	List<BillDetail> billDetails;
 

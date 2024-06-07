@@ -27,9 +27,13 @@ public class VoucherDetail {
 	Integer id;
 	boolean status;
 	
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "voucher_id")
