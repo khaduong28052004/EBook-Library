@@ -10,7 +10,6 @@ import com.foti_java.model.Bill;
 import com.foti_java.model.BillDetail;
 
 public interface BillDetailRepository extends JpaRepository<BillDetail, Integer> {
-
 	@Query("SELECT BD FROM Bill B "
 			+ "JOIN B.billDetails BD "
 			+ "WHERE B.id = ?1 ORDER BY B.dateBuy DESC")
