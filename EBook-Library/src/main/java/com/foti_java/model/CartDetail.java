@@ -28,9 +28,9 @@ public class CartDetail {
 	int quantity;
 
 	@ManyToOne
-	@JoinColumn(name = "cart_id")
-	Cart cart;
-	
+	@JoinColumn(name = "account_id")
+	Account account;
+
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	Product product;

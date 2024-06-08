@@ -34,8 +34,8 @@ public class Bank {
 	String name;
 	@Nationalized
 	String accountNumber;
-
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
+
 }

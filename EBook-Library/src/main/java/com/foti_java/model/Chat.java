@@ -35,10 +35,9 @@ public class Chat {
 	Integer id;
 	@Nationalized
 	String content;
-	int idTo;
+	Integer idTo;
 	@Temporal(TemporalType.DATE)
 	Date date;
-
 	@ManyToOne
 	@JoinColumn(name = "idFrom")
 	Account account;
