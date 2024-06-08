@@ -22,7 +22,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "ReturnBooks")
 public class ReturnBook {
