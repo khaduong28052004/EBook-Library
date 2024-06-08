@@ -1,92 +1,103 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Order Statistical</title>
-
-
-
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed" >
-<%@include file = "/common/taglib-link.jsp" %>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<%@include file="/common/taglib-link.jsp"%>
 
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<div class="content-header">
-				<div class="container-fluid">
-					<!-- Main row -->
-					<div class="row">
-						<section class="col-lg-12 connectedSortable">
-							<!-- BAR CHART -->
-							<div class="card card-success">
-								<div class="card-header">
-									<h3 class="card-title">Thông kê đơn hàng</h3>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<!-- Main row -->
+				<div class="row">
+					<section class="col-lg-12 connectedSortable">
+						<!-- BAR CHART -->
+						<div class="card card-success">
+							<div class="card-header">
+								<h3 class="card-title">Thông kê đơn hàng</h3>
 
-									<div class="card-tools">
-										<button type="button" class="btn btn-tool"
-											data-card-widget="collapse">
-											<i class="fas fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-tool"
-											data-card-widget="remove">
-											<i class="fas fa-times"></i>
-										</button>
-									</div>
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool"
+										data-card-widget="collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-tool"
+										data-card-widget="remove">
+										<i class="fas fa-times"></i>
+									</button>
 								</div>
-								<div class="card-body">
-									<div class="chart">
-										<canvas id="barChart"
-											style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-									</div>
-								</div>
-								<!-- /.card-body -->
 							</div>
-							<!-- /.card -->
-						</section>
-
-
-						<!-- full col -->
-
-						<!-- right col (We are only adding the ID to make the widgets sortable)-->
-						<section class="col-lg-12 connectedSortable">
-							<div class="card">
-								<div class="card-header">
-									<h3 class="card-title">Thông kê doanh thu seller</h3>
+							<div class="card-body">
+								<div class="chart">
+									<canvas id="barChart"
+										style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 								</div>
-								<!-- /.card-header -->
-								<div class="card-body">
-									<table id="example1" class="table table-bordered table-striped">
-										<thead>
-											<tr>
-												<th>Họ và tên</th>
-												<th>SDT</th>
-												<th>Địa chỉ</th>
-												<th>Email</th>
-												<th>Doanh thu</th>
-												<th>Chiết khấu</th>
-												<th>Lợi nhuận</th>
-												<th>Trạng thái</th>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</section>
 
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="align-middle">Dương Văn Kha</td>
-												<td class="align-middle">0899672816</td>
-												<td class="align-middle">Cái Răng cần thơ</td>
-												<td class="align-middle">khadv@gmail.com</td>
-												<td>1.000.000.000</td>
-												<td class="align-middle">1%</td>
-												<td class="align-middle">10.000.000</td>
-												<td>Đang hoạt động</td>
-											</tr>
 
-										</tbody>
-										<!-- <tfoot>
+					<!-- full col -->
+
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<section class="col-lg-12 connectedSortable">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Thông kê doanh thu seller</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Mã hóa đơn</th>
+											<th>Ngày tạo</th>
+											<th>Ngày hoàn thành</th>
+											<th>Người mua</th>
+											<th>Số lượng</th>
+											<th>Tổng tiền</th>
+											<th>Voucher</th>
+											<th>Tiền ship</th>
+											<th>Địa chỉ</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="bills" items="${listbills }">
+											<tr>
+												<th>${bills.id }</th>
+												<td>${bills.dateBuy }</td>
+												<td>${bills.finishDay }</td>
+												<td>${bills.account.username }</td>
+												<td>${bills.quantity }</td>
+												<td>${bills.totalPrice }</td>
+												<td><c:set var="voucherFound" value="false" /> <c:forEach
+														var="voucher" items="${vouchers}">
+														<c:if
+															test="${voucher.id == bills.id && voucherFound == false}">
+                   									 		${voucher.name}
+                   									 		<c:set var="voucherFound" value="true" />
+														</c:if>
+													</c:forEach></td>
+												<td>${bills.priceShipping }</td>
+												<td>${bills.address }</td>
+												<td><a href="/seller/orderstatistical/details/${bills.id }" class="btn btn-success"><i
+														class="bi bi-list-ul"></i></a></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+									<!-- <tfoot>
                       <tr>
                         <th>Rendering engine</th>
                         <th>Browser</th>
@@ -95,38 +106,79 @@
                         <th>CSS grade</th>
                       </tr>
                     </tfoot> -->
-									</table>
-								</div>
-								<!-- /.card-body -->
+								</table>
 							</div>
-							<!-- /.card -->
-						</section>
-						<!-- right col -->
-					</div>
-					<!-- /.row (main row) -->
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+
+						<!-- /Card2 -->
+
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Thông kê doanh thu seller</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Mã hóa đơn</th>
+											<th>Sản phẩm</th>
+											<th>Số lượng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="billDetails" items="${listbillDetails }">
+											<tr>
+												<th>${bill.id }</th>
+												<td>${billDetails.product.name }</td>
+												<td>${billDetails.quantity}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+									<!-- <tfoot>
+                      <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                      </tr>
+                    </tfoot> -->
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card2 -->
+					</section>
+					<!-- right col -->
 				</div>
-				<!-- /.container-fluid -->
-				</section>
-				<!-- /.content -->
+				<!-- /.row (main row) -->
 			</div>
-
-
-
-
-
-
+			<!-- /.container-fluid -->
+			</section>
+			<!-- /.content -->
 		</div>
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+
+
+
+
+
+	</div>
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 
 
 
 	<%@include file="/common/taglib-js.jsp"%>
 	<script>
+	
 		$(function() {
 			$("#example1").DataTable(
 					{
@@ -151,7 +203,21 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			// Đoạn mã JavaScript sẽ được thực thi sau khi trang và tất cả các nguồn tài nguyên đã được tải xong
-
+var SellerSuccessDT = ${SellerSuccessJsonDT}; 
+    var billValuesSucces = SellerSuccessDT.map(function(str) {
+        var value = str.split('=')[1];
+        var endBracketIndex = value.indexOf('}');
+        return value.substring(0, endBracketIndex);
+    });
+   console.log(billValuesSucces);
+   
+   
+   var SellerSuccessLN = ${SellerSuccessJsonLN}; 
+    var billValuesLN = SellerSuccessLN.map(function(str) {
+        var value = str.split('=')[1];
+        var endBracketIndex = value.indexOf('}');
+        return value.substring(0, endBracketIndex);
+    }); 
 			var areaChartData = {
 				labels : [ 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4',
 						'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9',
@@ -165,7 +231,7 @@
 					pointStrokeColor : 'rgba(60,141,188,1)',
 					pointHighlightFill : '#fff',
 					pointHighlightStroke : 'rgba(60,141,188,1)',
-					data : [ 1, 2, 40, 19, 86, 27, 90, 80, 40, 10, 30, 50 ]
+					data :billValuesSucces
 				}, {
 					label : 'Doanh thu',
 					backgroundColor : 'rgba(210, 214, 222, 1)',
@@ -175,7 +241,7 @@
 					pointStrokeColor : '#c1c7d1',
 					pointHighlightFill : '#fff',
 					pointHighlightStroke : 'rgba(220,220,220,1)',
-					data : [ 65, 59, 80, 81, 56, 55, 40, 70, 40, 10, 67, 100 ]
+					data : billValuesLN
 				}, ]
 			};
 

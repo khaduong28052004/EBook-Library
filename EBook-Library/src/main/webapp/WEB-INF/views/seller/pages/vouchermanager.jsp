@@ -195,6 +195,8 @@
 											<th>Loại voucher</th>
 											<th>Ghi chú</th>
 											<th>Trạng thái</th>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
