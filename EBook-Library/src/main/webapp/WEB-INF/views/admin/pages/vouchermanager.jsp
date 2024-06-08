@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,23 +107,12 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-
-													<c:choose>
-														<c:when test="${voucher.priceProduct > 0}">
-															<c:set var="inputValue" value="${voucher.priceProduct}" />
-														</c:when>
-														<c:otherwise>
-															<c:set var="inputValue"
-																value="${voucher.totalPriceOrder}" />
-														</c:otherwise>
-													</c:choose>
-
 													<label for="exampleInputEmail1">Điều Kiện</label>
 													<div class="dieuKien" style="display: flex;">
 														<input type="number" name="PriceDK" class="form-control"
 															id="exampleInputEmail1" placeholder="Giá tối thiểu"
 															style="margin-right: 15px;" required
-															value="${inputValue}">
+															value="${voucher.priceMin}">
 														<p class="text-danger">${errorDKPrice}</p>
 													</div>
 												</div>
@@ -214,14 +203,7 @@
 											<tr>
 												<td>${voucher.id }</td>
 												<td>${voucher.name }</td>
-												<td><c:choose>
-														<c:when test="${voucher.priceProduct > 0}">
-                                                                            Sản phẩm lớn hơn ${voucher.priceProduct}
-                                                                            </c:when>
-														<c:otherwise>
-                                                                                Tổng hóa đơn lớn hơn ${voucher.totalPriceOrder}
-                                                                            </c:otherwise>
-													</c:choose></td>
+												<td>${voucher.priceMin}</td>
 												<td>${voucher.originalNumber }</td>
 												<td><c:choose>
 														<c:when test="${voucher.sale >1000}">
