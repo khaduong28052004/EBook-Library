@@ -45,10 +45,12 @@ public class Product {
 	String publishingCompany;
 	@Temporal(TemporalType.DATE)
 	Date date;
+	String image;
 	boolean status;
 	int quantity;
 	int quantitySell;
 	boolean active;
+	double weight;
 
 	@OneToMany(mappedBy = "product")
 	List<ImageProduct> imageProducts;
