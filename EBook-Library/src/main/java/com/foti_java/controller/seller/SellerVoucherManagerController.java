@@ -61,10 +61,9 @@ public class SellerVoucherManagerController {
 	Integer idTypeonl;
 
 	@RequestMapping({ "vouchermanager", "vouchermanager/clear" })
-	public String voucherManager(Model model,
-			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
+	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
-		listVoucher= voucherRepository.findAll();
+		listVoucher = voucherRepository.findAll();
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		model.addAttribute("vouchers", listVoucher);
@@ -181,12 +180,8 @@ public class SellerVoucherManagerController {
 		Optional<TypeVoucher> type = typeVoucherRepository.findById(typeVoucher);
 		entity.setName(name);
 		entity.setTypeVoucher(type.get());
-		if (typeVoucher == 1) {
-			entity.setPriceProduct(DKPrice);
-		}
-		if (typeVoucher == 2) {
-			entity.setTotalPriceOrder(DKPrice);
-		}
+		entity.setPriceMin(DKPrice);
+
 		// Chuyển đổi LocalDate sang Date
 		Date startDate = Date.from(dateStart.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Date endDate = Date.from(dateEnd.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -227,12 +222,7 @@ public class SellerVoucherManagerController {
 		entity.setId(voucherID);
 		entity.setName(name);
 		entity.setTypeVoucher(type.get());
-		if (typeVoucher == 1) {
-			entity.setPriceProduct(DKPrice);
-		}
-		if (typeVoucher == 2) {
-			entity.setTotalPriceOrder(DKPrice);
-		}
+		entity.setPriceMin(DKPrice);
 
 		// Chuyển đổi LocalDate sang Date
 		Date startDate = Date.from(dateStart.atStartOfDay(ZoneId.systemDefault()).toInstant());

@@ -85,7 +85,7 @@
 													<label for="exampleInputPassword1">Loại voucher</label> <select
 														name="voucher" id="" class="form-control">
 														<c:forEach var="voucherItem" items="${typeVouchers }">
-															<c:if test="${voucherItem.id == 1 || voucherItem.id ==2}">
+															<c:if test="${voucherItem.id == 2 || voucherItem.id ==3}">
 																<option
 																	${voucherItem.id == voucher.typeVoucher.id ? 'selected' : ''}
 																	value="${voucherItem.id}">${voucherItem.name }</option>
