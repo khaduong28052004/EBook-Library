@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.foti_java.model.MailSender;
 
+
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
@@ -27,6 +28,9 @@ public class SendMailService {
 		MailSender mail = new MailSender(to, subject, content);
 		this.push(mail);
 	}
+//	public void push(MailSender mailModel) {
+//		list.add(mailModel);
+//	}
 
 	public void push(MailSender mail) {
 		MimeMessage mime = sender.createMimeMessage();
@@ -46,12 +50,13 @@ public class SendMailService {
 			for(File file :mail.getFiles()) {
 				helper.addAttachment(file.getName(), file);
 			}
+			sender.send(mime);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 	}
 
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(fixedDelay = 5000)
 	public void run() {
 		int error = 0;
 		int success = 0;
