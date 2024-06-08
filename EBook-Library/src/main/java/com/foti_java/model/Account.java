@@ -54,6 +54,9 @@ public class Account {
 	List<VoucherDetail> voucherDetails;
 
 	@OneToMany(mappedBy = "account")
+	List<VoucherDetail> voucherDetail;
+
+	@OneToMany(mappedBy = "account")
 	List<RoleDetail> roledetails;
 
 	@OneToMany(mappedBy = "account")

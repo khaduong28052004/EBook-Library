@@ -1,11 +1,13 @@
 package com.foti_java.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,15 +28,14 @@ public class VoucherDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	boolean status;
-	
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
-	
-	
-	
+	@OneToOne
+	@JoinColumn(name = "bill_id",nullable = true)
+	Bill bill;
+
 	@ManyToOne
 	@JoinColumn(name = "voucher_id")
 	Voucher voucher;

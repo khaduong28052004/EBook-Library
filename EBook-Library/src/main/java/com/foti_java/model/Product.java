@@ -50,6 +50,7 @@ public class Product {
 	int quantity;
 	int quantitySell;
 	boolean active;
+	double weight;
 
 	@OneToMany(mappedBy = "product")
 	List<ImageProduct> imageProducts;
