@@ -37,8 +37,7 @@ public class Voucher {
 	String name;
 	@Nationalized
 	String note;
-	double priceProduct;
-	double totalPriceOrder;
+	double priceMin;
 	int sale;
 	int quantity;
 	boolean status;
@@ -47,14 +46,18 @@ public class Voucher {
 	@Temporal(TemporalType.DATE)
 	Date dateEnd;
 	int originalNumber;
-	
+
 	@OneToMany(mappedBy = "voucher")
 	List<VoucherDetail> voucherDetails;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "typeVourcher_id")
 	TypeVoucher typeVoucher;
-	
-	@OneToMany(mappedBy = "voucher")
-	List<Bill> bills;
+
+//	@OneToMany(mappedBy = "voucher")
+//	List<Bill> bills;
+
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	Account account;
 }
