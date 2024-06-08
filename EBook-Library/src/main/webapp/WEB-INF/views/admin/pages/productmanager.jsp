@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,87 +60,37 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="align-middle" style="width: 160px;">
-												<div class="row">
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
+										<c:forEach var="product" items="${products }">
+											<tr>
+												<td class="align-middle" style="width: 160px;">
+													<div class="row">
+														<c:forEach var="imgae" items="${product.imageProducts }">
+															<div class="col-md-6" style="padding: 3px;">
+																<img src="/images/${image.name }" width="100%"
+																	height="120px" alt="">
+															</div>
+														</c:forEach>
 													</div>
+												</td>
+												<td class="align-middle">${product.name }</td>
+												<td class="align-middle">${product.category.name }</td>
+												<td class="align-middle">${product.writerName }</td>
+												<td class="align-middle">${product.publishingCompany }</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency" value="${product.price }"></fmt:formatNumber>
+												</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency"
+														value="${product.discountType? (product.price - product.price*product.discount) : product.price }"></fmt:formatNumber>
+												</td>
+												<td class="align-middle">${product.quantity}</td>
+												<td class="align-middle"><a
+													href="/admin/productmanager/true/${product.id}" class="btn btn-primary">Đồng
+														ý</a> <a href="/admin/productmanager/false/${product.id}"
+													class="btn btn-danger">Từ chối</a></td>
+											</tr>
+										</c:forEach>
 
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
-															width="100%" height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-												</div>
-											</td>
-											<td class="align-middle">Nhân Gian Khúc</td>
-											<td class="align-middle">Truyện</td>
-											<td class="align-middle">Văn Kha</td>
-											<td class="align-middle">VanKha</td>
-											<td class="align-middle">169.000 VND</td>
-											<td class="align-middle"><span
-												style="text-decoration: line-through;">149.000 VND</span></td>
-											<td class="align-middle">200</td>
-											<td class="align-middle"><button class="btn btn-primary">Đồng
-													ý</button>
-												<button class="btn btn-danger">Từ chối</button></td>
-										</tr>
-
-										<tr>
-											<td class="align-middle" style="width: 160px;">
-												<div class="row">
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
-															width="100%" height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-												</div>
-											</td>
-											<td class="align-middle">Nhân Gian Khúc</td>
-											<td class="align-middle">Truyện</td>
-											<td class="align-middle">Văn Kha</td>
-											<td class="align-middle">VanKha</td>
-											<td class="align-middle">169.000 VND</td>
-											<td class="align-middle"><span
-												style="text-decoration: line-through;">149.000 VND</span></td>
-											<td class="align-middle">200</td>
-											<td class="align-middle"><button class="btn btn-primary">Đồng
-													ý</button>
-												<button class="btn btn-danger">Từ chối</button></td>
-										</tr>
 
 									</tbody>
 									<!-- <tfoot>

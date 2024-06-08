@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-<%@include file="/common/taglib-link.jsp"%>
+	<%@include file="/common/taglib-link.jsp"%>
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -37,111 +38,7 @@
 		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-
-						<form id="quickForm">
-							<div class="row">
-								<div class="col-md-3">
-									<div class="card"
-										style="width: 280px; height: 280px; padding: 10px;">
-										<img src="/html/admin/AdminLTE-3.1.0/dist/img/avatar.png"
-											style="width: 100%;" alt="">
-									</div>
-								</div>
-								<div class="col-md-8">
-
-									<div class="card-body" style="padding: 0px;">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for="exampleInputEmail1">Tên tài khoản</label> <input
-														type="text" name="tenTK" class="form-control"
-														id="exampleInputEmail1" placeholder="Tên tài khoản">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for="exampleInputEmail1">Họ và tên</label> <input
-														type="email" name="hoTen" class="form-control"
-														id="exampleInputEmail1" placeholder="Họ và tên">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for="exampleInputEmail1">Số điện thoại</label> <input
-														type="number" name="sdt" class="form-control"
-														id="exampleInputEmail1" placeholder="Số điện thoại">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for="exampleInputEmail1">Email</label> <input
-														type="email" name="email" class="form-control"
-														id="exampleInputEmail1" placeholder="Email">
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<label for="exampleInputPassword1">Avata</label> <input
-														type="file" name="password" class="form-control"
-														placeholder="Password">
-												</div>
-											</div>
-
-											<div class="col-md-12">
-												<div class="form-group mb-0" style="display: inline-flex;">
-													<div class="custom-control custom-checkbox"
-														style="margin-right: 10px;">
-														<input type="checkbox" class="custom-control-input"
-															id="cboAdmin"> <label
-															class="custom-control-label" for="cboAdmin">Admin</label>
-
-													</div>
-													<div class="custom-control custom-checkbox"
-														style="margin-right: 10px;">
-														<input type="checkbox" class="custom-control-input"
-															id="cboSeller"> <label
-															class="custom-control-label" for="cboSeller">Seller</label>
-
-													</div>
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input"
-															id="cboUser"> <label class="custom-control-label"
-															for="cboUser">User</label>
-
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label for="exampleInputPassword1">Địa chỉ</label>
-										<textarea name="diaChi" class="form-control"
-											placeholder="Địa chỉ"></textarea>
-									</div>
-								</div>
-								<!-- /.card-body -->
-								<div class="col-md-12">
-									<div class="card-footer"
-										style="background-color: rgba(240, 248, 255, 0); padding-left: 0px; padding-top: 0px;">
-										<button type="submit" class="btn btn-primary"
-											style="width: 100px;">Thêm</button>
-										<button type="submit" class="btn btn-primary"
-											style="width: 100px;">Sửa</button>
-										<button type="submit" class="btn btn-primary"
-											style="width: 100px;">Reset</button>
-
-									</div>
-								</div>
-
-							</div>
-						</form>
-
-
-					</div>
+					<div class="col-md-12"></div>
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
@@ -165,31 +62,41 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="align-middle">khadv</td>
-											<td class="align-middle">Dương Văn Kha</td>
-											<td class="align-middle">khadv@gmail.com</td>
-											<td class="align-middle">0899672816</td>
-											<td class="align-middle">Hậu Giang</td>
-											<td class="align-middle">Đang hoạt động</td>
-											<td class="align-middle">admin</td>
+										<c:forEach var="accounts" items="${listAccount }">
 
-											<td class="align-middle text-center"><button
-													class="btn btn-danger">Ngừng hoạt động</button></td>
-										</tr>
-										<tr>
-											<td class="align-middle">khadv</td>
-											<td class="align-middle">Dương Văn Kha</td>
-											<td class="align-middle">khadv@gmail.com</td>
-											<td class="align-middle">0899672816</td>
-											<td class="align-middle">Hậu Giang</td>
-											<td class="align-middle">Ngừng hoạt động</td>
-											<td class="align-middle">admin, seller</td>
+											<tr>
+												<td class="align-middle">${accounts.username}</td>
+												<td class="align-middle">${accounts.fullname}</td>
+												<td class="align-middle">${accounts.email}</td>
+												<td class="align-middle">${accounts.phone}</td>
+												<td class="align-middle"><c:forEach var="addresses"
+														items="${accounts.addresses }">
+														<c:if test="${addresses.status}">
+												${addresses.province.name } - ${addresses.district.name } - ${addresses.commune.name }
+												</c:if>
+													</c:forEach></td>
+												<td class="align-middle">${accounts.status?'Đang hoạt động':'Ngừng hoạt động'}</td>
+												<td class="align-middle"><c:forEach var="roledetails"
+														items="${accounts.roledetails }">
+														<c:if test="${roledetails.account.id == accounts.id }">
+															${roledetails.role.name }
+															</c:if>
+													</c:forEach></td>
 
-											<td class="align-middle text-center"><button
-													class="btn btn-success">Tiếp tục hoạt động</button></td>
-										</tr>
-
+												<td class="align-middle text-center"><c:if
+														test="${accounts.status}">
+														<a href="/admin/accountmanager/status/${accounts.id}"
+															class="btn btn-danger">
+															<i class="bi bi-trash-fill"></i> Ngừng hoạt động
+														</a>
+													</c:if> <c:if test="${!accounts.status}">
+														<a href="/admin/accountmanager/status/${accounts.id}"
+															class="btn btn-success"> <i
+															class="bi bi-check-circle-fill"></i> Hoạt động
+														</a>
+													</c:if></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 									<!-- <tfoot>
                       <tr>

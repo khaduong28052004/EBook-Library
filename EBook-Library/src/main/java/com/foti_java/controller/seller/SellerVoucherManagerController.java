@@ -61,50 +61,13 @@ public class SellerVoucherManagerController {
 	Integer idTypeonl;
 
 	@RequestMapping({ "vouchermanager", "vouchermanager/clear" })
-	public String voucherManager(Model model, @RequestParam(name = "status", defaultValue = "") String status,
+	public String voucherManager(Model model,
 			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
-		System.out.println("status: " + status);
-		pageable = PageRequest.of(pageNumber.orElse(0), 5, sort);
-		if (!status.isEmpty() && idType != null) {
-			statusonl = status;
-			idTypeonl = idType;
-			Optional<TypeVoucher> typeVoucher = typeVoucherRepository.findById(idType);
-			if (typeVoucher.isPresent()) {
-				if (status.equals("ON")) {
-					page = voucherRepository.findAllByStatusAndTypeVoucher(true, typeVoucher.get(), pageable);
-				} else if (status.equals("OFF")) {
-					page = voucherRepository.findAllByStatusAndTypeVoucher(false, typeVoucher.get(), pageable);
-				} else {
-					page = voucherRepository.findAllByTypeVoucher(typeVoucher.get(), pageable);
-				}
-			} else {
-				page = voucherRepository.findAll(pageable);
-			}
-		} else if (!status.isEmpty()) {
-			if (status.equals("ON")) {
-				page = voucherRepository.findAllByStatus(true, pageable);
-			} else if (status.equals("OFF")) {
-				page = voucherRepository.findAllByStatus(false, pageable);
-			} else {
-				page = voucherRepository.findAll(pageable);
-			}
-		} else if (idType != null) {
-			Optional<TypeVoucher> typeVoucher = typeVoucherRepository.findById(idType);
-			if (typeVoucher.isPresent()) {
-				page = voucherRepository.findAllByTypeVoucher(typeVoucher.get(), pageable);
-			} else {
-				page = voucherRepository.findAll(pageable);
-			}
-		} else {
-			page = voucherRepository.findAll(pageable);
-		}
-		listVoucher = page.getContent();
+		listVoucher= voucherRepository.findAll();
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		model.addAttribute("vouchers", listVoucher);
-		model.addAttribute("currentPage", page.getNumber());
-		model.addAttribute("totalPages", page.getTotalPages());
 		return "seller/pages/vouchermanager";
 	}
 
@@ -173,7 +136,6 @@ public class SellerVoucherManagerController {
 
 	@GetMapping("vouchermanager/update/{id}")
 	public String getUpdate(Model model, @PathVariable(name = "id") Integer id,
-			@RequestParam(name = "status", defaultValue = "") String status,
 			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
 		Optional<Voucher> entity = null;
@@ -184,7 +146,7 @@ public class SellerVoucherManagerController {
 			model.addAttribute("voucher", entity.get());
 			model.addAttribute("currentPath", "update");
 		}
-		return voucherManager(model, status, idType, pageNumber);
+		return voucherManager(model, idType, pageNumber);
 	}
 
 	@GetMapping("vouchermanager/delete/{id}")
@@ -288,10 +250,10 @@ public class SellerVoucherManagerController {
 			voucherRepository.saveAndFlush(entity);
 			return "redirect:/seller/vouchermanager";
 		} else {
-
 			listTypeVoucher = typeVoucherRepository.findAll();
 			model.addAttribute("currentPath", "update");
 			model.addAttribute("typeVouchers", listTypeVoucher);
+			model.addAttribute("vouchers", voucherRepository.findAll());
 			model.addAttribute("voucher", entity);
 			check(model, name, typeVoucher, DKPrice, dateStart, dateEnd, quantity, priceSale,
 					entityOld.get().getQuantity(), loaiGG);
