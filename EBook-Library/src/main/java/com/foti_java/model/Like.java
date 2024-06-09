@@ -25,8 +25,6 @@ public class Like {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	int account;
-	
 	boolean status;
 	@ManyToOne
 	@JoinColumn(name = "product_id")

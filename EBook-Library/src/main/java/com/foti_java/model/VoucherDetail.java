@@ -28,12 +28,10 @@ public class VoucherDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	boolean status;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
-	
 	@OneToOne
 	@JoinColumn(name = "bill_id",nullable = true)
 	Bill bill;

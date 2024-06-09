@@ -38,17 +38,8 @@ public class SendMailService {
 			MimeMessageHelper helper = new MimeMessageHelper(mime, true, "utf-8");
 			helper.setFrom(mail.getFrom());
 			helper.setTo(mail.getToEmail());
-			;
 			helper.setSubject(mail.getSubject());
 			helper.setText(mail.getContent(), true);
-			for (String cc : mail.getCc()) {
-				helper.addCc(cc);
-			}
-			for (String bcc : mail.getBcc()) {
-				helper.addBcc(bcc);
-			}
-			for(File file :mail.getFiles()) {
-				helper.addAttachment(file.getName(), file);
 			try {
 				for (String cc : mail.getCc()) {
 					helper.addCc(cc);
