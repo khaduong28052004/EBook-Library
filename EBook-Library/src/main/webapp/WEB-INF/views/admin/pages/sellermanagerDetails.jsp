@@ -41,74 +41,51 @@
 
 
 						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Quản lý tài khoản seller</h3>
+							<div class="card-header row">
+								<h3 class=" col-md-11 card-title">Hóa đơn</h3>
+								<a href="/admin/sellermanager" class=" col-md-1 btn btn-success">Quay
+									lại</a>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<table id="example1" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>Tên tài khoản</th>
-											<th>Họ và tên</th>
-											<th>Lượt theo dõi</th>
-											<th>Lượt đánh giá</th>
-											<th>Đã bán</th>
-											<th>Doanh thu</th>
-											<th>Lợi nhuận</th>
-											<th>Đánh giá</th>
-											<th>Trạng thái</th>
+											<th>Mã hóa đơn</th>
+											<th>Ngày tạo</th>
+											<th>Ngày hoàn thành</th>
+											<th>Người mua</th>
+											<th>Số lượng</th>
+											<th>Tổng tiền</th>
+											<th>Voucher</th>
+											<th>Tiền ship</th>
+											<th>Địa chỉ</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<c:forEach var="stats" items="${statisticsList}">
+											<c:forEach var="bills" items="${listbills }">
 												<tr>
-													<td class="align-middle">${stats.username}</td>
-													<td class="align-middle">${stats.fullname}</td>
-													<td class="align-middle">${stats.countTD}</td>
-													<td class="align-middle">${stats.countDanhGia}</td>
-													<td class="align-middle">${stats.countDaBan}</td>
-													<td class="align-middle"><fmt:formatNumber
-															type="currency" value="${stats.doanhThu}"></fmt:formatNumber>
-													</td>
-													<td class="align-middle"><fmt:formatNumber
-															type="currency" value="${stats.loiNhuan}"></fmt:formatNumber>
-													</td>
-													<td class="align-middle">
-														<div class="progress progress-xs">
-															<div class="progress-bar progress-bar-danger "
-																style="width: ${stats.avgDanhGia/5*100}%">${stats.avgDanhGia}</div>
-														</div>
-													</td>
-													<td><c:choose>
-															<c:when test="${stats.status}">
-																<a href="/admin/sellermanager/id/${stats.id}"
-																	class="btn btn-danger"> <i class="bi bi-trash-fill"
-																	style="color: #ffffff; margin-right: 5px;"></i> Ngừng
-																	hoạt động
-																</a>
-															</c:when>
-															<c:otherwise>
-																<a href="/admin/sellermanager/id/${stats.id}"
-																	class="btn btn-success"> <i
-																	class="bi bi-check-circle-fill"
-																	style="color: #ffffff; margin-right: 5px;"></i> Hoạt
-																	động lại
-																</a>
-															</c:otherwise>
-														</c:choose></td>
-													<td>
-														<form action="/admin/sellermanager/bills" method="get">
-															<input type="hidden" name="accountId"
-																value="${stats.id}" />
-															<button type="submit" class="btn btn-success"
-																style="color: white;">
-																<i class="bi bi-list-ul"></i>
-															</button>
-														</form>
-													</td>
+													<th>${bills.id }</th>
+													<td>${bills.dateBuy }</td>
+													<td>${bills.finishDay }</td>
+													<td>${bills.account.username }</td>
+													<td>${bills.quantity }</td>
+													<td>${bills.totalPrice }</td>
+													<td><c:set var="voucherFound" value="false" /> <c:forEach
+															var="voucher" items="${vouchers}">
+															<c:if
+																test="${voucher.id == bills.id && voucherFound == false}">
+                   									 		${voucher.name}
+                   									 		<c:set var="voucherFound" value="true" />
+															</c:if>
+														</c:forEach></td>
+													<td>${bills.priceShipping }</td>
+													<td>${bills.address }</td>
+													<td><a
+														href="/admin/sellermanager/bills/details/${bills.id }"
+														class="btn btn-success"><i class="bi bi-list-ul"></i></a></td>
 												</tr>
 											</c:forEach>
 										</tr>
@@ -139,39 +116,17 @@
 								<table id="example3" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>Tên tài khoản</th>
-											<th>Họ và tên</th>
-											<th>SDT</th>
-											<th>Địa chỉ</th>
-											<th>Email</th>
-											<th>Số CCCD</th>
-											<th>Ngân hàng</th>
-											<th>Số tài khoản</th>
-											<th>Trạng thái</th>
-
+											<th>Mã hóa đơn</th>
+											<th>Sản phẩm</th>
+											<th>Số lượng</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="seller" items="${listCheckSeller }">
+										<c:forEach var="billDetails" items="${listbillDetails }">
 											<tr>
-												<td class="align-middle">${seller.username }</td>
-												<td class="align-middle">${seller.fullname }</td>
-												<td class="align-middle">${seller.phone }</td>
-												<td class="align-middle"><c:forEach var="addresses"
-														items="${seller.addresses }">
-														<c:if test="${addresses.status}">
-												${addresses.province.name } - ${addresses.district.name } - ${addresses.commune.name }
-												</c:if>
-													</c:forEach></td>
-												<td class="align-middle">${seller.email }</td>
-												<td class="align-middle">${seller.numberCitizenIdentification }</td>
-												<td class="align-middle">${seller.banks[0].name}</td>
-												<td class="align-middle">${seller.banks[0].accountNumber}</td>
-												<td class="align-middle"><a
-													href="/admin/sellermanager/checkSeller/${seller.id}?status=true"
-													class="btn btn-primary">Đồng ý</a> <a
-													href="/admin/sellermanager/checkSeller/${seller.id}?status=false"
-													class="btn btn-danger">Từ chối</a></td>
+												<th>${bill.id }</th>
+												<td>${billDetails.product.name }</td>
+												<td>${billDetails.quantity}</td>
 											</tr>
 										</c:forEach>
 									</tbody>

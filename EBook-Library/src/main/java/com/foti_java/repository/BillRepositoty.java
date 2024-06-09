@@ -23,4 +23,7 @@ public interface BillRepositoty extends JpaRepository<Bill, Integer> {
 
 	@Query(value = "exec PROC_TK_NAM_Seller ?1", nativeQuery = true)
 	List<Object[]> PROC_TK_NAM_Seller(Integer id);
+
+	@Query(value = "exec TK_SELLER_IN_ACCOUNT", nativeQuery = true)
+	List<Object[]> TK_SELLER_IN_ACCOUNT();
 }

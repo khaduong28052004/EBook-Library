@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.foti_java.model.Account;
+import com.foti_java.model.RoleDetail;
+
 
 public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 
@@ -70,4 +72,10 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 			+ ") AS role_counts\r\n"
 			+ "GROUP BY role;", nativeQuery = true)
 	List<Object[]> findListAccount();
+
+	List<Account> findAllByStatus(boolean status);
+	
+	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2)"
+			, nativeQuery = true)
+	List<Account> findAllCheckSeller();
 }

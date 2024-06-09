@@ -116,7 +116,7 @@
 
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Thông kê doanh thu seller</h3>
+								<h3 class="card-title">Chi tiết hóa đơn</h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">

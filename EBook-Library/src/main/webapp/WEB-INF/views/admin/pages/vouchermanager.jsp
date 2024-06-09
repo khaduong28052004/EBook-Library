@@ -223,7 +223,7 @@
 												<td>${voucher.status ?'Đang hoạt động':'Hết hạn'}</td>
 
 												<td>
-													<form action="/seller/vouchermanager/details" method="get">
+													<form action="/admin/vouchermanager/details" method="get">
 														<input type="hidden" name="voucherId"
 															value="${voucher.id}" />
 														<button type="submit" class="btn btn-success"
@@ -233,7 +233,7 @@
 													</form>
 												</td>
 												<td><a
-													href="/seller/vouchermanager/update/${voucher.id }"
+													href="/admin/vouchermanager/update/${voucher.id }"
 													class="btn btn-success"> <i style="color: #ffffff;"
 														class="bi bi-pencil-fill"></i>
 												</a></td>

@@ -35,14 +35,14 @@ public class SellerOrderStatisticalController {
 
 	@RequestMapping("orderstatistical")
 	public String orderStatistical(Model model) {
-		listBill = billRepository.findAllBySeller(3);
+		listBill = billRepository.findAllBySeller(7);
 		for (Bill bill : listBill) {
 			Voucher voucher = voucherRepository.findVoucherInBill(bill.getId());
 			if (voucher != null) {
 				listVoucher.add(voucher);
 			}
 		}
-		List<Object[]> listTKSeller = billRepository.PROC_TK_NAM_Seller(3);
+		List<Object[]> listTKSeller = billRepository.PROC_TK_NAM_Seller(7);
 		List<String> jsonListDT = new ArrayList<String>();
 		List<String> jsonListLN = new ArrayList<String>();
 		for (Object[] objArray : listTKSeller) {
