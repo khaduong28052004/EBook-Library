@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,7 +93,7 @@
 						<!-- small box -->
 						<div class="small-box bg-info">
 							<div class="inner">
-								<h3>33</h3>
+								<h3>${countSellerNotCheck }</h3>
 
 								<p>Chờ duyệt</p>
 							</div>
@@ -109,7 +110,7 @@
 						<div class="small-box bg-success">
 							<div class="inner">
 								<h3>
-									30<sup style="font-size: 20px">%</sup>
+									${AvgSeller}<sup style="font-size: 20px">%</sup>
 								</h3>
 
 								<p>Seller/user</p>
@@ -126,7 +127,7 @@
 						<!-- small box -->
 						<div class="small-box bg-warning">
 							<div class="inner">
-								<h3>150</h3>
+								<h3>${countAccount }</h3>
 
 								<p>Tài khoản</p>
 							</div>
@@ -143,7 +144,7 @@
 						<div class="small-box bg-danger">
 							<div class="inner">
 								<h3>
-									70.000.000 <span>VND</span>
+									<fmt:formatNumber type="currency" value="${totalPriceAdmin }"></fmt:formatNumber>
 								</h3>
 
 								<p>Doanh thu</p>
@@ -552,15 +553,16 @@
 		});
 		// piechart
 		var pieChart = {
-			labels : [ 'Cửa hàng', 'Khách hàng',
+			labels : [ 'User', 'Seller','Admin'
 			// 'FireFox',
 			// 'Safari',
 			// 'Opera',
 			// 'Navigator',
 			],
 			datasets : [ {
-				data : [ 30, 70
-				// ,400, 600, 300, 100
+				data : [
+				 <%=request.getAttribute("countUser")%>, <%=request.getAttribute("countSeller")%>, <%=request.getAttribute("countAdmin")%> 
+				//400, 600, 300, 100
 				],
 				backgroundColor : [ '#f56954', '#00a65a',
 				// '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'
@@ -576,7 +578,7 @@
 			// 'Navigator',
 			],
 			datasets : [ {
-				data : [ 60, 40
+				data : [ 56, 40
 				// ,400, 600, 300, 100
 				],
 				// backgroundColor: ['#f56954', '#00a65a',
