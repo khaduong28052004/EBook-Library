@@ -9,5 +9,6 @@ public class AdminOrderStatisticalController {
 	@RequestMapping("orderstatistical")
 	public String orderstatistical() {
 		return "html/admin/AdminLTE-3.1.0/views/pages/orderstatistical";
+		return "admin/pages/orderstatistical";
 	}
 }

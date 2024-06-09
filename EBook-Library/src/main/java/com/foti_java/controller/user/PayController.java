@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("Ebook/user")
+@RequestMapping("user")
 public class PayController {
 	@RequestMapping("pay")
 	public String get() {
 		return "html/user/pay";
+		return "client/pay";
 	}
 }

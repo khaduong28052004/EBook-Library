@@ -9,5 +9,6 @@ public class SellerVoucherManagerController {
 	@RequestMapping("vouchermanager")
 	public String voucherManager() {
 		return "html/admin/AdminLTE-3.1.0/views/pages/seller/vouchermanager";
+		return "seller/pages/vouchermanager";
 	}
 }

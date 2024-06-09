@@ -9,5 +9,6 @@ public class SellerOrderManagerController {
 	@RequestMapping("ordermanager")
 	public String orderManager() {
 		return "html/admin/AdminLTE-3.1.0/views/pages/seller/ordermanager";
+		return "seller/pages/ordermanager";
 	}
 }

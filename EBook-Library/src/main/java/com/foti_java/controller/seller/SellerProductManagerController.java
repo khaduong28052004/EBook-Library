@@ -12,6 +12,7 @@ public class SellerProductManagerController {
 @RequestMapping("/productmanager")
 public String productManafer() {
     return "html/admin/AdminLTE-3.1.0/views/pages/seller/productmanager";
+    return "seller/pages/productmanager";
 }
 
 }

@@ -36,6 +36,7 @@ public class Chat {
 	@Nationalized
 	String content;
 	int idTo;
+	Integer idTo;
 	@Temporal(TemporalType.DATE)
 	Date date;
 

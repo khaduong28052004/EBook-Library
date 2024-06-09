@@ -9,5 +9,6 @@ public class AdminAccountManagerController {
 	@RequestMapping("accountmanager")
 	public String accountManager() {
 		return "html/admin/AdminLTE-3.1.0/views/pages/accountmanager";
+		return "admin/pages/accountmanager";
 	}
 }

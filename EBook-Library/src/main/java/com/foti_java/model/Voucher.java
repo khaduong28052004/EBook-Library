@@ -37,6 +37,9 @@ public class Voucher {
 	String name;
 	double priceProduct;
 	double totalPriceOrder;
+	@Nationalized
+	String note;
+	double priceMin;
 	int sale;
 	int quantity;
 	boolean status;
@@ -55,4 +58,9 @@ public class Voucher {
 	
 	@OneToMany(mappedBy = "voucher")
 	List<Bill> bills;
+//	@OneToMany(mappedBy = "voucher")
+//	List<Bill> bills;
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	Account account;
 }

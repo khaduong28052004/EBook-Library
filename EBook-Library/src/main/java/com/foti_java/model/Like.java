@@ -27,7 +27,13 @@ public class Like {
 	Integer id;
 	int account;
 	
+	boolean status;
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	Product product;
+
+	@ManyToOne
+	@JoinColumn(name = "account_id")
+	Account account;
+
 }

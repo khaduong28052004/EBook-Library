@@ -35,6 +35,10 @@ public class Product {
 	Integer id;
 	double price;
 	int sale;
+
+	double discount;
+	boolean discountType;
+
 	@Nationalized
 	String name;
 	@Nationalized
@@ -45,34 +49,44 @@ public class Product {
 	String publishingCompany;
 	@Temporal(TemporalType.DATE)
 	Date date;
+	String image;
 	boolean status;
 	int quantity;
+	int quantitySell;
 	boolean active;
+	double weight;
 
 	
 	@OneToMany(mappedBy = "product")
 	List<ImageProduct> imageProducts;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	Category category;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
 	
+
 	@OneToMany(mappedBy = "product")
 	List<CartDetail> cartDetail;
 	
+
 	@OneToMany(mappedBy = "product")
 	List<BillDetail> billDetails;
 	
+
 	@OneToMany(mappedBy = "product")
 	List<Evalue> evalues;
 	
+
 	@OneToMany(mappedBy = "product")
 	List<Share> shares;
 	
+
 	@OneToMany(mappedBy = "product")
 	List<Like> likes;
 }

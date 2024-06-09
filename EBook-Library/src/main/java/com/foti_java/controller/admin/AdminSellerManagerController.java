@@ -12,6 +12,7 @@ public class AdminSellerManagerController {
 @RequestMapping("sellermanager")
 public String requestMethodName() {
     return "html/admin/AdminLTE-3.1.0/views/pages/sellermanager";
+    return "admin/pages/sellermanager";
     }
 
 }

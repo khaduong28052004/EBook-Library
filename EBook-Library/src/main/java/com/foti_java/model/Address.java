@@ -34,18 +34,25 @@ public class Address {
 	String phone;
 	
 	
+	String nameAddress;
+	@Nationalized
+	String fullNameAddress;
+
 	@ManyToOne
 	@JoinColumn(name = "acount_id ")
 	Account account;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "provinces_id")
 	Province province;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "districts_id")
 	District district;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "communes_id")
 	Commune commune;
