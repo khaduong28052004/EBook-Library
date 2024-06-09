@@ -113,6 +113,57 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/*
+function validateUserName(input) {
+    const userName = input.value.trim();
+    const errorSpan = input.nextElementSibling;
 
+    errorSpan.textContent = '';
+
+    if (!userName) {
+        errorSpan.textContent = 'Vui lòng nhập Tên Đăng Nhập.';
+        return false;
+    }
+    return true;
+}
+
+function validateEmail(input) {
+    const email = input.value.trim();
+    const errorSpan = input.nextElementSibling;
+
+    errorSpan.textContent = '';
+
+    if (!email) {
+        errorSpan.textContent = 'Vui lòng nhập Email.';
+        return false;
+    }
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        errorSpan.textContent = 'Email không hợp lệ.';
+        return false;
+    }
+    return true;
+}
+
+function validatePassword(input) {
+    const password = input.value.trim();
+    const errorSpan = input.nextElementSibling;
+
+    errorSpan.textContent = '';
+
+    if (!password) {
+        errorSpan.textContent = 'Vui lòng nhập Mật Khẩu.';
+        return false;
+    }
+
+    if (password.length < 6) {
+        errorSpan.textContent = 'Mật khẩu phải chứa ít nhất 6 ký tự.';
+        return false;
+    }
+    return true;
+}
+
+*/
 
 

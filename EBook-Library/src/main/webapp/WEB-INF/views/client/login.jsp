@@ -57,7 +57,7 @@
 				</div>
 				<input type="email" placeholder="Email" name="gmail">
 				
-						<span style="color: red;">${error}</span>	
+						<span style="color: red;">${errorE}</span>	
 					<button>Xác
 						Nhận</button>
 					
@@ -83,6 +83,16 @@
 		</div>
 	</div>
 	<script src="/assets/js/login.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const errorMessage = "${errorR}";
+            if (errorMessage) {
+                $('#errorModal').modal('show');
+            }
+        });
+    </script> 
+    
 </body>
 </html>

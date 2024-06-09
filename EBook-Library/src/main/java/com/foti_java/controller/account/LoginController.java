@@ -74,37 +74,32 @@ public class LoginController {
     }
     public String error = "";
     public String errorR = "";
+    public String errorE = "";
     @PostMapping("register")
-    public String register(Model model, @RequestParam("gmail") String mail, @RequestParam(name="userName", defaultValue = "ahha") String user, @RequestParam("password") String password) {
-    	Account account = new Account();
-        List<Account>	accountList = accountRepository.findAll();
-    	for (Account account2 : accountList) {
-			if(account2.getEmail().equals(mail)) {
-				System.out.println("Tài khoản này đã được sử dụng");
-				errorR = "Tài khoản này đã được sử dụng";
-				  model.addAttribute("errorR",errorR);
-				  return "client/login";
-			}
-		}
-        if ((account = accountRepository.findByEmail(mail)) !=null) {
-        	error = " tài khoản này đã  này đã được sử dụng";
-        	  model.addAttribute("error",error);
-        	  return "redirect:/login";
-		}
-//        if ((account = accountRepository.findByUsername(user)) !=null) {
-//        	error = " Gmail này đã được sử dụng";
-//        	  model.addAttribute("error",error);
-//        	   return "client/login";
-//		}
-      
+    public String register(Model model, @RequestParam("gmail") String mail, @RequestParam("userName") String user, @RequestParam("password") String password) {
+        List<Account> accountList = accountRepository.findAll();
+        for (Account account : accountList) {
+            if (account.getUsername().equals(user)) {
+                model.addAttribute("errorR", "Tài khoản này đã được sử dụng");
+                return "client/login";
+            }
+            if (account.getEmail().equals(mail)) {
+                model.addAttribute("errorR", "Email này đã được sử dụng");
+                return "client/login";
+            }
+        }
+
+        Account account = new Account();
         account.setUsername(user);
         account.setPassword(MD5Encoder.encode(password));
         account.setEmail(mail);
         account.setStatus(true);
         accountRepository.saveAndFlush(account);
+        
         model.addAttribute("message", "Đăng ký thành công! Vui lòng đăng nhập.");
         return "client/login";
     }
+
 
     private String otp1;
     private String Gmail;
@@ -126,7 +121,8 @@ public class LoginController {
     public String otp(Model model, @RequestParam("gmail") String mail) {
         Account account = accountRepository.findByEmail(mail);
         if (account == null) {
-            model.addAttribute("error", "Không tìm thấy tài khoản với email này.");
+        	errorE ="Không tìm thấy tài khoản với email này.";
+            model.addAttribute("errorE",errorE );
             return "client/login";
         } else {
             Gmail = mail;
