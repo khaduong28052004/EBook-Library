@@ -5,9 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/views/css/login.css">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-	rel='stylesheet'>
+  <link rel="stylesheet" href="/assets/css/login.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script>
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
@@ -38,12 +37,12 @@ window.onload = function () {
 	<div class="container" id="container">
 
 		<div class="form-container sign-in">
-			<form action="/Ebook/account/forgotPassword" method="post">
+			<form action="/forgotPassword" method="post">
 				<h1>Xác nhận otp</h1>
                 <input type="text" placeholder="nhập otp" name="otp">
 		
 		  <p>Thời gian: <span id="time">01:00</span></p>
-                <a id="resendLink" href="<c:url value='/account/resendOtp?email=${gmail}' />" style="display:none;">Gửi lại</a>
+                <a id="resendLink" href="/resendOtp/${gmail}" style="display:none;">Gửi lại</a>
 				 <button>xác nhận</button>
   
 

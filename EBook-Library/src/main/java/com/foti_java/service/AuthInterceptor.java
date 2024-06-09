@@ -24,26 +24,28 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Account user = sessionService.getAttribute("account");
+        
+    	
+    	Account user = sessionService.getAttribute("account");
         String uri = request.getRequestURI();
         
         if (user == null) {
-            response.sendRedirect("/Ebook/account/login");
+            response.sendRedirect("/login");
             return false;
         }
 
         // Check for admin access
-        if (uri.contains("/Ebook/admin/")) {
+        if (uri.contains("admin")) {
             if (!hasRole(user, "admin")) {
-                response.sendRedirect("/Ebook/account/login");
+                response.sendRedirect("/login");
                 return false;
             }
         }
 
         // Check for seller access
-        if (uri.contains("/Ebook/seller/")) {
+        if (uri.contains("/seller/")) {
             if (!hasRole(user, "seller")) {
-                response.sendRedirect("/Ebook/account/login");
+                response.sendRedirect("/login");
                 return false;
             }
         }

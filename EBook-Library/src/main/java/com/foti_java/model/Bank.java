@@ -38,8 +38,5 @@ public class Bank {
 	@JoinColumn(name = "account_id")
 	Account account;
 
-	@ManyToOne
-	@JoinColumn(name = "account_id")
-	Account account;
 
 }
