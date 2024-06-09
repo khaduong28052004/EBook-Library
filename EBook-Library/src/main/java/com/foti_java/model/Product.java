@@ -33,10 +33,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	double price;
-
 	double discount;
 	boolean discountType;
-
 	@Nationalized
 	String name;
 	@Nationalized

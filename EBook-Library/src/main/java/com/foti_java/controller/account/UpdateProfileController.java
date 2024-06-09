@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("user")
 public class UpdateProfileController {
-	@GetMapping("/Ebook/account/updateProfile")
 	@GetMapping("updateProfile")
 	public String getProfile() {
-		return "/html/account/updateProfile";
+		return "client/updateProfile";
 	}
 }

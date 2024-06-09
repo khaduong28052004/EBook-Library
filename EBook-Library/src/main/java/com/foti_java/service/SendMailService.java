@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.foti_java.model.MailSender;
 
-
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
@@ -28,9 +27,9 @@ public class SendMailService {
 		MailSender mail = new MailSender(to, subject, content);
 		this.push(mail);
 	}
-//	public void push(MailSender mailModel) {
-//		list.add(mailModel);
-//	}
+	// public void push(MailSender mailModel) {
+	// list.add(mailModel);
+	// }
 
 	public void push(MailSender mail) {
 		MimeMessage mime = sender.createMimeMessage();
@@ -60,8 +59,7 @@ public class SendMailService {
 		queue.add(mime);
 	}
 
-	@Scheduled(fixedDelay = 5000)
-
+	@Scheduled(fixedDelay = 10)
 	public void run() {
 		int error = 0;
 		int success = 0;
@@ -74,6 +72,6 @@ public class SendMailService {
 		} catch (Exception e) {
 			error++;
 		}
-//		System.out.println("success : " + success + "/n error : " + error);
+		// System.out.println("success : " + success + "/n error : " + error);
 	}
 }

@@ -31,7 +31,6 @@ public class Evalue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	int account;
 	@Nationalized
 	String quality;
 	@Nationalized
@@ -39,12 +38,10 @@ public class Evalue {
 	int star;
 	@Nationalized
 	String content;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	Product product;
-	
 
 	@OneToMany(mappedBy = "evalue")
 	List<ImageEvalue> imageEvalues;

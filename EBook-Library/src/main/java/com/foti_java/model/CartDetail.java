@@ -28,9 +28,6 @@ public class CartDetail {
 	int quantity;
 
 	@ManyToOne
-	@JoinColumn(name = "cart_id")
-	Cart cart;
-	
 	@JoinColumn(name = "account_id")
 	Account account;
 

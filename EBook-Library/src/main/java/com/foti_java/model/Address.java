@@ -32,8 +32,6 @@ public class Address {
 	boolean status;
 	@Nationalized
 	String phone;
-	
-	
 	String nameAddress;
 	@Nationalized
 	String fullNameAddress;
@@ -41,17 +39,14 @@ public class Address {
 	@ManyToOne
 	@JoinColumn(name = "acount_id ")
 	Account account;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "provinces_id")
 	Province province;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "districts_id")
 	District district;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "communes_id")

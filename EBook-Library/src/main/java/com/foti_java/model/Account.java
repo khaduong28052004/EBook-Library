@@ -51,7 +51,6 @@ public class Account {
 	String background;
 	@Nationalized
 	String shopName;
-	@Nationalized
 	boolean status;
 	String numberCitizenIdentification;
 	@Nationalized
@@ -76,16 +75,12 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	List<Follower> followers;
-	
 
 	@OneToMany(mappedBy = "account")
 	List<Transaction> transections;
-	
 
 	@OneToMany(mappedBy = "account")
 	List<Bill> bills;
-	
-
 
 	@OneToMany(mappedBy = "account")
 	List<Bank> banks;
@@ -98,5 +93,4 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	List<Like> likes;
-
 }

@@ -26,7 +26,6 @@ import com.foti_java.service.SendMailService;
 import com.foti_java.service.SessionService;
 
 @Controller
-@RequestMapping("Ebook/account")
 public class LoginController {
 
 	@Autowired
@@ -43,7 +42,7 @@ public class LoginController {
 	@RequestMapping("login")
 
 	public String getChangePass() {
-		return "html/account/login";
+
 		return "client/login";
 	}
 
@@ -61,25 +60,25 @@ public class LoginController {
 			} else {
 				sessionService.setAttribute("account", account);
 				System.out.println("Đăng nhập thành công!");
-//			
+				//
 				//
 				// xét quuyền ở đây nè
 				List<RoleDetail> role1 = roleDetailRepository.findByAccount(account);
 				System.out.println(role1.get(0).getId());
 				for (RoleDetail roleDetail : role1) {
-//					System.out.println(roleDetail.get().getId());
+					// System.out.println(roleDetail.get().getId());
 					// System.out.println(roleDetail.get().getId());
 					System.out.println(roleDetail.getRole().getName());
-					if(roleDetail.getRole().getName().equals("admin")) {
 					if (roleDetail.getRole().getName().equals("admin")) {
-						return "redirect:/Ebook/admin/accountmanager";
-						 
-					} else if(roleDetail.getRole().getName().equals("seller") ) {
+						if (roleDetail.getRole().getName().equals("admin")) {
+							return "redirect:/Ebook/admin/accountmanager";
 
-					} else if (roleDetail.getRole().getName().equals("seller")) {
-						return "redirect:/Ebook/seller/home";
+						} else if (roleDetail.getRole().getName().equals("seller")) {
+
+						} else if (roleDetail.getRole().getName().equals("seller")) {
+							return "redirect:/Ebook/seller/home";
+						}
 					}
-				}			
 				}
 				return "redirect:/Ebook/user/buyBookHome";
 			}
@@ -89,23 +88,22 @@ public class LoginController {
 			return "redirect:/Ebook/account/login";
 		}
 	}
-	
 
 	@PostMapping("register")
 	public String postMethodName(Model model, @RequestParam("gmail") String mail, @RequestParam("userName") String user,
 			@RequestParam("password") String password) {
 		// TODO: process POST request
 		Account account = new Account();
-//	    String pattern = "yyyy-MM-dd";
-//	    Date now = new Date();
-//	    SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-//	    account.set
-//		account.setEmail(mail);
-        account.setUsername(user);
-        account.setPassword(password);
-        
-        accountRepository.saveAndFlush(account);
-		
+		// String pattern = "yyyy-MM-dd";
+		// Date now = new Date();
+		// SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		// account.set
+		// account.setEmail(mail);
+		account.setUsername(user);
+		account.setPassword(password);
+
+		accountRepository.saveAndFlush(account);
+
 		// String pattern = "yyyy-MM-dd";
 		// Date now = new Date();
 		// SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -118,15 +116,15 @@ public class LoginController {
 
 		return "redirect:/Ebook/user/buyBookHome";
 	}
-	
-	 public  int otp;
-	 public  String Gmail;
-	  private String generateOtp() {
-	        Random random = new Random();
-	         otp = 100000 + random.nextInt(900000);
-	        return String.valueOf(otp);
-	    }
-	
+
+	public int otp;
+	public String Gmail;
+
+	private String generateOtp() {
+		Random random = new Random();
+		otp = 100000 + random.nextInt(900000);
+		return String.valueOf(otp);
+	}
 
 	public int otp;
 	public String Gmail;
@@ -139,7 +137,8 @@ public class LoginController {
 
 	@PostMapping("otp")
 	public String otp(Model model,@RequestParam("gmail") String mail) {
-		//TODO: process POST request
+
+	// TODO: process POST request
 	public String otp(Model model, @RequestParam("gmail") String mail) {
 		// TODO: process POST request
 		Account account = accountRepository.findByEmail(mail);
@@ -187,27 +186,20 @@ public class LoginController {
 //		return "redirect:/Ebook/user/buyBookHome";
 		// return "redirect:/Ebook/user/buyBookHome";
 	}
-	
 
 	@PostMapping("forgotPassword")
 	public String forgotPassword(Model model,@RequestParam("otp") String requeOpt) {
+
 	public String forgotPassword(Model model, @RequestParam("otp") String requeOpt) {
 		System.out.println(Gmail);
 		System.out.println("otp ne");
 		System.out.println(otp);
 		model.addAttribute("gmail", Gmail);
-		
-		
 
 		System.out.println(generateOtp());
-//		return "html/account/forgotPassword";
+		// return "html/account/forgotPassword";
 		// return "html/account/forgotPassword";
 		return "redirect:/Ebook/user/buyBookHome";
 	}
-	
-	
-	
-	
-	
 
 }
