@@ -72,24 +72,36 @@ public class LoginController {
             return "client/login";
         }
     }
-
+    public String error = "";
+    public String errorR = "";
     @PostMapping("register")
-    public String register(Model model, @RequestParam("gmail") String mail, @RequestParam("userName") String user, @RequestParam("password") String password) {
-        if (accountRepository.findByUsername(user) != null) {
-            model.addAttribute("error", "Tài khoản đã tồn tại");
-            return "client/login";
-        }
-        if (accountRepository.findByEmail(mail) != null) {
-            model.addAttribute("error", "Email đã tồn tại");
-            return "client/login";
-        }
-        
-        Account account = new Account();
+    public String register(Model model, @RequestParam("gmail") String mail, @RequestParam(name="userName", defaultValue = "ahha") String user, @RequestParam("password") String password) {
+    	Account account = new Account();
+        List<Account>	accountList = accountRepository.findAll();
+    	for (Account account2 : accountList) {
+			if(account2.getEmail().equals(mail)) {
+				System.out.println("Tài khoản này đã được sử dụng");
+				errorR = "Tài khoản này đã được sử dụng";
+				  model.addAttribute("errorR",errorR);
+				  return "client/login";
+			}
+		}
+        if ((account = accountRepository.findByEmail(mail)) !=null) {
+        	error = " tài khoản này đã  này đã được sử dụng";
+        	  model.addAttribute("error",error);
+        	  return "redirect:/login";
+		}
+//        if ((account = accountRepository.findByUsername(user)) !=null) {
+//        	error = " Gmail này đã được sử dụng";
+//        	  model.addAttribute("error",error);
+//        	   return "client/login";
+//		}
+      
         account.setUsername(user);
         account.setPassword(MD5Encoder.encode(password));
         account.setEmail(mail);
+        account.setStatus(true);
         accountRepository.saveAndFlush(account);
-
         model.addAttribute("message", "Đăng ký thành công! Vui lòng đăng nhập.");
         return "client/login";
     }
