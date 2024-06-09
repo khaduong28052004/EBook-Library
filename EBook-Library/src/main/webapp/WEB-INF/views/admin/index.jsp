@@ -161,8 +161,8 @@
 				<!-- /.row -->
 				<!-- Main row -->
 				<div class="row">
-					<section class="col-lg-12 connectedSortable">
-						<!-- BAR CHART -->
+			<!-- 		<section class="col-lg-12 connectedSortable">
+						BAR CHART
 						<div class="card card-success">
 							<div class="card-header">
 								<h3 class="card-title">Thông kê doanh thu và lợi nhuận</h3>
@@ -184,10 +184,10 @@
 										style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 								</div>
 							</div>
-							<!-- /.card-body -->
+							/.card-body
 						</div>
-						<!-- /.card -->
-					</section>
+						/.card
+					</section> -->
 
 
 					<!-- Left col -->
@@ -494,7 +494,7 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			// Đoạn mã JavaScript sẽ được thực thi sau khi trang và tất cả các nguồn tài nguyên đã được tải xong
-
+/* 
 			var areaChartData = {
 				labels : [ 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4',
 						'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9',
@@ -520,7 +520,7 @@
 					pointHighlightStroke : 'rgba(220,220,220,1)',
 					data : [ 65, 59, 80, 81, 56, 55, 40, 70, 40, 10, 67, 100 ]
 				}, ]
-			};
+			}; */
 
 			var barChartCanvas = document.getElementById('barChart');
 			if (barChartCanvas) {
@@ -571,14 +571,14 @@
 		}
 
 		var lineChart = {
-			labels : [ 'Doanh thu', 'Lợi nhuận',
+			labels : [ 'Đang chờ duyệt', 'Seller đã duyệt',
 			// 'FireFox',
 			// 'Safari',
 			// 'Opera',
 			// 'Navigator',
 			],
 			datasets : [ {
-				data : [ 56, 40
+				data : [  <%=request.getAttribute("countSellerNotCheck")%>, <%=request.getAttribute("countSeller")%>
 				// ,400, 600, 300, 100
 				],
 				// backgroundColor: ['#f56954', '#00a65a',
