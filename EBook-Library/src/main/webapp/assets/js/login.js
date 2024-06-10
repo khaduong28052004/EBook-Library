@@ -18,6 +18,19 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove("show-forgot-password");
 });
 
+	document.addEventListener("DOMContentLoaded",function(){
+		let page =  "${page}";
+ 		if("ft" == page.toString()){
+ 		    container.classList.add("show-forgot-password");
+		}else if( "rg" === page.toString()){
+		
+			container.classList.add("active");
+		}else{
+		    container.classList.remove("active");  
+		}
+
+	});
+
 document.addEventListener('DOMContentLoaded', function () {
     const registerForm = document.querySelector('.sign-up form');
     const loginForm = document.querySelector('.sign-in form');
