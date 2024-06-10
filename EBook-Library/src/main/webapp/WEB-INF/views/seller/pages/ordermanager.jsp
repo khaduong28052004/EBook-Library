@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 						<!-- BAR CHART -->
 						<div class="card card-success">
 							<div class="card-header">
-								<h3 class="card-title">Thông kê đơn hàng</h3>
+								<h3 class="card-title">Thống kê đơn hàng</h3>
 
 								<div class="card-tools">
 									<button type="button" class="btn btn-tool"
@@ -74,58 +75,90 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="align-middle">7477467464</td>
-											<td class="align-middle">Dương Văn Kha</td>
-											<td class="align-middle">0899672816</td>
-											<td class="align-middle">Cái Răng cần thơ</td>
-											<td class="align-middle">200</td>
-											<td>10.000.000</td>
-											<td class="align-middle">28/05/2024</td>
-											<td class="align-middle">60.000</td>
-											<td class="align-middle">100.000</td>
-											<td class="align-middle">9.840.000</td>
-											<td><buuton class="btn btn-success">Xác nhận</buuton>
-												<button class="btn btn-danger">Hủy đơn</button></td>
-										</tr>
-										<tr>
-											<td class="align-middle">7477467464</td>
-											<td class="align-middle">Dương Văn Kha</td>
-											<td class="align-middle">0899672816</td>
-											<td class="align-middle">Cái Răng cần thơ</td>
-											<td class="align-middle">200</td>
-											<td>10.000.000</td>
-											<td class="align-middle">28/05/2024</td>
-											<td class="align-middle">60.000</td>
-											<td class="align-middle">100.000</td>
-											<td class="align-middle">9.840.000</td>
-											<td><buuton class="btn btn-success">Xác nhận</buuton>
-												<button class="btn btn-danger">Hủy đơn</button></td>
-										</tr>
+										<c:forEach var="bill" items="${listBill}">
+											<tr>
+												<td class="align-middle">${bill.id}</td>
+												<td class="align-middle">${bill.account.fullname}</td>
+												<td class="align-middle">${bill.account.phone}</td>
+												<td class="align-middle">${bill.address}</td>
+												<td class="align-middle">${bill.quantity}</td>
+												<td class="align-middle">${bill.totalPrice}</td>
+												<td class="align-middle">${bill.dateBuy}</td>
+												<td class="align-middle">${bill.priceShipping}</td>
+												<c:set var="chietKhau" value="${bill.totalPrice * 0.01}"></c:set>
+												<td class="align-middle">${bill.totalPrice * 0.01}</td>
+												<td class="align-middle">${bill.totalPrice - chietKhau}</td>
+												<td class="align-middle"><a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#xacNhan${bill.id}">Xác nhận</a> 
+												<a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal${bill.id}">Hủy đơn</a></td>
+											</tr>
 
+											<!-- Modal XacNhan -->
+											<div class="modal fade" id="xacNhan${bill.id}"
+												tabindex="-1" aria-labelledby="exampleModalLabel"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h1 class="modal-title fs-5" id="exampleModalLabel">Xác Nhận
+																Đơn Hàng</h1>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+														<p>Bạn muốn xác nhận đơn hàng với mã đơn hàng là: ${bill.id} không?</p>
+															</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-secondary"
+																		data-bs-dismiss="modal">Thoát</button>
+																	<a type="submit" class="btn btn-primary" href="/seller/ordermanager/xacNhan${bill.id}">Xác
+																		Nhận</a>
+															</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Modal Huy -->
+											<div class="modal fade" id="exampleModal${bill.id}" tabindex="-1"
+												aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h1 class="modal-title fs-5" id="exampleModalLabel">Hủy Đơn Hàng</h1>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+														<form action="/seller/ordermanager/huy?id=${bill.id}" method="post">
+														<div class="mb-3">
+														<label class="form-label">Mã đơn hàng:</label> <span>${bill.id}</span>
+														<input value="${bill.account.email}" name="email${bill.id}" type="hidden">
+														<input value="${bill.billDetails[0].product.account.email}" name="emailSuprot${bill.id}" type="hidden">
+														<input value="${bill.account.fullname}" name="fullname${bill.id}" type="hidden">
+														<input value="${bill.address}" name="address${bill.id}" type="hidden">
+														</div>
+														<div class="mb-3">
+														<label class="form-label">Lý do hủy đơn <span style="color:red;">*</span></label>
+														<textarea rows="" cols="" name="contentCancel${bill.id}" class="form-control"required="required"></textarea>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Thoát</button>
+															<button type="submit" class="btn btn-danger">Xác Nhận</button>
+														</div>
+														</form>
+														</div>
+														
+													</div>
+												</div>
+											</div>
+										</c:forEach>
 									</tbody>
-									<!-- <tfoot>
-                      <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                      </tr>
-                    </tfoot> -->
 								</table>
 							</div>
-							<!-- /.card-body -->
 						</div>
-						<!-- /.card -->
 					</section>
-					<!-- right col -->
 				</div>
-				<!-- /.row (main row) -->
 			</div>
-			<!-- /.container-fluid -->
-			</section>
-			<!-- /.content -->
 		</div>
 
 
@@ -149,7 +182,22 @@
 	<!-- <script src="/assets/dist/js/demo.js"></script> -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			// Đoạn mã JavaScript sẽ được thực thi sau khi trang và tất cả các nguồn tài nguyên đã được tải xong
+
+    var billSucces = ${listSucces}; 
+    var billFalse = ${listFalse};
+    var billValuesSucces = billSucces.map(function(str) {
+        var value = str.split('=')[1];
+        var endBracketIndex = value.indexOf('}');
+        return value.substring(0, endBracketIndex);
+    });
+    console.log(billValuesSucces);
+    var billValuesFalse = billFalse.map(function(str) {
+        var value = str.split('=')[1];
+        var endBracketIndex = value.indexOf('}');
+        return value.substring(0, endBracketIndex);
+    });
+    
+    console.log(billValuesFalse);
 
 			var areaChartData = {
 				labels : [ 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4',
@@ -164,9 +212,9 @@
 					pointStrokeColor : 'rgba(60,141,188,1)',
 					pointHighlightFill : '#fff',
 					pointHighlightStroke : 'rgba(60,141,188,1)',
-					data : [ 1, 2, 40, 19, 86, 27, 90, 80, 40, 10, 30, 50 ]
+					data : billValuesSucces
 				}, {
-					label : 'Bị hủy hoặc trả hàng',
+					label : 'Bị hủy',
 					backgroundColor : 'rgba(210, 214, 222, 1)',
 					borderColor : 'rgba(210, 214, 222, 1)',
 					pointRadius : false,
@@ -174,7 +222,7 @@
 					pointStrokeColor : '#c1c7d1',
 					pointHighlightFill : '#fff',
 					pointHighlightStroke : 'rgba(220,220,220,1)',
-					data : [ 65, 59, 80, 81, 56, 55, 40, 70, 40, 10, 67, 100 ]
+					data : billValuesFalse
 				}, ]
 			};
 
