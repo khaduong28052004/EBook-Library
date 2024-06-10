@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +22,7 @@
 <body>
 	<div class="container">
 		<!-- hearder -->
-		<div class="row" >
+		<div class="row">
 			<div class="col-md-12">
 				<h5 style="color: green; padding-top: 40px; padding-bottom: 40px;">
 					<i class="fa-solid fa-cart-shopping" style="color: #19d10c;"></i> <Strong
@@ -132,9 +134,11 @@
 		</div>
 
 
+
+
 		<!-- SẢN PHẨM -->
 		<table class="table table-hover"
-			style="margin-top: 60px; border-collapse: collapse; border-bottom: white;">
+			style="margin-top: 10px; border-collapse: collapse; border-bottom: white;">
 			<tr>
 				<td>
 					<h5>Sản phẩm</h5>
@@ -150,8 +154,9 @@
 				<td></td>
 				<td style="color: #7e847e;">Thành tiền</td>
 			</tr>
-			<tbody>
-				<tr style="border-bottom: white;">
+			<c:forEach var="item" items="${listCarts}">
+
+				<tr>
 					<td><img
 						src="https://png.pngtree.com/png-clipart/20210309/original/pngtree-3d-logo-design-vector-cdr-file-png-image_5883019.jpg"
 						style="width: 40px;">LyLyShop</td>
@@ -166,26 +171,48 @@
 					<td></td>
 					<td></td>
 				</tr>
-			</tbody>
-			<tfoot style="border-top: white;">
-				<tr>
-					<td><img
-						src="https://nxbhcm.com.vn/Image/Biasach/dacnhantam86.jpg"
-						style="height: 70px; width: auto;">Sách Đắc Nhân Tâm</td>
+
+
+				<tr style="border-bottom: 1px solid gray;">
+					<td><img src="${item.product.image}"
+						style="height: 70px; width: auto;"></td>
+					<td><span style="font-weight: bold; font-size: 18px">[${item.product.name}]</span>
+						Mô tả : ${item.product.introduce}</td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
+					<td style="color: #7e847e;">Loại:
+						${item.product.category.name}</td>
+					<td><fmt:formatNumber>${item.product.price-item.product.discount}</fmt:formatNumber><sup>đ</sup></td>
+					<td class="text-center">${item.quantity}</td>
 					<td></td>
-					<td style="color: #7e847e;">Loại: sách cũ</td>
-					<td>₫40.000</td>
-					<td>1</td>
-					<td></td>
-					<td>₫40.000</td>
+					<td><fmt:formatNumber>${item.quantity*(item.product.price-item.product.discount)}</fmt:formatNumber><sup>đ</sup></td>
 				</tr>
-			</tfoot>
+			</c:forEach>
 		</table>
-		<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<!-- ĐƠN VỊ VẬN CHUYỂN -->
 		<table class="table table-hover"
 			style="border-collapse: collapse; border-bottom: white;">
@@ -237,7 +264,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td style="padding-right: 150px;">0đ</td>
+				<td style="padding-right: 150px;"><fmt:formatNumber>${service_fee}</fmt:formatNumber><sup>đ</sup></td>
 			</tr>
 			<tbody>
 				<td></td>
@@ -261,11 +288,17 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td style="color: #7e847e;">Tổng số tiền(1 sản phẩm):</td>
+				<td style="color: #7e847e;">Tổng số tiền(${listCarts.size()}
+					sản phẩm):</td>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td>70.000</td>
+				<c:set var="total" value="0" />
+				<c:forEach var="it" items="${listCarts}">
+					<c:set var="total"
+						value="${total+(it.quantity*(it.product.price-it.product.discount))}" />
+				</c:forEach>
+				<td><fmt:formatNumber>${total}</fmt:formatNumber><sup>đ</sup></td>
 			</tfoot>
 		</table>
 		<img src="/views/img/Pay/gachDut.png"
@@ -361,7 +394,7 @@
 						</td>
 						<td></td>
 						<td></td>
-						<td style="text-align: center;">40.000</td>
+						<td style="text-align: center;"><fmt:formatNumber>${total}</fmt:formatNumber><sup>đ</sup></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -380,7 +413,7 @@
 						</td>
 						<td></td>
 						<td></td>
-						<td style="text-align: center;">0đ</td>
+						<td style="text-align: center;"><fmt:formatNumber>${service_fee}</fmt:formatNumber><sup>đ</sup></td>
 					</tr>
 				</tbody>
 				</tr>
@@ -399,8 +432,9 @@
 							toán</td>
 						<td></td>
 						<td></td>
+						<c:set var ="total" value = "${total+service_fee}"></c:set>
 						<td style="color: green; text-align: center;">
-							<h4>70.000</h4>
+							<h4><fmt:formatNumber>${total}</fmt:formatNumber><sup>đ</sup></h4> 
 						</td>
 						<td></td>
 					</tr>

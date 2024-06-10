@@ -28,8 +28,9 @@
 					<div class="cart-title">
 						<div class="row">
 							<div class="col-md-4">
-								<input class="form-check-input" type="checkbox" id="gridCheck">
-								<h3>Sản phẩm</h3>
+								<%-- 	<input class="form-check-input" type="checkbox"
+									id="checkProductAll" ${listCarts.size()==0?'disabled':''}> --%>
+								<h3 style="margin-left: 50px">Sản phẩm</h3>
 							</div>
 							<div class="col-md-2">
 								<h3>Đơn giá</h3>
@@ -51,12 +52,12 @@
 
 			</div>
 			<form action="" method="post">
-				<c:forEach var="item" items="${listCarts}">
-					<div class="col-md-12" style="margin-top: 10px;">
+				<c:forEach var="item" items="${listCarts}" varStatus="index">
+					<div class="col-md-12 indexCard" style="margin-top: 10px;">
 						<div class="card" style="border-radius: 0px;">
 							<div class="cart-nameStore">
-								<input class="form-check-input" type="checkbox" id="gridCheck">
-								<h3>Kha Duong Shop</h3>
+								<!-- 	<input class="form-check-input" type="checkbox" id="gridCheck"> -->
+								<h3 style="margin-left: 50px">${item.account.shopName}</h3>
 
 							</div>
 						</div>
@@ -64,35 +65,60 @@
 							<div class="cart-product">
 								<div class="row">
 									<div class="col-md-4">
-										<input class="form-check-input" name="idProduct"
-											value="${item.id}" type="checkbox" id="gridCheck"> <img
-											src="${item.product.image}" alt="">
+										<input class="form-check-input product" name="idProduct"
+											onclick="change()" value="${item.id}" type="checkbox"
+											id="gridCheck"> <img src="${item.product.image}"
+											alt="">
 										<div class="title-product" style="margin-left: 10px;">
 											<span style="font-weight: bold;">[${item.product.name}]</span>
 											${item.product.introduce}
 										</div>
 									</div>
 									<div class="col-md-2" style="display: flex;">
-
 										<h3 style="font-size: 17px; margin-left: 10px;">
 											<span style="text-decoration: line-through;"><fmt:formatNumber>${item.product.price}</fmt:formatNumber></span><sup>đ</sup>
 											<fmt:formatNumber>${item.product.price - item.product.discount}</fmt:formatNumber>
 											<sup>đ</sup>
 										</h3>
 									</div>
-									<div class="col-md-2">
-										<p style="text-align: center;">${item.quantity}</p>
+
+									<div class="col-md-2"
+										style="display: flex; align-items: center; justify-content: center;">
+										<!-- <form> -->
+											<div class="btn-group me-2" role="group"
+												aria-label="First group">
+
+												<button type="submit" class="btn btn-outline-secondary"
+													onclick="decreaseValue(${index.index})"
+													formaction="/user/shoppingcart/quantity/${item.id}"
+													formmethod="get" style="border-right: none">-</button>
+												<input type="number" style="width: 60px;" readonly
+													class="btn-outline-secondary text-center btnradio"
+													name="btnradio" id="btnradio1" min="1"
+													max="${item.product.quantity}" value="${item.quantity}">
+												<button type="submit" class="btn btn-outline-secondary"
+													formaction="/user/shoppingcart/quantity/${item.id}"
+													formmethod="get" style="border-left: none"
+													onclick="increaseValue(${item.product.quantity},${index.index})">+</button>
+
+
+											</div>
+									<!-- 	</form> -->
 									</div>
+
 									<div class="col-md-2">
+										<input class="priceProduct" type="number" hidden="true"
+											value="${(item.product.price-item.product.discount)*item.quantity}">
 										<h3
 											style="font-size: 17px; margin-left: 10px; text-align: center;">
-											<fmt:formatNumber>${item.product.price*item.quantity}</fmt:formatNumber>
+											<fmt:formatNumber>${(item.product.price-item.product.discount)*item.quantity}</fmt:formatNumber>
 											<sup>đ</sup>
 										</h3>
 									</div>
 									<div class="col-md-2"
 										style="display: flex; justify-content: center;">
-										<a href="/user/shoppingcart/delete/${item.id}" class="btn btn-danger">Xóa</a>
+										<a href="/user/shoppingcart/delete/${item.id}"
+											class="btn btn-danger">Xóa</a>
 									</div>
 
 								</div>
@@ -114,17 +140,29 @@
 					style="margin-bottom: 30px; margin-top: 20px;">
 					<div class="card" style="border-radius: 0px;">
 						<div class="payment-cart">
-							<input class="form-check-input" type="checkbox" id="clickAll">
-							<h3>Chọn Tất cả [2]</h3>
-							<button class="btn btn-danger"
-								formaction="/user/shoppingcart/deleteall">Xóa</button>
+							<input class="form-check-input" type="checkbox" id="clickAll"
+								${listCarts.size()==0?'disabled':''}>
+							<h3 class="countCart">Chọn Tất cả [2]</h3>
+						
+								<button type="submit" class="btn btn-danger" id="deleteAll"
+									formaction="/user/shoppingcart/deleteall" formmethod="post" disabled="true">Xóa tất cả</button>
+						
 							<div class="payment">
-								<h3>
-									Tổng thanh toán ${quantity} [sản phẩm] : <span><fmt:formatNumber>${total}</fmt:formatNumber><sup>đ</sup></span>
+								<c:set var="total" value="0" />
+								<c:set var="quantity" value="0" />
+								<c:forEach var="it" items="${listCarts}">
+									<c:set var="total"
+										value="${total+(it.quantity*(it.product.price-it.product.discount))}" />
+									<c:set var="quantity" value="${quantity+it.quantity }" />
+								</c:forEach>
+								<h3 id="totalProduct">
+									Tổng thanh toán 0 [sản phẩm] : <span><fmt:formatNumber>0</fmt:formatNumber><sup>đ</sup></span>
 								</h3>
 							</div>
 							<div class="btn-payment">
-								<button class="btn btn-success">Mua hàng</button>
+								<button class="btn btn-success"
+									formaction="/user/shoppingcart/getCartPay" id="cartPay"
+									disabled="true">Mua hàng</button>
 								<a href="/user/home" class="btn btn-primary">Quay lại</a>
 							</div>
 						</div>
@@ -142,24 +180,101 @@
 	</div>
 	</div>
 	<script>
-		var allChecked = document.querySelectorAll(".form-check-input");
+		var allChecked = document.querySelectorAll(".form-check-input.product");
 		document.getElementById("clickAll").onclick = click;
-		document.getElementById("cboProduct").onclick = click;
+		/* document.getElementById("cboProduct").onclick = click; */
 
 		function click() {
+		
 			if (this.checked) {
-
+				document.getElementById("deleteAll").disabled = false;
+				document.getElementById("cartPay").disabled = false;
+			 
 				for (var i = 0; i < allChecked.length; i++) {
 					allChecked[i].checked = true;
-
+				 	
 				}
+		
 			} else {
 				for (var i = 0; i < allChecked.length; i++) {
 					allChecked[i].checked = false;
-
+					document.getElementById("deleteAll").disabled = true;
+					document.getElementById("cartPay").disabled = true;
 				}
 			}
+			totalProduct();
+			
 		};
+
+		function change() {
+			totalProduct();
+			for (var i = 0; i < allChecked.length; i++) {
+				if (allChecked[i].checked) {
+					document.getElementById("deleteAll").disabled = false;
+					document.getElementById("cartPay").disabled = false;
+					return;
+				}
+			}
+			document.getElementById("deleteAll").disabled = true;
+			document.getElementById("cartPay").disabled = true;
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			// Code sẽ được thực thi khi trang web đã tải xong
+			console.log('Trang web đã tải xong!');
+			var cart = document.querySelectorAll(".indexCard");
+			var count = document.querySelector(".countCart");
+			count.innerHTML = "Chọn Tất cả [" + cart.length + "]";
+		});
+		
+		function totalProduct() {
+			var priceProduct = document.querySelectorAll(".priceProduct");
+			var total = 0;
+			var index =0;
+			for (var i = 0; i <allChecked.length ; i++) {
+				if(allChecked[i].checked){
+				  index++;
+				  total = total + parseFloat(priceProduct[i].value);
+				}	
+			}
+			
+			document.getElementById('totalProduct').innerHTML = "Tổng thanh toán "+index+" [sản phẩm] : "+total.toLocaleString().replace(/,/g, '.')+"<sup>đ<sup>"
+			
+
+		}
+	</script>
+	<script>
+	//3.Tăng giảm số lượng
+	function increaseValue(index,page) {
+		var value = parseInt(document.querySelectorAll('.btnradio')[page].value, 10);
+		value = isNaN(value) ? 0 : value;
+		if (value < index) {
+			value++;
+		} else {
+			document.querySelectorAll('.btnradio')[page].value = index;
+			return;
+		}
+		document.querySelectorAll('.btnradio')[page].value = value;
+	}
+
+	function changeValue(index) {
+		var value = parseInt(document.getElementById('btnradio1').value, 10);
+		value = isNaN(value) ? 0 : value;
+		if (value > index) {
+			document.getElementById('btnradio1').value = index;
+		}
+	}
+
+	function decreaseValue(page) {
+		var value = parseInt(document.querySelectorAll('.btnradio')[page].value, 10);
+		value = isNaN(value) ? 0 : value;
+		if (value > 1) {
+			value--;
+			document.querySelectorAll('.btnradio')[page].value = value;
+		}
+		
+	}
+
 	</script>
 </body>
 </html>

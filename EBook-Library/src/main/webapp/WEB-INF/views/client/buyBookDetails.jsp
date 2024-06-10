@@ -206,35 +206,43 @@
 						</div>
 					</c:if>
 
-
-					<div class="bodyPanle4">
-						<label for="sl" class="title"><strong>Số lượng: </strong></label>
-						<div class="btn-group me-2" role="group" aria-label="First group">
-							<button type="button" class="btn btn-outline-secondary"
-								onclick="decreaseValue()" style="border-right: none">-</button>
-							<input type="number" style="width: 60px;"
-								onblur="changeValue(${product.quantity})"
-								class="btn-outline-secondary text-center" name="btnradio"
-								id="btnradio1" min="1" max="${product.quantity}" value="1">
-							<button type="button" class="btn btn-outline-secondary"
-								onclick="increaseValue(${product.quantity})">+</button>
+					<form action="" method="get">
+						<div class="bodyPanle4">
+							<label for="sl" class="title"><strong>Số lượng:
+							</strong></label>
+							<div class="btn-group me-2" role="group" aria-label="First group">
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="decreaseValue()" style="border-right: none">-</button>
+								<input type="number" style="width: 60px;"
+									onblur="changeValue(${product.quantity})"
+									class="btn-outline-secondary text-center" name="btnradio"
+									id="btnradio1" min="1" max="${product.quantity}" value="1">
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="increaseValue(${product.quantity})">+</button>
+							</div>
 						</div>
-					</div>
-					<div class="footer">
-						<li
+						<div class="footer">
+							<%-- 			<li
 							class="d-inline-block bg-success border border-success px-5 py-2 rounded-5 mr-2 mb-2"
-							style="margin-right: 15px;"><a href="#"
+							style="margin-right: 15px;"><a href="/user/shoppingcart/add/${product.id}"
 							class="cursor-pointer text-light text-decoration-none font-weight-semibold d-flex justify-content-center">
 								<i class="bi bi-basket-fill"></i> &emsp14; Mua ngay
-						</a></li>
-						<li
+						</a></li> --%>
+							<button
+								class="d-inline-block bg-success border border-success px-5 py-2 rounded-5 mr-2 mb-2"
+								style="color: white">Mua ngay</button>
+							<button
+								class="d-inline-block bg-danger border border-danger px-5 py-2 rounded-5 mr-2 mb-2"
+								style="color: white" formaction="/user/shoppingcart/add/${product.id}">Thêm vào giỏ hàng</button>
+							<!-- 			<li
 							class="d-inline-block bg-danger border border-danger px-5 py-2 rounded-5 mr-2 mb-2">
 							<a href="#"
 							class="cursor-pointer text-light text-decoration-none font-weight-semibold d-flex justify-content-center">
 								<i class="bi bi-cart4"></i> &emsp14; Thêm vào giỏ hàng
 						</a>
-						</li>
-					</div>
+						</li> -->
+						</div>
+					</form>
 			</aside>
 		</div>
 		<div class="panel2 row">
@@ -244,8 +252,8 @@
 			</div>
 			<div class="col-md-11">
 				<p>An an shop</p>
-				<button class="btn btn-danger">Chat ngay</button>
-				<button class="btn btn-success">Xem shop</button>
+					<a href="/user/storehome/${product.account.id}" class="btn btn-danger">Chat ngay</a>
+				<a href="/user/storehome/${product.account.id}" class="btn btn-success">Xem shop</a>
 			</div>
 		</div>
 		<div class="panel3">

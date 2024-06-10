@@ -10,4 +10,8 @@ import com.foti_java.model.Product;
 
 public interface CartDetailRepository extends JpaRepository<CartDetail, Integer> {
 	List<CartDetail> findAllCartDetailsByAccount(Account account);
+
+	CartDetail findByAccountAndProduct(Account account, Product product);
+
+	List<CartDetail> findAllByIdIn(List<Integer> list);
 }
