@@ -44,8 +44,8 @@ public class SellerProductManagerController {
 	HttpServletRequest req;
 	Integer id;
 	String imageName;
-	Product product = new Product();
-	Category categoryNew = new Category();
+	Product product;
+	Category categoryNew;
 	List<String> image;
 	Integer idCategory;
 	boolean showModal = false;
@@ -58,10 +58,10 @@ public class SellerProductManagerController {
 
 	@GetMapping("/productmanager")
 	public String productManafer(Model model) {
-		List<Product> listProducts = productRepository.findAll();
+		List<Product> listProducts = productRepository.findByStatus();
 		List<Category> listCategories = categoryRepository.findAll();
 		//
-		checkSale = true;
+		checkSale = false;
 		model.addAttribute("listProduct", listProducts);
 		req.setAttribute("listCategories", listCategories);
 		model.addAttribute("errorName", errorName);
@@ -73,10 +73,12 @@ public class SellerProductManagerController {
 		model.addAttribute("errorNameCategory", errorNameCategory);
 		model.addAttribute("checkSale", checkSale);
 		model.addAttribute("categoryNew", categoryNew);
+		model.addAttribute("images", image);
 		showModal = false;
 		errorName = null;
 		errorSale = null;
 		product = null;
+		image = new ArrayList<>();
 		return "/seller/pages/productmanager";
 	}
 
@@ -85,7 +87,8 @@ public class SellerProductManagerController {
 			@RequestParam("writerName") String writerName, @RequestParam("publishingCompany") String publishingCompany,
 			@RequestPart("images") List<MultipartFile> images, @RequestParam("quantity") Integer quantity,
 			@RequestParam("price") double price, @RequestParam("discount") double discount,
-			@RequestParam("introduce") String introduce, @RequestParam("discountType") boolean discountType) {
+			@RequestParam("introduce") String introduce, @RequestParam("discountType") boolean discountType,
+			@RequestParam("weight") double weight) {
 
 		Product products = new Product();
 		products.setName(name);
@@ -105,41 +108,46 @@ public class SellerProductManagerController {
 		products.setActive(false);
 		products.setStatus(true);
 		products.setIntroduce(introduce);
-		if (checkNameProduct(name) && checkSale(discountType, discount)) {
+		products.setImage(getImage(images));
+		products.setWeight(weight);
+		image = getListImage(images);
+		if (checkNameProduct(name) && checkSale(discountType, discount, price)) {
 			productRepository.saveAndFlush(products);
 			for (MultipartFile multipartFile : images) {
-				if (!images.isEmpty()) {
+				if (!images.isEmpty() && !multipartFile.getOriginalFilename().equals(getImage(images))) {
 					ImageProduct imageProduct = new ImageProduct();
 					imageProduct.setName(multipartFile.getOriginalFilename());
 					imageProduct.setProduct(products);
 					imageProductRepository.saveAndFlush(imageProduct);
-					String realPath = context.getRealPath("/images/" + imageProduct.getName());
-					Path path = Path.of(realPath);
-					if (!Files.exists(path)) {
-						try {
-							Files.createDirectories(path);
-						} catch (Exception e) {
-							// TODO: handle exception
-						}
-					}
-					File file = new File(context.getRealPath("/images/" + imageProduct.getName()));
+				}
+				String realPath = context.getRealPath("/images/" + multipartFile.getOriginalFilename());
+				Path path = Path.of(realPath);
+				if (!Files.exists(path)) {
 					try {
-						multipartFile.transferTo(file);
+						Files.createDirectories(path);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
 				}
+				File file = new File(context.getRealPath("/images/" + multipartFile.getOriginalFilename()));
+				try {
+					multipartFile.transferTo(file);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
+			
 		} else {
 			products.setDiscount(discount);
 			product = products;
+			return "redirect:/seller/productmanager";
 		}
-		return "redirect:/seller/productmanager";
+		return "redirect:/seller/productmanager/reset";
 	}
 
 	@GetMapping("/productmanager/edit")
 	public String edit(Model model, @RequestParam("id") Integer idProduct) {
-		List<Product> listProducts = productRepository.findAll();
+		List<Product> listProducts = productRepository.findByStatus();
 		List<Category> listCategories = categoryRepository.findAll();
 		model.addAttribute("listProduct", listProducts);
 		model.addAttribute("listCategories", listCategories);
@@ -165,6 +173,7 @@ public class SellerProductManagerController {
 		model.addAttribute("product", product);
 		model.addAttribute("errorName", errorName);
 		model.addAttribute("checkSale", checkSale);
+		model.addAttribute("errorSale", errorSale);
 		return "/seller/pages/productmanager";
 	}
 
@@ -173,9 +182,9 @@ public class SellerProductManagerController {
 			@RequestParam("writerName") String writerName, @RequestParam("publishingCompany") String publishingCompany,
 			@RequestPart("images") List<MultipartFile> images, @RequestParam("quantity") Integer quantity,
 			@RequestParam("price") double price, @RequestParam("discount") double discount,
-			@RequestParam("introduce") String introduce, @RequestParam("discountType") boolean discountType) {
-		if (checkNameProductUpdate(name, id) && checkSale(discountType, discount)) {
-			Product product = new Product();
+			@RequestParam("introduce") String introduce, @RequestParam("discountType") boolean discountType,
+			@RequestParam("weight") double weight) {
+		if (checkNameProductUpdate(name, id) && checkSale(discountType, discount, price)) {
 			System.out.println("Updateid: " + id);
 			product.setId(id);
 			product.setName(name);
@@ -193,6 +202,8 @@ public class SellerProductManagerController {
 			product.setWriterName(writerName);
 			product.setDate(new Date());
 			product.setIntroduce(introduce);
+			product.setImage(getImage(images));
+			product.setWeight(weight);
 			productRepository.saveAndFlush(product);
 			List<ImageProduct> imageProducts = imageProductRepository.findAll();
 			for (ImageProduct imageProduct : imageProducts) {
@@ -201,26 +212,26 @@ public class SellerProductManagerController {
 				}
 			}
 			for (MultipartFile multipartFile : images) {
-				if (!images.isEmpty()) {
+				if (!images.isEmpty() && !multipartFile.getOriginalFilename().equals(getImage(images))) {
 					ImageProduct imageProduct = new ImageProduct();
 					imageProduct.setName(multipartFile.getOriginalFilename());
 					imageProduct.setProduct(product);
 					imageProductRepository.saveAndFlush(imageProduct);
-					String realPath = context.getRealPath("/images/" + imageProduct.getName());
-					Path path = Path.of(realPath);
-					if (!Files.exists(path)) {
-						try {
-							Files.createDirectories(path);
-						} catch (Exception e) {
-							// TODO: handle exception
-						}
-					}
-					File file = new File(context.getRealPath("/images/" + imageProduct.getName()));
+			}
+				String realPath = context.getRealPath("/images/" + multipartFile.getOriginalFilename());
+				Path path = Path.of(realPath);
+				if (!Files.exists(path)) {
 					try {
-						multipartFile.transferTo(file);
+						Files.createDirectories(path);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
+				}
+				File file = new File(context.getRealPath("/images/" + multipartFile.getOriginalFilename()));
+				try {
+					multipartFile.transferTo(file);
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
 		} else {
@@ -228,20 +239,21 @@ public class SellerProductManagerController {
 			return "redirect:/seller/productmanager/edit?id=" + id;
 		}
 		errorName = null;
-		return "redirect:/seller/productmanager";
+		return "redirect:/seller/productmanager/reset";
 	}
 
 	@GetMapping("/productmanager/delete")
 	public String getMethodName(@RequestParam("id") Integer id) {
-		List<ImageProduct> imageProducts = imageProductRepository.findAll();
-		for (ImageProduct imageProduct : imageProducts) {
-			if (imageProduct.getProduct().getId() == id) {
-				imageProductRepository.delete(imageProduct);
+		List<Product> list = productRepository.findAll();
+		for(Product product : list) {
+			if(product.getId() ==  id) {
+				product.setId(id);
+				product.setStatus(false);
+				productRepository.saveAndFlush(product);
+				break;
 			}
 		}
-		Optional<Product> product = productRepository.findById(id);
-		productRepository.delete(product.get());
-		return "redirect:/seller/productmanager";
+		return "redirect:/seller/productmanager/reset";
 	}
 
 	public boolean checkNameProduct(String nameProduct) {
@@ -330,6 +342,7 @@ public class SellerProductManagerController {
 		showModal = true;
 		showBtnCreate = true;
 		showBtnUpdate = false;
+		errorNameCategory = null;
 		return "redirect:/seller/productmanager";
 	}
 
@@ -337,6 +350,7 @@ public class SellerProductManagerController {
 	public String resetProduct() {
 		product = null;
 		errorName = null;
+		image = new ArrayList<>();
 		return "redirect:/seller/productmanager";
 	}
 
@@ -372,20 +386,39 @@ public class SellerProductManagerController {
 		return checkValue;
 	}
 
-	public boolean checkSale(boolean type, double sale) {
+	public boolean checkSale(boolean type, double sale , double price) {
 		boolean checkValues = true;
 		if (type == true) {
 			if (sale < 0 || sale > 100) {
-				errorSale = "Giá trị trong sale từ 0 - 100";
+				errorSale = "Giá trị phải từ 0 - 100";
 				checkValues = false;
+			}else {
+				errorSale = null;
 			}
 		} else {
 			if (sale < 1000) {
-				errorSale =  "Giá trị trong sale phải lớn hơn 1000";
+				errorSale =  "Giá trị phải lớn hơn hoặc bằng 1000";
+				checkValues = false;
+			}else {
+				errorSale = null;
+			}
+			if(sale > price) {
+				errorSale = "Giá trị giảm giá không được lớn hơn giá trị sản phẩm";
 				checkValues = false;
 			}
 		}
 		System.out.println("--------------------SaleValue-------------------" + sale);
 		return checkValues;
+	}
+	
+	public String getImage(List<MultipartFile> Listimages) {
+		return Listimages.get(0).getOriginalFilename();
+	}
+	public List<String> getListImage(List<MultipartFile> Listimages) {
+		 image = new ArrayList<String>();
+		for(MultipartFile file : Listimages) {
+			image.add(file.getOriginalFilename());
+		}
+		return image;
 	}
 }

@@ -303,7 +303,7 @@ display: block;
 													<div class="info col-md-6">
 														<div class="lbl-info">
 															<label for="ten-sanpham" class="form-label">Loại
-																sản phẩm <span style="color: red;">*</span>
+																sản phẩm
 															</label>
 														</div>
 														<div class="input-group">
@@ -365,7 +365,7 @@ display: block;
 
 														<div class="container-price-sanpham">
 															<div class="row">
-																<div class="info col-md-6">
+																<div class="info col-md-4">
 																	<div class="lbl-info">
 																		<label for="price-sanpham" class="form-label">Mức
 																			giá của sản phẩm <span style="color: red;">${errorPrice}
@@ -380,7 +380,7 @@ display: block;
 																			class="input-group-text" id="khoiluong-sanpham2">VNĐ</span>
 																	</div>
 																</div>
-																<div class="info col-md-6">
+																<div class="info col-md-4">
 																	<div class="lbl-info">
 																		<label for="price-sanpham" class="form-label">Số
 																			lượng <span style="color: red;">${errorQuantity}
@@ -394,7 +394,22 @@ display: block;
 																			value="${product.quantity}" min="1" />
 																	</div>
 																</div>
+															<div class="info col-md-4">
+																<div class="lbl-info">
+																	<label for="price-sanpham" class="form-label">Khối lượng
+																		lượng <span style="color: red;">${errorWeight}
+																			<c:if test="${errorWeight == null}">*</c:if>
+																	</span>
+																	</label>
 																</div>
+																<div class="input-group">
+																		<input type="number" class="form-control" name="weight"
+																			required="required" id="gia-sanpham"
+																			value="${product.weight}" min="1" /> <span
+																			class="input-group-text" id="khoiluong-sanpham2">Gram</span>
+																</div>
+															</div>
+														</div>
 																<div class="row">
 															<div class="info col-md-6">
 																<div class="lbl-info">
@@ -405,8 +420,8 @@ display: block;
 																	<select id="discountType" class="form-select"
 																		name="discountType"
 																		aria-label="Default select example">
-																		<option selected value="true">Giảm theo %</option>
-																		<option value="false">Giảm theo tiền</option>
+																		<option ${ product.discountType?'selected':''} value="true">Giảm theo %</option>
+																		<option ${ product.discountType?'':'selected'} value="false">Giảm theo tiền</option>
 																	</select>
 																</div>
 															</div>
@@ -489,55 +504,63 @@ display: block;
 									</thead>
 																			<tbody>
 											<c:forEach var="product" items="${listProduct}">
-												<tr>
-													<td class="align-middle">${product.id}</td>
-													<td class="align-middle"><c:forEach var="img"
-															items="${product.imageProducts}">
+											<tr>
+												<td class="align-middle">${product.id}</td>
+												<td class="align-middle">
+														
 
-															<img alt="" style="width: 70px; height: 50px;"
-																src="/images/${img.name}">
+														<img alt="" style="width: 70px; height: 90px; border-radius: 5px;"
+															src="/images/${product.image}">
 
-														</c:forEach></td>
-
-													<td class="align-middle">${product.name}</td>
-													<td class="align-middle">${product.quantity}</td>
-													<td class="align-middle"><fmt:formatNumber
-															value="${product.price}" type="currency" pattern="#,##0"
-															currencySymbol="" /><sup>đ</sup></td>
-
-													<!-- Khởi tạo các biến totalStars và numberOfReviews -->
-													<c:set var="totalStars" value="0" />
-													<c:set var="numberOfReviews" value="0" />
-
-													<td class="align-middle">
-														<!-- Cập nhật giá trị của totalStars và numberOfReviews trong vòng lặp forEach -->
-														<c:forEach var="star" items="${product.evalues}">
-															<c:set var="totalStars" value="${totalStars + star.star}" />
-															<c:set var="numberOfReviews"
-																value="${numberOfReviews + 1}" />
-														</c:forEach> <!-- Tính giá trị trung bình của star --> <c:set
-															var="averageStars"
-															value="${numberOfReviews != 0 ? totalStars / numberOfReviews : 0}" />
-														${averageStars}/5*
 													</td>
 
-													<td class="align-middle">
-														<!-- Khởi tạo biến totalQuantity --> <c:set
-															var="totalQuantity" value="0" /> <c:forEach var="item"
-															items="${product.billDetails}">
-															<!-- Cập nhật giá trị của totalQuantity -->
-															<c:set var="totalQuantity"
-																value="${totalQuantity + item.quantity}" />
-														</c:forEach> ${totalQuantity}
-													</td>
+												<td class="align-middle">${product.name}</td>
+												<td class="align-middle">${product.quantity}</td>
+												<td class="align-middle"><fmt:formatNumber
+														value="${product.price}" type="currency" pattern="#,##0"
+														currencySymbol="" /><sup>đ</sup></td>
 
-													<td class="align-middle text-center"><a
-														href="/seller/productmanager/edit?id=${product.id}"
-														class="btn btn-primary">Edit</a> <a type="button"
-														class="btn btn-danger" id="deleteModal">Xóa</a></td>
-												</tr>
+												<!-- Khởi tạo các biến totalStars và numberOfReviews -->
+												<c:set var="totalStars" value="0" />
+												<c:set var="numberOfReviews" value="0" />
 
-												<div class="modal" id="confirmDeleteModal">
+												<td class="align-middle">
+													<!-- Cập nhật giá trị của totalStars và numberOfReviews trong vòng lặp forEach -->
+													<c:forEach var="star" items="${product.evalues}">
+														<c:set var="totalStars" value="${totalStars + star.star}" />
+														<c:set var="numberOfReviews"
+															value="${numberOfReviews + 1}" />
+													</c:forEach> <!-- Tính giá trị trung bình của star --> <c:set
+														var="averageStars"
+														value="${numberOfReviews != 0 ? totalStars / numberOfReviews : 0}" />
+													<fmt:formatNumber value="${averageStars}" type="number"
+														minFractionDigits="1" maxFractionDigits="1" />/5*
+												</td>
+
+												<td class="align-middle">
+													<!-- Khởi tạo biến totalQuantity --> <c:set
+														var="totalQuantity" value="0" /> <c:forEach var="item"
+														items="${product.billDetails}">
+														<!-- Cập nhật giá trị của totalQuantity -->
+														<c:set var="totalQuantity"
+															value="${totalQuantity + item.quantity}" />
+													</c:forEach> ${totalQuantity}
+												</td>
+
+												<td class="align-middle text-center"><a
+													href="/seller/productmanager/edit?id=${product.id}"
+													class="btn btn-primary">Edit</a> <a type="button"
+													class="btn btn-danger deleteModal" data-id="${product.id}">Xóa</a>
+												</td>
+
+
+											</tr>
+
+										</c:forEach>
+
+										</tbody>
+								</table>
+																				<div class="modal" id="confirmDeleteModal">
 													<div class="modal-dialog">
 														<div class="modal-content">
 															<div class="modal-header">
@@ -550,17 +573,11 @@ display: block;
 															<div class="modal-footer">
 																<button type="button" class="btn btn-secondary thoat">Hủy</button>
 																<a type="button" class="btn btn-danger"
-																	href="/seller/productmanager/delete?id=${product.id}"
 																	id="confirmDeleteButton">Xóa</a>
 															</div>
 														</div>
 													</div>
 												</div>
-
-											</c:forEach>
-
-										</tbody>
-								</table>
 							</div>
 						</div>
 						<!-- /.card-body -->
@@ -593,7 +610,7 @@ display: block;
 														test="${errorNameCategory == null}">*</c:if>
 											</span>
 											</label> <input type="text" name="nameCategory"
-												value="${categoryNew.name}" class="form-control" />
+												value="${categoryNew.name}" class="form-control" required="required" />
 										</div>
 										<div class="mb-3">
 										<c:if test="${showBtnCreate == true}">
@@ -761,10 +778,11 @@ if ('${images[3]}'.length > 0) {
              const maxSize = 500 * 1024 * 1024; // 500 MB
              const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
              const currentImageCount = imagesArray.filter(item => item instanceof File).length;
+             let countListImages;
             console.log(currentImageCount)
              for (let index = 0; index < files.length; index++) {
                  const image = files[index];
-                 console.log(files.length)
+                 console.log(files.length);
                  // Kiểm tra tổng số ảnh nếu thêm ảnh hiện tại
                  if (files.length+currentImageCount > 4){
                      message.innerHTML = "Bạn chỉ có thể thêm tối đa 4 ảnh.";
@@ -791,7 +809,27 @@ if ('${images[3]}'.length > 0) {
              // Clear message and reset input
              message.innerHTML = "";
              inputSaveImage.value = ''; // Reset file input
+             countListImages = currentImageCount;
+
              displayImage();
+             const showImgDivs = document.querySelectorAll('.show-img-div');
+             showImgDivs.forEach(div => {
+            	    const imgCount = div.querySelectorAll('img').length;
+            	    console.log(`Number of <img> tags in this div:`+imgCount);
+            	    countListImages = imgCount;
+            	});
+             var button = document.getElementById('updateButton');
+             var creatteButton = document.getElementById('creatteButton');
+            
+             if(countListImages < 2){
+             	updateButton.disabled = true;
+                 createButton.disabled = true;
+                 message.innerHTML = "Bạn vui lòng chọn tối thiếu 2 ảnh.";
+             }else{
+             	updateButton.disabled = false;
+                 createButton.disabled = false;
+             }
+             console.log("Số ảnh:"+countListImages);
          });
      } else {
          console.log("Element with id 'show-img-form' not found.");
@@ -799,6 +837,7 @@ if ('${images[3]}'.length > 0) {
 
      // DISPLAY IMAGE
      function displayImage() {
+    	 
          showImg.innerHTML = ""; // Xóa bỏ tất cả các phần tử hiện có trước khi tạo mới
          const dataTransfer = new DataTransfer(); // Tạo một DataTransfer mới để cập nhật
 
@@ -834,10 +873,14 @@ if ('${images[3]}'.length > 0) {
 
          // Cập nhật files trong inputSaveImage
          inputSaveImage.files = dataTransfer.files;
+         
+         
      }
 document.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById('updateButton');
     var creatteButton = document.getElementById('creatteButton');
+    
+    
     var currentUrl = window.location.href;
     var regex = /^http:\/\/localhost:8080\/seller\/productmanager\/edit\?id=\d+$/;
 
@@ -852,19 +895,31 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error("One or both buttons do not exist in the DOM.");
     }
+  
     const confirmDeleteModal = document.getElementById("confirmDeleteModal");
-    const buttonOpen =  document.getElementById("deleteModal");
-         buttonOpen.addEventListener("click", (event) => {
-            confirmDeleteModal.style.display = 'block';
-        }); 
-    
-    const buttonsDis = document.querySelectorAll(".thoat");
+    const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 
+    const deleteButtons = document.querySelectorAll(".deleteModal");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const productId = button.getAttribute("data-id");
+            console.log("Product ID:", productId);  // Debugging line
+            if (productId) {
+                confirmDeleteButton.setAttribute('href', `/seller/productmanager/delete?id=`+productId);
+                confirmDeleteModal.style.display = 'block';
+            } else {
+                console.error("Product ID not found");
+            }
+        });
+    });
+
+    const buttonsDis = document.querySelectorAll(".thoat");
     buttonsDis.forEach(button => {
         button.addEventListener("click", (event) => {
             confirmDeleteModal.style.display = 'none';
         });
     });
+  
     
     const categoryModal = document.getElementById("categoryModal");
     const catergoryButton = document.getElementById("categoryButton");
@@ -958,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', function() {
           var row = document.createElement('tr');
           row.innerHTML = '<th scope="row">' + categories[i].id + '</th>' +
                           '<td>' + categories[i].name + '</td>' +
-                          '<td><a type="button" class="btn btn-success" href="/Ebook/seller/productmanager/category/edit?id=' + categories[i].id + '">Edit</a></td>';
+                          '<td><a type="button" class="btn btn-success" href="/seller/productmanager/category/edit?id=' + categories[i].id + '">Edit</a></td>';
           tableBody.appendChild(row);
       }
 
