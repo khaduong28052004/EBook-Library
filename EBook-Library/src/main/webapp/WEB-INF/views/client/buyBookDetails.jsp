@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,20 +18,14 @@
 		<div class=" panel1 row">
 			<article class="col-md-3">
 				<div class="bigImg">
-					<img id="imgActive"
-						src="https://thuvienhoasen.org/images/file/SFO5nWNm2ggBAmBH/hat-giong-tam-hon.png"
-						alt="">
+					<img id="imgActive" src="${product.image}" alt="">
 				</div>
 				<div class="smallImg">
-					<img class="imgItem"
-						src="https://thuvienhoasen.org/images/file/SFO5nWNm2ggBAmBH/hat-giong-tam-hon.png"
-						alt=""> <img class="imgItem"
-						src="https://salt.tikicdn.com/cache/w300/ts/product/a9/76/5a/f2abb1973b7bbe22f4bcb7c1dfd3f86d.jpg"
-						alt=""> <img class="imgItem"
-						src="https://down-vn.img.susercontent.com/file/73f7a15b46f699b03d9fa3c8de733f1c"
-						alt=""> <img class="imgItem"
-						src="https://product.hstatic.net/200000408481/product/1234_892c40cda53d4cbc851896f69b4a692b_grande.jpg"
-						alt="">
+					<img class="imgItem" src="${product.image}" alt="">
+					<c:forEach var="item" items="${product.imageProducts}">
+						<img class="imgItem" src="${item.name}" alt="">
+
+					</c:forEach>
 				</div>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -52,6 +48,7 @@
 										<div class="carousel-item">
 											<img src="" class="imgSlide d-block w-100" alt="...">
 										</div>
+
 									</div>
 									<button class="carousel-control-prev" type="button"
 										data-bs-target="#carouselExampleControlsNoTouching"
@@ -88,7 +85,7 @@
 			<aside class="col-md-9">
 				<div class="panel-title row">
 					<div class="title col-md-10">
-						<p>Hạt giống tâm hồn</p>
+						<p>${product.name}</p>
 					</div>
 					<div class="col-md-2" style="margin-top: 20px;">
 						<span id="tym" style="font-size: 1.5rem; margin-right: 20px;"><i
@@ -141,59 +138,111 @@
 				</div>
 				<div class="body">
 					<div class="bodyPanle1 row">
+						<c:set var="totalStar" value="0" />
+						<c:forEach var="itemEvalue" items="${product.evalues}">
+							<c:set var="totalStar" value="${totalStar+itemEvalue.star}" />
+						</c:forEach>
 						<div class="col-md-2">
-							<p style="border-right: 1px solid gray;">
-								4.2 <i class="bi bi-star-fill text-warning"></i>
-							</p>
+							<c:if test="${totalStar != '0'}">
+								<p style="border-right: 1px solid gray;">
+									<fmt:formatNumber type="number" maxFractionDigits="1">	${totalStar / product.evalues.size()}</fmt:formatNumber>
+									<i class="bi bi-star-fill text-warning"></i>
+								</p>
+							</c:if>
+							<c:if test="${totalStar == '0'}">
+								<p style="border-right: 1px solid gray;">
+									<fmt:formatNumber type="number" maxFractionDigits="1">0</fmt:formatNumber>
+									<i class="bi bi-star-fill text-warning"></i>
+								</p>
+							</c:if>
 						</div>
 						<div class="col-md-3">
 							<p
-								style="border-right: 1px solid gray; align-items: center; text-align: center;">120
+								style="border-right: 1px solid gray; align-items: center; text-align: center;">${product.evalues.size()}
 								lượt đánh giá</p>
 						</div>
 						<div class="col-md-7">
-							<p>đã bán 1</p>
+							<p>
+								đã bán
+								<fmt:formatNumber>${product.quantitySell}</fmt:formatNumber>
+							</p>
 						</div>
 					</div>
 					<!-- <hr> -->
 					<div class="bodyPanle2">
-						<p>230.000 VNĐ</p>
-					</div>
-					<div class="bodyPanle3 row">
-						<p class="title col-md-1">
-							<strong>Tình trạng: </strong>
+						<p>
+							<span
+								style="text-decoration: line-through; color: rgba(0, 0, 0, 0.463);"><fmt:formatNumber>${product.price}</fmt:formatNumber></span><sup
+								style="color: rgba(0, 0, 0, 0.463);">đ</sup>
+							<fmt:formatNumber>${product.price-product.discount}</fmt:formatNumber>
+							<sup>đ</sup>
 						</p>
-						<div class="checked col-md-11">
-							<i class="bi bi-check-lg"></i>&emsp13;Còn hàng
-						</div>
 					</div>
-					<div class="bodyPanle4">
-						<label for="sl" class="title"><strong>Số lượng: </strong></label>
-						<div class="btn-group me-2" role="group" aria-label="First group">
-							<button type="button" class="btn btn-outline-secondary"
-								onclick="decreaseValue()">-</button>
-							<input type="number" style="width: 60px;"
-								class="btn-outline-secondary text-center" name="btnradio"
-								id="btnradio1" min="1" value="1">
-							<button type="button" class="btn btn-outline-secondary"
-								onclick="increaseValue()">+</button>
+					<c:if test="${product.quantity>0}">
+						<div class="bodyPanle3 row">
+							<p class="title col-md-1">
+								<strong>Tình trạng: </strong>
+
+
+							</p>
+							<div class="checked col-md-11">
+								<i class="bi bi-check-lg"></i>&emsp13; Còn hàng
+
+							</div>
 						</div>
-					</div>
-					<div class="footer">
-						<li
+					</c:if>
+					<!-- 	hết hành  -->
+					<c:if test="${product.quantity==0}">
+						<div class="bodyPanle3 row">
+							<p class="title col-md-1">
+								<strong>Tình trạng: </strong>
+
+
+							</p>
+							<div class="checked col-md-11" style="background-color: red">
+								<i class="bi bi-check-lg"></i>&emsp13; Hết hàng
+
+							</div>
+						</div>
+					</c:if>
+
+					<form action="" method="get">
+						<div class="bodyPanle4">
+							<label for="sl" class="title"><strong>Số lượng:
+							</strong></label>
+							<div class="btn-group me-2" role="group" aria-label="First group">
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="decreaseValue()" style="border-right: none">-</button>
+								<input type="number" style="width: 60px;"
+									onblur="changeValue(${product.quantity})"
+									class="btn-outline-secondary text-center" name="btnradio"
+									id="btnradio1" min="1" max="${product.quantity}" value="1">
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="increaseValue(${product.quantity})">+</button>
+							</div>
+						</div>
+						<div class="footer">
+							<%-- 			<li
 							class="d-inline-block bg-success border border-success px-5 py-2 rounded-5 mr-2 mb-2"
-							style="margin-right: 15px;"><a href="#"
+							style="margin-right: 15px;"><a href="/user/shoppingcart/add/${product.id}"
 							class="cursor-pointer text-light text-decoration-none font-weight-semibold d-flex justify-content-center">
 								<i class="bi bi-basket-fill"></i> &emsp14; Mua ngay
-						</a></li>
-						<li
+						</a></li> --%>
+							<button
+								class="d-inline-block bg-success border border-success px-5 py-2 rounded-5 mr-2 mb-2"
+								style="color: white">Mua ngay</button>
+							<button
+								class="d-inline-block bg-danger border border-danger px-5 py-2 rounded-5 mr-2 mb-2"
+								style="color: white" formaction="/user/shoppingcart/add/${product.id}">Thêm vào giỏ hàng</button>
+							<!-- 			<li
 							class="d-inline-block bg-danger border border-danger px-5 py-2 rounded-5 mr-2 mb-2">
 							<a href="#"
 							class="cursor-pointer text-light text-decoration-none font-weight-semibold d-flex justify-content-center">
 								<i class="bi bi-cart4"></i> &emsp14; Thêm vào giỏ hàng
 						</a>
-						</li>
-					</div>
+						</li> -->
+						</div>
+					</form>
 			</aside>
 		</div>
 		<div class="panel2 row">
@@ -203,194 +252,60 @@
 			</div>
 			<div class="col-md-11">
 				<p>An an shop</p>
-				<button class="btn btn-danger">Chat ngay</button>
-				<button class="btn btn-success">Xem shop</button>
+					<a href="/user/storehome/${product.account.id}" class="btn btn-danger">Chat ngay</a>
+				<a href="/user/storehome/${product.account.id}" class="btn btn-success">Xem shop</a>
 			</div>
 		</div>
 		<div class="panel3">
 			<div class="slider-container">
 				<div class="slider">
-					<!-- Sản phẩm -->
-					<div class="card cardMoi SP">
-						<div class="image-container">
-							<img class="rounded-3 default-img"
-								src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-								alt="Title" width="100%" height="" /> <img class=" rounded-3"
-								src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-								alt="Title" width="100%" height="300px" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Đắc nhân tâm</h5>
-							<h5 class="card-text textOranger">100.000 VNĐ</h5>
-							<div class="star">
-								<span class="active" style="width: 100%;"> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i>
-								</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-							</div>
-							<div class="row">
-								<button class="col-md-6 btn btn-outline-danger">Mua
-									Ngay</button>
-								<div class="col-md-6 ">
-									<i class="bi bi-heart-fill heard"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Sản phẩm -->
-					<div class="card cardMoi SP">
-						<div class="image-container">
-							<img class="rounded-3 default-img"
-								src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-								alt="Title" width="100%" height="" /> <img class=" rounded-3"
-								src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-								alt="Title" width="100%" height="300px" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Đắc nhân tâm</h5>
-							<h5 class="card-text textOranger">100.000 VNĐ</h5>
-							<div class="star">
-								<span class="active" style="width: 100%;"> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i>
-								</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-							</div>
-							<div class="row">
-								<button class="col-md-6 btn btn-outline-danger">Mua
-									Ngay</button>
-								<div class="col-md-6 ">
-									<i class="bi bi-heart-fill heard"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Sản phẩm -->
-					<div class="card cardMoi SP">
-						<div class="image-container">
-							<img class="rounded-3 default-img"
-								src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-								alt="Title" width="100%" height="" /> <img class=" rounded-3"
-								src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-								alt="Title" width="100%" height="300px" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Đắc nhân tâm</h5>
-							<h5 class="card-text textOranger">100.000 VNĐ</h5>
-							<div class="star">
-								<span class="active" style="width: 100%;"> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i>
-								</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-							</div>
-							<div class="row">
-								<button class="col-md-6 btn btn-outline-danger">Mua
-									Ngay</button>
-								<div class="col-md-6 ">
-									<i class="bi bi-heart-fill heard"></i>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<!-- Sản phẩm -->
-					<div class="card cardMoi SP">
-						<div class="image-container">
-							<img class="rounded-3 default-img"
-								src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-								alt="Title" width="100%" height="" /> <img class=" rounded-3"
-								src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-								alt="Title" width="100%" height="300px" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Đắc nhân tâm</h5>
-							<h5 class="card-text textOranger">100.000 VNĐ</h5>
-							<div class="star">
-								<span class="active" style="width: 100%;"> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i>
-								</span> <span class="d-inline-block ml-2">Đã bán 120</span>
+					<c:forEach var="item" items="${listProduct}">
+						<!-- Sản phẩm -->
+						<div class="card cardMoi SP">
+							<div class="image-container">
+								<img class="rounded-3 default-img" src="${item.image}"
+									alt="Title" width="100%" height="" />
+								<c:forEach var="itemImg" items="${item.imageProducts}">
+									<img class="rounded-3 default-img" src="${itemImg.name}"
+										alt="Title" width="100%" height="" />
+								</c:forEach>
 							</div>
-							<div class="row">
-								<button class="col-md-6 btn btn-outline-danger">Mua
-									Ngay</button>
-								<div class="col-md-6 ">
-									<i class="bi bi-heart-fill heard"></i>
+							<div class="card-body">
+								<h5 class="card-title">${item.name}</h5>
+								<h5 class="card-text textOranger" style="color: red">
+									<span
+										style="text-decoration: line-through; color: rgba(0, 0, 0, 0.463)"><fmt:formatNumber>${item.price}</fmt:formatNumber><sup>đ</sup></span>
+									<fmt:formatNumber>${item.price-item.discount}</fmt:formatNumber>
+									<sup>đ</sup>
+								</h5>
+								<div class="star">
+									<span class="active" style="width: 100%;"> <c:set
+											var="totalStar" value="0" /> <c:forEach var="it"
+											items="${item.evalues}">
+											<c:set var="totalStar" value="${totalStar+it.star}" />
+										</c:forEach> <c:forEach begin="1" end="${totalStar/item.evalues.size()}">
+											<i class="bi bi-star-fill text-warning"></i>
+										</c:forEach>
+
+									</span> <span class="d-inline-block ml-2">Đã bán <fmt:formatNumber>${item.quantitySell}</fmt:formatNumber>
+									</span>
+								</div>
+								<div class="row">
+									<button class="col-md-6 btn btn-outline-danger">Mua
+										Ngay</button>
+									<div class="col-md-6 ">
+										<i class="bi bi-heart-fill heard"></i>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Sản phẩm -->
-					<div class="card cardMoi SP">
-						<div class="image-container">
-							<img class="rounded-3 default-img"
-								src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-								alt="Title" width="100%" height="" /> <img class=" rounded-3"
-								src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-								alt="Title" width="100%" height="300px" /> <img
-								class=" rounded-3"
-								src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-								alt="Title" width="100%" height="300px" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Đắc nhân tâm</h5>
-							<h5 class="card-text textOranger">100.000 VNĐ</h5>
-							<div class="star">
-								<span class="active" style="width: 100%;"> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i> <i
-									class="bi bi-star-fill text-warning"></i>
-								</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-							</div>
-							<div class="row">
-								<button class="col-md-6 btn btn-outline-danger">Mua
-									Ngay</button>
-								<div class="col-md-6 ">
-									<i class="bi bi-heart-fill heard"></i>
-								</div>
-							</div>
-						</div>
-					</div>
+
+					</c:forEach>
+
+
+
+
 				</div>
 			</div>
 		</div>
@@ -411,15 +326,20 @@
 					<p>Mô tả:</p>
 				</article>
 				<aside class="col-md-10">
-					<p>8935210305497</p>
-					<p>Hạt giống tâm hồn</p>
-					<p>12</p>
-					<p>Cuộc sống và tâm hồn</p>
-					<p>Tân Việt</p>
-					<p>Nguyễn Văn Phước</p>
-					<p>Thanh Niên</p>
-					<p>15/5/2024</p>
-					<p>bìa cứng</p>
+					<p>${product.id}</p>
+					<p>${product.name}</p>
+					<p>${product.category.name}</p>
+					<p>${product.category.name}</p>
+					<p>${product.account.shopName}</p>
+					<p>${product.writerName}</p>
+					<p>${product.publishingCompany}</p>
+					<c:forEach var="item" items="${product.account.roledetails}">
+						<c:if test="${item.role.name == 'seller'}">
+							<p>${item.registrationDate}</p>
+						</c:if>
+					</c:forEach>
+
+					<p>${product.introduce}</p>
 				</aside>
 			</div>
 		</div>
