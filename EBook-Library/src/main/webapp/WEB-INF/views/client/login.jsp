@@ -188,13 +188,25 @@
 
  	        // Xóa thông báo lỗi trước khi kiểm tra
  	        loginErrorSpan.textContent = '';
+ 	        
+ 	       if (!loginUserName.trim()) {
+	            loginErrorSpan.textContent = 'Vui lòng nhập đầy đủ Tên Đăng Nhập và Mật Khẩu.';
+	         
+	            event.preventDefault(); // Ngăn chặn việc submit form
+	            return;
+	        }
 
  	        // Kiểm tra các điều kiện
- 	        if (!loginUserName.trim() || !loginPassword.trim()) {
+ 	        if (!loginUserName.trim()) {
  	            loginErrorSpan.textContent = 'Vui lòng nhập đầy đủ Tên Đăng Nhập và Mật Khẩu.';
+ 	        
  	            event.preventDefault(); // Ngăn chặn việc submit form
- 	            return;
+ 	           return;
+ 	       
  	        }
+ 	        
+ 	  
+ 	        
  	    });
 
  	    // Thêm sự kiện submit cho form Quên Mật Khẩu

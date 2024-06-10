@@ -41,6 +41,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 return false;
             }
         }
+        
 
         // Check for seller access
         if (uri.contains("/seller/")) {
