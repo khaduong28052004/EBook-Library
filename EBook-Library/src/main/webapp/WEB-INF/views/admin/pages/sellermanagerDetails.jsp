@@ -21,6 +21,8 @@
 				<div class="row mb-2">
 					<div class="col-sm-6">
 						<h1>Quản lý seller</h1>
+						<a href="/admin/sellermanager" class="btn btn-success" style="margin-top: 30px;width: 100px;">Quay
+							lại</a>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -42,9 +44,35 @@
 
 						<div class="card">
 							<div class="card-header row">
-								<h3 class=" col-md-11 card-title">Hóa đơn</h3>
-								<a href="/admin/sellermanager" class=" col-md-1 btn btn-success">Quay
-									lại</a>
+								<div class="row d-flex justify-content-center"
+									style="margin-top: 50px;">
+									<div class="col-md-5">
+										<form action="/admin/sellermanager/bills/filter" method="get">
+											<div class="form-group">
+												<label for="exampleInputEmail1">Ngày bắt đầu</label> <input
+													type="date" name=dateStart class="form-control"
+													value="${dateStart}" name="dateStart"
+													id="exampleInputEmail1" placeholder="Ngày bắt đầu">
+												<p class="text-danger">${errorDateStart }</p>
+											</div>
+									</div>
+									<div class="col-md-5">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Ngày kết thúc</label> <input
+												type="date" name="dateEnd" value="${dateEnd}"
+												class="form-control" id="exampleInputEmail1"
+												placeholder="Ngày kết thúc">
+											<p class="text-danger">${errorDateEnd }</p>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<button class="btn btn-success"
+												style="margin-top: 30px; width: 100%;">Lọc</button>
+										</div>
+									</div>
+									</form>
+								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
@@ -124,7 +152,7 @@
 									<tbody>
 										<c:forEach var="billDetails" items="${listbillDetails }">
 											<tr>
-												<th>${bill.id }</th>
+												<th>${billId }</th>
 												<td>${billDetails.product.name }</td>
 												<td>${billDetails.quantity}</td>
 											</tr>

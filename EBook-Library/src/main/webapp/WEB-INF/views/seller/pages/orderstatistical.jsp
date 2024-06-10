@@ -55,6 +55,33 @@
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Thông kê doanh thu seller</h3>
+								<div class="row d-flex justify-content-center" style="margin-top: 50px;">
+									<div class="col-md-5">
+									<form action="/seller/orderstatistical" method="get">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Ngày bắt đầu</label> <input
+												type="date" name=dateStart class="form-control" required
+												value="${dateStart}" name="dateStart"
+												id="exampleInputEmail1" placeholder="Ngày bắt đầu">
+											<p class="text-danger">${errorDateStart }</p>
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Ngày kết thúc</label> <input
+												type="date" name="dateEnd" value="${dateEnd}"
+												class="form-control" id="exampleInputEmail1" required
+												placeholder="Ngày kết thúc">
+											<p class="text-danger">${errorDateEnd }</p>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<button class="btn btn-success" style="margin-top: 30px; width: 100%;">Lọc</button>
+										</div>
+									</div>
+									</form>
+								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">

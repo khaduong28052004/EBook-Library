@@ -29,6 +29,8 @@ import com.foti_java.repository.RoleDetailRepository;
 import com.foti_java.repository.RoleRepository;
 import com.foti_java.repository.VoucherRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -47,6 +49,9 @@ public class AdminSellerManagerController {
 	RoleRepository roleRepository;
 	@Autowired
 	VoucherRepository voucherRepository;
+
+	@Autowired
+	HttpServletRequest req;
 	List<Voucher> listVoucher = new ArrayList<>();
 	List<Bill> listBill = new ArrayList<>();
 	List<BillDetail> listBillDetails = new ArrayList<>();
@@ -112,12 +117,13 @@ public class AdminSellerManagerController {
 		return "redirect:/admin/sellermanager";
 	}
 
-	int idSeller;
+	boolean status;
 
 	@GetMapping("/sellermanager/bills")
-	public String getFillDetails(Model model, @RequestParam("accountId") Integer id) {
+	public String getFillDetails(Model model, @RequestParam(value = "accountId", defaultValue = "") Integer id) {
+		status = true;
 		listBill = billRepository.findAllBySeller(id);
-		idSeller = id;
+		req.getSession().setAttribute("idSeller", id);
 		for (Bill bill : listBill) {
 			Voucher voucher = voucherRepository.findVoucherInBill(bill.getId());
 			if (voucher != null) {
@@ -130,12 +136,45 @@ public class AdminSellerManagerController {
 		return "admin/pages/sellermanagerDetails";
 	}
 
+	String startDate;
+	String endDate;
+
+	@GetMapping("/sellermanager/bills/filter")
+	public String getFillDetailsFilter(Model model,
+			@RequestParam(value = "dateStart", defaultValue = "") String dateStart,
+			@RequestParam(value = "dateEnd", defaultValue = "") String dateEnd) {
+		Integer idSeller = (Integer) req.getSession().getAttribute("idSeller");
+		status = false;
+		startDate = dateStart;
+		endDate = dateEnd;
+		listBill = billRepository.findAllBySellerBeweenAnd(idSeller, dateStart, dateEnd);
+
+		model.addAttribute("dateStart", dateStart);
+		model.addAttribute("dateEnd", dateEnd);
+
+		for (Bill bill : listBill) {
+			Voucher voucher = voucherRepository.findVoucherInBill(bill.getId());
+			if (voucher != null) {
+				listVoucher.add(voucher);
+			}
+		}
+		model.addAttribute("listbills", listBill);
+		model.addAttribute("vouchers", listVoucher);
+		return "admin/pages/sellermanagerDetails";
+	}
+
 	@GetMapping("/sellermanager/bills/details/{id}")
 	public String fillDetails(Model model, @PathVariable("id") Integer id) {
 		listBillDetails = billDetailRepository.findAllByBill(id);
-//		model.addAttribute("listbillDetails", listBillDetails);
-		model.addAttribute("bill", billRepository.findById(id).get());
-		 getFillDetails(model, idSeller);
+		model.addAttribute("listbillDetails", listBillDetails);
+		model.addAttribute("billId", id);
+		Integer idSeller = (Integer) req.getSession().getAttribute("idSeller");
+		if (status) {
+			getFillDetails(model, idSeller);
+		} else {
+			getFillDetailsFilter(model, startDate, endDate);
+		}
+		
 		return "admin/pages/sellermanagerDetails";
 	}
 }

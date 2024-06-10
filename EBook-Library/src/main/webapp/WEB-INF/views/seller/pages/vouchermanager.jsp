@@ -66,7 +66,7 @@
 												<div class="form-group">
 													<label for="exampleInputEmail1">Ngày bắt đầu</label> <input
 														type="date" name=dateStart class="form-control" required
-														value="${voucher.dateStart}" name="dateStart"
+														value="${dateStart}" name="dateStart"
 														id="exampleInputEmail1" placeholder="Ngày bắt đầu">
 													<p class="text-danger">${errorDateStart }</p>
 												</div>
@@ -74,7 +74,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Ngày kết thúc</label> <input
-														type="date" name="dateEnd" value="${voucher.dateEnd}"
+														type="date" name="dateEnd" value="${dateEnd}"
 														class="form-control" id="exampleInputEmail1" required
 														placeholder="Ngày kết thúc">
 													<p class="text-danger">${errorDateEnd }</p>
@@ -139,7 +139,7 @@
 								<div class="col-md-12">
 									<div class="card-footer"
 										style="background-color: rgba(240, 248, 255, 0); padding-left: 0px; padding-top: 0px;">
-										<a href="/seller/vouchermanager/clear"
+										<a href="/seller/vouchermanager"
 											class="btn btn-secondary"> <i
 											class="fa-solid fa-circle-xmark"
 											style="color: #ffffff; margin-right: 5px;"></i>Làm mới
