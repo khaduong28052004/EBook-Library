@@ -26,12 +26,15 @@ import com.foti_java.repository.CategoryRepository;
 import com.foti_java.repository.ImageProductRepository;
 import com.foti_java.repository.ProductRepository;
 
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 
+
 @Controller
-@RequestMapping("seller")
+@RequestMapping("Ebook/seller")
 public class SellerProductManagerController {
+
 	@Autowired
 	CategoryRepository categoryRepository;
 	@Autowired

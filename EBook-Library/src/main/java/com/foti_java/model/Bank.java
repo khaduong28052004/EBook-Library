@@ -32,9 +32,11 @@ public class Bank {
 	Integer id;
 	@Nationalized
 	String name;
+	@Nationalized
 	String accountNumber;
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
+
 
 }

@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
-@RequestMapping("admin")
+@RequestMapping("Ebook/admin")
 public class AdminSellerManagerController {
-@RequestMapping("sellermanager")
-public String requestMethodName() {
-    return "admin/pages/sellermanager";
+    @RequestMapping("sellermanager")
+    public String requestMethodName() {
+        return "admin/pages/sellermanager";
     }
 
 }

@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("seller")
+@RequestMapping("Ebook/seller")
 public class SellerOrderManagerController {
 	@Autowired
 	SendMailService mailService;
