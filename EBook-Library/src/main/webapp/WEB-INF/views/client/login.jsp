@@ -22,11 +22,14 @@
 						href="#" class="icon"><i class='bx bxl-linkedin'></i></a> <a
 						href="#" class="icon"><i class='bx bxl-github'></i></a>
 				</div>
+		  <div class="password-container">
 			 <input id="fullName" type="text" name="fullName" placeholder="Họ và tên">
 			 <input type="email" name="gmail" placeholder="Email">
 			 <input id="userName" type="text" name="userName" placeholder="Tên Đăng Nhập"> 
-			 <input type="password" name="password" placeholder="Mật Khẩu">
+			 <input type="password" name="password" placeholder="Mật Khẩu" id="password1"> 
+			  <i class='itogglePassword3 bx bx-show-alt' id="togglePassword3" style="cursor: pointer;"></i>
 			  <span	style="color: red;">${errorR}</span>
+		</div>	  
 				<button>Đăng Ký</button>
 			</form>
 		</div>
@@ -39,9 +42,13 @@
 						href="#" class="icon"><i class='bx bxl-linkedin'></i></a> <a
 						href="#" class="icon"><i class='bx bxl-github'></i></a>
 				</div>
-				<input type="text" name="userName" placeholder="Tên Đăng Nhập">
+			
 
-				<input type="password" name="password" placeholder="Mật Khẩu">
+		 <div class="password-container">
+		    	<input type="text" name="userName" placeholder="Tên Đăng Nhập">
+                <input type="password" name="password" placeholder="Mật Khẩu " id="password">
+               <i class='bx bx-show-alt' id="togglePassword" style="cursor: pointer;"></i>
+          </div>
 				<span style="color: red;">${error}</span> <a href="#" class="fp"
 					id="forgotPassword">Quên mật khẩu?</a>
 				<button>Xác Nhận</button>
@@ -86,6 +93,30 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 	<script>
+	
+	document.getElementById('togglePassword').addEventListener('click', function () {
+	    var passwordInput = document.getElementById('password');
+	    var passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+	    passwordInput.setAttribute('type', passwordType);
+	    
+		var passwordInput = document.getElementById('password1');
+		var passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+		passwordInput.setAttribute('type', passwordType);
+		
+	    this.classList.toggle('bx-show-alt');
+	    this.classList.toggle('bx-hide');
+	});
+	
+	document.getElementById('togglePassword3').addEventListener('click', function () {
+	   
+		var passwordInput = document.getElementById('password1');
+		var passwordType = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+		passwordInput.setAttribute('type', passwordType);
+	    this.classList.toggle('bx-show-alt');
+	    this.classList.toggle('bx-hide');
+	});
+
+	
 	const container = document.getElementById('container');
 	const registerBtn = document.getElementById('register');
 	const loginBtn = document.getElementById('login');

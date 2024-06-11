@@ -148,11 +148,13 @@ public class LoginController {
 		int otp = 100000 + random.nextInt(900000);
 		return String.valueOf(otp);
 	}
-
+    public String errorM=""; 
 	@GetMapping("/resendOtp/{gmail}")
-	public String resendOtp(@PathVariable(name = "gmail") String mail) {
+	public String resendOtp(Model model,@PathVariable(name = "gmail") String mail) {
 		otp1 = generateOtp();
+		errorM = "Đã gửi lại vui lòng kiểm tra mail! ";
 		sendMailService.push(mail, "forgotPassword send OTP", "Mã OTP: " + otp1);
+		model.addAttribute("error",errorM);
 		return "client/forgotPassword";
 	}
 
@@ -173,6 +175,11 @@ public class LoginController {
 			return "client/forgotPassword";
 		}
 	}
+	@GetMapping("forgotPassword")
+	public String getMethodName() {
+		return "client/updatePassword";
+	}
+	
 
 	@PostMapping("forgotPassword")
 	public String forgotPassword(Model model, @RequestParam("otp") String requestOtp) {

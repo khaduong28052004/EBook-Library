@@ -8,7 +8,12 @@
   <link rel="stylesheet" href="/assets/css/login.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script>
+
+
 function startTimer(duration, display) {
+
+	
+	
     var timer = duration, minutes, seconds;
     setInterval(function () {
         minutes = parseInt(timer / 60, 10);
@@ -28,7 +33,13 @@ function startTimer(duration, display) {
 
 window.onload = function () {
     var oneMinute = 60,
+    
         display = document.querySelector('#time');
+    const er = document.getElementById('lo');
+    setInterval(function () {
+        er.innerHTML = "...";
+    }, 1000)
+
     startTimer(oneMinute, display);
 };
 </script>
@@ -37,11 +48,12 @@ window.onload = function () {
 	<div class="container" id="container">
 
 		<div class="form-container sign-in">
-			<form action="/forgotPassword" method="post">
+			<form action= "/forgotPassword" method="post">
 				<h1>Xác nhận otp</h1>
                 <input type="text" placeholder="nhập otp" name="otp">
 		
 		  <p>Thời gian: <span id="time">01:00</span></p>
+		    <span id="lo">${error}</span>
                 <a id="resendLink" href="/resendOtp/${gmail}" style="display:none;">Gửi lại</a>
 				 <button>xác nhận</button>
   
