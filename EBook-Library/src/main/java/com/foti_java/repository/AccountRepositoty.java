@@ -78,4 +78,9 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2)"
 			, nativeQuery = true)
 	List<Account> findAllCheckSeller();
+
+//   @Query("select c form account c where name like ?1")
+//   public List<Account> findlogin(String username); 
+     public Account findByUsername(String username);
+     public Account findByEmail(String email);
 }

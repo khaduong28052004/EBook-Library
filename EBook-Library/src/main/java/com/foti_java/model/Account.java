@@ -32,29 +32,34 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
+	@Nationalized
 	String username;
+	@Nationalized
 	String password;
+	@Nationalized
 	String avatar;
 	@Nationalized
 	String fullname;
 	boolean gender;
+	@Nationalized
 	String email;
 	@Temporal(TemporalType.DATE)
 	Date birthday;
+	@Nationalized
 	String phone;
+	@Nationalized
 	String background;
 	@Nationalized
 	String shopName;
 	boolean status;
 	String numberCitizenIdentification;
+	@Nationalized
 	String beforeCitizenIdentification;
+	@Nationalized
 	String afterCitizenIdentification;
 
 	@OneToMany(mappedBy = "account")
 	List<VoucherDetail> voucherDetails;
-
-	@OneToMany(mappedBy = "account")
-	List<VoucherDetail> voucherDetail;
 
 	@OneToMany(mappedBy = "account")
 	List<RoleDetail> roledetails;
@@ -85,4 +90,6 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	List<Like> likes;
+	@OneToMany(mappedBy = "account")
+	List<Product> products;
 }

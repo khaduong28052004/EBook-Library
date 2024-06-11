@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("Ebook/admin")
 public class AdminVoucherManagerController {
 	@Autowired
 	HttpServletRequest req;

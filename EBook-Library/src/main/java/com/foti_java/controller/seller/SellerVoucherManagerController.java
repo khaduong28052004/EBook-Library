@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("seller")
+@RequestMapping("Ebook/seller")
 public class SellerVoucherManagerController {
 	@Autowired
 	HttpServletRequest req;

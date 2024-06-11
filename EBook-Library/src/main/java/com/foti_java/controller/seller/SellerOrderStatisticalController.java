@@ -91,6 +91,7 @@ public class SellerOrderStatisticalController {
 //		model.addAttribute("listbillDetails", listBillDetails);
 		model.addAttribute("bill", billRepository.findById(id).get());
 		orderStatistical(model, startDate, endDate);
+
 		return "seller/pages/orderstatistical";
 	}
 }
