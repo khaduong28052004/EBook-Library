@@ -21,8 +21,8 @@
 				<div class="row mb-2">
 					<div class="col-sm-6">
 						<h1>Quản lý seller</h1>
-						<a href="/admin/sellermanager" class="btn btn-success" style="margin-top: 30px;width: 100px;">Quay
-							lại</a>
+						<a href="/admin/sellermanager" class="btn btn-success"
+							style="margin-top: 30px; width: 100px;">Quay lại</a>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -92,31 +92,29 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<c:forEach var="bills" items="${listbills }">
-												<tr>
-													<th>${bills.id }</th>
-													<td>${bills.dateBuy }</td>
-													<td>${bills.finishDay }</td>
-													<td>${bills.account.username }</td>
-													<td>${bills.quantity }</td>
-													<td>${bills.totalPrice }</td>
-													<td><c:set var="voucherFound" value="false" /> <c:forEach
-															var="voucher" items="${vouchers}">
-															<c:if
-																test="${voucher.id == bills.id && voucherFound == false}">
+										<c:forEach var="bills" items="${listbills }">
+											<tr>
+												<th>${bills.id }</th>
+												<td>${bills.dateBuy }</td>
+												<td>${bills.finishDay }</td>
+												<td>${bills.account.username }</td>
+												<td>${bills.quantity }</td>
+												<td>${bills.totalPrice }</td>
+												<td><c:set var="voucherFound" value="false" /> <c:forEach
+														var="voucher" items="${vouchers}">
+														<c:if
+															test="${voucher.id == bills.id && voucherFound == false}">
                    									 		${voucher.name}
                    									 		<c:set var="voucherFound" value="true" />
-															</c:if>
-														</c:forEach></td>
-													<td>${bills.priceShipping }</td>
-													<td>${bills.address }</td>
-													<td><a
-														href="/admin/sellermanager/bills/details/${bills.id }"
-														class="btn btn-success"><i class="bi bi-list-ul"></i></a></td>
-												</tr>
-											</c:forEach>
-										</tr>
+														</c:if>
+													</c:forEach></td>
+												<td>${bills.priceShipping }</td>
+												<td>${bills.address }</td>
+												<td><a
+													href="/admin/sellermanager/bills/details/${bills.id }"
+													class="btn btn-success"><i class="bi bi-list-ul"></i></a></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 									<!-- <tfoot>
                       <tr>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -196,6 +196,8 @@
 											<th>Loại voucher</th>
 											<th>Ghi chú</th>
 											<th>Trạng thái</th>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>

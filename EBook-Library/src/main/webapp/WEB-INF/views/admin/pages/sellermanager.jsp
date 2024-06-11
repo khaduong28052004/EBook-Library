@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Quản lý seller</title>
-
 </head>
 
 <body class="hold-transition sidebar-mini" ng-app="myApp">
@@ -62,56 +61,81 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<c:forEach var="stats" items="${statisticsList}">
-												<tr>
-													<td class="align-middle">${stats.username}</td>
-													<td class="align-middle">${stats.fullname}</td>
-													<td class="align-middle">${stats.countTD}</td>
-													<td class="align-middle">${stats.countDanhGia}</td>
-													<td class="align-middle">${stats.countDaBan}</td>
-													<td class="align-middle"><fmt:formatNumber
-															type="currency" value="${stats.doanhThu}"></fmt:formatNumber>
-													</td>
-													<td class="align-middle"><fmt:formatNumber
-															type="currency" value="${stats.loiNhuan}"></fmt:formatNumber>
-													</td>
-													<td class="align-middle">
-														<div class="progress progress-xs">
-															<div class="progress-bar progress-bar-danger "
-																style="width: ${stats.avgDanhGia/5*100}%">${stats.avgDanhGia}</div>
-														</div>
-													</td>
-													<td><c:choose>
-															<c:when test="${stats.status}">
-																<a href="/admin/sellermanager/id/${stats.id}"
-																	class="btn btn-danger"> <i class="bi bi-trash-fill"
+										<c:forEach var="stats" items="${statisticsList}">
+											<tr>
+												<td class="align-middle">${stats.username}</td>
+												<td class="align-middle">${stats.fullname}</td>
+												<td class="align-middle">${stats.countTD}</td>
+												<td class="align-middle">${stats.countDanhGia}</td>
+												<td class="align-middle">${stats.countDaBan}</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency" value="${stats.doanhThu}"></fmt:formatNumber>
+												</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency" value="${stats.loiNhuan}"></fmt:formatNumber>
+												</td>
+												<td class="align-middle">
+													<div class="progress progress-xs">
+														<div class="progress-bar progress-bar-danger "
+															style="width: ${stats.avgDanhGia/5*100}%">${stats.avgDanhGia}</div>
+													</div>
+												</td>
+												<td><c:choose>
+														<c:when test="${stats.status}">
+															<button data-id="${stats.id}"
+																data-fullname="${stats.fullname}" type="button"
+																class="btn btn-danger deleteModal1">
+																<i class="bi bi-trash-fill"
 																	style="color: #ffffff; margin-right: 5px;"></i> Ngừng
-																	hoạt động
-																</a>
-															</c:when>
-															<c:otherwise>
-																<a href="/admin/sellermanager/id/${stats.id}"
-																	class="btn btn-success"> <i
-																	class="bi bi-check-circle-fill"
-																	style="color: #ffffff; margin-right: 5px;"></i> Hoạt
-																	động lại
-																</a>
-															</c:otherwise>
-														</c:choose></td>
-													<td>
-														<form action="/admin/sellermanager/bills" method="get">
-															<input type="hidden" name="accountId"
-																value="${stats.id}" />
-															<button type="submit" class="btn btn-success"
-																style="color: white;">
-																<i class="bi bi-list-ul"></i>
+																hoạt động
 															</button>
-														</form>
-													</td>
-												</tr>
-											</c:forEach>
-										</tr>
+
+														</c:when>
+														<c:otherwise>
+															<a href="/admin/sellermanager/id/${stats.id}"
+																class="btn btn-success"> <i
+																class="bi bi-check-circle-fill"
+																style="color: #ffffff; margin-right: 5px;"></i> Hoạt
+																động lại
+															</a>
+														</c:otherwise>
+													</c:choose></td>
+												<td>
+													<form action="/admin/sellermanager/bills" method="get">
+														<input type="hidden" name="accountId" value="${stats.id}" />
+														<button type="submit" class="btn btn-success"
+															style="color: white;">
+															<i class="bi bi-list-ul"></i>
+														</button>
+													</form>
+												</td>
+											</tr>
+										</c:forEach>
+
+										<form action="" method="get" id="modelForm1">
+											<div class="modal" id="modelID1">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-body">
+															<input value="false" name="status" hidden>
+															<h2 class="text-center">Phản hồi shop</h2>
+															<div class="form-group">
+																<label class="form-label">Gửi đến:</label> <input
+																	class="form-control" id="context1" disabled="disabled">
+															</div>
+															<div class="form-group">
+																<label class="form-label">Lí do:</label>
+																<textarea id="contextLiDo1" class="form-control"></textarea>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button class=" btn btn-danger btnclose1">Close</button>
+															<a type="button" id="buttonSend1" class="btn btn-success">Gửi</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
 									</tbody>
 									<!-- <tfoot>
                       <tr>
@@ -169,11 +193,36 @@
 												<td class="align-middle">${seller.banks[0].accountNumber}</td>
 												<td class="align-middle"><a
 													href="/admin/sellermanager/checkSeller/${seller.id}?status=true"
-													class="btn btn-primary">Đồng ý</a> <a
-													href="/admin/sellermanager/checkSeller/${seller.id}?status=false"
-													class="btn btn-danger">Từ chối</a></td>
+													class="btn btn-primary">Đồng ý</a>
+													<button data-id="${seller.id}"
+														data-fullname="${seller.fullname}"
+														class="btn btn-danger deleteModal">Từ chối</button></td>
 											</tr>
 										</c:forEach>
+										<form action="" method="get" id="modelForm">
+											<div class="modal" id="modelID">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-body">
+															<input value="false" name="status" hidden>
+															<h2 class="text-center">Phản hồi shop</h2>
+															<div class="form-group">
+																<label class="form-label">Gửi đến:</label> <input
+																	class="form-control" id="context" disabled="disabled">
+															</div>
+															<div class="form-group">
+																<label class="form-label">Lí do:</label>
+																<textarea id="contextLiDo" class="form-control"></textarea>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button class=" btn btn-danger btnclose">Close</button>
+															<a type="button" id="buttonSend" class="btn btn-success">Gửi</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
 									</tbody>
 									<!-- <tfoot>
                       <tr>
@@ -211,6 +260,81 @@
 
 	<%@include file="/common/taglib-js.jsp"%>
 	<script>
+	/* MOdel 1 */
+	const confirmDeleteModal1 = document.getElementById("modelID1");
+	const form1 = document.getElementById("modelForm1");
+	const confirmDeleteButton1 = document.getElementById("buttonSend1");
+	const deleteButtons1 = document.querySelectorAll(".deleteModal1");
+	
+	const closeButtons1 = document.querySelectorAll(".btnclose1");
+	let dataId1 ;
+	let dataFullname1;
+	// Add click event listener to each delete button
+	deleteButtons1.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	    		dataId1 = button.getAttribute("data-id");
+	    		dataFullname1 = button.getAttribute("data-fullname");
+	    		 const contextInput = document.getElementById("context1");
+	    	        contextInput.value = dataFullname1;
+	            if (dataId1) {
+	            	confirmDeleteModal1.style.display = 'block';
+	            } else {
+	                console.error("Product ID not found");
+	            }
+            });
+	});
+
+	confirmDeleteButton1.addEventListener("click", (event) => {
+	    	const contextLD = document.getElementById("contextLiDo1").value;
+	    	confirmDeleteButton1.href='/admin/sellermanager/id/'+dataId1+'?liDo1='+encodeURIComponent(contextLD);
+			window.location.href = confirmDeleteButton1.href; 
+	    }); 
+	
+	// Add click event listener to each close button
+	closeButtons1.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	        confirmDeleteModal1.style.display = 'none';
+	    });
+	});
+	
+	
+	
+	
+	const confirmDeleteModal = document.getElementById("modelID");
+	const form = document.getElementById("modelForm");
+	const confirmDeleteButton = document.getElementById("buttonSend");
+	const deleteButtons = document.querySelectorAll(".deleteModal");
+	
+	const closeButtons = document.querySelectorAll(".btnclose");
+	let dataId ;
+	let dataFullname;
+	// Add click event listener to each delete button
+	deleteButtons.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	    		dataId = button.getAttribute("data-id");
+	    		dataFullname = button.getAttribute("data-fullname");
+	    		 const contextInput = document.getElementById("context");
+	    	        contextInput.value = dataFullname;
+	            if (dataId) {
+	            	confirmDeleteModal.style.display = 'block';
+	            } else {
+	                console.error("Product ID not found");
+	            }
+            });
+	});
+
+	 confirmDeleteButton.addEventListener("click", (event) => {
+	    	const contextLD = document.getElementById("contextLiDo").value;
+	    	confirmDeleteButton.href='/admin/sellermanager/checkSeller/'+dataId+'?status=false&liDo2='+encodeURIComponent(contextLD);
+			window.location.href = confirmDeleteButton.href; 
+	    }); 
+	
+	// Add click event listener to each close button
+	closeButtons.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	        confirmDeleteModal.style.display = 'none';
+	    });
+	});
 		$(function() {
 			$("#example1").DataTable(
 					{
