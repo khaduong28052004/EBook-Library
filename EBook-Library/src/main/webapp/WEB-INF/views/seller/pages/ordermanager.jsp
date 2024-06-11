@@ -110,7 +110,7 @@
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-secondary"
 																		data-bs-dismiss="modal">Thoát</button>
-																	<a type="submit" class="btn btn-primary" href="/seller/ordermanager/xacNhan${bill.id}">Xác
+																	<a type="submit" class="btn btn-primary" href="/seller/ordermanager/xacNhan?id=${bill.id}">Xác
 																		Nhận</a>
 															</div>
 													</div>

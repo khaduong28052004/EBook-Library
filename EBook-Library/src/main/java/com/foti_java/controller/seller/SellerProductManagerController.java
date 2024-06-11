@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.foti_java.model.Account;
 import com.foti_java.model.Category;
 import com.foti_java.model.ImageProduct;
 import com.foti_java.model.Product;
 import com.foti_java.repository.CategoryRepository;
 import com.foti_java.repository.ImageProductRepository;
 import com.foti_java.repository.ProductRepository;
+import com.foti_java.service.SessionService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +34,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("seller")
 public class SellerProductManagerController {
+	@Autowired
+	SessionService sessionService;
 	@Autowired
 	CategoryRepository categoryRepository;
 	@Autowired
@@ -55,10 +59,10 @@ public class SellerProductManagerController {
 	String errorName = null;
 	String errorSale = null;
 	String errorNameCategory = null;
-
 	@GetMapping("/productmanager")
 	public String productManafer(Model model) {
-		List<Product> listProducts = productRepository.findByStatus();
+		Account account = sessionService.getAttribute("account");
+		List<Product> listProducts = productRepository.findByStatus(account.getId());
 		List<Category> listCategories = categoryRepository.findAll();
 		//
 		checkSale = false;
@@ -147,7 +151,9 @@ public class SellerProductManagerController {
 
 	@GetMapping("/productmanager/edit")
 	public String edit(Model model, @RequestParam("id") Integer idProduct) {
-		List<Product> listProducts = productRepository.findByStatus();
+		Account account = sessionService.getAttribute("account");
+		image = new ArrayList<>();
+		List<Product> listProducts = productRepository.findByStatus(account.getId());
 		List<Category> listCategories = categoryRepository.findAll();
 		model.addAttribute("listProduct", listProducts);
 		model.addAttribute("listCategories", listCategories);
@@ -157,12 +163,13 @@ public class SellerProductManagerController {
 			if (products.getId() == id) {
 				if (products.isDiscountType()) {
 					products.setDiscount(products.getDiscount() * 100);
+					image.add(products.getImage());
 				}
 				checkSale = products.isDiscountType();
 				product = products;
 			}
 		}
-		image = new ArrayList<>();
+		
 		List<ImageProduct> listImage = imageProductRepository.findAll();
 		for (ImageProduct images : listImage) {
 			if (images.getProduct().getId() == id) {
@@ -257,8 +264,13 @@ public class SellerProductManagerController {
 	}
 
 	public boolean checkNameProduct(String nameProduct) {
+		Account account = sessionService.getAttribute("account");
 		boolean checkValue = true;
-		for (Product product : productRepository.findAll()) {
+		for (Product product : productRepository.findByStatus(account.getId())) {
+			if (product.isStatus() == false) {
+				continue;
+			}
+
 			if (nameProduct.equals(product.getName())) {
 				errorName = "Tên sản phẩm đã tồn tại";
 				break;
@@ -270,9 +282,10 @@ public class SellerProductManagerController {
 	}
 
 	public boolean checkNameProductUpdate(String nameProduct, int productId) {
+		Account account = sessionService.getAttribute("account");
 		boolean checkValue = true;
-		for (Product product : productRepository.findAll()) {
-			if (product.getId() == productId) {
+		for (Product product : productRepository.findByStatus(account.getId())) {
+			if (product.getId() == productId || product.isStatus() == false) {
 				continue;
 			}
 

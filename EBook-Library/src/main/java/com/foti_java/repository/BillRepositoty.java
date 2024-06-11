@@ -10,10 +10,10 @@ import com.foti_java.model.Bill;
 
 public interface BillRepositoty extends JpaRepository<Bill, Integer> {
 	//Phuc
-    @Query(value = "EXEC CalculateMonthlyBills", nativeQuery = true)
-    List<Object[]> calculateMonthlyBills(); 
-    @Query(value = "EXEC CalculateMonthlyBillsFalse", nativeQuery = true)
-    List<Object[]> calculateMonthlyBillsFalse();
+    @Query(value = "EXEC CalculateMonthlyBills ?1", nativeQuery = true)
+    List<Object[]> calculateMonthlyBills(Integer id); 
+    @Query(value = "EXEC CalculateMonthlyBillsFalse ?1", nativeQuery = true)
+    List<Object[]> calculateMonthlyBillsFalse(Integer id);
     @Query(value = "EXEC GetFollowerCountByShopId ?1", nativeQuery = true)
     Integer getFollwer(Integer id);
     @Query(value = "EXEC GetLikeCountByShopId ?1", nativeQuery = true)
@@ -41,7 +41,7 @@ public interface BillRepositoty extends JpaRepository<Bill, Integer> {
     @Query("Select count(b) FROM Bill b INNER JOIN b.billDetails bd Where b.status = false And b.finishDay is null And bd.product.account.id = :id")
     Integer billChuaDuyet(@Param("id") Integer id);
    
-    @Query("Select b FROM Bill b INNER JOIN b.billDetails bd Where b.status = false And b.finishDay is null And bd.product.account.id = :id")
+    @Query("Select b FROM Bill b INNER JOIN b.billDetails bd Where b.status = true And b.finishDay is null And bd.product.account.id = :id and b.active = false")
     List<Bill> findByIdAccount(@Param("id") Integer id);
     //Tuyen
     @Query("SELECT B FROM Bill B " + "JOIN B.billDetails BD " + "JOIN BD.product P "
