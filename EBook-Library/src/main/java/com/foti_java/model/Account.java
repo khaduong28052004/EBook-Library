@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,32 +33,62 @@ import lombok.Setter;
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id;
-	@Nationalized
-	String username;
-	@Nationalized
-	String password;
-	@Nationalized
-	String avatar;
-	@Nationalized
-	String fullname;
-	boolean gender;
-	@Nationalized
-	String email;
-	@Temporal(TemporalType.DATE)
-	Date birthday;
-	@Nationalized
-	String phone;
-	@Nationalized
-	String background;
-	@Nationalized
-	String shopName;
-	@Nationalized
-	String numberCitizenIdentification;
-	@Nationalized
-	String beforeCitizenIdentification;
-	@Nationalized
-	String afterCitizenIdentification;
+	private Integer id;
+
+//	@Nationalized
+	@Column(name = "username")
+	private String username;
+
+//	@Nationalized
+	@Column(name = "password")
+	private String password;
+
+//	@Nationalized
+	@Column(name = "avatar")
+	private String avatar;
+
+//	@Nationalized
+	@Column(name = "fullname", columnDefinition = "VARCHAR")
+	private String fullname;
+
+	@Column(name = "gender")
+	private boolean gender;
+	
+	@Column(name = "status")
+	private boolean status;
+
+//	@Nationalized
+	@Column(name = "email")
+	private String email;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE) // Ensure correct date type
+	@Column(name = "birthday")
+	private Date birthday;
+
+//	@Nationalized
+	@Column(name = "phone")
+	private String phone;
+
+//	@Nationalized
+	@Column(name = "background")
+	private String background;
+	
+//	@Nationalized
+	@Column(name = "shopname", columnDefinition = "VARCHAR")
+	private String shopname;
+
+//	@Nationalized
+	@Column(name = "numbercitizenidentification")
+	private String numberCitizenIdentification;
+
+//	@Nationalized
+	@Column(name = "beforecitizenidentification")
+	private String beforeCitizenIdentification;
+
+//	@Nationalized
+	@Column(name = "aftercitizenidentification")
+	private String afterCitizenIdentification;
 
 	@OneToMany(mappedBy = "account")
 	List<VoucherDetail> voucherDetails;
@@ -71,13 +104,13 @@ public class Account {
 
 	@OneToMany(mappedBy = "account")
 	List<Follower> followers;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Transaction> transections;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Bill> bills;
-	
+
 	@OneToMany(mappedBy = "account")
 	List<Bank> banks;
 }

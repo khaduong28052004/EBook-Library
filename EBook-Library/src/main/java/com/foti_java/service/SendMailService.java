@@ -51,7 +51,7 @@ public class SendMailService {
 		}
 	}
 
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(fixedDelay = 100000)
 	public void run() {
 		int error = 0;
 		int success = 0;

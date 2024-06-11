@@ -22,7 +22,7 @@
         </div>
         <div class="avatar">
             <div class="container-avatar">
-                <img src="/img/books/Truyen/NhanGianKhuc.jpg" alt="">
+                <img src="/views/img/books/Truyen/NhanGianKhuc.jpg" alt="">
                 <p class="username">TeoNV</p>
             </div>
         </div>

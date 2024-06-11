@@ -29,10 +29,11 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	boolean status;
-	@Nationalized
+	boolean status = true;
+//	@Nationalized
 	String phone;
-	
+	String fullnameaddress;
+	String nameaddress;
 	
 	@ManyToOne
 	@JoinColumn(name = "acount_id ")

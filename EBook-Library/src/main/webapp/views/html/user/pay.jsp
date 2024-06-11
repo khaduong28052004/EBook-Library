@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,10 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet"
@@ -42,10 +47,9 @@
 					đường số 22, phường Thường Thạnh, quận Cái Răng, TP Cần Thơ
 				</div>
 				<div class="col-md-3">
-					<a type="text" data-bs-toggle="modal"
+					<a type="text" data-bs-toggle="modal" href="#"
 						data-bs-target="#exampleModal"
-						style="color: rgb(67, 73, 228); cursor: pointer;";> Thay đổi
-					</a>
+						style="color: rgb(67, 73, 228); cursor: pointer;";> Thay đổi </a>
 				</div>
 		</main>
 		<!-- modal1 -->
@@ -61,63 +65,62 @@
 					</div>
 					<div class="modal-body">
 						<!-- RADIO -->
-						<div class="form-check">
-							<input class="form-check-input" type="radio"
-								name="flexRadioDefault" id="flexRadioDefault1"> <label
-								class="form-check-label" for="flexRadioDefault1"
-								style="display: flex; flex-direction: column;">
-								<div class="d-flex align-items-center" style="display: flex;">
-									<h6 class="me-3" style="margin-right: 1rem;">
-										Hồ Thị Trúc Ly | <strong style="color: #7e847e;">(+84)
-											876543219</strong>
-									</h6>
-									<!-- CẬP NHẬT -->
-									<!-- Button trigger modal -->
-									<button class="btn" type="text" data-bs-toggle="modal"
-										data-bs-target="#exampleModal2"
-										style="color: rgb(67, 73, 228); cursor: pointer; margin-left: 90px;">
-										Thay đổi</button>
-									<!-- Modal -->
-									<!-- CẬP NHẬT -->
-								</div>
-								<p style="color: #7e847e;">Lý Tự Trọng</p>
-								<p style="color: #7e847e;">Phường An Cư, Quận Ninh Kiều, Cần
-									Thơ</p>
-							</label>
-						</div>
-						<hr>
-						<div class="form-check">
-							<input class="form-check-input" type="radio"
-								name="flexRadioDefault" id="flexRadioDefault1"> <label
-								class="form-check-label" for="flexRadioDefault1"
-								style="display: flex; flex-direction: column;">
-								<div class="d-flex align-items-center" style="display: flex;">
-									<h6 class="me-3" style="margin-right: 1rem;">
-										Hồ Thị Trúc Ly |<strong style="color: #7e847e;">
-											(+84) 876543219</strong>
-									</h6>
-									<!-- CẬP NHẬT -->
-									<!-- Button trigger modal -->
-									<button class="btn" type="text" data-bs-toggle="modal"
-										data-bs-target="#exampleModal3"
-										style="color: rgb(67, 73, 228); cursor: pointer; margin-left: 90px;">
-										Thay đổi</button>
-									<!-- Modal -->
+						<c:forEach var="c" items="${addresses}">
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault1"> <label
+									class="form-check-label" for="flexRadioDefault1"
+									style="display: flex; flex-direction: column;">
+									<div class="d-flex align-items-center" style="display: flex;">
+										<h6 class="me-3" style="margin-right: 1rem;">
+											${c.account.fullname } | <strong style="color: #7e847e;">${c.phone }</strong>
+										</h6>
+										<!-- CẬP NHẬT -->
+										<!-- Button trigger modal -->
+										<a href="/Ebook/user/edit/${c.id}" class="btn"
+											type="button"
+											style="color: rgb(67, 73, 228); cursor: pointer; margin-left: 90px;">
+											Thay đổi</a>
+										<!-- Modal -->
+										<!-- CẬP NHẬT -->
+									</div> <!-- 									<p style="color: #7e847e;">Lý Tự Trọng</p> -->
+									<p style="color: #7e847e;">${c.fullnameaddress}</p>
+								</label>
+							</div>
+							<hr>
+						</c:forEach>
+						<!-- 						<div class="form-check"> -->
+						<!-- 							<input class="form-check-input" type="radio" -->
+						<!-- 								name="flexRadioDefault" id="flexRadioDefault1"> <label -->
+						<!-- 								class="form-check-label" for="flexRadioDefault1" -->
+						<!-- 								style="display: flex; flex-direction: column;"> -->
+						<!-- 								<div class="d-flex align-items-center" style="display: flex;"> -->
+						<!-- 									<h6 class="me-3" style="margin-right: 1rem;"> -->
+						<!-- 										Hồ Thị Trúc Ly |<strong style="color: #7e847e;"> -->
+						<!-- 											(+84) 876543219</strong> -->
+						<!-- 									</h6> -->
+						<!-- 									CẬP NHẬT -->
+						<!-- 									Button trigger modal -->
+						<!-- 									<button class="btn" type="text" data-bs-toggle="modal" -->
+						<!-- 										data-bs-target="#exampleModal3" -->
+						<!-- 										style="color: rgb(67, 73, 228); cursor: pointer; margin-left: 90px;"> -->
+						<!-- 										Thay đổi</button> -->
+						<!-- 									Modal -->
 
-									<!-- CẬP NHẬT -->
-								</div>
-								<p style="color: #7e847e;">Trường Cao Đẳng Fpt Polytechnic
-									Cần Thơ, Đường Số 22, Kdc Hoàng Quân</p>
-								<p style="color: #7e847e;">Phường Lê Bình , Quận Cái Răng,
-									Cần Thơ</p>
-							</label>
-						</div>
-						<button
-							style="width: 200px; margin-bottom: 20px; margin-left: 10px;"
-							type="button" class="btn btn-outline-success"
-							data-bs-toggle="modal" data-bs-target="#exampleModal6">
-							Thêm địa chỉ mới</button>
-						<!-- RADIO -->
+						<!-- 									CẬP NHẬT -->
+						<!-- 								</div> -->
+						<!-- 								<p style="color: #7e847e;">Trường Cao Đẳng Fpt Polytechnic -->
+						<!-- 									Cần Thơ, Đường Số 22, Kdc Hoàng Quân</p> -->
+						<!-- 								<p style="color: #7e847e;">Phường Lê Bình , Quận Cái Răng, -->
+						<!-- 									Cần Thơ</p> -->
+						<!-- 							</label> -->
+						<!-- 
+										</div> -->
+						<a href="/Ebook/user/add/${account.id }"><button
+								style="width: 200px; margin-bottom: 20px; margin-left: 10px;"
+								type="button" class="btn btn-outline-success">Thêm địa
+								chỉ mới</button> <!-- RADIO --></a>
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-secondary"
@@ -344,7 +347,6 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
 			</tr>
 			<table class="table table-hover"
 				style="border-collapse: collapse; border-bottom: white;">
@@ -536,83 +538,83 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal thêm địa chỉ mới -->
-	<div class="modal fade" id="exampleModal6" tabindex="-1"
-		aria-labelledby="exampleModalLabel6" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel6">Thêm địa chỉ
-						mới</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="col-md-12">
-						<div class="form-floating mb-3">
-							<input type="email" class="form-control" id="floatingInput"
-								placeholder="name@example.com"> <label
-								for="floatingInput">Email (tùy chọn)</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="floatingInput"
-								placeholder=""> <label for="floatingInput">Họ và
-								tên</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="floatingInput"
-								placeholder=""> <label for="floatingInput"> Số
-								điện thoại </label>
-						</div>
-						<div class="form-floating">
-							<input type="text" class="form-control" id="floatingInput"
-								placeholder=""> <label for="floatingInput">Địa
-								chỉ (tùy chọn)</label>
-						</div>
+<!-- 	<!-- Modal thêm địa chỉ mới --> -->
+<!-- 	<div class="modal fade" id="exampleModal6" tabindex="-1" -->
+<!-- 		aria-labelledby="exampleModalLabel6" aria-hidden="true"> -->
+<!-- 		<div class="modal-dialog"> -->
+<!-- 			<div class="modal-content"> -->
+<!-- 				<div class="modal-header"> -->
+<!-- 					<h5 class="modal-title" id="exampleModalLabel6">Thêm địa chỉ -->
+<!-- 						mới</h5> -->
+<!-- 					<button type="button" class="btn-close" data-bs-dismiss="modal" -->
+<!-- 						aria-label="Close"></button> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-body"> -->
+<!-- 					<div class="col-md-12"> -->
+<!-- 						<div class="form-floating mb-3"> -->
+<!-- 							<input type="email" class="form-control" id="floatingInput" -->
+<!-- 								placeholder="name@example.com"> <label -->
+<!-- 								for="floatingInput">Email (tùy chọn)</label> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-floating mb-3"> -->
+<!-- 							<input type="text" class="form-control" id="floatingInput" -->
+<!-- 								placeholder=""> <label for="floatingInput">Họ và -->
+<!-- 								tên</label> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-floating mb-3"> -->
+<!-- 							<input type="text" class="form-control" id="floatingInput" -->
+<!-- 								placeholder=""> <label for="floatingInput"> Số -->
+<!-- 								điện thoại </label> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-floating"> -->
+<!-- 							<input type="text" class="form-control" id="floatingInput" -->
+<!-- 								placeholder=""> <label for="floatingInput">Địa -->
+<!-- 								chỉ (tùy chọn)</label> -->
+<!-- 						</div> -->
 
-						<div style="padding-top: 20px;">
-							<select class="form-select" aria-label="Default select example">
-								<option selected style="font: 300;"><strong>Tỉnh
-										thành </strong></option>
-								<option value="1">An Giang</option>
-							</select>
-						</div>
+<!-- 						<div style="padding-top: 20px;"> -->
+<!-- 							<select class="form-select" aria-label="Default select example"> -->
+<!-- 								<option selected style="font: 300;"><strong>Tỉnh -->
+<!-- 										thành </strong></option> -->
+<!-- 								<option value="1">An Giang</option> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
 
-						<div style="padding-top: 20px;">
-							<select class="form-select" aria-label="Default select example">
-								<option selected style="font: 300;"><strong>Quận
-										huyện (tùy chọn) </strong></option>
-								<option value="1">Ninh Kiều</option>
-								<option value="2">Cái Răng</option> /
-								<select>
-						</div>
+<!-- 						<div style="padding-top: 20px;"> -->
+<!-- 							<select class="form-select" aria-label="Default select example"> -->
+<!-- 								<option selected style="font: 300;"><strong>Quận -->
+<!-- 										huyện (tùy chọn) </strong></option> -->
+<!-- 								<option value="1">Ninh Kiều</option> -->
+<!-- 								<option value="2">Cái Răng</option> / -->
+<!-- 								<select> -->
+<!-- 						</div> -->
 
-						<div style="padding-top: 20px;">
-							<select class="form-select" aria-label="Default select example">
-								<option selected style="font: 300;"><strong>Phường
-										xã (tùy chọn) </strong></option>
-								<option value="1">An Bình</option>
-								<option value="2">An Cư</option> /
-								<select>
-						</div>
+<!-- 						<div style="padding-top: 20px;"> -->
+<!-- 							<select class="form-select" aria-label="Default select example"> -->
+<!-- 								<option selected style="font: 300;"><strong>Phường -->
+<!-- 										xã (tùy chọn) </strong></option> -->
+<!-- 								<option value="1">An Bình</option> -->
+<!-- 								<option value="2">An Cư</option> / -->
+<!-- 								<select> -->
+<!-- 						</div> -->
 
-						<div class="form-floating mb-3" style="padding-top: 20px;">
-							<textarea class="form-control" placeholder="Leave a comment here"
-								id="floatingTextarea2" style="height: 100px"></textarea>
-							<label for="floatingTextarea2">Ghi chú (nếu có)</label>
-						</div>
-					</div>
+<!-- 						<div class="form-floating mb-3" style="padding-top: 20px;"> -->
+<!-- 							<textarea class="form-control" placeholder="Leave a comment here" -->
+<!-- 								id="floatingTextarea2" style="height: 100px"></textarea> -->
+<!-- 							<label for="floatingTextarea2">Ghi chú (nếu có)</label> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary"
-						data-bs-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-outline-success">Hoàn
-						Thành</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 				</div> -->
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<button type="button" class="btn btn-outline-secondary" -->
+<!-- 						data-bs-dismiss="modal">Đóng</button> -->
+<!-- 					<button type="button" class="btn btn-outline-success">Hoàn -->
+<!-- 						Thành</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	</div>
 </body>
 </html>
