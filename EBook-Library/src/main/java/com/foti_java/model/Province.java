@@ -30,10 +30,10 @@ public class Province {
 	Integer id;
 	@Nationalized
 	String name;
-
+	String provinceId;
 	@OneToMany(mappedBy = "province")
 	List<District> districts;
-	
+
 	@OneToMany(mappedBy = "province")
 	List<Address> addresses;
 }

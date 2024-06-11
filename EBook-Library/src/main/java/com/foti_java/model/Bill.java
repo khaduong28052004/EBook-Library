@@ -38,6 +38,7 @@ public class Bill {
 	double discount;
 	int quantity;
 	boolean status;
+	boolean active = false;
 	@Temporal(TemporalType.TIMESTAMP)
 	Date dateBuy = new Date();
 	@Nationalized
@@ -64,6 +65,4 @@ public class Bill {
 	@JoinColumn(name = "account_id")
 	Account account;
 	
-	@OneToMany(mappedBy = "bill")
-	List<ReturnBook> returnBooks;
 }

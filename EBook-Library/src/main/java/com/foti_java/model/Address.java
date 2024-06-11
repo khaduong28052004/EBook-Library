@@ -32,6 +32,7 @@ public class Address {
 	boolean status;
 	@Nationalized
 	String phone;
+	@Nationalized
 	String nameAddress;
 	@Nationalized
 	String fullNameAddress;
