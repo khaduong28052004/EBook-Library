@@ -37,13 +37,21 @@
 									id="tatCa" aria-current="page"
 									href="/user/bill?activeMenu=tatCa">Tất cả</a></li>
 								<li class="nav-item"><a
-									class="nav-linkMenu ${activeMenu == 'VANCHUYEN' ? 'activeMenu3' : ''}"
-									id="vanChuyen" aria-current="page" href="/user/bill/VANCHUYEN">Vận
-										chuyển</a></li>
+									class="nav-linkMenu ${activeMenu == 'CHUANBI' ? 'activeMenu3' : ''}"
+									id="vanChuyen" aria-current="page" href="/user/bill/CHUANBI">Chuẩn
+										bị hàng</a></li>
 								<li class="nav-item"><a
-									class="nav-linkMenu ${activeMenu == 'DANGGIAOHANG' ? 'activeMenu3' : ''}"
+									class="nav-linkMenu ${activeMenu == 'DAGIAOHANG' ? 'activeMenu3' : ''}"
 									id="choGiaoHang" aria-current="page"
-									href="/user/bill/DANGGIAOHANG">Đang giao hàng</a></li>
+									href="/user/bill/DAGIAOHANG">Đã giao vận chuyển</a></li>
+								<li class="nav-item"><a
+									class="nav-linkMenu ${activeMenu == 'VANCHUYEN' ? 'activeMenu3' : ''}"
+									id="choGiaoHang" aria-current="page"
+									href="/user/bill/VANCHUYEN">Vận chuyển</a></li>
+								<li class="nav-item"><a
+									class="nav-linkMenu ${activeMenu == 'DANHANHANG' ? 'activeMenu3' : ''}"
+									id="daNhanHang" aria-current="page"
+									href="/user/bill/DANHANHANG">Nhận hàng</a></li>
 								<li class="nav-item"><a
 									class="nav-linkMenu ${activeMenu == 'HOANTHANH' ? 'activeMenu3' : ''}"
 									id="hoanThanh" aria-current="page" href="/user/bill/HOANTHANH">Hoàn
@@ -142,7 +150,8 @@
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-secondary"
 																		data-bs-dismiss="modal">Hủy</button>
-																	<button type="submit" class="btn btn-outline-success">Xác nhận</button>
+																	<button type="submit" class="btn btn-outline-success">Xác
+																		nhận</button>
 																	<!-- type="submit" -->
 																</div>
 															</form>

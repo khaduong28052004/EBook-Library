@@ -45,11 +45,16 @@ public class BillController {
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
 
-	String user = (String) session.getAttribute("username");
-//	String user = "user";
 
+	Account account = (Account) session.getAttribute("account");
+	String username = account.getUsername();
+
+//	String username = "user";
+	
 	@GetMapping("/user/bill")
 	public String getAllBills(Model model, HttpServletRequest request) {
+
+
 		// Lấy thông tin người dùng hiện tại từ request (nếu cần)
 		// Principal principal = request.getUserPrincipal();
 //		Principal principal = request.getUserPrincipal();
@@ -66,9 +71,9 @@ public class BillController {
 //		model.addAttribute("total", totals);
 //		model.addAttribute("activeMenu", "tatCa");
 //	    }
-		
+
 		// Lấy danh sách các hóa đơn từ repository
-		List<Bill> bills = billRepositoty.getAll(user);
+		List<Bill> bills = billRepositoty.getAll(username);
 
 		// Thêm danh sách hóa đơn và tổng tiền vào model
 		model.addAttribute("bills", bills);
@@ -84,13 +89,19 @@ public class BillController {
 	@GetMapping("/user/bill/{delivery}")
 	public String getBillByDelivery(Model model, HttpServletRequest request,
 			@PathVariable("delivery") String delivery) {
+
+
 		List<Bill> bills = new ArrayList<>();
-		if ("VANCHUYEN".equalsIgnoreCase(delivery)) {
-			bills = billRepositoty.getBillsByDelivery("Đang chờ đơn vị vận chuyển", "user");
-		} else if ("DANGGIAOHANG".equalsIgnoreCase(delivery)) {
-			bills = billRepositoty.getBillsByDelivery("Đã giao cho đơn vị vận chuyển", user);
+		if ("CHUANBI".equalsIgnoreCase(delivery)) {
+			bills = billRepositoty.getBillsByDelivery("Đang chờ đơn vị vận chuyển", username);
+		} else if ("DAGIAOHANG".equalsIgnoreCase(delivery)) {
+			bills = billRepositoty.getBillsByDelivery("Đã giao cho đơn vị vận chuyển", username);
+		} else if ("VANCHUYEN".equalsIgnoreCase(delivery)) {
+			bills = billRepositoty.getBillsByDelivery("Đang vận chuyển", username);
+		}else if ("DANHANHANG".equalsIgnoreCase(delivery)) {
+			bills = billRepositoty.getBillsByDelivery("Đã nhận hàng", username);
 		} else if ("HOANTHANH".equalsIgnoreCase(delivery)) {
-			bills = billRepositoty.getBillsByDelivery("Hoàn Thành", user);
+			bills = billRepositoty.getBillsByDelivery("Hoàn Thành", username);
 		}
 //		else if ("DAHUY".equalsIgnoreCase(delivery)) {
 //			bills = billRepositoty.getBillsByDelivery("Đã hủy");
