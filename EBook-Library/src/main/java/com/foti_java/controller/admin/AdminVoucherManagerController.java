@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.foti_java.model.Account;
 import com.foti_java.model.TypeVoucher;
 import com.foti_java.model.Voucher;
@@ -26,7 +27,9 @@ import com.foti_java.model.VoucherDetail;
 import com.foti_java.repository.TypeVoucherRepository;
 import com.foti_java.repository.VoucherDetailRepository;
 import com.foti_java.repository.VoucherRepository;
+
 import com.foti_java.service.SessionService;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
@@ -47,6 +50,7 @@ public class AdminVoucherManagerController {
 	TypeVoucherRepository typeVoucherRepository;
 	@Autowired
 	VoucherDetailRepository voucherDetailsRepository;
+
 	@Autowired
 	SessionService session;
 	String errorName = "";
@@ -63,8 +67,11 @@ public class AdminVoucherManagerController {
 	@RequestMapping({ "vouchermanager", "vouchermanager/clear" })
 	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
+
 		Account account = session.getAttribute("account");
 		listVoucher = voucherRepository.findAllByAccount(account);
+
+
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		model.addAttribute("vouchers", listVoucher);

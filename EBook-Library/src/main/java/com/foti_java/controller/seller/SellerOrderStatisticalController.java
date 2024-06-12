@@ -18,19 +18,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.foti_java.model.Account;
+
 import com.foti_java.model.Bill;
 import com.foti_java.model.BillDetail;
 import com.foti_java.model.Voucher;
 import com.foti_java.repository.BillDetailRepository;
 import com.foti_java.repository.BillRepositoty;
 import com.foti_java.repository.VoucherRepository;
+
 import com.foti_java.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
 @Controller
-@RequestMapping("Ebook/seller")
+@RequestMapping("seller")
 public class SellerOrderStatisticalController {
 	@Autowired
 	BillRepositoty billRepository;
@@ -38,15 +42,18 @@ public class SellerOrderStatisticalController {
 	BillDetailRepository billDetailRepository;
 	@Autowired
 	VoucherRepository voucherRepository;
+
 	@Autowired
 	HttpServletRequest req;
 	@Autowired
 	SessionService session;
+
 	List<Voucher> listVoucher = new ArrayList<>();
 	List<Bill> listBill = new ArrayList<>();
 	List<BillDetail> listBillDetails = new ArrayList<>();
 	String startDate;
 	String endDate;
+
 
 	@RequestMapping("orderstatistical")
 	public String orderStatistical(Model model, @RequestParam(value = "dateStart", defaultValue = "") String dateStart,
@@ -58,6 +65,7 @@ public class SellerOrderStatisticalController {
 			startDate = dateStart;
 			endDate = dateEnd;
 			listBill = billRepository.findAllBySellerBeweenAnd(account.getId(), dateStart, dateEnd);
+
 			model.addAttribute("dateStart", dateStart);
 			model.addAttribute("dateEnd", dateEnd);
 
@@ -68,7 +76,9 @@ public class SellerOrderStatisticalController {
 				listVoucher.add(voucher);
 			}
 		}
+
 		List<Object[]> listTKSeller = billRepository.PROC_TK_NAM_Seller(account.getId());
+
 		List<String> jsonListDT = new ArrayList<String>();
 		List<String> jsonListLN = new ArrayList<String>();
 		for (Object[] objArray : listTKSeller) {
@@ -81,6 +91,7 @@ public class SellerOrderStatisticalController {
 			jsonListLN.add("'" + jsonMapLN + "'");
 
 		}
+
 
 		model.addAttribute("SellerSuccessJsonDT", jsonListDT);
 		model.addAttribute("SellerSuccessJsonLN", jsonListLN);
@@ -99,6 +110,7 @@ public class SellerOrderStatisticalController {
 //		model.addAttribute("listbillDetails", listBillDetails);
 		model.addAttribute("bill", billRepository.findById(id).get());
 		orderStatistical(model, startDate, endDate);
+
 		return "seller/pages/orderstatistical";
 	}
 }

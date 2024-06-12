@@ -10,7 +10,10 @@ import org.springframework.data.repository.query.Param;
 import com.foti_java.model.Bill;
 import com.foti_java.model.Selerstatistical;
 
+import lombok.Data;
+
 public interface BillRepositoty extends JpaRepository<Bill, Integer> {
+
     // kien
     @Query(value = "EXEC GetCustomerStatistics1", nativeQuery = true)
     List<Object[]> Selerstatistical();
@@ -77,4 +80,5 @@ public interface BillRepositoty extends JpaRepository<Bill, Integer> {
 			+ "WHERE P.account_id = ?1 AND B.status=1 AND B.finishDay IS NOT NULL AND B.finishDay BETWEEN ?2 AND ?3\r\n"
 			+ "ORDER BY B.dateBuy DESC",nativeQuery = true)
 	List<Bill> findAllBySellerBeweenAnd(int id, String startDate, String endDate);
+
 }

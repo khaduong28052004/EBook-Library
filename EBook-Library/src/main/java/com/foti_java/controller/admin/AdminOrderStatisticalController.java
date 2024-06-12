@@ -1,5 +1,6 @@
 package com.foti_java.controller.admin;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,10 +24,10 @@ import com.foti_java.repository.BillRepositoty;
 import com.foti_java.repository.RoleDetailRepository;
 import com.foti_java.repository.RoleRepository;
 
-
 @Controller
 @RequestMapping("admin")
 public class AdminOrderStatisticalController {
+
 	@Autowired
 	AccountRepositoty accountRepository;
 	@Autowired

@@ -19,14 +19,18 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.foti_java.model.Account;
+
 import com.foti_java.model.TypeVoucher;
 import com.foti_java.model.Voucher;
 import com.foti_java.model.VoucherDetail;
 import com.foti_java.repository.TypeVoucherRepository;
 import com.foti_java.repository.VoucherDetailRepository;
 import com.foti_java.repository.VoucherRepository;
+
 import com.foti_java.service.SessionService;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
@@ -47,8 +51,10 @@ public class SellerVoucherManagerController {
 	TypeVoucherRepository typeVoucherRepository;
 	@Autowired
 	VoucherDetailRepository voucherDetailsRepository;
+
 	@Autowired
 	SessionService sessison;
+
 	Page<Voucher> page;
 	Pageable pageable;
 	Sort sort = Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "id");
@@ -67,8 +73,10 @@ public class SellerVoucherManagerController {
 	@RequestMapping("vouchermanager")
 	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
+
 		Account account = sessison.getAttribute("account");
 		listVoucher = voucherRepository.findAllByAccount(account);
+
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		model.addAttribute("vouchers", listVoucher);
@@ -142,8 +150,10 @@ public class SellerVoucherManagerController {
 	public String getUpdate(Model model, @PathVariable(name = "id") Integer id,
 			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
+
 		Account account = sessison.getAttribute("account");
 		listVoucher = voucherRepository.findAllByAccount(account);
+
 		Optional<Voucher> entity = null;
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
@@ -216,7 +226,9 @@ public class SellerVoucherManagerController {
 			List<TypeVoucher> list = typeVoucherRepository.findAll();
 			model.addAttribute("typeVouchers", list);
 			model.addAttribute("voucher", entity);
+  
 			model.addAttribute("dateStart", originalDateStart);
+
 			model.addAttribute("dateEnd", originalDateEnd);
 			return "seller/pages/vouchermanager";
 		}

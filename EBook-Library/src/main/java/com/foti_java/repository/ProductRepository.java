@@ -20,6 +20,7 @@ import com.foti_java.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+
 	Page<Product> findAllByIdNotIn(List<Integer> id, Pageable pageable);
 
 	Page<Product> findAllByAccountAndIdNot(Account account, Integer productId, Pageable pageable);

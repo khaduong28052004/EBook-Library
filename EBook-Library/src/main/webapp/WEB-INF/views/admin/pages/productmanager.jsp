@@ -1,11 +1,8 @@
 <%@page import="com.foti_java.model.Category"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@page import="com.foti_java.model.ImageProduct"%>
-<%@page import="com.foti_java.model.Product"%>
-<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +58,70 @@
 												<th style="width: 135px;">Mô tả</th>
 
 
+<<<<<<< HEAD
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="product" items="${products }">
+											<tr>
+												<td class="align-middle" style="width: 160px;">
+													<div class="row">
+														<c:forEach var="imgae" items="${product.imageProducts }">
+															<div class="col-md-6" style="padding: 3px;">
+																<img src="/images/${image.name }" width="100%"
+																	height="120px" alt="">
+															</div>
+														</c:forEach>
+													</div>
+												</td>
+												<td class="align-middle">${product.name }</td>
+												<td class="align-middle">${product.category.name }</td>
+												<td class="align-middle">${product.writerName }</td>
+												<td class="align-middle">${product.publishingCompany }</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency" value="${product.price }"></fmt:formatNumber>
+												</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency"
+														value="${product.discountType? (product.price - product.price*product.discount) : product.price }"></fmt:formatNumber>
+												</td>
+												<td class="align-middle">${product.quantity}</td>
+												<td class="align-middle"><a
+													href="/admin/productmanager/true/${product.id}"
+													class="btn btn-primary">Đồng ý</a>
+													<button data-id="${product.id}"
+														data-fullname="${product.name}"
+														class="btn btn-danger deleteModal1 ">Từ chối</button></td>
+											</tr>
+										</c:forEach>
+										<form action="" method="get" id="modelForm1">
+											<div class="modal" id="modelID1">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-body">
+															<input value="false" name="status" hidden>
+															<h2 class="text-center">Phản hồi shop</h2>
+															<div class="form-group">
+																<label class="form-label">Gửi đến:</label> <input
+																	class="form-control" id="context1" disabled="disabled">
+															</div>
+															<div class="form-group">
+																<label class="form-label">Lí do:</label>
+																<textarea id="contextLiDo1" class="form-control"></textarea>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button class=" btn btn-danger btnclose1">Close</button>
+															<a type="button" id="buttonSend1" class="btn btn-success">Gửi</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+
+									</tbody>
+									<!-- <tfoot>
+=======
 											</tr>
 										</thead>
 										<tbody>
@@ -148,6 +209,7 @@
 
 										</tbody>
 										<!-- <tfoot>
+>>>>>>> kha28
                       <tr>
                         <th>Rendering engine</th>
                         <th>Browser</th>
