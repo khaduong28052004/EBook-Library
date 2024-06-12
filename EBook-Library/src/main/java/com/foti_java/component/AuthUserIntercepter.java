@@ -15,15 +15,15 @@ public class AuthUserIntercepter implements HandlerInterceptor {
 	@Autowired
 	SessionService sessionService;
 
-//	@Override
-//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-//			throws Exception {
-//		Account account = sessionService.getAttribute("account");
-//		if (account != null) {
-//			return true;
-//		}
-//		response.sendRedirect("/login");
-//		return false;
-//
-//	}
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		Account account = sessionService.getAttribute("account");
+		if (account != null) {
+			return true;
+		}
+		response.sendRedirect("/login");
+		return false;
+
+	}
 }
