@@ -28,12 +28,15 @@ import com.foti_java.repository.ImageProductRepository;
 import com.foti_java.repository.ProductRepository;
 import com.foti_java.service.SessionService;
 
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 
+
 @Controller
-@RequestMapping("seller")
+@RequestMapping("Ebook/seller")
 public class SellerProductManagerController {
+
 	@Autowired
 	SessionService sessionService;
 	@Autowired

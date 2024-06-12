@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.foti_java.model.Bill;
+import com.foti_java.model.Selerstatistical;
 
 public interface BillRepositoty extends JpaRepository<Bill, Integer> {
+	//kien
+	@Query(value="EXEC GetCustomerStatistics1", nativeQuery = true)
+	List<Object[]> Selerstatistical();
 	//Phuc
     @Query(value = "EXEC CalculateMonthlyBills ?1", nativeQuery = true)
     List<Object[]> calculateMonthlyBills(Integer id); 

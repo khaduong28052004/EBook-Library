@@ -30,6 +30,7 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	boolean status;
+	@Nationalized
 	String phone;
 	@Nationalized
 	String nameAddress;

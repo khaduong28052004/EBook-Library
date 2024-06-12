@@ -16,7 +16,7 @@
           alt="User Image">
       </div>
       <div class="info">
-        <a href="/admin/home" class="d-block">admin</a>
+        <a href="/Ebook/admin/home" class="d-block">admin</a>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
         <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
-          <a href="/admin/home" class="nav-link active">
+          <a href="/Ebook/admin/home" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Trang chủ
@@ -146,25 +146,25 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/admin/accountmanager" class="nav-link">
+              <a href="/Ebook/admin/accountmanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Account</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/sellermanager" class="nav-link">
+              <a href="/Ebook/admin/sellermanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Seller</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/productmanager" class="nav-link">
+              <a href="/Ebook/admin/productmanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Sản phẩm</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/vouchermanager" class="nav-link">
+              <a href="/Ebook/admin/vouchermanager" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Voucher</p>
               </a>
