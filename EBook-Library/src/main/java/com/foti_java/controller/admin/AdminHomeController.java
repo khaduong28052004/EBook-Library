@@ -26,7 +26,7 @@ public class AdminHomeController {
 		int countAdmin = accountRepository.countAdmin();
 		double AvgSeller = ((double) countSeller / countAccount) * 100;
 		double totalPriceAdmin = accountRepository.totalPriceAdmin();
-
+		
 		model.addAttribute("countSellerNotCheck", countSellerNotCheck);
 		model.addAttribute("AvgSeller", Math.round((AvgSeller * 10.0) / 10.0));
 		model.addAttribute("countAccount", countAccount);

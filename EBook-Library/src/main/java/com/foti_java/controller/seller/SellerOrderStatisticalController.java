@@ -25,6 +25,7 @@ import com.foti_java.model.Voucher;
 import com.foti_java.repository.BillDetailRepository;
 import com.foti_java.repository.BillRepositoty;
 import com.foti_java.repository.VoucherRepository;
+import com.foti_java.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -39,6 +40,8 @@ public class SellerOrderStatisticalController {
 	VoucherRepository voucherRepository;
 	@Autowired
 	HttpServletRequest req;
+	@Autowired
+	SessionService session;
 	List<Voucher> listVoucher = new ArrayList<>();
 	List<Bill> listBill = new ArrayList<>();
 	List<BillDetail> listBillDetails = new ArrayList<>();
@@ -48,7 +51,7 @@ public class SellerOrderStatisticalController {
 	@RequestMapping("orderstatistical")
 	public String orderStatistical(Model model, @RequestParam(value = "dateStart", defaultValue = "") String dateStart,
 			@RequestParam(value = "dateEnd", defaultValue = "") String dateEnd) {
-		Account account = (Account) req.getAttribute("account");
+		Account account = session.getAttribute("account");
 		if (dateStart == null && dateEnd == null) {
 			listBill = billRepository.findAllBySeller(account.getId());
 		} else {

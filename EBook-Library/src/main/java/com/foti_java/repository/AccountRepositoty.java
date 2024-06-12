@@ -16,25 +16,16 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 	
 	//Tuyen
 
-	@Query(value = "SELECT COUNT(id) as 'acc' " + "FROM Accounts " + "WHERE status = 1 "
-			+ "AND numberCitizenIdentification IS NOT NULL " + "AND id NOT IN (" + "    SELECT account_id "
-			+ "    FROM RoleDetails " + "    WHERE role_id = 2" + ");", nativeQuery = true)
+	@Query(value = "SELECT COALESCE(COUNT(id), 0)  FROM Accounts WHERE status = 1 AND numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT account_id FROM RoleDetails WHERE role_id = 2);", nativeQuery = true)
 	Integer countSellerNotCheck();
 
-	@Query(value = "SELECT COUNT(id) as 'acc' " + "FROM Accounts " + "WHERE status = 1 ", nativeQuery = true)
+	@Query(value = "SELECT COALESCE(COUNT(id), 0) FROM Accounts WHERE status = 1 ", nativeQuery = true)
 	Integer countAccount();
 	
-	@Query(value = "  SELECT COUNT(id) as cnt\r\n"
-			+ "    FROM Accounts \r\n"
-			+ "    WHERE status = 1 \r\n"
-			+ "    AND id  IN (\r\n"
-			+ "        SELECT account_id \r\n"
-			+ "        FROM RoleDetails \r\n"
-			+ "        WHERE role_id = 2\r\n"
-			+ "    );", nativeQuery = true)
+	@Query(value = "  SELECT COALESCE(COUNT(id), 0) FROM Accounts WHERE status = 1 AND id  IN ( SELECT account_id  FROM RoleDetails WHERE role_id = 2);", nativeQuery = true)
 	Integer countSeller();
 	
-	@Query(value = "  SELECT COUNT(id) as cnt\r\n"
+	@Query(value = "  SELECT COALESCE(COUNT(id), 0) as cnt\r\n"
 			+ "    FROM Accounts \r\n"
 			+ "    WHERE status = 1 \r\n"
 			+ "    AND id  IN (\r\n"
@@ -44,7 +35,7 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 			+ "    );", nativeQuery = true)
 	Integer countUser();
 	
-	@Query(value = "  SELECT COUNT(id) as cnt\r\n"
+	@Query(value = "  SELECT COALESCE(COUNT(id), 0) as cnt\r\n"
 			+ "    FROM Accounts \r\n"
 			+ "    WHERE status = 1 \r\n"
 			+ "    AND id  IN (\r\n"
@@ -54,8 +45,7 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 			+ "    );", nativeQuery = true)
 	Integer countAdmin();
 	
-	@Query(value = "select SUM(totalPrice) from Bills WHERE MONTH(dateBuy) = MONTH(GETDATE()) AND YEAR(dateBuy)=YEAR(GETDATE())\r\n"
-			+ "", nativeQuery = true)
+	@Query(value = "select COALESCE(SUM(totalPrice),0) from Bills WHERE MONTH(finishDay) = MONTH(GETDATE()) AND YEAR(finishDay)=YEAR(GETDATE()) AND status=1 AND active=1 ", nativeQuery = true)
 	Double totalPriceAdmin();
 	
 	@Query(value = "SELECT \r\n"
@@ -80,7 +70,7 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 
 	List<Account> findAllByStatus(boolean status);
 	
-	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2)"
+	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2 OR R.id=1)"
 			, nativeQuery = true)
 	List<Account> findAllCheckSeller();
 }

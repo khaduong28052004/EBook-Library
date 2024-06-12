@@ -38,7 +38,7 @@
 				<div class="row">
 					<div class="col-md-12">
 
-						<form id="quickForm" method="post">
+						<form id="quickForm" action="" method="post">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="card-body" style="padding: 0px;">
@@ -111,7 +111,7 @@
 													<div class="dieuKien" style="display: flex;">
 														<input type="number" name="PriceDK" class="form-control"
 															id="exampleInputEmail1" placeholder="Giá tối thiểu"
-															style="margin-right: 15px;" required
+															style="margin-right: 15px;" 
 															value="${voucher.priceMin}">
 														<p class="text-danger">${errorDKPrice}</p>
 													</div>
@@ -121,7 +121,7 @@
 												<div class="form-group">
 													<label for="exampleInputPassword1">Giảm giá</label> <input
 														type="number" name="priceSale" value="${voucher.sale }"
-														required class="form-control" placeholder=" % hoặc VND">
+														 class="form-control" placeholder=" % hoặc VND">
 													<p class="text-danger">${errorPriceSale }</p>
 												</div>
 											</div>
@@ -141,7 +141,7 @@
 								<div class="col-md-12">
 									<div class="card-footer"
 										style="background-color: rgba(240, 248, 255, 0); padding-left: 0px; padding-top: 0px;">
-										<a href="/seller/vouchermanager/clear"
+										<a href="/admin/vouchermanager"
 											class="btn btn-secondary"> <i
 											class="fa-solid fa-circle-xmark"
 											style="color: #ffffff; margin-right: 5px;"></i>Làm mới
@@ -205,7 +205,7 @@
 											<tr>
 												<td>${voucher.id }</td>
 												<td>${voucher.name }</td>
-												<td>${voucher.priceMin}</td>
+												<td><fmt:formatNumber type="currency">${voucher.priceMin}</fmt:formatNumber></td>
 												<td>${voucher.originalNumber }</td>
 												<td><c:choose>
 														<c:when test="${voucher.sale >1000}">

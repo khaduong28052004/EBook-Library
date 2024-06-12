@@ -27,6 +27,7 @@ import com.foti_java.repository.AccountRepositoty;
 import com.foti_java.repository.TypeVoucherRepository;
 import com.foti_java.repository.VoucherDetailRepository;
 import com.foti_java.repository.VoucherRepository;
+import com.foti_java.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
@@ -49,7 +50,8 @@ public class AdminVoucherManagerController {
 	VoucherDetailRepository voucherDetailsRepository;
 	@Autowired
 	AccountRepositoty accountRepositoty;
-
+	@Autowired
+	SessionService session;
 	String errorName = "";
 	String errorDKPrice = "";
 	String errorDateStart = "";
@@ -64,7 +66,7 @@ public class AdminVoucherManagerController {
 	@RequestMapping({ "vouchermanager", "vouchermanager/clear" })
 	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
-		Account account = (Account) req.getAttribute("account");
+		Account account = session.getAttribute("account");
 		listVoucher = voucherRepository.findAllByAccount(account);
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
@@ -139,11 +141,10 @@ public class AdminVoucherManagerController {
 	public String getUpdate(Model model, @PathVariable(name = "id") Integer id,
 			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
-		Optional<Voucher> entity = null;
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		if (req.getRequestURI().contains("update") && id != null) {
-			entity = voucherRepository.findById(id);
+			Optional<Voucher> entity = voucherRepository.findById(id);
 			model.addAttribute("voucher", entity.get());
 			model.addAttribute("currentPath", "update");
 		}
@@ -191,7 +192,8 @@ public class AdminVoucherManagerController {
 		System.out.println("ngày bắt đầu: " + entity.getDateStart());
 		entity.setDateEnd(endDate);
 		System.out.println("ngày kết thúc: " + entity.getDateEnd());
-
+		String ngayBD = dateStart.toString();
+		String ngayTK = dateEnd.toString();
 		entity.setOriginalNumber(quantity);
 		entity.setStatus(true);
 		entity.setSale(priceSale);
@@ -203,6 +205,8 @@ public class AdminVoucherManagerController {
 			List<TypeVoucher> list = typeVoucherRepository.findAll();
 			model.addAttribute("typeVouchers", list);
 			model.addAttribute("voucher", entity);
+			model.addAttribute("dateStart", startDate);
+			model.addAttribute("dateEnd", endDate);
 			check(model, name, typeVoucher, DKPrice, dateStart, dateEnd, quantity, priceSale, 0, loaiGG);
 			return "admin/pages/vouchermanager";
 		}
@@ -240,10 +244,12 @@ public class AdminVoucherManagerController {
 			voucherRepository.saveAndFlush(entity);
 			return "redirect:/admin/vouchermanager";
 		} else {
+			Account account = session.getAttribute("account");
+			listVoucher = voucherRepository.findAllByAccount(account);
 			listTypeVoucher = typeVoucherRepository.findAll();
 			model.addAttribute("currentPath", "update");
 			model.addAttribute("typeVouchers", listTypeVoucher);
-			model.addAttribute("vouchers", voucherRepository.findAll());
+			model.addAttribute("vouchers", listVoucher);
 			model.addAttribute("voucher", entity);
 			check(model, name, typeVoucher, DKPrice, dateStart, dateEnd, quantity, priceSale,
 					entityOld.get().getQuantity(), loaiGG);
