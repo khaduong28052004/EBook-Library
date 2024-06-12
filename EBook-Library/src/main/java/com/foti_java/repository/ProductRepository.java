@@ -47,4 +47,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	Page<Product> findAllByNameContaining(String name, Pageable pageable);
 //	@Query("SELECT p FROM Product p  WHERE p.cartDetail = listCart")
 //	List<Product> listCart(@Param("listCart")CartDetail listCart);
+
+	List<Product> findAllByActiveAndStatus(boolean active, boolean status);
+    @Query("SELECT p FROM Product p WHERE p.status = true and p.account.id =:id")
+    public List<Product> findByStatus(@Param("id") Integer id);
 }
