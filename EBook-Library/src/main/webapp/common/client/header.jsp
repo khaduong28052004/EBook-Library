@@ -1,132 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+<%-- 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  --%>
 <header class="container  sticky-top">
 	<style>
 .mic-search:hover {
 	cursor: pointer;
 	background-color: rgba(128, 128, 128, 0.299);
 }
-#closeIcon{
-position: fixed;
-right: 10px;
-top :10px;
-height: 50px;
-width: 50px;
+
+#closeIcon {
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	height: 50px;
+	width: 50px;
 }
-#closeIcon>h1{
-cursor: pointer;
+
+#closeIcon>h1 {
+	cursor: pointer;
 }
 
 .mic-search {
 	border-radius: 50%;
 	background-color: rgba(128, 128, 128, 0.129);
 }
-    .model-record {
-        position: absolute;
-        width:100%;
-        top: 0px;
-        right: 0px;
-        left: 0px;
-        height: 200px;
-        z-index: 9999;
-        background-color: white;
-        box-shadow: 2px 2px 2px 2px gray;
-    }
 
-    .container-record {
-        margin: 0px;
-    }
+.model-record {
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	height: 200px;
+	z-index: 9999;
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px gray;
+}
 
-    .textSpeak {
-        margin-top: 20px;
-        width: 500px;
-        /* background-color: #808080; */
-        text-align: left;
-        font-size: 2rem;
-        padding-right: 30px;
-    }
+.container-record {
+	margin: 0px;
+}
 
-    .record-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 50px;
-        height: 50px;
+.textSpeak {
+	margin-top: 20px;
+	width: 500px;
+	/* background-color: #808080; */
+	text-align: left;
+	font-size: 2rem;
+	padding-right: 30px;
+}
 
-        border-radius: 50%;
-        position: relative;
-        cursor: pointer;
-    }
+.record-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: relative;
+	cursor: pointer;
+}
 
-    .record-button::before {
-        content: '';
-        width: 120px;
-        height: 120px;
-        border: 10px solid gray;
-        border-radius: 50%;
-        position: absolute;
-        top: -35px;
-        left: -35px;
-        animation: pulse 1.5s infinite;
-    }
+.record-button::before {
+	content: '';
+	width: 120px;
+	height: 120px;
+	border: 10px solid gray;
+	border-radius: 50%;
+	position: absolute;
+	top: -35px;
+	left: -35px;
+	animation: pulse 1.5s infinite;
+}
 
-    .record-button .fa-microphone {
-        color: red;
-        font-size: 50px;
-        z-index: 1;
-    }
+.record-button .fa-microphone {
+	color: red;
+	font-size: 50px;
+	z-index: 1;
+}
 
-    .record-button.stopped {
-        background-color: white;
-        border: 1px solid gray;
-        padding: 50px;
-    }
+.record-button.stopped {
+	background-color: white;
+	border: 1px solid gray;
+	padding: 50px;
+}
 
-    .record-button.stopped::before {
-        display: none;
-        padding: 50px;
-    }
+.record-button.stopped::before {
+	display: none;
+	padding: 50px;
+}
 
-    .record-button.stopped .fa-microphone {
-        color: red;
-    }
+.record-button.stopped .fa-microphone {
+	color: red;
+}
 
-    @keyframes pulse {
-        0% {
-            transform: scale(0.9);
-            opacity: 1;
-        }
+@
+keyframes pulse { 0% {
+	transform: scale(0.9);
+	opacity: 1;
+}
 
-        70% {
-            transform: scale(1);
-            opacity: 0.7;
-        }
+70
+%
+{
+transform
+:
+scale(
+1
+);
+opacity
+:
+0.7;
+}
+100
+%
+{
+transform
+:
+scale(
+0.9
+);
+opacity
+:
+1;
+}
+}
+.close-icon {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	font-size: 24px;
+}
 
-        100% {
-            transform: scale(0.9);
-            opacity: 1;
-        }
+.close-icon a:hover {
+	color: #000;
+}
 
-    }
-
-    .close-icon {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 24px;
-    }
-
-    .close-icon a:hover {
-        color: #000;
-    }
-
-    .close-icon a {
-        font-size: 2rem;
-        text-decoration: none;
-        color: #888;
-    }
+.close-icon a {
+	font-size: 2rem;
+	text-decoration: none;
+	color: #888;
+}
 </style>
 
 	<div class="page-content rounded-2 "
@@ -187,11 +202,11 @@ cursor: pointer;
 						<input class="form-control me-2" type="search" name="searchName"
 							placeholder="Search" aria-label="Search"
 							onblur="this.form.submit()">
-							<div class="mic-search " id="open-record">
-								<i class="fa-solid fa-microphone"
-									style="font-size: 15px; margin: 10px; margin-left: 13px; margin-right: 13px"></i>
-							</div>
-					
+						<div class="mic-search " id="open-record">
+							<i class="fa-solid fa-microphone"
+								style="font-size: 15px; margin: 10px; margin-left: 13px; margin-right: 13px"></i>
+						</div>
+
 					</form>
 
 				</div>
@@ -200,9 +215,9 @@ cursor: pointer;
 						<div class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false"> <i
-								class="fa-solid fa-user" style="color: green;"></i>
-				        		<c:if test="${account.username!=null}">${account.username}</c:if>
-								<c:if test="${account.username==null}">Tài khoản</c:if> 
+								class="fa-solid fa-user" style="color: green;"></i> <c:if
+									test="${account.username!=null}">${account.username}</c:if> <c:if
+									test="${account.username==null}">Tài khoản</c:if>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item"
@@ -215,6 +230,15 @@ cursor: pointer;
 								<!-- <hr> -->
 								<li><a class="dropdown-item" href="/Ebook/account/login">Đăng
 										xuất</a></li>
+								<%-- 		<c:if test="${roleDetailOptional!=null}"></c:if>		 --%>
+							
+								<c:forEach var="roleDetailOptional"
+									items="${roleDetailOptional}">
+									<li><a href="/${roleDetailOptional.role.name}/home" class="dropdown-item" href=""> ${roleDetailOptional.role.name}</a></li>
+								</c:forEach>
+
+
+
 							</ul>
 						</div>
 					</ul>
@@ -226,33 +250,34 @@ cursor: pointer;
 	</nav>
 	</div>
 </header>
-	<div class="model-record" style="display: none;">
-		<div id="content" class="container-record">
-			<button id="btnTalk" hidden></button>
-			<form action="/user/searchbuybook" method="get">
-				<div class="container mt-5">
-					<div class="d-flex justify-content-center ">
+<div class="model-record" style="display: none;">
+	<div id="content" class="container-record">
+		<button id="btnTalk" hidden></button>
+		<form action="/user/searchbuybook" method="get">
+			<div class="container mt-5">
+				<div class="d-flex justify-content-center ">
 
-						<div class="close-icon" id="closeIcon">
-						    <h1> &times;</h1>
-						</div>
-						<div class="textSpeak text-center me-5">
-							<p id="message">Đang nghe...</p>
-							<a id="recordButton2" class="text-primary"
-								style="cursor: pointer;">Thử lại</a>
-						</div>
-
-						<div class="record-button" id="recordButton">
-							<i class="fas fa-microphone"></i>
-						</div>
-						<div class="textSpeak text-center me-5">
-							<p id="message">Ebook Library</p>
-						</div>
-						<input type="text" id = "searchName" name = "searchName" value = "Web" hidden>
-						<button id="btnPOST" hidden></button>
-
+					<div class="close-icon" id="closeIcon">
+						<h1>&times;</h1>
 					</div>
+					<div class="textSpeak text-center me-5">
+						<p id="message">Đang nghe...</p>
+						<a id="recordButton2" class="text-primary"
+							style="cursor: pointer;">Thử lại</a>
+					</div>
+
+					<div class="record-button" id="recordButton">
+						<i class="fas fa-microphone"></i>
+					</div>
+					<div class="textSpeak text-center me-5">
+						<p id="message">Ebook Library</p>
+					</div>
+					<input type="text" id="searchName" name="searchName" value="Web"
+						hidden>
+					<button id="btnPOST" hidden></button>
+
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
+</div>
