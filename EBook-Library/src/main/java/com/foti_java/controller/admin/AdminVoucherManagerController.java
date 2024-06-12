@@ -19,9 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foti_java.model.Account;
 import com.foti_java.model.TypeVoucher;
 import com.foti_java.model.Voucher;
 import com.foti_java.model.VoucherDetail;
+import com.foti_java.repository.AccountRepositoty;
 import com.foti_java.repository.TypeVoucherRepository;
 import com.foti_java.repository.VoucherDetailRepository;
 import com.foti_java.repository.VoucherRepository;
@@ -45,6 +47,8 @@ public class AdminVoucherManagerController {
 	TypeVoucherRepository typeVoucherRepository;
 	@Autowired
 	VoucherDetailRepository voucherDetailsRepository;
+	@Autowired
+	AccountRepositoty accountRepositoty;
 
 	String errorName = "";
 	String errorDKPrice = "";
@@ -60,7 +64,8 @@ public class AdminVoucherManagerController {
 	@RequestMapping({ "vouchermanager", "vouchermanager/clear" })
 	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
-		listVoucher = voucherRepository.findAll();
+		Account account = (Account) req.getAttribute("account");
+		listVoucher = voucherRepository.findAllByAccount(account);
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		model.addAttribute("vouchers", listVoucher);

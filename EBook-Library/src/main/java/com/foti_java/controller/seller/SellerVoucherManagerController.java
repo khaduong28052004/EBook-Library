@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foti_java.model.Account;
 import com.foti_java.model.TypeVoucher;
 import com.foti_java.model.Voucher;
 import com.foti_java.model.VoucherDetail;
@@ -63,7 +64,8 @@ public class SellerVoucherManagerController {
 	@RequestMapping("vouchermanager")
 	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
 			@RequestParam("page") Optional<Integer> pageNumber) {
-		listVoucher = voucherRepository.findAll();
+		Account account = (Account) req.getAttribute("account");
+		listVoucher = voucherRepository.findAllByAccount(account);
 		listTypeVoucher = typeVoucherRepository.findAll();
 		model.addAttribute("typeVouchers", listTypeVoucher);
 		model.addAttribute("vouchers", listVoucher);
