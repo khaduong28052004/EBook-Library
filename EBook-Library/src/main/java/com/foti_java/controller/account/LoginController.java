@@ -88,4 +88,46 @@ public class LoginController {
 			return "client/login";
 		}
 	}
+	
+//	@Autowired
+//	RoleDetailRepository roleDetailRepository;
+//	@PostMapping("login")
+//	public String login(Model model, @RequestParam("userName") String user, @RequestParam("passWord") String password) {
+//
+//		Account account = accountRepositoty.findByUsernameAndPassword(user,password);
+//
+//		if (account != null) {
+//			if (account.isStatus()) {
+//
+//				if (!account.getPassword().equals(password)) {
+//					System.out.println("Sai mật khẩu!!");
+//					model.addAttribute("error", "Sai mật khẩu!");
+//					return "client/login";
+//				} else {
+//					sessionService.setAttribute("account", account);
+//					System.out.println("Đăng nhập thành công!");
+//					List<RoleDetail> role1 = roleDetailRepository.findByAccount(account);
+//					System.out.println(role1.get(0).getId());
+//					for (RoleDetail roleDetail : role1) {
+//						System.out.println(roleDetail.getRole().getName());
+//						if (roleDetail.getRole().getName().equals("admin")) {
+//							return "redirect:/admin/accountmanager";
+//						} else if (roleDetail.getRole().getName().equals("seller")) {
+//							return "redirect:/seller/home";
+//						}
+//					}
+//					return "redirect:/user/home";
+//				}
+//			} else {
+//				model.addAttribute("error", "Tài khoản đã ngường hoặc động ! <br> vui lòng liên hệ hotline <br>"
+//						+ "để biết thêm chi tiết" + "<a> 1900323</a>");
+//				System.out.println("lỏ");
+//				return "client/login";
+//
+//			}
+//		} else {
+//			model.addAttribute("error", "Tài khoản không tồn tại!");
+//			return "client/login";
+//		}
+//	}
 }
