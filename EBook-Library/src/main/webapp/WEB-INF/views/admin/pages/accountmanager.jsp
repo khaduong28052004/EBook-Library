@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +55,7 @@
 											<th>Họ và tên</th>
 											<th>Email</th>
 											<th>SDT</th>
-											<th>Địa chỉ</th>
+											<!-- <th>Địa chỉ</th> -->
 											<th>Trang Thái</th>
 											<th>Quyền</th>
 											<th style="width: 150px;">Thao tác</th>
@@ -64,24 +66,31 @@
 									<tbody>
 										<c:forEach var="accounts" items="${listAccount }">
 
+
 											<tr>
 												<td class="align-middle">${accounts.username}</td>
 												<td class="align-middle">${accounts.fullname}</td>
 												<td class="align-middle">${accounts.email}</td>
 												<td class="align-middle">${accounts.phone}</td>
-												<td class="align-middle"><c:forEach var="addresses"
+
+												<%-- <td class="align-middle"><c:forEach var="addresses"
+
 														items="${accounts.addresses }">
 														<c:if test="${addresses.status}">
 												${addresses.province.name } - ${addresses.district.name } - ${addresses.commune.name }
 												</c:if>
-													</c:forEach></td>
+
+													</c:forEach></td> --%>
+
 												<td class="align-middle">${accounts.status?'Đang hoạt động':'Ngừng hoạt động'}</td>
 												<td class="align-middle"><c:forEach var="roledetails"
 														items="${accounts.roledetails }">
 														<c:if test="${roledetails.account.id == accounts.id }">
 															${roledetails.role.name }
 															</c:if>
-													</c:forEach></td>
+
+													</c:forEach></td> 
+
 
 												<td class="align-middle text-center"><c:if
 														test="${accounts.status}">

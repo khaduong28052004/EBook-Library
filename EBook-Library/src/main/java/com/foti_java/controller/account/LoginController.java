@@ -67,6 +67,7 @@ public class LoginController {
 					List<RoleDetail> role1 = roleDetailRepository.findByAccount(account);
 					System.out.println(role1.get(0).getId());
 					for (RoleDetail roleDetail : role1) {
+						System.out.println("helloaf==------------------------------------------------");
 						System.out.println(roleDetail.getRole().getName());
 						if (roleDetail.getRole().getName().equals("admin")) {
 							return "redirect:/admin/accountmanager";

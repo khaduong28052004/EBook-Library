@@ -1,6 +1,7 @@
 package com.foti_java.controller.seller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.foti_java.model.Account;
 import com.foti_java.model.Bill;
 import com.foti_java.repository.BillRepositoty;
 import com.foti_java.service.SendMailService;
+import com.foti_java.service.SessionService;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +27,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("Ebook/seller")
 public class SellerOrderManagerController {
 	@Autowired
+	SessionService sessionService;
+	@Autowired
 	SendMailService mailService;
 	@Autowired
 	HttpServletRequest req;
@@ -31,9 +36,10 @@ public class SellerOrderManagerController {
 	BillRepositoty billRepository;
 	@GetMapping("ordermanager")
 	public String orderManager(Model model) {
-	    List<Object[]> listBillSucces = billRepository.calculateMonthlyBills();
-	    List<Object[]> listBillFalse = billRepository.calculateMonthlyBillsFalse();
-	    List<Bill> listBill = billRepository.findByIdAccount(1);
+		Account account = sessionService.getAttribute("account");
+	    List<Object[]> listBillSucces = billRepository.calculateMonthlyBills(account.getId());
+	    List<Object[]> listBillFalse = billRepository.calculateMonthlyBillsFalse(account.getId());
+	    List<Bill> listBill = billRepository.findByIdAccount(account.getId());
 	    List<String> listSucces = new ArrayList<>();
 	    List<String> listFalse = new ArrayList<>();
 	    for (Object[] objArray : listBillSucces) {
@@ -56,8 +62,8 @@ public class SellerOrderManagerController {
 		List<Bill> list = billRepository.findAll();
 		for(Bill bill : list) {
 			if(bill.getId() == id) {
-//				bill.setId(id);
-//				bill.setStatus(true);
+				bill.setId(id);
+				bill.setActive(true);
 				billRepository.saveAndFlush(bill);
 			}
 		}
@@ -107,6 +113,16 @@ public class SellerOrderManagerController {
 			    "</body>" +
 			    "</html>";
 	    mailService.push(email,subject,content);
+		List<Bill> list = billRepository.findAll();
+		for(Bill bill : list) {
+			if(bill.getId() == id) {
+				bill.setId(id);
+				bill.setActive(false);
+				bill.setStatus(false);
+				bill.setFinishDay(new Date());
+				billRepository.saveAndFlush(bill);
+			}
+		}
 		return "redirect:/seller/ordermanager";
 	}
 }

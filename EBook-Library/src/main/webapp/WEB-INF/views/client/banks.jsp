@@ -46,7 +46,7 @@
 								style="background-color: white;">
 								<p class="tenNguoiBan" style="font-weight: bold;">Tài Khoản Ngân Hàng Của Tôi</p>
 								<p class="noiDungPhai">
-									<button class="danhGia btn btn-danger" data-bs-toggle="modal"
+									<button class="danhGia btn btn-danger" id="buttonAdd" data-bs-toggle="modal"
 										data-bs-target="#themTKNH1">Thêm Tài Khoản Ngân Hàng</button>
 								</p>
 							</div>
@@ -61,29 +61,57 @@
 						<div class="card-custom">
 							<div class="card-body">
 								<h6 class="card-title" style="font-weight: bold;">
-									BDIV: Ngân hàng TMCP Đầu tư và Phát triển Việt Nam <span
-										style="width: 90px; margin-left: 10px; color: green; font-size: 17px;">Mặc
-										Định</span>
+									${bank.nameBank}
+									<c:if test="${bank.status}">
+										<span
+											style="width: 90px; margin-left: 10px; color: green; font-size: 17px;">Mặc
+											Định</span>
+									</c:if>
 								</h6>
 								<p class="card-text">
-									Họ và tên: ${bank.name} <span class="soTK">Số tài
-										khoản: ${bank.name}</span>
+									Họ và tên: ${bank.name} <span class="soTK" id="soTK">Số tài khoản:
+										${bank.accountNumber}</span>
 								</p>
 							</div>
 							<div class="card-footer">
-								<a href="#" class="btn btn-outline-danger">Xóa</a>
-								<button type="button" class="btn btn-primary">Edit</button>
+								<a class="btn btn-outline-danger" data-bs-toggle="modal"
+									data-bs-target="#deleteModal${bank.id}">Xóa</a> <a type="button"
+									class="btn btn-primary" href="/user/bank/edit?id=${bank.id}">Edit</a>
 							</div>
 						</div>
 					</div>
+					<div class="modal fade" id="deleteModal${bank.id}" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Thông
+										Báo</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<p>Bạn chắc chắn muốn xóa tài khoản ngân hàng này không?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">Thoát</button>
+									<a type="button" class="btn btn-danger"
+										href="/user/bank/delete?id=${bank.id}">Xác Nhận</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</c:forEach>
 
 			</aside>
 		</div>
 	</main>
+	
+	<!-- Modal -->
 
-	<div class="modal fade" id="themTKNH1" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal" id="themTKNH1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -91,55 +119,68 @@
 						Khoản Ngân Hàng</h1>
 				</div>
 				<div class="modal-body Page2">
-						<form action="">
-							<div class="item">
-								<label for="" class="title-item form-label">Ngân hàng</label>
-								<div>
-									<select name="bankId" id="banks" class="form-control">
-									</select>
-								</div>
+					<form action="" method="post">
+						<div class="item">
+							<label for="" class="title-item form-label">Ngân hàng</label>
+							<div>
+								<select name="bankId" id="banks" class="form-control">
+								</select>
+							</div>
 
-							</div>
-							<div class="item">
-								<label for="" class="title-item form-label">Số tài khoản</label>
-								<div>
-									<input style="box-sizing: border-box;" type="text" name="accountNumber"
-										id="accountNumber" class="form-control">
-								</div>
-							</div>
-							<div class="item">
-								<label for="" class="form-label">Tên tài khoản</label>
-								<div>
-									<input style="box-sizing: border-box;" type="text" name="accountName"
-										id="accountName" disabled class="form-control">
-								</div>
-							</div>
-							<p id="error"></p>
-						</form>
-					<div id="loading" class="d-none text-center">
-						<div class="spinner-border text-primary" role="status">
-							<span class="visually-hidden">Loading...</span>
 						</div>
-						<p style="font-size: 16px;">Đang xử lý, vui lòng chờ...</p>
-					</div>
-					<div id="successMessage" class="d-none text-center">
-						<p style="font-size: 16px;">Thêm tài khoản ngân hàng thành
-							công!</p>
-					</div>
+						<input type="hidden" id="selectedBankName" value="${bank.nameBank}">
+						<input type="text" style="display: none" id="nameCheck" value="${bank.name}" required="required">
+						<div class="item">
+							<label for="" class="title-item form-label">Số tài khoản</label>
+							<div>
+								<input style="box-sizing: border-box;" type="text"
+									name="accountNumber" id="accountNumber" class="form-control" value="${bank.accountNumber}" required="required">
+							</div>
+						</div>
+						<div class="item">
+							<label for="" class="form-label" >Tên tài khoản</label>
+							<div>
+								<input style="box-sizing: border-box;" type="text" name="name" value="${bank.name}"
+									id="accountName" class="form-control" required>
+							</div>
+						</div>
+						<div class="mb-3 form-check">
+							<input type="checkbox" value="true" name="status" class="form-check-input" ${bank.status ? 'checked' : ''}
+								id="exampleCheck1"> <label class="form-check-label"
+								for="exampleCheck1" >Đặt làm mặc định</label>
+						</div>
+						<p id="error" class="form-label" style="color:red;"></p>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-toggle="modal" data-bs-target="#themTKNH1">Trở
+								Lại</button>
+								
+							<button type="submit" class="btn btn-success"
+								id="completeButton " formaction="/user/bank/save">Lưu</button>
+								
+						</div>
+					</form>
+
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-toggle="modal" data-bs-target="#themTKNH1">Trở
-						Lại</button>
-					<button type="button" class="btn btn-success" id="completeButton">Hoàn
-						Thành</button>
-				</div>
+
 			</div>
 		</div>
 	</div>
 
 
 	<script type="text/javascript">
+	let listBanks = ${listTKNH};
+	if(${modal} == true){
+		
+		 setTimeout(() => {
+		        const button = document.getElementById("buttonAdd");
+		        if (button) {
+		            button.click();
+		        } else {
+		            console.log("Element with id 'buttonAdd' not found");
+		        }
+		    }, 50);
+	}
 		function toggleSubmenu() {
 			var menuItem = document.querySelector('.menu-item');
 			if (menuItem) {
@@ -147,10 +188,11 @@
 			}
 		}
 
-
-	    const defaultApiKey = 'd3b50422-de43-4235-ba79-f2a0e86d347e';
-	    const defaultClientId = '192ad2f0-865b-4a1f-abe7-0e2ae97f3571';
-
+		
+	    const defaultApiKey = 'b2b25e6d-c435-4051-87ef-644424a72bcf';
+	    const defaultClientId = '185e9463-d547-432f-93cc-c139d308711b';
+	    const bankName = document.getElementById('selectedBankName').value;
+	    
 	      async function fetchBankNames() {
 	            try {
 	                // Replace with the actual API URL
@@ -169,23 +211,36 @@
 	                const selectElement = document.getElementById('banks');
 
 	                // Populate the select element with bank names
+	                
 	                bankData.forEach(bank => {
+	                	const isSelected = bank.name === bankName ? 'selected' : '';
 	                    // Using string concatenation to avoid conflicts with JSP expressions
-	                    var optionHTML = '<option value="' + bank.id + '" data-bin="' + bank.bin + '" data-short-name="' + bank.shortName + '" data-thumbnail="' + bank.logo + '">(' + bank.bin + ') ' + bank.shortName + '</option>';
+	                    var optionHTML = '<option value="' + bank.name + '" data-bin="' + bank.bin + '" data-short-name="' + bank.shortName + '" data-thumbnail="' + bank.logo + '" '+isSelected+'>(' + bank.bin + ') ' + bank.shortName + '</option>';
 	                    selectElement.insertAdjacentHTML('beforeend', optionHTML);
 	                });
+	                if (bankName) {
+	                    selectElement.value = bankName;
+	                }
 	            } catch (error) {
 	                console.error('Error fetching bank names:', error);
 	            }
 	        }
-
+	    
+	     
 
 	    function findAccountName(accountNumber, bankId) {
+	    	if (listBanks.includes(accountNumber)) {
+	            document.getElementById("error").innerText = `Tài khoản đã tồn tại trong cơ sở dữ liệu`;
+	            document.getElementById("error").style.display = "block";
+	            
+	            return;
+	        }
             var xmlhttp = new XMLHttpRequest();
             let params = {
                 accountNumber: accountNumber,
                 bin: bankId
             };
+
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
                     if (xmlhttp.status == 200) {
@@ -194,10 +249,18 @@
                         if (data.code == "00") {
                             document.getElementById("error").style.display = "none";
                             document.getElementById("accountName").value = data.data.accountName;
+                            document.getElementById("nameCheck").value = data.data.accountName;
+                            check = true;
+                            
                         } else {
                             document.getElementById("error").innerText = `Số tài khoản không hợp lệ`;
                             document.getElementById("error").style.display = "block";
                             document.getElementById("accountName").value = '';
+                            document.getElementById("nameCheck").value = '';
+
+                            check = false;
+
+                            
                         }
                     } else if (xmlhttp.status == 400) {
                         alert('There was an error 400');
@@ -213,22 +276,26 @@
             xmlhttp.setRequestHeader("x-client-id", defaultClientId);
             xmlhttp.send(JSON.stringify(params));
         }
-
         function init() {
             let inputBankId = document.getElementById('banks');
             let inputAccountNumber = document.getElementById('accountNumber');
+            let accountName =  document.getElementById("accountName");
+         // Hàm để xử lý sự kiện thay đổi của inputBankId và inputAccountNumber
+            function handleInputChange() {
+                let value = inputAccountNumber.value;
+                let selectedOption = inputBankId.options[inputBankId.selectedIndex];
+                let bankBin = selectedOption.getAttribute('data-bin');
+                console.log(value, bankBin);
+                findAccountName(value, bankBin);
+            }
+
+            // Sự kiện khi trường số tài khoản hoặc tên tài khoản mất focus
+            inputAccountNumber.addEventListener('focusout', handleInputChange);
+            accountName.addEventListener('focusout', handleInputChange);
+
+            // Sự kiện khi chọn một ngân hàng khác
+            inputBankId.addEventListener('change', handleInputChange);
             
-            inputAccountNumber.addEventListener('focusout', async function (e) {
-                let value = e.target.value;
-                if (value.length > 0) {
-                    // Retrieve the selected option element
-                    let selectedOption = inputBankId.options[inputBankId.selectedIndex];
-                    // Get the bin from the data attribute
-                    let bankBin = selectedOption.getAttribute('data-bin');
-                    console.log(value, bankBin);
-                    findAccountName(value, bankBin);
-                }
-            });
         }
 
         function cutData(data) {
@@ -239,13 +306,37 @@
                 return `***${lastData}`;
             }
         }
-
+       
         // Initialize the app
         document.addEventListener('DOMContentLoaded', (event) => {
             fetchBankNames();
             init();
         });
+        let soTKElements = document.querySelectorAll('.soTK');
 
+     // Duyệt qua mỗi phần tử và chỉ hiển thị ba số cuối của nội dung của chúng
+     soTKElements.forEach(element => {
+         let originalText = element.innerText;
+         let visibleText = hideFirstCharacters(originalText) + showLastThreeDigits(originalText);
+         element.innerText = visibleText;
+     });
+
+     // Hàm để che đi ký tự đầu của một chuỗi
+     function hideFirstCharacters(text) {
+         let numberOfHiddenCharacters = text.length - 3; // Số ký tự cần che đi
+         let hiddenCharacters = '*'.repeat(numberOfHiddenCharacters); // Tạo một chuỗi gồm các ký tự '*'
+         return hiddenCharacters;
+     }
+
+     // Hàm để chỉ hiển thị ba số cuối của một chuỗi
+     function showLastThreeDigits(text) {
+         if (text.length <= 3) {
+             return text; // Trả về nguyên vẹn nếu chuỗi ít hơn hoặc bằng 3 ký tự
+         } else {
+             let visibleDigits = text.slice(-3); // Lấy ba ký tự cuối cùng
+             return visibleDigits;
+         }
+     }
     </script>
 
 </body>

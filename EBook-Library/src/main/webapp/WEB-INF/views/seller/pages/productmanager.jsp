@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@page import="com.foti_java.model.ImageProduct"%>
 <%@page import="com.foti_java.model.Product"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -502,17 +501,18 @@ display: block;
 												tác</th>
 										</tr>
 									</thead>
-																			<tbody>
-											<c:forEach var="product" items="${listProduct}">
+									<tbody>
+										<c:forEach var="product" items="${listProduct}">
 											<tr>
 												<td class="align-middle">${product.id}</td>
-												<td class="align-middle">
-														
-
-														<img alt="" style="width: 70px; height: 90px; border-radius: 5px;"
-															src="/images/${product.image}">
-
-													</td>
+												<td class="align-middle"><img alt=""
+													style="width: 60px; height: 70px; border-radius: 5px;"
+													src="/images/${product.image}"> <c:forEach var="img"
+														items="${product.imageProducts}">
+														<img alt=""
+															style="width: 60px; height: 70px; border-radius: 5px;"
+															src="/images/${img.name}">
+													</c:forEach></td>
 
 												<td class="align-middle">${product.name}</td>
 												<td class="align-middle">${product.quantity}</td>
@@ -537,55 +537,52 @@ display: block;
 														minFractionDigits="1" maxFractionDigits="1" />/5*
 												</td>
 
-												<td class="align-middle">
-													<!-- Khởi tạo biến totalQuantity --> <c:set
-														var="totalQuantity" value="0" /> <c:forEach var="item"
+												<td class="align-middle"><c:set var="totalQuantity"
+														value="0" /> <c:forEach var="item"
 														items="${product.billDetails}">
 														<!-- Cập nhật giá trị của totalQuantity -->
 														<c:set var="totalQuantity"
 															value="${totalQuantity + item.quantity}" />
-													</c:forEach> ${totalQuantity}
-												</td>
+													</c:forEach>${totalQuantity}</td>
 
-												<td class="align-middle text-center"><a
-													href="/seller/productmanager/edit?id=${product.id}"
-													class="btn btn-primary">Edit</a> <a type="button"
-													class="btn btn-danger deleteModal" data-id="${product.id}">Xóa</a>
-												</td>
-
-
+												<td class="align-middle text-center"><c:if
+														test="${product.active}">
+														<a href="/seller/productmanager/edit?id=${product.id}"
+															class="btn btn-primary">Edit</a>
+													</c:if> <c:if test="${product.active}">
+														<a type="button" class="btn btn-danger deleteModal"
+															data-id="${product.id}">Xóa</a>
+													</c:if></td>
 											</tr>
 
 										</c:forEach>
 
-										</tbody>
+									</tbody>
 								</table>
-																				<div class="modal" id="confirmDeleteModal">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="confirmDeleteLabel">Thông
-																	Báo</h5>
-																<button type="button" class="btn-close thoat"></button>
-															</div>
-															<div class="modal-body">Bạn có chắc chắn muốn xóa
-																sản phẩm này không?</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary thoat">Hủy</button>
-																<a type="button" class="btn btn-danger"
-																	id="confirmDeleteButton">Xóa</a>
-															</div>
-														</div>
-													</div>
-												</div>
+								<div class="modal" id="confirmDeleteModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="confirmDeleteLabel">Thông
+													Báo</h5>
+												<button type="button" class="btn-close thoat"></button>
+											</div>
+											<div class="modal-body">Bạn có chắc chắn muốn xóa sản
+												phẩm này không?</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary thoat">Hủy</button>
+												<a type="button" class="btn btn-danger"
+													id="confirmDeleteButton">Xóa</a>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<!-- /.card-body -->
-
 					</section>
 				</div>
 				<!-- /.card -->
-
 
 
 			</div>

@@ -32,11 +32,11 @@ public class Bank {
 	Integer id;
 	@Nationalized
 	String name;
-	@Nationalized
+	String nameBank;
 	String accountNumber;
+	boolean status = false;
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
-
 
 }

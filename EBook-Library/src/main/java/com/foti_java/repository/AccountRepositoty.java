@@ -8,8 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import com.foti_java.model.Account;
 import com.foti_java.model.RoleDetail;
 
-
 public interface AccountRepositoty extends JpaRepository<Account, Integer> {
+	// @Query("select c form account c where name like ?1")
+	// public List<Account> findlogin(String username);
+	public Account findByUsername(String username);
+
+	public Account findByEmail(String email);
 
 	@Query(value = "SELECT COUNT(id) as 'acc' " + "FROM Accounts " + "WHERE status = 1 "
 			+ "AND numberCitizenIdentification IS NOT NULL " + "AND id NOT IN (" + "    SELECT account_id "
@@ -18,7 +22,6 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 
 	@Query(value = "SELECT COUNT(id) as 'acc' " + "FROM Accounts " + "WHERE status = 1 ", nativeQuery = true)
 	Integer countAccount();
-	
 	@Query(value = "  SELECT COUNT(id) as cnt\r\n"
 			+ "    FROM Accounts \r\n"
 			+ "    WHERE status = 1 \r\n"
@@ -28,7 +31,7 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 			+ "        WHERE role_id = 2\r\n"
 			+ "    );", nativeQuery = true)
 	Integer countSeller();
-	
+
 	@Query(value = "  SELECT COUNT(id) as cnt\r\n"
 			+ "    FROM Accounts \r\n"
 			+ "    WHERE status = 1 \r\n"
@@ -38,7 +41,7 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 			+ "        WHERE role_id = 3\r\n"
 			+ "    );", nativeQuery = true)
 	Integer countUser();
-	
+
 	@Query(value = "  SELECT COUNT(id) as cnt\r\n"
 			+ "    FROM Accounts \r\n"
 			+ "    WHERE status = 1 \r\n"
@@ -48,11 +51,12 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 			+ "        WHERE role_id = 1\r\n"
 			+ "    );", nativeQuery = true)
 	Integer countAdmin();
-	
+
+
 	@Query(value = "select SUM(totalPrice) from Bills WHERE MONTH(dateBuy) = MONTH(GETDATE()) AND YEAR(dateBuy)=YEAR(GETDATE())\r\n"
 			+ "", nativeQuery = true)
 	Double totalPriceAdmin();
-	
+
 	@Query(value = "SELECT \r\n"
 			+ "    role,\r\n"
 			+ "    COUNT(id) AS count,\r\n"
@@ -74,13 +78,9 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 	List<Object[]> findListAccount();
 
 	List<Account> findAllByStatus(boolean status);
-	
-	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2)"
-			, nativeQuery = true)
+
+
+	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2)", nativeQuery = true)
 	List<Account> findAllCheckSeller();
 
-//   @Query("select c form account c where name like ?1")
-//   public List<Account> findlogin(String username); 
-     public Account findByUsername(String username);
-     public Account findByEmail(String email);
 }
