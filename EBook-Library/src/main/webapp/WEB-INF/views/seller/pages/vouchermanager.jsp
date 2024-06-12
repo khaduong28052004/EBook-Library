@@ -204,7 +204,7 @@
 											<tr>
 												<td>${voucher.id }</td>
 												<td>${voucher.name }</td>
-												<td>${voucher.priceMin}</td>
+												<td><fmt:formatNumber type="currency" value="${voucher.priceMin}"></fmt:formatNumber></td>
 												<td>${voucher.originalNumber }</td>
 												<td><c:choose>
 														<c:when test="${voucher.sale >1000}">

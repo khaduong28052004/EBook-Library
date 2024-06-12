@@ -60,5 +60,4 @@ public interface BillRepositoty extends JpaRepository<Bill, Integer> {
 			+ "WHERE P.account_id = ?1 AND B.status=1 AND B.finishDay IS NOT NULL AND B.finishDay BETWEEN ?2 AND ?3\r\n"
 			+ "ORDER BY B.finishDay DESC",nativeQuery = true)
 	List<Bill> findAllBySellerBeweenAnd(int id, String startDate, String endDate);
-
 }

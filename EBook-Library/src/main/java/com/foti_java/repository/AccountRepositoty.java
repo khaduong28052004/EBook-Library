@@ -73,4 +73,7 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 	@Query(value = "SELECT * FROM Accounts WHERE numberCitizenIdentification IS NOT NULL AND id NOT IN (SELECT A.id FROM Accounts A JOIN RoleDetails RD ON A.id = RD.account_id JOIN Roles R ON R.id = RD.role_id WHERE R.id=2 OR R.id=1)"
 			, nativeQuery = true)
 	List<Account> findAllCheckSeller();
+	
+	@Query(value = "SELECT * FROM Accounts WHERE ID NOT IN (SELECT account_id  FROM RoleDetails WHERE role_id = 1)",nativeQuery = true)
+	List<Account> findAllListAccountNotAdmin();
 }
