@@ -1,5 +1,8 @@
 package com.foti_java.controller.account;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.foti_java.model.Account;
 import com.foti_java.repository.AccountRepositoty;
 import com.foti_java.service.SessionService;
+import com.foti_java.utils.MD5Encoder;
 
 @Controller
 public class LoginController {
@@ -25,14 +29,18 @@ public class LoginController {
 		return "client/login";
 	}
 
-	@PostMapping("/login")
-	public String postLogin(@RequestParam("userName") String userName, @RequestParam("passWord") String passWord,
+
+	@PostMapping("login")
+	public String postLogin(@RequestParam("userName") String userName, @RequestParam("password") String passWord,
 			Model model) {
-		Account account = accountRepositoty.findByUsernameAndPassword(userName, passWord);
+		Account account = accountRepositoty.findByUsernameAndPassword(userName, MD5Encoder.encode(passWord));
+	
+		
+		
 		if (account == null) {
 			model.addAttribute("error", "Sai username hoặc password");
 			return "client/login";
-		} else {
+		} else {	
 			if (account.isStatus() == false) {
 				model.addAttribute("error", "Tài khoản của bạn đã bị khóa");
 				return "client/login";

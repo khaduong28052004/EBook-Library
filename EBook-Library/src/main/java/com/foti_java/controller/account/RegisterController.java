@@ -20,7 +20,7 @@ import com.foti_java.service.SendMailService;
 import com.foti_java.service.SessionService;
 import com.foti_java.utils.MD5Encoder;
 @Controller
-@RequestMapping("user")
+//@RequestMapping("user")
 public class RegisterController {
 
 	@Autowired
@@ -56,7 +56,6 @@ public class RegisterController {
 				model.addAttribute("page", "rg");
 				return "client/login";
 			}
-
 		}
 		errorR = "";
 		Account account = new Account();
@@ -71,7 +70,7 @@ public class RegisterController {
 		RoleDetail roleDetail = new RoleDetail();
 		roleDetail.setAccount(account);
 		roleDetail.setRegistrationDate(null);
-		roleDetail.setRole(role.get(2));
+		roleDetail.setRole(role.get(3));
 		roleDetailRepository.saveAndFlush(roleDetail);
 
 		model.addAttribute("errorR", "Đăng ký thành công! Vui lòng đăng nhập.");

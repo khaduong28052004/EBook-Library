@@ -13,7 +13,7 @@
 <body>
 	<div class="container" id="container">
 		<div class="form-container sign-up">
-			<form action="#">
+			<form action="/register" method="post">
 				<h1>Đăng Ký</h1>
 				<div class="social-icons">
 					<a href="#" class="icon"><i class='bx bxl-facebook'></i></a> <a
@@ -21,10 +21,11 @@
 						href="#" class="icon"><i class='bx bxl-linkedin'></i></a> <a
 						href="#" class="icon"><i class='bx bxl-github'></i></a>
 				</div>
-
-				<input type="text" placeholder="Tên Đăng Nhập"> <input
-					type="email" placeholder="Email"> <input type="password"
-					placeholder="Mật Khẩu">
+                <p style="color: red">${errorR}</p>
+				<input name="userName" type="text" placeholder="Tên Đăng Nhập">
+				<input name="fullName" type="text" placeholder="Họ và tên">
+				<input name="gmail" type="email" placeholder="Email">
+				<input name="password" type="password" placeholder="Mật Khẩu">
 				<button>Đăng Ký</button>
 			</form>
 		</div>
@@ -40,7 +41,7 @@
 				</div>
 				<p style="color: red">${error}</p>
 				<input type="text" placeholder="Tên Đăng Nhập" name="userName">
-				<input type="password" placeholder="Mật Khẩu" name="passWord">
+				<input type="password" placeholder="Mật Khẩu" name="password">
 				<a href="#" class="fp" id="forgotPassword">Quên mật khẩu?</a>
 				<button>Xác Nhận</button>
 			</form>
@@ -54,7 +55,7 @@
 						href="#" class="icon"><i class='bx bxl-linkedin'></i></a> <a
 						href="#" class="icon"><i class='bx bxl-github'></i></a>
 				</div>
-				<p style="color: red">${error}</p>
+				<p style="color: red">${errorF}</p>
 				<input type="email" placeholder="Email" name="email"><button>Xác
 						Nhận</button></a>
 			</form>

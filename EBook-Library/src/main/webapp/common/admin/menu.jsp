@@ -5,7 +5,8 @@
   <a href="/admin/home" class="brand-link">
     <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
       class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Xin chào Admin</span>
+    <span class="brand-text font-weight-light">		<c:if test="${account.username!=null}">${account.username}</c:if>
+								<c:if test="${account.username==null}">Tài khoản</c:if> </span>
   </a>
   <!-- Sidebar -->
   <div class="sidebar">

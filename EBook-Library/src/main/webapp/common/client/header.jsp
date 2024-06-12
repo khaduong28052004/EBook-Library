@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 <header class="container  sticky-top">
 	<style>
 .mic-search:hover {
@@ -198,7 +200,9 @@ cursor: pointer;
 						<div class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false"> <i
-								class="fa-solid fa-user" style="color: green;"></i> Tài khoản
+								class="fa-solid fa-user" style="color: green;"></i>
+				        		<c:if test="${account.username!=null}">${account.username}</c:if>
+								<c:if test="${account.username==null}">Tài khoản</c:if> 
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item"

@@ -68,6 +68,7 @@ public class HomeTestController {
 		Sort sort = Sort.by(Sort.Direction.DESC, "quantitySell");
 		Pageable pageableHot = PageRequest.of(0, 2, sort);
 		Account account = sessionService.getAttribute("account");
+		model.addAttribute("account",account);
 		Page<Product> pageProductHot = productRepository.findAllByAccountNot(account, pageableHot);
 		List<Integer> listId = new ArrayList<>();
 		for (int i = 0; i < pageProductHot.getContent().size(); i++) {
