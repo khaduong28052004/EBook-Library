@@ -223,11 +223,6 @@ opacity
 								<li><a class="dropdown-item"
 									href="/Ebook/user/registerSell/registerSell01">Đăng ký bán
 										sách</a></li>
-								<li><a class="dropdown-item"
-									href="/admin/accountmanager">Amind
-										sách</a></li>
-								<li><a class="dropdown-item"
-									href="/admin/seller">Seller</a></li>
 								<!-- <hr> -->
 								<li><a class="dropdown-item" href="/Ebook/account/login">Đăng
 										xuất</a></li>

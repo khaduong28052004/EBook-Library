@@ -76,6 +76,7 @@ public class SellerVoucherManagerController {
 		Optional<Voucher> voucher = voucherRepository.findById(voucherId);
 		List<VoucherDetail> list = voucherDetailsRepository.findAllByVoucher(voucher.get());
 		model.addAttribute("voucherDetails", list);
+		model.addAttribute("voucher", voucher.get());
 		return "seller/pages/voucherDetailsManager";
 	}
 

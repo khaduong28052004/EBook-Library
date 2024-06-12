@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
@@ -58,15 +58,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="voucher" items="${vouchers }">
+										<c:forEach var="voucherdetails" items="${voucherDetails }">
 											<tr>
 												<td>${voucher.id }</td>
 												<td>${voucher.name }</td>
-												<td><c:if test="${voucher.priceProduct > 0}">
-                                                                            Sản phẩm lớn hơn ${voucher.priceProduct}
+												<td><c:if test="${voucher.typeVoucher.id ==1 }">
+                                                                            Sản phẩm lớn hơn ${voucher.priceMin}
                                                                             </c:if>
-													<c:if test="${voucher.totalPriceOrder >0}">
-                                                                                Tổng hóa đơn lớn hơn ${voucher.totalPriceOrder}
+													<c:if test="${voucher.typeVoucher.id ==2}">
+                                                                                Tổng hóa đơn lớn hơn ${voucher.priceMin}
                                                                             </c:if>
 												</td>
 												<td><c:if test="${voucher.sale >1000}">
@@ -77,7 +77,7 @@
 												<td>${voucher.dateStart }</td>
 												<td>${voucher.dateEnd }</td>
 												<td>${voucher.typeVoucher.name }</td>
-												<td>${voucher.account.username }</td>
+												<td>${voucherdetails.account.username }</td>
 										</c:forEach>
 									</tbody>
 									<!-- <tfoot>

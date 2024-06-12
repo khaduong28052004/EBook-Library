@@ -226,7 +226,6 @@ public class AdminSellerManagerController {
 			}
 		}
 		model.addAttribute("listbills", listBill);
-		model.addAttribute("listbillDetails", listBillDetails);
 		model.addAttribute("vouchers", listVoucher);
 		return "admin/pages/sellermanagerDetails";
 	}
