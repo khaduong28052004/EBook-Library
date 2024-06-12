@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,87 +60,62 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="align-middle" style="width: 160px;">
-												<div class="row">
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
+										<c:forEach var="product" items="${products }">
+											<tr>
+												<td class="align-middle" style="width: 160px;">
+													<div class="row">
+														<c:forEach var="imgae" items="${product.imageProducts }">
+															<div class="col-md-6" style="padding: 3px;">
+																<img src="/images/${image.name }" width="100%"
+																	height="120px" alt="">
+															</div>
+														</c:forEach>
 													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
-															width="100%" height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-												</div>
-											</td>
-											<td class="align-middle">Nhân Gian Khúc</td>
-											<td class="align-middle">Truyện</td>
-											<td class="align-middle">Văn Kha</td>
-											<td class="align-middle">VanKha</td>
-											<td class="align-middle">169.000 VND</td>
-											<td class="align-middle"><span
-												style="text-decoration: line-through;">149.000 VND</span></td>
-											<td class="align-middle">200</td>
-											<td class="align-middle"><button class="btn btn-primary">Đồng
-													ý</button>
-												<button class="btn btn-danger">Từ chối</button></td>
-										</tr>
-
-										<tr>
-											<td class="align-middle" style="width: 160px;">
-												<div class="row">
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
-															height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
-															width="100%" height="120px" alt="">
-													</div>
-
-
-													<div class="col-md-6" style="padding: 3px;">
-														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
-															height="120px" alt="">
+												</td>
+												<td class="align-middle">${product.name }</td>
+												<td class="align-middle">${product.category.name }</td>
+												<td class="align-middle">${product.writerName }</td>
+												<td class="align-middle">${product.publishingCompany }</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency" value="${product.price }"></fmt:formatNumber>
+												</td>
+												<td class="align-middle"><fmt:formatNumber
+														type="currency"
+														value="${product.discountType? (product.price - product.price*product.discount) : product.price }"></fmt:formatNumber>
+												</td>
+												<td class="align-middle">${product.quantity}</td>
+												<td class="align-middle"><a
+													href="/admin/productmanager/true/${product.id}"
+													class="btn btn-primary">Đồng ý</a>
+													<button data-id="${product.id}"
+														data-fullname="${product.name}"
+														class="btn btn-danger deleteModal1 ">Từ chối</button></td>
+											</tr>
+										</c:forEach>
+										<form action="" method="get" id="modelForm1">
+											<div class="modal" id="modelID1">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-body">
+															<input value="false" name="status" hidden>
+															<h2 class="text-center">Phản hồi shop</h2>
+															<div class="form-group">
+																<label class="form-label">Gửi đến:</label> <input
+																	class="form-control" id="context1" disabled="disabled">
+															</div>
+															<div class="form-group">
+																<label class="form-label">Lí do:</label>
+																<textarea id="contextLiDo1" class="form-control"></textarea>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button class=" btn btn-danger btnclose1">Close</button>
+															<a type="button" id="buttonSend1" class="btn btn-success">Gửi</a>
+														</div>
 													</div>
 												</div>
-											</td>
-											<td class="align-middle">Nhân Gian Khúc</td>
-											<td class="align-middle">Truyện</td>
-											<td class="align-middle">Văn Kha</td>
-											<td class="align-middle">VanKha</td>
-											<td class="align-middle">169.000 VND</td>
-											<td class="align-middle"><span
-												style="text-decoration: line-through;">149.000 VND</span></td>
-											<td class="align-middle">200</td>
-											<td class="align-middle"><button class="btn btn-primary">Đồng
-													ý</button>
-												<button class="btn btn-danger">Từ chối</button></td>
-										</tr>
+											</div>
+										</form>
 
 									</tbody>
 									<!-- <tfoot>
@@ -173,6 +150,44 @@
 	<%@include file="/common/taglib-js.jsp"%>
 
 	<script>
+	/* MOdel 1 */
+	const confirmDeleteModal1 = document.getElementById("modelID1");
+	const form1 = document.getElementById("modelForm1");
+	const confirmDeleteButton1 = document.getElementById("buttonSend1");
+	const deleteButtons1 = document.querySelectorAll(".deleteModal1");
+	
+	const closeButtons1 = document.querySelectorAll(".btnclose1");
+	let dataId1 ;
+	let dataFullname1;
+	// Add click event listener to each delete button
+	deleteButtons1.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	    		dataId1 = button.getAttribute("data-id");
+	    		dataFullname1 = button.getAttribute("data-fullname");
+	    		 const contextInput = document.getElementById("context1");
+	    	        contextInput.value = dataFullname1;
+	            if (dataId1) {
+	            	confirmDeleteModal1.style.display = 'block';
+	            } else {
+	                console.error("Product ID not found");
+	            }
+            });
+	});
+
+	confirmDeleteButton1.addEventListener("click", (event) => {
+	    	const contextLD = document.getElementById("contextLiDo1").value;
+	    	confirmDeleteButton1.href='/admin/productmanager/false/'+dataId1+'?liDo1='+encodeURIComponent(contextLD);
+			window.location.href = confirmDeleteButton1.href; 
+	    }); 
+	
+	// Add click event listener to each close button
+	closeButtons1.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	        confirmDeleteModal1.style.display = 'none';
+	    });
+	});
+	
+	
 		$(function() {
 			$("#example1").DataTable(
 					{
