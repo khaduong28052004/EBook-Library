@@ -50,6 +50,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE p.status = true and p.account.id =:id")
     public List<Product> findByStatus(@Param("id") Integer id);
+
+
 	//Tuyen
 	List<Product> findAllByActiveAndStatus(boolean active, boolean status);
     @Query("SELECT p FROM Product p WHERE p.status = true")

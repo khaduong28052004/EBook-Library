@@ -214,7 +214,7 @@
 									<div class="card-body p-0">
 										<ul class="users-list clearfix">
 										<c:forEach var="account" items="${listTopAccount}">
-										<li ><img src="/assets/dist/img/user1-128x128.jpg"
+										<li ><img src="/assets/img/${account[1]}"
 												alt="User Image"> <a class="users-list-name" href="#">${account[0]}
 				                                </a> <span class="users-list-date">${account[2]}</span></li>
 										</c:forEach>
@@ -367,8 +367,8 @@
 								<c:forEach var="eValue" items="${listEvalueNew}">
 									<li class="item">
 										<div class="product-img">
-											<img src="/assets/dist/img/default-150x150.png"
-												alt="Product Image" class="img-size-50">
+											<img src="/assets/img/${eValue[1]}"
+												alt="Image" class="img-size-50">
 										</div>
 										<div class="product-info">
 											<a href="javascript:void(0)" class="product-title">${eValue[1]}

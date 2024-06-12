@@ -97,7 +97,7 @@ public class SellerProductManagerController {
 
 		Product products = new Product();
 		products.setName(name);
-		product.setAccount(account);
+		products.setAccount(account);
 		products.setPrice(price);
 		products.setDiscountType(discountType);
 		if (discountType == true) {
@@ -192,6 +192,7 @@ public class SellerProductManagerController {
 			@RequestParam("price") double price, @RequestParam("discount") double discount,
 			@RequestParam("introduce") String introduce, @RequestParam("discountType") boolean discountType,
 			@RequestParam("weight") double weight) {
+		account = sessionService.getAttribute("account");
 		if (checkNameProductUpdate(name, id) && checkSale(discountType, discount, price)) {
 			System.out.println("Updateid: " + id);
 			product.setId(id);
@@ -208,7 +209,6 @@ public class SellerProductManagerController {
 			product.setQuantity(quantity);
 			product.setPublishingCompany(publishingCompany);
 			product.setWriterName(writerName);
-			product.setDate(new Date());
 			product.setIntroduce(introduce);
 			product.setImage(getImage(images));
 			product.setWeight(weight);

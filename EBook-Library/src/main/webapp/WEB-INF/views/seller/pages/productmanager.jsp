@@ -678,12 +678,6 @@ display: block;
 
 
 	<script>
-	  const PAT = "c9bcfa03a89c476b91936cab785c8b0d";
-	  const USER_ID = "gnwcvstmaqvo";
-	  const APP_ID = "my-first-application-b21dep";
-	  const MODEL_ID = "general-image-detection";
-	  const MODEL_VERSION_ID = "1580bb1932594c93b7e2e04456af7c6f";
-	  
     document.addEventListener('DOMContentLoaded', function() {
         var discountType = document.getElementById('discountType');
         var discountUnit = document.getElementById('discountUnit');
@@ -775,171 +769,190 @@ if ('${images[3]}'.length > 0) {
      }
 
      // THÊM IMG
-let checkValue = true;
-if (inputSaveImage) {
-    inputSaveImage.addEventListener("change", async (event) => {
-        checkValue = true;
-        const files = Array.from(event.target.files);
-        const maxSize = 500 * 1024 * 1024; // 500 MB
-        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-        const currentImageCount = imagesArray.filter(item => item instanceof File).length;
-        let countListImages = currentImageCount;
-        let validFiles = [];
+     let checkValue = true;
+     if (inputSaveImage){
+         inputSaveImage.addEventListener("change", (event) => {
+        	 
+             const files = Array.from(event.target.files);
+             const maxSize = 500 * 1024 * 1024; // 500 MB
+             const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+             const currentImageCount = imagesArray.filter(item => item instanceof File).length;
+             let countListImages;
+            console.log(currentImageCount)
+             for (let index = 0; index < files.length; index++) {
+                 const image = files[index];
+                 console.log(files.length);
+                 // Kiểm tra tổng số ảnh nếu thêm ảnh hiện tại
+                 if (files.length+currentImageCount > 4){
+                     message.innerHTML = "Bạn chỉ có thể thêm tối đa 4 ảnh.";
+                     checkValue = false;
+                     return;
+                 }
+        
 
-        for (let index = 0; index < files.length; index++) {
-            const image = files[index];
+                 if (image.size > maxSize) {
+                     message.innerHTML = "Kích thước file ảnh quá lớn, vui lòng chọn file khác.";
+                     inputSaveImage.value = ''; // Reset file input
+                     checkValue = false;
+                     return;
+                 }
 
-            if (countListImages >= 4) {
-                message.innerHTML = "Bạn chỉ có thể thêm tối đa 4 ảnh.";
-                checkValue = false;
-                resetInput();
-                break;
-            }
+                 // Kiểm tra loại file
+                 if (!allowedTypes.includes(image.type)) {
+                     message.innerHTML = "Loại file không hợp lệ, vui lòng chọn file ảnh có định dạng PNG, JPEG hoặc JPG.";
+                     inputSaveImage.value = ''; // Reset file input
+                     checkValue = false;
+                     return;
+                 }
+                 checkAI(inputSaveImage,index);	
+                 imagesArray.push(image);
+             }
 
-            if (image.size > maxSize) {
-                message.innerHTML = "Kích thước file ảnh quá lớn, vui lòng chọn file khác.";
-                checkValue = false;
-                continue;
-            }
+             // Clear message and reset input
+             message.innerHTML = "";
+             inputSaveImage.value = ''; // Reset file input
+             countListImages = currentImageCount;
 
-            if (!allowedTypes.includes(image.type)) {
-                message.innerHTML = "Loại file không hợp lệ, vui lòng chọn file ảnh có định dạng PNG, JPEG hoặc JPG.";
-                checkValue = false;
-                continue;
-            }
+             displayImage();
+             const showImgDivs = document.querySelectorAll('.show-img-div');
+             showImgDivs.forEach(div => {
+            	    const imgCount = div.querySelectorAll('img').length;
+            	    console.log(`Number of <img> tags in this div:`+imgCount);
+            	    countListImages = imgCount;
+            	});
+             var button = document.getElementById('updateButton');
+             var creatteButton = document.getElementById('creatteButton');
+            
+             if(checkValue == false||countListImages < 2){
+             	updateButton.disabled = true;
+                 createButton.disabled = true;
+                 message.innerHTML = "Bạn vui lòng chọn tối thiếu 2 ảnh.";
+             }else{
+             	updateButton.disabled = false;
+                 createButton.disabled = false;
+             }
+             console.log("Số ảnh:"+countListImages);
+         });
+     } else {
+         console.log("Element with id 'show-img-form' not found.");
+     }
 
-            if (imagesArray.some(item => item.name === image.name && item.size === image.size)) {
-                message.innerHTML = "Ảnh đã tồn tại trong danh sách.";
-                checkValue = false;
-                continue;
-            }
+     const PAT = "c9bcfa03a89c476b91936cab785c8b0d";
+     const USER_ID = "gnwcvstmaqvo";
+     const APP_ID = "my-first-application-b21dep";
+     const MODEL_ID = "general-image-detection";
+     const MODEL_VERSION_ID = "1580bb1932594c93b7e2e04456af7c6f";
 
-            const aiCheckResult = await checkAIImage(image);
-            if (aiCheckResult) {
-                validFiles.push(image);
-                countListImages++;
-            } else {
-                checkValue = false;
-            }
-        }
+     function checkAI(inputSaveImage, index,) {
+    	 
+       const file = inputSaveImage.files[index];
+   
+       if (file) {
+         const reader = new FileReader();
+         reader.onloadend = function () {
+           const base64String = reader.result
+             .replace("data:", "")
+             .replace(/^.+,/, "");
 
-        if (validFiles.length > 0) {
-            imagesArray.push(...validFiles);
-            displayImage();
-        }
+           const raw = JSON.stringify({
+             user_app_id: {
+               user_id: USER_ID,
+               app_id: APP_ID,
+             },
+             inputs: [
+               {
+                 data: {
+                   image: {
+                     base64: base64String,
+                   },
+                 },
+               },
+             ],
+           });
 
-        resetInput();
-        updateButtonState(countListImages);
+           const requestOptions = {
+             method: "POST",
+             headers: {
+               Accept: "application/json",
+               Authorization: "Key " + PAT,
+             },
+             body: raw,
+           };
 
-        console.log("Số ảnh: " + countListImages);
-    });
-} else {
-    console.log("Element with id 'show-img-form' not found.");
-}
+           fetch(
+             "https://api.clarifai.com/v2/models/" +
+               MODEL_ID +
+               "/versions/" +
+               MODEL_VERSION_ID +
+               "/outputs",
+             requestOptions
+           )
+             .then((response) => response.json())
+             .then((result) => {
+               console.log(result); 
+             // console.log(result.outputs[0].data.regions[0].data.concepts[0].name);
+            
+               const outputs = result.outputs;
+               if (
+                 outputs &&
+                 outputs.length > 0 &&
+                 outputs[0].data &&
+                 outputs[0].data.regions
+               ) {
+                 const regions = outputs[0].data.regions;
+                
 
-function resetInput() {
-    inputSaveImage.value = ''; // Reset file input
-}
+                 let bookDetected = false; // Biến để kiểm tra xem có sách được nhận dạng không
 
-function updateButtonState(countListImages) {
-    var updateButton = document.getElementById('updateButton');
-    var createButton = document.getElementById('createButton');
+                 regions.forEach((region) => {
+       if (region.data.concepts) {
+         region.data.concepts.forEach((concept) => {
+             console.log(concept.name);
+           if (concept.name == 'Book' || concept.name == 'Poster') {
+             outputHtml += `<p>Book.<p>`;
+             bookDetected = true;
+           }
+         });
+       }
+     });
 
-    if (countListImages < 2) {
-        checkValue = false;
-        message.innerHTML = "Bạn vui lòng chọn tối thiểu 2 ảnh.";
-    }
+                 if (!bookDetected) {
+                	 message.innerHTML = "Ảnh không hợp lệ sau khi kiểm tra AI.";
+                   checkValue = false;
+                 }
+                 checkBTNLoad();
+                
+               } else {
+                 
+               }
+             })
+             .catch((error) => console.log("error", error));
+         };
+         reader.readAsDataURL(file);
+       } else {
+         alert("Please select an image file.");
+       }
+     }
+     function checkBTNLoad() {
+    	   var button = document.getElementById('updateButton');
+    	    var creatteButton = document.getElementById('creatteButton');
+    	    
+    	    
+    	    var currentUrl = window.location.href;
+    	    var regex = /^http:\/\/localhost:8080\/seller\/productmanager\/edit\?id=\d+$/;
 
-    updateButton.disabled = !checkValue;
-    createButton.disabled = !checkValue;
-}
-
-async function checkAIImage(image) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = function () {
-            const base64String = reader.result
-                .replace("data:", "")
-                .replace(/^.+,/, "");
-
-            const raw = JSON.stringify({
-                user_app_id: {
-                    user_id: USER_ID,
-                    app_id: APP_ID,
-                },
-                inputs: [
-                    {
-                        data: {
-                            image: {
-                                base64: base64String,
-                            },
-                        },
-                    },
-                ],
-            });
-
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: "Key " + PAT,
-                },
-                body: raw,
-            };
-
-            fetch(
-                "https://api.clarifai.com/v2/models/" +
-                MODEL_ID +
-                "/versions/" +
-                MODEL_VERSION_ID +
-                "/outputs",
-                requestOptions
-            )
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
-                    const outputs = result.outputs;
-                    if (
-                        outputs &&
-                        outputs.length > 0 &&
-                        outputs[0].data &&
-                        outputs[0].data.regions
-                    ) {
-                        const regions = outputs[0].data.regions;
-                        let bookDetected = false;
-
-                        regions.forEach((region) => {
-                            if (region.data.concepts) {
-                                region.data.concepts.forEach((concept) => {
-                                    console.log(concept.name);
-                                    if (concept.name === 'Book' || concept.name === 'Poster') {
-                                        bookDetected = true;
-                                    }
-                                });
-                            }
-                        });
-
-                        if (!bookDetected) {
-                            message.innerHTML = "Vui lòng chọn hình là sách và độ phân giải cao";
-                            resetInput();
-                            resolve(false);
-                        } else {
-                            resolve(true);
-                        }
-                    } else {
-                        resolve(false);
-                    }
-                })
-                .catch((error) => {
-                    console.log("error", error);
-                    resolve(false);
-                });
-        };
-        reader.readAsDataURL(image);
-    });
-}
-
-
+    	    if (updateButton && createButton) {
+    	        if (!regex.test(currentUrl)) {
+    	            updateButton.disabled = true;
+    	            createButton.disabled = false;
+    	        } else {
+    	            updateButton.disabled = false;
+    	            createButton.disabled = true;
+    	        }
+    	    } else {
+    	        console.error("One or both buttons do not exist in the DOM.");
+    	    }
+     }
      // DISPLAY IMAGE
      function displayImage() {
     	 
@@ -982,24 +995,7 @@ async function checkAIImage(image) {
          
      }
 document.addEventListener('DOMContentLoaded', function() {
-    var button = document.getElementById('updateButton');
-    var creatteButton = document.getElementById('creatteButton');
-    
-    
-    var currentUrl = window.location.href;
-    var regex = /^http:\/\/localhost:8080\/seller\/productmanager\/edit\?id=\d+$/;
-
-    if (updateButton && createButton) {
-        if (!regex.test(currentUrl)) {
-            updateButton.disabled = true;
-            createButton.disabled = false;
-        } else {
-            updateButton.disabled = false;
-            createButton.disabled = true;
-        }
-    } else {
-        console.error("One or both buttons do not exist in the DOM.");
-    }
+	checkBTNLoad();
   
     const confirmDeleteModal = document.getElementById("confirmDeleteModal");
     const confirmDeleteButton = document.getElementById("confirmDeleteButton");
@@ -1085,8 +1081,6 @@ document.addEventListener('DOMContentLoaded', function() {
     renderTable();
     });
 
-
-
   </script>
   
    <script>
@@ -1147,12 +1141,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.onload = function() {
       displayTable(currentPage);
   };
-  
-  
-
-
-  
 </script>
 </body>
 
-</html>
+</html>	

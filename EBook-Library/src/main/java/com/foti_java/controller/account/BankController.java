@@ -30,9 +30,10 @@ public class BankController {
 	Integer id;
 	Bank banks = new Bank();
 	boolean modal = false;
+	Account account = new Account();
 	@GetMapping("/user/bank")
 	public String getBank(Model model) {
-		Account account = serviceSessionService.getAttribute("account");
+		account = serviceSessionService.getAttribute("account");
 		active = "insert";
 		List<String> listTKNH = new ArrayList<>();
 		List<Bank> list = bankRepositoty.findAllById(account.getId());
@@ -97,8 +98,6 @@ public class BankController {
 									   @RequestParam("name") String accountName
 									  ) {
 		boolean status = Boolean.parseBoolean(req.getParameter("status"));
-		Account account = new Account();
-		account.setId(1);
 		if(status!=true) {
 			status = false;
 		}
@@ -163,7 +162,6 @@ public class BankController {
 	}
 	
 	public void setDefautDelete(Integer id, boolean status) {
-		Account account = serviceSessionService.getAttribute("account");
 		if(status) {
 			List<Bank> list = bankRepositoty.findAllById(account.getId());
 			for(Bank bank : list) {
