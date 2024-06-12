@@ -43,53 +43,59 @@
 						<hr>
 					</div>
 					<div class="body">
-						<form cl action="/Ebook/account/updateProfile/user" method="post" enctype="multipart/form-data">
+						<form action="/Ebook/account/updateProfile/user" method="post"
+							enctype="multipart/form-data"">
 							<div class="form-group mb-3">
-  <label for="tenShop" class="form-label">Tên shop</label>
-  <input type="text" class="form-control" id="tenShop" name="shopname" value="${account.shopname}">
-  <div class="form-text text-danger">${error}</div>
-  <input type="hidden" class="form-control" id="tenShop" name="id" value="${account.id}">
-</div>
+								<label for="tenShop" class="form-label">Tên shop</label> <input
+									type="text" class="form-control" id="tenShop" name="shopname"
+									value="${account.shopname}" required>
+
+								<div class="form-text text-danger">${error }</div>
+								<input type="hidden" class="form-control" id="" name="id"
+									value="${account.id}">
+							</div>
 							<div class="form-group row g-3">
 								<div class="col">
 									<label for="username" class="form-label">Username</label> <input
 										type="text" class="form-control" id="username"
-										value="${account.username}" name="username">
+										value="${account.username}" name="username" required>
 								</div>
 								<div class="col">
 									<label for="password" class="form-label">Password</label> <input
 										type="password" class="form-control" id="password" readonly
-										value="${account.password}" name="password">
+										value="${account.password}" name="password" disabled="disabled">
 								</div>
 							</div>
 							<div class="form-group row g-3">
 								<div class="col">
 									<label for="fullname" class="form-label">Họ và tên</label> <input
 										type="text" class="form-control" id="fullname"
-										value="${account.fullname}" name="fullname">
+										value="${account.fullname}" name="fullname" required>
 								</div>
 								<div class="col">
 									<label for="email" class="form-label">Email</label> <input
 										type="email" class="form-control" id="email"
-										value="${account.email}" name="email">
+										value="${account.email}" name="email" required>
+										<span class="text-danger">${errorMail}</span>
 								</div>
 							</div>
 							<div class=" form-group row g-3">
 								<div class="col">
 									<label for="birthday" class="form-label">Ngày sinh</label> <input
 										type="date" class="form-control" id="birthday"
-										value="${account.birthday}" name="birthday">
+										value="${account.birthday}" name="birthday" required>
 								</div>
 								<div class="col">
 									<label for="sdt" class="form-label">Số điện thoại</label> <input
 										type="text" class="form-control" id="sdt"
-										value="${account.phone}" name="phone">
+										value="${account.phone}" name="phone" required>
 								</div>
 							</div>
-							
+
 							<span class="span">${error}</span>
 							<div class="form-group md-3 d-flex justify-content-center">
-								<button style="width: 100px;" class="register btn btn-outline-success"
+								<button style="width: 100px;"
+									class="register btn btn-outline-success" id='submitbtn'
 									type="submit">Lưu</button>
 							</div>
 					</div>
@@ -105,6 +111,7 @@
 					<div class="title-TenShop">
 						<p>${account.shopname}</p>
 					</div>
+					
 					<div class="uploadImg">
 						<div class="form-group row g-3">
 							<div class="col">
@@ -134,84 +141,105 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
 		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
 		crossorigin="anonymous"></script>
-	<script>   
+		
+		
+	<script type="text/javascript">   
 	
 	const container = document.getElementById('container');
-	const registerBtn = document.getElementById('register');
+	const btnSubmit = document.getElementById('submitbtn');
 
 
 	
    // ngăn submit
-	registerBtn.addEventListener('click', () => {
+	btnSubmit.addEventListener('click', () => {
 	    container.classList.add("active");
 	});
-	loginBtn.addEventListener('click', () => {
+   
+	/* loginBtn.addEventListener('click', () => {
 	    container.classList.remove("active");
-	});
+	}); */
 
-	forgotPassBtn.addEventListener('click', () => {
+	/* forgotPassBtn.addEventListener('click', () => {
 	    container.classList.add("show-forgot-password");
 	});
 	loginBtn.addEventListener('click', () => {
 	    container.classList.remove("show-forgot-password");
-	});
+	}); */
 		
- 		const registerForm = document.querySelector('.sign-up form');
+ 		const profileForm = document.querySelector('.profileForm form');
  	    const errorSpan = document.getElementById('span');
  	
 
- 	    // Thêm sự kiện submit cho form Đăng Ký
- 	    registerForm.addEventListener('submit', function (event) {
- 	        // Lấy giá trị từ các trường input
- 	        const userName = document.getElementById('userName').value;
+ 	    // Thêm sự kiện submit cho form update profile
+ 	    //profileForm.addEventListener('submit', function (event) {
+ 	 
+ 	    	function validateForm() {
+ 	    	
+ 	    	//Lấy tất cả các giá trị từ form cập nhật hồ sơ
+ 	    	
+ 	   		const shopName = document.getElementById('tenshop').value
+ 	       
+ 	      const userName = document.getElementById('userName').value;
  	   
- 	       // const fullName = document.queryselector('.sign-up input[name="fullName"]').value;
-           const name = document.getElementById('fullName').value;
+          const name = document.getElementById('fullName').value;
+          const password = document.getElementById('password').value
+          const email = document.getElementById('email').value
+          const birthday = document.getElementById('birthday').value
+          const numberphone = document.getElementById('sdt').value
+          const ImgAvt = document.getElementById('ImgAvt').value
+          const ImgBia = document.getElementById('ImgBia').value
  	        // Xóa thông báo lỗi trước khi kiểm tra
  	        errorSpan.textContent = '';
               
- 	        // Kiểm tra các điều kiện
- 	        
- 	        if (!name.trim()) {
- 	            errorSpan.textContent = 'Vui lòng nhập Tên đầy đủ.';
- 	            event.preventDefault(); // Ngăn chặn việc submit form
- 	            return;
- 	        }
-
- 	        
- 	        if (!userName.trim()) {
- 	            errorSpan.textContent = 'Vui lòng nhập Tên Đăng Nhập.';
- 	            event.preventDefault(); // Ngăn chặn việc submit form
- 	            return;
- 	        }
-
- 	        if (!email.trim()) {
- 	            errorSpan.textContent = 'Vui lòng nhập Email.';
- 	            event.preventDefault(); // Ngăn chặn việc submit form
- 	            return;
- 	        }
-
- 	        if (!password.trim()) {
- 	            errorSpan.textContent = 'Vui lòng nhập Mật Khẩu.';
-				event.preventDefault(); // Ngăn chặn việc submit form
-			     return;
-			 }
-			
 			 // Kiểm tra email hợp lệ
 			 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 			 if (!emailPattern.test(email)) {
 			     errorSpan.textContent = 'Email không hợp lệ.';
-			     event.preventDefault(); // Ngăn chặn việc submit form
-			     return;
+			     //event.preventDefault(); // Ngăn chặn việc submit form
+			    
 			 }
+			 
+			 // Kiem tra so dien thoai
+			 
+			const phonePattern = /^(?:\+84-?|0)(?:\d{2,3}-?)?\d{3}-?\d{4}$/
+				
+				if (!numberphone.match(birthdayPattern)) {
+					  errorSpan.textContent = 'Số điện thoại không đúng định dạng';
+					  //event.preventDefault(); // Ngăn chặn việc submit form
+					 
+				}
+					
+					
+			// Kiem tra ngay sinh dinh dang (dd-mm-yyyy)
 			
-			 // Kiểm tra mật khẩu có ít nhất 6 ký tự
-			//    if (password.length < 6) {
-			//       errorSpan.textContent = 'Mật khẩu phải chứa ít nhất 6 ký tự.';
-			//       event.preventDefault(); // Ngăn chặn việc submit form
-			//       return;
-			//    }
-			});
+			const birthdayPattern = /^\d{2}-\d{2}-\d{4}$/
+				
+			// Kiem tra ngay sinh co dung voi dinh dang
+			
+			if (!birthday.match(birthdayPattern)) {
+				  errorSpan.textContent = 'Ngày sinh không đúng định dang (dd-MM-yyyy)';
+				  event.preventDefault(); // Ngăn chặn việc submit form
+				
+			}
+			
+			// Kiểm tra file co duoc chon hay khong
+			
+			var fileBia = ImgBia.files[0]
+			var fileAvart = ImgAvt.files[0]
+			
+			if (!(fileBia || fileAvart)) {
+ 	    	errorSpan.textContent = 'Vui long chon file';
+			  //event.preventDefault(); // Ngăn chặn việc submit form
+	
+ 	   		 }
+			
+			if (errorSpan != "") 
+				return false
+ 	    
+ 	   		// kiem tra file .jpg .png .
+			
+				return true;
+			}
 			
 			
    </script>

@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -25,54 +27,57 @@ import com.foti_java.repository.AccountRepositoty;
 import com.foti_java.service.SessionService;
 
 import jakarta.servlet.ServletContext;
+
 @Controller
 public class UpdateProfileController {
-	
+
 	@Autowired
 	AccountRepositoty accountRepository;
-	
+
 	@Autowired
 	ServletContext context;
 	@Autowired
 	SessionService sessionService;
-	
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
-	public int id =1;
+
+	public int id = 1;
+
 	@GetMapping("/Ebook/account/updateProfile/user")
 	public String getProfile(Model model) {
-	
+
 //		Account account = accountRepository.findById(id).orElse(null);
-		  Account account1  = accountRepository.findById(id).orElse(null);
-		   sessionService.setAttribute("account", account1);  
-		   Account account = sessionService.getAttribute("account");	
+		Account account1 = accountRepository.findById(id).orElse(null);
+		sessionService.setAttribute("account", account1);
+		Account account = sessionService.getAttribute("account");
 		model.addAttribute("account", account);
 		return "/html/account/updateProfile";
 	}
-	
+
 	@PostMapping("/Ebook/account/updateProfile/user")
-	public String updateProduct(
-	        @RequestParam("shopname") String shopname,
-	        @RequestParam("username") String username,
-	        @RequestParam("fullname") String fullname,
-	        @RequestParam("email") String email,
-	        @RequestParam("phone") String phone,
-	        @RequestParam("birthday") Date birthday,
-	        @RequestParam("avatar") MultipartFile avatar,
-	        @RequestParam("background") MultipartFile background,
-	        @RequestParam("id") Integer id,
-	        Model model) {
+	public String updateProduct(@RequestParam("shopname") String shopname, @RequestParam("username") String username,
+			@RequestParam("fullname") String fullname, @RequestParam("email") String email,
+			@RequestParam("phone") String phone, @RequestParam("birthday") Date birthday,
+			@RequestParam("avatar") MultipartFile avatar, @RequestParam("background") MultipartFile background,
+			@RequestParam("id") Integer id, Model model) {
 		String imageNameAVT = "";
 		String imageNameBR = "";
-		
+
+		if (!checkEmai(email)) {
+			model.addAttribute("errorMail", "Email không đúng định dạng");
+			return "redirect:/Ebook/account/updateProfile/user";
+		}
+
+		if (!checkNumberPhone(phone))
+			return "redirect:/Ebook/account/updateProfile/user";
 //		Account account1 = accountRepository.findById(id);//id bạn muốn cập nhật
-	   Account account1  = accountRepository.findById(id).get();
-	   sessionService.setAttribute("account", account1);  
-	   Account account = sessionService.getAttribute("account");			 
+		Account account1 = accountRepository.findById(id).get();
+		sessionService.setAttribute("account", account1);
+		Account account = sessionService.getAttribute("account");
 		// TODO: process POST request
 		account.setShopname(shopname);
 		account.setUsername(username);
@@ -125,9 +130,23 @@ public class UpdateProfileController {
 		accountRepository.saveAndFlush(account);
 		return "redirect:/Ebook/account/updateProfile/user";
 	}
-	
-	
-	//TEST
+
+	public boolean checkEmai(String email) {
+		String emailPattern = "^(.+)@(\\S+)$";
+		Pattern pattern = Pattern.compile(emailPattern);
+
+		if (email == "")
+			return false;
+		Matcher matcher = pattern.matcher(emailPattern);
+		return matcher.matches();
+	}
+
+	public boolean checkNumberPhone(String sdt) {
+		String pattern = "\\d{3}-\\d{2}-\\d{7}"; // 3so mã quóc gia - 2 số mã vùng - 7 số điện thoại
+		return sdt.matches(pattern);
+	}
+
+	// TEST
 //	@PostMapping("/Ebook/account/updateProfile/user/update")
 //	public String updateProfile(
 //	        @RequestParam("shopname") String shopname,
@@ -172,8 +191,6 @@ public class UpdateProfileController {
 //	    return "redirect:/Ebook/account/updateProfile/user/" + id;
 //	}
 
-	
-	
 //		Account account = accountRepository.findById(id).get();
 //	    // Kiểm tra `shopname`
 //	    if (shopname == null || shopname.trim().isEmpty() || shopname.length() < 3 || shopname.length() > 50) {
@@ -274,5 +291,5 @@ public class UpdateProfileController {
 //	    String phoneRegex = "^[0-9]{10}$";
 //	    return phone.matches(phoneRegex);
 //	}
-	
+
 }
