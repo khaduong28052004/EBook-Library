@@ -1,5 +1,6 @@
 package com.foti_java.controller.admin;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.foti_java.model.Account;
+import com.foti_java.model.RoleDetail;
 import com.foti_java.repository.AccountRepositoty;
 import com.foti_java.service.SendMailService;
 
@@ -31,7 +33,7 @@ public class AdminAccountManagerController {
 
 	@RequestMapping("accountmanager")
 	public String accountManager(Model model) {
-		listAccount = accountRepository.findAll();
+		listAccount = accountRepository.findAllListAccountNotAdmin();
 		model.addAttribute("listAccount", listAccount);
 		return "admin/pages/accountmanager";
 	}

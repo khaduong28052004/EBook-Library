@@ -48,14 +48,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 //	@Query("SELECT p FROM Product p  WHERE p.cartDetail = listCart")
 //	List<Product> listCart(@Param("listCart")CartDetail listCart);
 
-<<<<<<< phucptpc05587
-	List<Product> findAllByActiveAndStatus(boolean active, boolean status);
     @Query("SELECT p FROM Product p WHERE p.status = true and p.account.id =:id")
     public List<Product> findByStatus(@Param("id") Integer id);
-=======
 	//Tuyen
 	List<Product> findAllByActiveAndStatus(boolean active, boolean status);
     @Query("SELECT p FROM Product p WHERE p.status = true")
     public List<Product> findByStatus();
->>>>>>> MergerCode01
 }
