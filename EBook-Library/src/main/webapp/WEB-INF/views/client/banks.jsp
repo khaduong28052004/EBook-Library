@@ -189,8 +189,8 @@
 		}
 
 		
-	    const defaultApiKey = 'b2b25e6d-c435-4051-87ef-644424a72bcf';
-	    const defaultClientId = '185e9463-d547-432f-93cc-c139d308711b';
+	    const defaultApiKey = 'dd956639-ba26-4c70-9679-928b6f76e8b2';
+	    const defaultClientId = '5f38046f-7b67-44e4-8bf9-a78d619aac4f';
 	    const bankName = document.getElementById('selectedBankName').value;
 	    
 	      async function fetchBankNames() {
