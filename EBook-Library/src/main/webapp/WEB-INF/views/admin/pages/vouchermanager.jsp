@@ -65,8 +65,8 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Ngày bắt đầu</label> <input
-														type="date" name=dateStart class="form-control" required
-														value="${voucher.dateStart}" name="dateStart"
+														type="date" class="form-control" required
+															value="${dateStart}" name="dateStart"
 														id="exampleInputEmail1" placeholder="Ngày bắt đầu">
 													<p class="text-danger">${errorDateStart }</p>
 												</div>
@@ -74,7 +74,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Ngày kết thúc</label> <input
-														type="date" name="dateEnd" value="${voucher.dateEnd}"
+														type="date" name="dateEnd" value="${dateEnd}"
 														class="form-control" id="exampleInputEmail1" required
 														placeholder="Ngày kết thúc">
 													<p class="text-danger">${errorDateEnd }</p>

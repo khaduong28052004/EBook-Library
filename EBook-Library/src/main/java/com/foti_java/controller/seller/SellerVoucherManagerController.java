@@ -62,8 +62,7 @@ public class SellerVoucherManagerController {
 	Integer idTypeonl;
 
 	@RequestMapping("vouchermanager")
-	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
-			@RequestParam("page") Optional<Integer> pageNumber) {
+	public String voucherManager(Model model, @RequestParam(name = "typeVoucher", defaultValue = "") Integer idType) {
 		Account account = session.getAttribute("account");
 		listVoucher = voucherRepository.findAllByAccount(account);
 		listTypeVoucher = typeVoucherRepository.findAll();
@@ -81,7 +80,7 @@ public class SellerVoucherManagerController {
 	}
 
 	public boolean check(Model model, String name, Integer voucher, double DKPrice, LocalDate dateStart,
-			LocalDate dateEnd, int OriginalNumber, int priceSale, int quantity, boolean loaiSale) {
+			LocalDate dateEnd, int OriginalNumber, double priceSale, int quantity, boolean loaiSale) {
 		if (DKPrice < 0) {
 			errorPriceSale = "Vui lòng nhập giá sale";
 			model.addAttribute("errorPriceSale", errorPriceSale);
@@ -137,8 +136,7 @@ public class SellerVoucherManagerController {
 
 	@GetMapping("vouchermanager/update/{id}")
 	public String getUpdate(Model model, @PathVariable(name = "id") Integer id,
-			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType,
-			@RequestParam("page") Optional<Integer> pageNumber) {
+			@RequestParam(name = "typeVoucher", defaultValue = "") Integer idType) {
 		Account account = session.getAttribute("account");
 		listVoucher = voucherRepository.findAllByAccount(account);
 		Optional<Voucher> entity = null;
@@ -152,7 +150,7 @@ public class SellerVoucherManagerController {
 			model.addAttribute("vouchers", listVoucher);
 			model.addAttribute("currentPath", "update");
 		}
-		return voucherManager(model, idType, pageNumber);
+		return voucherManager(model, idType);
 	}
 
 	@GetMapping("vouchermanager/delete/{id}")
@@ -180,7 +178,7 @@ public class SellerVoucherManagerController {
 			@RequestParam("PriceDK") double DKPrice,
 			@RequestParam("dateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateStart,
 			@RequestParam("dateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateEnd,
-			@RequestParam("quantity") int quantity, @RequestParam("priceSale") int priceSale,
+			@RequestParam("quantity") int quantity, @RequestParam("priceSale") double priceSale,
 			@RequestParam("note") String note) {
 
 		Voucher entity = new Voucher();
@@ -192,16 +190,16 @@ public class SellerVoucherManagerController {
 		// Chuyển đổi LocalDate sang Date
 		Date startDate = Date.from(dateStart.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Date endDate = Date.from(dateEnd.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Account account = session.getAttribute("account");
 
 		entity.setDateStart(startDate);
-		System.out.println("ngày bắt đầu: " + entity.getDateStart());
 		entity.setDateEnd(endDate);
-		System.out.println("ngày kết thúc: " + entity.getDateEnd());
 
 		entity.setOriginalNumber(quantity);
 		entity.setStatus(true);
 		entity.setSale(priceSale);
 		entity.setNote(note);
+		entity.setAccount(account);
 		if (check(model, name, typeVoucher, DKPrice, dateStart, dateEnd, quantity, priceSale, 0, loaiGG)) {
 			voucherRepository.saveAndFlush(entity);
 			return "redirect:/seller/vouchermanager";
@@ -209,11 +207,12 @@ public class SellerVoucherManagerController {
 			// Bảo toàn các giá trị ban đầu
 			String originalDateStart = dateStart.toString();
 			String originalDateEnd = dateEnd.toString();
-
+			listVoucher = voucherRepository.findAllByAccount(account);
 			List<TypeVoucher> list = typeVoucherRepository.findAll();
 			model.addAttribute("typeVouchers", list);
 			model.addAttribute("voucher", entity);
-			model.addAttribute("dateStart",originalDateStart);
+			model.addAttribute("vouchers", listVoucher);
+			model.addAttribute("dateStart", originalDateStart);
 			model.addAttribute("dateEnd", originalDateEnd);
 			return "seller/pages/vouchermanager";
 		}
@@ -225,9 +224,9 @@ public class SellerVoucherManagerController {
 			@RequestParam("loaiGG") boolean loaiGG, @RequestParam("PriceDK") double DKPrice,
 			@RequestParam("dateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateStart,
 			@RequestParam("dateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateEnd,
-			@RequestParam("quantity") int quantity, @RequestParam("priceSale") int priceSale,
+			@RequestParam("quantity") int quantity, @RequestParam("priceSale") double priceSale,
 			@RequestParam("note") String note) {
-
+		Account account = session.getAttribute("account");
 		Voucher entity = new Voucher();
 		Optional<Voucher> entityOld = voucherRepository.findById(voucherID);
 		Optional<TypeVoucher> type = typeVoucherRepository.findById(typeVoucher);
@@ -246,6 +245,8 @@ public class SellerVoucherManagerController {
 		entity.setStatus(true);
 		entity.setSale(priceSale);
 		entity.setNote(note);
+		entity.setAccount(account);
+
 		// Bảo toàn các giá trị ban đầu
 		String originalDateStart = dateStart.toString();
 		String originalDateEnd = dateEnd.toString();
@@ -260,7 +261,7 @@ public class SellerVoucherManagerController {
 			listTypeVoucher = typeVoucherRepository.findAll();
 			model.addAttribute("currentPath", "update");
 			model.addAttribute("typeVouchers", listTypeVoucher);
-			model.addAttribute("vouchers", voucherRepository.findAll());
+			model.addAttribute("vouchers", voucherRepository.findAllByAccount(account));
 			model.addAttribute("voucher", entity);
 			model.addAttribute("dateStart", originalDateStart);
 			model.addAttribute("dateEnd", originalDateEnd);

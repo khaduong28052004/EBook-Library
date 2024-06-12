@@ -189,8 +189,12 @@
 													</c:forEach></td>
 												<td class="align-middle">${seller.email }</td>
 												<td class="align-middle">${seller.numberCitizenIdentification }</td>
-												<td class="align-middle">${seller.banks[0].name}</td>
-												<td class="align-middle">${seller.banks[0].accountNumber}</td>
+												<c:forEach var="banks" items="${seller.banks}">
+													<c:if test="${banks.status}">
+														<td class="align-middle">${banks.nameBank}</td>
+														<td class="align-middle">${banks.accountNumber}</td>
+													</c:if>
+												</c:forEach>
 												<td class="align-middle"><a
 													href="/admin/sellermanager/checkSeller/${seller.id}?status=true"
 													class="btn btn-primary">Đồng ý</a>

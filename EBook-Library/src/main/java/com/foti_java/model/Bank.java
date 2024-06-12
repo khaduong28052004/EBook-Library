@@ -32,6 +32,9 @@ public class Bank {
 	@Nationalized
 	String name;
 	String accountNumber;
+	@Nationalized
+	String nameBank;
+	boolean status;
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
