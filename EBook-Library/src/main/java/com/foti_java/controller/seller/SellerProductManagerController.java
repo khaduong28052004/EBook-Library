@@ -86,7 +86,7 @@ public class SellerProductManagerController {
 		errorSale = null;
 		product = null;
 		image = new ArrayList<>();
-		return "/seller/pages/productmanager";
+		return "seller/pages/productmanager";
 	}
 
 	@PostMapping("/productmanager/create")

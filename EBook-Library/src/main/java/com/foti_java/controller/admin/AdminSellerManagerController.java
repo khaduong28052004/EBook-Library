@@ -11,17 +11,52 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.foti_java.model.Account;
+import com.foti_java.model.Bill;
+import com.foti_java.model.BillDetail;
+import com.foti_java.model.Role;
+import com.foti_java.model.RoleDetail;
+import com.foti_java.model.SellerStatistics;
+import com.foti_java.model.Voucher;
+import com.foti_java.repository.AccountRepositoty;
+import com.foti_java.repository.BillDetailRepository;
+import com.foti_java.repository.BillRepositoty;
+import com.foti_java.repository.RoleDetailRepository;
+import com.foti_java.repository.RoleRepository;
+import com.foti_java.repository.VoucherRepository;
+import com.foti_java.service.SendMailService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("Ebook/admin")
 public class AdminSellerManagerController {
-    @RequestMapping("sellermanager")
-    public String requestMethodName() {
-        return "admin/pages/sellermanager";
-    }
+	@Autowired
+	BillDetailRepository billDetailRepository;
+	@Autowired
+	AccountRepositoty accountRepository;
+	@Autowired
+	BillRepositoty billRepository;
+	@Autowired
+	RoleDetailRepository roleDTRepository;
+	@Autowired
+	RoleRepository roleRepository;
+	@Autowired
+	VoucherRepository voucherRepository;
+	@Autowired
+	SendMailService mailService;
+	@Autowired
+	HttpServletRequest req;
+	List<Voucher> listVoucher = new ArrayList<>();
+	List<Bill> listBill = new ArrayList<>();
+	List<BillDetail> listBillDetails = new ArrayList<>();
+    
 
 	@RequestMapping("sellermanager")
 	public String requestMethodName(Model model) {
