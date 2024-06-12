@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,10 +76,26 @@
 										</tr>
 									</thead>
 									<tbody>
+									    <c:forEach var="Selerstatisticallist" items="${Selerstatisticallist}" >
+									    <tr>
+									         <td class="align-middle">${Selerstatisticallist.fullName}</td>
+											<td class="align-middle">${Selerstatisticallist.phone}</td>
+										    <td class="align-middle">${Selerstatisticallist.address}</td>
+											<td class="align-middle">${Selerstatisticallist.email}</td>
+											<td class="align-middle"><fmt:formatNumber>${Selerstatisticallist.totalRevenue}</fmt:formatNumber></td>
+											<td class="align-middle">1%</td>
+											<td class="align-middle"><fmt:formatNumber>${Selerstatisticallist.profit}</fmt:formatNumber></td>
+											
+											<td class="align-middle"><c:if test="${Selerstatisticallist.status}">Đang hoạt động</c:if>
+											<c:if test="${!Selerstatisticallist.status}">Ngừng hoạt động</c:if></td>
+											
+											</tr>
+									    </c:forEach>
+									  
 										<tr>
 											<td class="align-middle">Dương Văn Kha</td>
 											<td class="align-middle">0899672816</td>
-											<td class="align-middle">Cái Răng cần thơ</td>
+											<td class="align-middle"> kha lo</td>
 											<td class="align-middle">khadv@gmail.com</td>
 											<td>1.000.000.000</td>
 											<td class="align-middle">1%</td>
