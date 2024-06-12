@@ -12,8 +12,7 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="/assets/dist/img/user2-160x160.jpg"
-					class="img-circle elevation-2" alt="User Image">
+			    <img src="/assets/img/account/${account.avatar}" class="img-circle elevation-2" alt="${account.avatar}">
 			</div>
 			<div class="info">
 				<a href="/admin/home" class="d-block"> 
@@ -196,7 +195,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item"><a href="/admin/home" class="nav-link">
+                                <li class="nav-item"><a href="/user/home" class="nav-link">
                                       
                                         <p>home user</p>
                                     </a>
