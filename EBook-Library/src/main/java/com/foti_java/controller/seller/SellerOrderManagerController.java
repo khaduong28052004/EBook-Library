@@ -36,7 +36,9 @@ public class SellerOrderManagerController {
 	BillRepositoty billRepository;
 	@GetMapping("ordermanager")
 	public String orderManager(Model model) {
-		Account account = sessionService.getAttribute("account");
+//		Account account = sessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 	    List<Object[]> listBillSucces = billRepository.calculateMonthlyBills(account.getId());
 	    List<Object[]> listBillFalse = billRepository.calculateMonthlyBillsFalse(account.getId());
 	    List<Bill> listBill = billRepository.findByIdAccount(account.getId());

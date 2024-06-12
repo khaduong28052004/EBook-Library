@@ -11,28 +11,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foti_java.model.Account;
 import com.foti_java.repository.BillRepositoty;
+import com.foti_java.service.SessionService;
 
 @Controller
 @RequestMapping("seller")
 public class SellerHomeController {
 	@Autowired
+	SessionService sessionService;
+	@Autowired
 	BillRepositoty billRepositoty;
 	@GetMapping("home")
 	public String home(Model model) {
-		int follwer = billRepositoty.getFollwer(1);
-		int like = billRepositoty.getLike(1);
-		int eValue = billRepositoty.getEvalue(1);
-		int billSucces = billRepositoty.getBillSucess(1);
-		int billChuaDuyet = billRepositoty.billChuaDuyet(1);
-		double avgStar = billRepositoty.getAVGStar(1);
-		int tongDoanhThu = billRepositoty.getTongDoanhThu(1);
-		int tongLoiNhuan = billRepositoty.getTongLoiNhuan(1);
-		List<Object> listTopAccount = billRepositoty.getTopBuyers(1);
-		List<Object> listEvalueNew = billRepositoty.getEvalueNew(1);
-		List<Object> listTopProduct = billRepositoty.getTopProduct(1);
-		List<Object[]> listDoanhThu = billRepositoty.getDoanhThu(1);
-		List<Object[]> listLoiNhuan = billRepositoty.getLoiNhuan(1);
+//		Account account = sessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
+		int follwer = billRepositoty.getFollwer(account.getId());
+		int like = billRepositoty.getLike(account.getId());
+		int eValue = billRepositoty.getEvalue(account.getId());
+		int billSucces = billRepositoty.getBillSucess(account.getId());
+		int billChuaDuyet = billRepositoty.billChuaDuyet(account.getId());
+		double avgStar = billRepositoty.getAVGStar(account.getId());
+		int tongDoanhThu = billRepositoty.getTongDoanhThu(account.getId());
+		int tongLoiNhuan = billRepositoty.getTongLoiNhuan(account.getId());
+		List<Object> listTopAccount = billRepositoty.getTopBuyers(account.getId());
+		List<Object> listEvalueNew = billRepositoty.getEvalueNew(account.getId());
+		List<Object> listTopProduct = billRepositoty.getTopProduct(account.getId());
+		List<Object[]> listDoanhThu = billRepositoty.getDoanhThu(account.getId());
+		List<Object[]> listLoiNhuan = billRepositoty.getLoiNhuan(account.getId());
 		List<String> doanhThu = new ArrayList<>();
 		List<String> loiNhuan = new ArrayList<>();
 	    for (Object[] objArray : listDoanhThu) {

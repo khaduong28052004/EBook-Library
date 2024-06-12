@@ -32,7 +32,9 @@ public class BankController {
 	boolean modal = false;
 	@GetMapping("/user/bank")
 	public String getBank(Model model) {
-		Account account = serviceSessionService.getAttribute("account");
+//		Account account = serviceSessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		active = "insert";
 		List<String> listTKNH = new ArrayList<>();
 		List<Bank> list = bankRepositoty.findAllById(account.getId());
@@ -51,7 +53,9 @@ public class BankController {
 	
 	@GetMapping("/user/bank/edit")
 	public String editBank(@RequestParam("id") Integer idBank) {
-		Account account = serviceSessionService.getAttribute("account");
+//		Account account = serviceSessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		id = idBank;
 		active = "update";
 		List<Bank> list = bankRepositoty.findAll();
@@ -130,7 +134,9 @@ public class BankController {
 	}
 	
 	public void setDefaut(Integer id, boolean status) {
-		Account account = serviceSessionService.getAttribute("account");
+//		Account account = serviceSessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		if(status) {
 			List<Bank> list = bankRepositoty.findAllById(account.getId());
 			for(Bank bank : list) {
@@ -163,7 +169,9 @@ public class BankController {
 	}
 	
 	public void setDefautDelete(Integer id, boolean status) {
-		Account account = serviceSessionService.getAttribute("account");
+//		Account account = serviceSessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		if(status) {
 			List<Bank> list = bankRepositoty.findAllById(account.getId());
 			for(Bank bank : list) {

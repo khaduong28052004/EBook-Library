@@ -61,7 +61,9 @@ public class SellerProductManagerController {
 	String errorNameCategory = null;
 	@GetMapping("/productmanager")
 	public String productManafer(Model model) {
-		Account account = sessionService.getAttribute("account");
+//		Account account = sessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		List<Product> listProducts = productRepository.findByStatus(account.getId());
 		List<Category> listCategories = categoryRepository.findAll();
 		//
@@ -151,7 +153,9 @@ public class SellerProductManagerController {
 
 	@GetMapping("/productmanager/edit")
 	public String edit(Model model, @RequestParam("id") Integer idProduct) {
-		Account account = sessionService.getAttribute("account");
+//		Account account = sessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		image = new ArrayList<>();
 		List<Product> listProducts = productRepository.findByStatus(account.getId());
 		List<Category> listCategories = categoryRepository.findAll();
@@ -264,7 +268,9 @@ public class SellerProductManagerController {
 	}
 
 	public boolean checkNameProduct(String nameProduct) {
-		Account account = sessionService.getAttribute("account");
+//		Account account = sessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		boolean checkValue = true;
 		for (Product product : productRepository.findByStatus(account.getId())) {
 			if (product.isStatus() == false) {
@@ -282,7 +288,9 @@ public class SellerProductManagerController {
 	}
 
 	public boolean checkNameProductUpdate(String nameProduct, int productId) {
-		Account account = sessionService.getAttribute("account");
+//		Account account = sessionService.getAttribute("account");
+		Account account = new Account();
+		account.setId(1);
 		boolean checkValue = true;
 		for (Product product : productRepository.findByStatus(account.getId())) {
 			if (product.getId() == productId || product.isStatus() == false) {
