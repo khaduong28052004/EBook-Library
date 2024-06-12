@@ -27,6 +27,9 @@ public class SendMailService {
 		MailSender mail = new MailSender(to, subject, content);
 		this.push(mail);
 	}
+	// public void push(MailSender mailModel) {
+	// list.add(mailModel);
+	// }
 
 	public void push(MailSender mail) {
 		MimeMessage mime = sender.createMimeMessage();
@@ -49,6 +52,7 @@ public class SendMailService {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+			sender.send(mime);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -68,6 +72,6 @@ public class SendMailService {
 		} catch (Exception e) {
 			error++;
 		}
-//		System.out.println("success : " + success + "/n error : " + error);
+		// System.out.println("success : " + success + "/n error : " + error);
 	}
 }

@@ -54,8 +54,8 @@ public class Voucher {
 	@JoinColumn(name = "typeVourcher_id")
 	TypeVoucher typeVoucher;
 
-//	@OneToMany(mappedBy = "voucher")
-//	List<Bill> bills;
+	// @OneToMany(mappedBy = "voucher")
+	// List<Bill> bills;
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")

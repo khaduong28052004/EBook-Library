@@ -18,13 +18,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ApiUtil {
-	public static List<Object[]> postApi(String url, JSONObject json, Object... params)
+	public static List<Object[]> postApi(String url,JSONObject json, Object... params)
 			throws ClientProtocolException, IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-
-		HttpPost httpPost = new HttpPost(url);
 		StringEntity entity = new StringEntity(json.toString(), ContentType.APPLICATION_JSON);
-
+		HttpPost httpPost = new HttpPost(url);
 		httpPost.setEntity(entity);
 		httpPost.setHeader("Token", "87b48598-2325-11ef-a951-76299e96dead");
 		httpPost.setHeader("Content-type", "application/json");
@@ -44,4 +42,16 @@ public class ApiUtil {
 		return list;
 
 	}
+//	public static void main(String[] args) throws ClientProtocolException, IOException {
+//		JSONObject jsonObject = new JSONObject();
+//		StringEntity entity = new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON);
+//		HttpPost post = new HttpPost("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province");
+//		post.setEntity(entity);
+//		post.setHeader("Token", "87b48598-2325-11ef-a951-76299e96dead");
+//		post.setHeader("Content-type", "application/json");
+//		List<Object[]> list = postApi(post, "ProvinceName");
+//		for (Object[] objects : list) {
+//			System.out.println(objects[0]);
+//		}
+//	}
 }

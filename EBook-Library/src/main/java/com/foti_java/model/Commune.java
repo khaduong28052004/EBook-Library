@@ -32,6 +32,7 @@ public class Commune {
 	Integer id;
 	@Nationalized
 	String name;
+	String communeId;
 
 	@ManyToOne
 	@JoinColumn(name = "districts_id")

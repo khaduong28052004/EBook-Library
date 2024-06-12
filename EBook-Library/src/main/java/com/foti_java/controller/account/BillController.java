@@ -52,6 +52,7 @@ public class BillController {
 //	String username = "user";
 	
 	@GetMapping("/user/bill")
+
 	public String getAllBills(Model model, HttpServletRequest request) {
 
 
@@ -169,5 +170,6 @@ public class BillController {
 	@PostMapping("/user/danhgia/{idProduct}")
 	public String danhGia(@PathVariable("idProduct") Integer idProduct, Model model) {
 		return "forward:/user/evaluate/" + idProduct;
+
 	}
 }
