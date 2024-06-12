@@ -32,6 +32,7 @@ public class District {
 	Integer id;
 	@Nationalized
 	String name;
+	String districtId;
 	
 	@ManyToOne
 	@JoinColumn(name = "provinces_id")
