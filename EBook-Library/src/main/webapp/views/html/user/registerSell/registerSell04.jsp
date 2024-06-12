@@ -68,37 +68,24 @@
             </div>
         </div>
         <div class="container-form">
-            <div class="container-form">
-                <div class="container-thongbao-choduyet">
-                    <div class="thongbao">
-                        <div class="thongbao-icon">
-                            <img src="/img/icon/info-circle-svgrepo-com-orange.png" alt="">
-                        </div>
-                        <div class="thongbao-content">
-                            <span>Đợi xét duyệt. Quay trở lại trang chủ</span>
-                        </div>
-                    </div>
-                </div>
+    <div class="container-thongbao-choduyet">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <img src="/img/icon/info-circle-svgrepo-com-orange.png" alt="Thông báo">
             </div>
-            <!-- <div class="container-thongbao">
-                <div class="thongbao">
-                    <div class="thongbao-icon">
-                        <img src="/img/icon/info-circle-svgrepo-com.png" alt="">
-                    </div>
-                    <div class="thongbao-content">
-                        <span>Đã đăng ký thành công. Quay trở về trang chủ</span>
-                    </div>
-                </div>
-            </div> -->
+            <div class="thongbao-content">
+                <span>Đợi xét duyệt. Quay trở lại trang chủ</span>
+            </div>
         </div>
-		<form action="">
-			<div class="md-2 form-btn">
-				<a href="./registerSell03" type="submit"
-					class="btn btn-outline-white btn-quaylai">Quay lại</a> <a
-					href="/Ebook/user/buyBookHome" class="btn btn-success btn-trangchu">Trang
-					chủ</a>
-			</div>
-		</form>
+    </div>
+</div>
+<form action="">
+    <div class="md-2 form-btn">
+        <a href="/Ebook/user/registerSell/edit/registerSell03/${account.id}" class="btn btn-quaylai">Quay lại</a>
+        <a href="/Ebook/user/buyBookHome" class="btn btn-success btn-trangchu">Trang chủ</a>
+    </div>
+</form>
+
 	</main>
 </body>
 </html>

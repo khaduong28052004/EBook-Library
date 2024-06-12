@@ -89,54 +89,62 @@
                     </div>
                 </div>
             </div>
-        <form class="row" action="${pageContext.request.contextPath}/Ebook/user/registerSell/registerSell03" method="post" enctype="multipart/form-data">
-            <div class="md-12 form-radio">
-                <label for="giayto" class="label-control">
-                    <span style="color: red;">*</span> Hình thức định danh
-                </label>
-                <div class="radios">
-                    <div>
-                        <input type="radio"  value="CCCD" required> Căn cước công dân (CCCD)
-                    </div>
-                    <div>
-                        <input type="radio" value="CMND" required> Chứng minh nhân dân (CMND)
-                    </div>
-                    <div>
-                        <input type="radio" value="Hộ chiếu" required> Hộ chiếu
-                    </div>
-                </div>
-            </div>
-            <div class="md-12 form">
-                <label for="so-shop" class="label-control">
-                    <span style="color: red;">*</span> Số CCCD/ CMND/ Hộ chiếu
-                </label>
-                <input type="text" id="so-shop" name="numberCitizenIdentification" class="form-control" placeholder="Nhập theo thông tin trên giấy tờ" required>
-            </div>
-            <div class="md-12 form">
-                <label for="hoten-shop" class="label-control">
-                    <span style="color: red;">*</span> Họ & Tên
-                </label>
-                <input type="text" id="hoten-shop" name="fullName" class="form-control" placeholder="Nhập theo thông tin trên giấy tờ" required>
-            </div>
-            <div class="md-12 form">
-                <label for="anhchup-shop" class="label-control">
-                    Hình chụp của thẻ CMND/CCCD/hộ chiếu
-                </label>
-                <input type="file" id="anhchup-shop" name="afterCitizenIdentification" class="form-control" required>
-            </div>
-            <div class="md-12 form">
-                <label for="anhchup-selfie" class="label-control">
-                    Ảnh đang cầm CMND/CCCD/Hộ chiếu
-                </label>
-                <input type="file" id="anhchup-selfie" name="beforeCitizenIdentification" class="form-control" required>
-            </div>
-            <hr>
-            <div class="md-2 form-btn">
-                <a href="./registerSell02" class="btn btn-quaylai">Quay lại</a>
-                <button type="submit" class="btn btn-success btn-tieptheo">Tiếp theo</button>
-            </div>
-        </form>
-
+        <form class="row"  action="/Ebook/user/registerSell/edit/registerSellStep4/${account.id}" method="post" enctype="multipart/form-data">
+  <div class="md-12 form-radio">
+    <label for="giayto" class="label-control">
+      <span style="color: red;">*</span> Hình thức định danh
+    </label>
+    <div class="radios">
+      <div>
+        <input type="radio" name="identityType" value="CCCD" required> Căn cước công dân (CCCD)
+      </div>
+      <div>
+        <input type="radio" name="identityType" value="CMND" required> Chứng minh nhân dân (CMND)
+      </div>
+      <div>
+        <input type="radio" name="identityType" value="Hộ chiếu" required> Hộ chiếu
+      </div>
+    </div>
+  </div>
+  <div class="md-12 form">
+    <label for="so-shop" class="label-control">
+      <span style="color: red;">*</span> Số CCCD/CMND/Hộ chiếu
+    </label>
+    <input type="hidden" name="id" value="${account.id}" class="form-control">
+    <input type="text" id="so-shop" name="numberCitizenIdentification" value="${account.numberCitizenIdentification}" class="form-control" placeholder="Nhập theo thông tin trên giấy tờ" required>
+  </div>
+  <div class="md-12 form">
+    <label for="hoten-shop" class="label-control">
+      <span style="color: red;">*</span> Họ & Tên
+    </label>
+    <input type="text" id="hoten-shop" name="fullname" class="form-control" value="${account.fullname}" placeholder="Nhập theo thông tin trên giấy tờ" required>
+  </div>
+  <div class="md-12 form">
+    <label for="anhchup-shop" class="label-control">
+      Hình chụp của thẻ CMND/CCCD/hộ chiếu
+    </label>
+    <input type="file" id="anhchup-shop" name="" class="form-control" >
+         </div>
+  <div class="md-12 form">
+    <label for="anhchup-selfie" class="label-control">
+      Ảnh đang cầm CMND/CCCD/Hộ chiếu
+    </label>
+    <input type="file" id="anhchup-selfie" name="" class="form-control">
+  </div>
+  <input type="hidden" name="avatar" value="${account.avatar}" class="form-control">
+     <input type="hidden" name="background" value="${account.background}"  class="form-control">
+             <input type="hidden" name="phone" value="${account.phone}" class="form-control">
+     <input type="hidden" name="phone" value="${account.phone}" class="form-control">
+     <input type="hidden" name="username" value="${account.username}"class="form-control">
+          <input type="hidden" name="email" value="${account.email}"class="form-control">
+     <input type="hidden" name="password"  value="${account.password}"class="form-control">
+          <input type="hidden" name="shopname"value="${account.shopname}"class="form-control">
+  <hr>
+  <div class="md-2 form-btn">
+    <a href="/Ebook/user/registerSell/edit/registerSell02/${account.id}" class="btn btn-quaylai">Quay lại</a>
+    <button type="submit" class="btn btn-success btn-tieptheo">Tiếp theo</button>
+  </div>
+</form>
         </div>
     </main>
 </body>

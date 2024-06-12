@@ -102,7 +102,7 @@ public class UpdateProfileController {
 				imageNameAVT = fileName;
 				account.setAvatar(imageNameAVT);
 			} catch (IOException e) {
-				// TODO Auto-generated catch bloc
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

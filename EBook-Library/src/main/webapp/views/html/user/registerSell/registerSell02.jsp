@@ -91,48 +91,56 @@
                     </div>
                 </div>
             </div>
-
-        <form class="row" action="/Ebook/user/registerSell/registerSell02" method="post">
-            <div class="md-12 form-radio">
-                <label for="loaihinh-kinhdoanh-shop" class="label-control">
-                    <span style="color: red;">*</span> Loại hình
-                </label>
-                <div class="radios">
-                    <div>
-                        <input type="radio" value="Cá nhân" required> Cá nhân
-                    </div>
-                    <div>
-                        <input type="radio" value="Hộ kinh doanh" required> Hộ kinh doanh
-                    </div>
-                    <div>
-                        <input type="radio" value="Công ty" required> Công ty
-                    </div>
-                </div>
-            </div>
-            <div class="md-12 form">
-                <label for="diachidk-shop" class="label-control">
-                    <span style="color: red;">*</span> Địa chỉ đăng ký kinh doanh
-                </label>
-                <input type="text" id="diachidk-shop" class="form-control" required>
-            </div>
-            <div class="md-12 form">
-                <label for="hoadon-shop" class="label-control">
-                    <span style="color: red;">*</span> Email nhận hóa đơn điện tử
-                </label>
-                <input type="email" id="hoadon-shop" class="form-control" required>
-            </div>
-            <div class="md-12 form">
-                <label for="thue-shop" class="label-control">
-                    <span style="color: red;">*</span> Mã số thuế
-                </label>
-                <input type="text" id="thue-shop" class="form-control" required>
-            </div>
-            <hr>
-            <div class="md-2 form-btn">
-                <a href="./registerSell01" class="btn btn-quaylai">Quay lại</a>
-                <button type="submit" class="btn btn-success btn-tieptheo">Tiếp theo</button>
-            </div>
-        </form>
+        <form class="row" action="/Ebook/user/registerSell/edit/registerSell02/${account.id}" method="post">
+  <div class="md-12 form-radio">
+    <label for="loaihinh-kinhdoanh-shop" class="label-control">
+      <span style="color: red;">*</span> Loại hình
+    </label>
+    <input type="hidden" name="id" class="form-control" value="${account.id }">
+         <input type="hidden" name="avatar" value="${account.avatar}" class="form-control">
+     <input type="hidden" name="background" value="${account.background}" class="form-control">
+     <input type="hidden" name="username" value="${account.username}" class="form-control">
+     <input type="hidden" name="password" value="${account.password}" class="form-control">
+        
+     <input type="hidden" name="phone" value="${account.phone}" class="form-control">
+          <input type="hidden" name="shopname" value="${account.shopname}" class="form-control">
+    <div class="radios">
+      <div>
+        <input type="radio" name="businessType" value="Cá nhân" required> Cá nhân
+      </div>
+      <div>
+        <input type="radio" name="businessType" value="Hộ kinh doanh" required> Hộ kinh doanh
+      </div>
+      <div>
+        <input type="radio" name="businessType" value="Công ty" required> Công ty
+      </div>
+    </div>
+  </div>
+  <div class="md-12 form">
+    <label for="diachidk-shop" class="label-control">
+      <span style="color: red;">*</span> Địa chỉ đăng ký kinh doanh
+    </label>
+    <input type="text" id="diachidk-shop" class="form-control" name="addresses[1].fullnameaddress" required value="${account.addresses[0].fullnameaddress}">
+  </div>
+  <div class="md-12 form">
+    <label for="hoadon-shop" class="label-control">
+      <span style="color: red;">*</span> Email nhận hóa đơn điện tử
+    </label>
+    <input type="email" id="hoadon-shop" class="form-control" name="email" required value="${account.email}">
+  </div>
+  <div class="md-12 form">
+    <label for="thue-shop" class="label-control">
+      <span style="color: red;">*</span> Mã số thuế
+    </label>
+    <input type="text" id="thue-shop" class="form-control" name="taxCode" required value="${taxCode}">
+  </div>
+  <hr>
+  <div class="md-2 form-btn">
+    <a href="/Ebook/user/registerSell/edit/${account.id}" class="btn btn-quaylai">Quay lại</a>
+    <button type="submit" class="btn btn-success btn-tieptheo">Tiếp theo</button>
+  </div>
+</form>
+</form>
         </div>
     </main>
 </body>

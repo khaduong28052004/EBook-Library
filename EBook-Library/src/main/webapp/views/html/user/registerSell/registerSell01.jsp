@@ -83,33 +83,43 @@
 		</div>
 
 		<div class="container-form">
-			<form class="row" action="/admin/products/update" method="post">
-				<div class="md-12 form">
-					<label for="ten-shop" class="label-control"><span
-						style="color: red;">*</span> Tên shop</label> <input type="text"
-						class="form-control" value="${product.name}">
-				</div>
-				<div class="md-12 form">
-					<label for="diachi-shop" class="label-control"
-						style="width: 250px;"><span style="color: red;">*</span>
-						Địa chỉ lấy hàng</label> <input type="text" class="form-control">
-				</div>
-				<div class="md-12 form">
-					<label for="email-shop" class="label-control" style="width: 250px;"><span
-						style="color: red;">*</span> Email</label> <input type="text"
-						class="form-control">
-				</div>
-				<div class="md-12 form">
-					<label for="sodienthoai-shop" class="label-control"
-						style="width: 250px;"><span style="color: red;">*</span>
-						Số điện thoại</label> <input type="text" class="form-control">
-				</div>
-				<hr>
-				<div class="md-12 form-btn">
-					<a href="./registerSell02" type="submit"
-						class="btn btn-success btn-tieptheo">Tiếp theo</a>
-				</div>
-			</form>
+			<form class="row" action="/Ebook/user/registerSell/edit/registerSell01/${account.id}" method="post">
+  <div class="md-12 form">
+    <label for="ten-shop" class="label-control">
+      <span style="color: red;">*</span> Tên shop
+    </label>
+    <input type="text" class="form-control" name="shopname" value="${account.shopname}">
+    <input type="hidden" name="id" value="${account.id}" class="form-control">
+         <input type="hidden" name="avatar" value="${account.avatar}" class="form-control">
+     <input type="hidden" name="background" value="${account.background}" class="form-control">
+     <input type="hidden" name="username" value="${account.username}" class="form-control">
+     <input type="hidden" name="password" value="${account.password}" class="form-control">
+          <input type="hidden" name="shopname" class="form-control">
+  </div>
+  <div class="md-12 form">
+    <label for="diachi-shop" class="label-control" style="width: 250px;">
+      <span style="color: red;">*</span> Địa chỉ lấy hàng
+    </label>
+    <input type="text" class="form-control" name="addresses[0].fullnameaddress" value="${account.addresses[0].fullnameaddress}">
+  </div>
+  <div class="md-12 form">
+    <label for="email-shop" class="label-control" style="width: 250px;">
+      <span style="color: red;">*</span> Email
+    </label>
+    <input type="text" class="form-control" name="email" value="${account.email}">
+  </div>
+  <div class="md-12 form">
+    <label for="sodienthoai-shop" class="label-control" style="width: 250px;">
+      <span style="color: red;">*</span> Số điện thoại
+    </label>
+    <input type="text" class="form-control" name="phone" value="${account.phone}">
+  </div> <input type="hidden" class="form-control" name="taxCode">
+  <hr>
+  <div class="md-12 form-btn">
+    <button type="submit" class="btn btn-success btn-tieptheo">Tiếp theo</button>
+  </div>
+</form>
+
 			<!-- 			<form class="row" action="/Ebook/user/registerSell/registerSell01" -->
 			<!-- 				method="get"> -->
 			<!-- 				<div class="md-12 form"> -->
