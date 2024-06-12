@@ -180,6 +180,44 @@
 	<%@include file="/common/taglib-js.jsp"%>
 
 	<script>
+	/* MOdel 1 */
+	const confirmDeleteModal1 = document.getElementById("modelID1");
+	const form1 = document.getElementById("modelForm1");
+	const confirmDeleteButton1 = document.getElementById("buttonSend1");
+	const deleteButtons1 = document.querySelectorAll(".deleteModal1");
+	
+	const closeButtons1 = document.querySelectorAll(".btnclose1");
+	let dataId1 ;
+	let dataFullname1;
+	// Add click event listener to each delete button
+	deleteButtons1.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	    		dataId1 = button.getAttribute("data-id");
+	    		dataFullname1 = button.getAttribute("data-fullname");
+	    		 const contextInput = document.getElementById("context1");
+	    	        contextInput.value = dataFullname1;
+	            if (dataId1) {
+	            	confirmDeleteModal1.style.display = 'block';
+	            } else {
+	                console.error("Product ID not found");
+	            }
+            });
+	});
+
+	confirmDeleteButton1.addEventListener("click", (event) => {
+	    	const contextLD = document.getElementById("contextLiDo1").value;
+	    	confirmDeleteButton1.href='/admin/productmanager/false/'+dataId1+'?liDo1='+encodeURIComponent(contextLD);
+			window.location.href = confirmDeleteButton1.href; 
+	    }); 
+	
+	// Add click event listener to each close button
+	closeButtons1.forEach(button => {
+	    button.addEventListener("click", (event) => {
+	        confirmDeleteModal1.style.display = 'none';
+	    });
+	});
+	
+	
 		$(function() {
 			$("#example1").DataTable(
 					{
