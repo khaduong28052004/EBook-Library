@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,8 +66,9 @@ public class SellerProductManagerController {
 	public String productManafer(Model model) {
 		account = sessionService.getAttribute("account");
 		List<Product> listProducts = productRepository.findByStatus(account.getId());
-		List<Category> listCategories = categoryRepository.findAll();
-		//
+		Sort sort = Sort.by(Sort.Direction.DESC, "id");
+		List<Category> listCategories = categoryRepository.findAll(sort);
+ 
 		checkSale = false;
 		model.addAttribute("listProduct", listProducts);
 		req.setAttribute("listCategories", listCategories);
