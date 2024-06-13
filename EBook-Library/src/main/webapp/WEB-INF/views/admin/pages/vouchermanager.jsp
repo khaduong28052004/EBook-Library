@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +38,7 @@
 				<div class="row">
 					<div class="col-md-12">
 
-						<form id="quickForm">
+						<form id="quickForm" action="" method="post">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="card-body" style="padding: 0px;">
@@ -44,47 +46,62 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Tên voucher</label> <input
-														type="text" name="tenTK" class="form-control"
-														id="exampleInputEmail1" placeholder="Tên voucher">
+														type="text" name="name" value="${voucher.name}"
+														class="form-control" id="exampleInputEmail1" required
+														placeholder="Tên voucher">
+													<p class="text-danger">${errorName }</p>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Số lượng</label> <input
-														type="number" name="hoTen" class="form-control"
-														id="exampleInputEmail1" placeholder="Số lượng">
+														type="number" class="form-control" id="exampleInputEmail1"
+														placeholder="Số lượng" name="quantity" min="1" required
+														value="${voucher.originalNumber}">
+													<p class="text-danger">${errorSL }</p>
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Ngày bắt đầu</label> <input
-														type="date" name="hoTen" class="form-control"
+														type="date" class="form-control" required
+															value="${dateStart}" name="dateStart"
 														id="exampleInputEmail1" placeholder="Ngày bắt đầu">
+													<p class="text-danger">${errorDateStart }</p>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Ngày kết thúc</label> <input
-														type="date" name="hoTen" class="form-control"
-														id="exampleInputEmail1" placeholder="Ngày kết thúc">
+														type="date" name="dateEnd" value="${dateEnd}"
+														class="form-control" id="exampleInputEmail1" required
+														placeholder="Ngày kết thúc">
+													<p class="text-danger">${errorDateEnd }</p>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputPassword1">Loại voucher</label> <select
-														name="" id="" class="form-control">
-														<option value="">Giảm giá trên hóa đơn</option>
-														<option value="">Giảm giá trên tiền ship</option>
+														name="voucher" id="" class="form-control">
+														<c:forEach var="voucherItem" items="${typeVouchers }">
+															<c:if test="${voucherItem.id == 2 || voucherItem.id ==3}">
+																<option
+																	${voucherItem.id == voucher.typeVoucher.id ? 'selected' : ''}
+																	value="${voucherItem.id}">${voucherItem.name }</option>
+															</c:if>
+														</c:forEach>
 													</select>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputPassword1">Loại giảm giá</label> <select
-														name="" id="" class="form-control">
-														<option value="">Giảm giá theo %</option>
-														<option value="">Giảm giá theo VND</option>
+														name="loaiGG" id="" class="form-control">
+														<option value="true" ${voucher.sale <100?'selected':''}>Giảm
+															giá theo %</option>
+														<option value="false" ${voucher.sale >1000?'selected':''}>Giảm
+															giá theo VND</option>
 													</select>
 												</div>
 											</div>
@@ -92,17 +109,20 @@
 												<div class="form-group">
 													<label for="exampleInputEmail1">Điều Kiện</label>
 													<div class="dieuKien" style="display: flex;">
-														<input type="number" name="sdt" class="form-control"
+														<input type="number" name="PriceDK" class="form-control"
 															id="exampleInputEmail1" placeholder="Giá tối thiểu"
-															style="margin-right: 15px;">
+															style="margin-right: 15px;" 
+															value="${voucher.priceMin}">
+														<p class="text-danger">${errorDKPrice}</p>
 													</div>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputPassword1">Giảm giá</label> <input
-														type="number" name="password" class="form-control"
-														placeholder=" % hoặc VND">
+														type="number" name="priceSale" value="${voucher.sale }"
+														 class="form-control" placeholder=" % hoặc VND">
+													<p class="text-danger">${errorPriceSale }</p>
 												</div>
 											</div>
 
@@ -113,27 +133,44 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="exampleInputPassword1">Ghi chú</label>
-										<textarea name="diaChi" class="form-control"
-											placeholder="Ghi chú"></textarea>
+										<textarea name="note" class="form-control"
+											placeholder="Ghi chú">${voucher.note }</textarea>
 									</div>
 								</div>
 								<!-- /.card-body -->
 								<div class="col-md-12">
 									<div class="card-footer"
 										style="background-color: rgba(240, 248, 255, 0); padding-left: 0px; padding-top: 0px;">
-										<button type="submit" class="btn btn-primary"
-											style="width: 100px;">Thêm</button>
-										<button type="submit" class="btn btn-primary"
-											style="width: 100px;">Sửa</button>
-										<button type="submit" class="btn btn-primary"
-											style="width: 100px;">Reset</button>
+										<a href="/admin/vouchermanager"
+											class="btn btn-secondary"> <i
+											class="fa-solid fa-circle-xmark"
+											style="color: #ffffff; margin-right: 5px;"></i>Làm mới
+										</a>
+										<button type="submit" class="btn btn-success">
+											<i class="fa-solid fa-plus"
+												style="color: #ffffff; margin-right: 5px;"></i>Xác nhận
+										</button>
 
+										<c:if test="${currentPath == 'update'}">
+											<a href="../delete/${voucher.id }" class="btn btn-danger"
+												style="color: white;"> <c:choose>
+													<c:when test="${voucher.status}">
+														<i class="bi bi-trash-fill"
+															style="color: #ffffff; margin-right: 5px;"></i> Ngừng hoạt
+													động</c:when>
+													<c:otherwise>
+														<i class="bi bi-check-circle-fill"
+															style="color: #ffffff; margin-right: 5px;"></i> Hoạt động lại
+													</c:otherwise>
+												</c:choose>
+
+											</a>
+										</c:if>
 									</div>
 								</div>
 
 							</div>
 						</form>
-
 
 					</div>
 					<div class="col-12">
@@ -155,45 +192,55 @@
 											<th>Giảm giá</th>
 											<th>Ngày bắt đầu</th>
 											<th>Ngày kết thúc</th>
+											<th>Số lượng còn lại</th>
+											<th>Loại voucher</th>
 											<th>Ghi chú</th>
 											<th>Trạng thái</th>
-											<th style="width: 150px;">Thao tác</th>
-
-
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="align-middle">7474646363</td>
-											<td class="align-middle">Giảm giá 5k</td>
-											<td class="align-middle">Tổng hóa đơn lớn hơn 100k</td>
-											<td class="align-middle">200</td>
-											<td>Giảm 5.000 phí ship</td>
-											<td class="align-middle">28/05/2024</td>
-											<td class="align-middle">28/06/2024</td>
-											<td class="align-middle">Tài khoản mới được tặng miễn
-												phí</td>
-											<td class="align-middle">Đang hoạt động</td>
-											<td class="align-middle text-center"><button
-													class="btn btn-danger">Ngừng hoạt động</button></td>
-										</tr>
+										<c:forEach var="voucher" items="${vouchers }">
+											<tr>
+												<td>${voucher.id }</td>
+												<td>${voucher.name }</td>
+												<td><fmt:formatNumber type="currency">${voucher.priceMin}</fmt:formatNumber></td>
+												<td>${voucher.originalNumber }</td>
+												<td><c:choose>
+														<c:when test="${voucher.sale >1000}">
+															<fmt:formatNumber type="currency"
+																value="${voucher.sale }"></fmt:formatNumber>
+														</c:when>
+														<c:otherwise>
+												${voucher.sale }%
+												</c:otherwise>
+													</c:choose></td>
+												<td>${voucher.dateStart }</td>
+												<td>${voucher.dateEnd }</td>
+												<td>${voucher.quantity }</td>
 
-										<tr>
-											<td class="align-middle">7474646363</td>
-											<td class="align-middle">Giảm giá 5k</td>
-											<td class="align-middle">Tổng hóa đơn lớn hơn 100k</td>
-											<td class="align-middle">200</td>
-											<td>Giảm 50.000 tổng hóa đơn</td>
-											<td class="align-middle">28/05/2024</td>
-											<td class="align-middle">28/06/2024</td>
-											<td class="align-middle">Tài khoản mới được tặng miễn
-												phí</td>
-											<td class="align-middle">Đang hoạt động</td>
-											<td class="align-middle text-center" style="width: 170px"><button
-													class="btn btn-danger">Ngừng hoạt động</button></td>
-										</tr>
+												<td>${voucher.typeVoucher.name }</td>
+												<td>${voucher.note }</td>
+												<td>${voucher.status ?'Đang hoạt động':'Hết hạn'}</td>
 
-
+												<td>
+													<form action="/admin/vouchermanager/details" method="get">
+														<input type="hidden" name="voucherId"
+															value="${voucher.id}" />
+														<button type="submit" class="btn btn-success"
+															style="color: white;">
+															<i class="bi bi-list-ul"></i>
+														</button>
+													</form>
+												</td>
+												<td><a
+													href="/admin/vouchermanager/update/${voucher.id }"
+													class="btn btn-success"> <i style="color: #ffffff;"
+														class="bi bi-pencil-fill"></i>
+												</a></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 									<!-- <tfoot>
                       <tr>

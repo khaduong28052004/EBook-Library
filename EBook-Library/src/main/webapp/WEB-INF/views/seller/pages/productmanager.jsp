@@ -1,5 +1,10 @@
+<%@page import="com.foti_java.model.Category"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page import="com.foti_java.model.Product"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +12,7 @@
 <title>Product Manager</title>
 <!-- bootstrap -->
 <%@include file = "/common/taglib-link.jsp" %>
-</head>
-<style>
+<style type="text/css">
 /* breadcrumb */
 .breadcrumb-item a {
 	color: rgba(33, 37, 41, 0.75);
@@ -195,7 +199,20 @@
     color: white;
     text-decoration: none;
 } */
+.modal.show {
+    display: block; /* Hiển thị modal khi có lớp show */
+}
+.modalCategory.show{
+display: block;
+}
+
+.show-text{
+	display:block;
+	z-index:1000;
+}
 </style>
+</head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 
 
@@ -258,150 +275,210 @@
 		<!-- /.content-header -->
 
 		<!-- Main content -->
-		<section class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<section class="col-lg-12 connectedSortable">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Quản lý</h3>
-							</div>
-							<form action="/admin/create" method="post"
-								enctype="multipart/form-data">
-								<div class="card-body" style="padding: 0px;">
-									<main class="container-them-sanpham ">
-										<div class="container-col-1">
-											<!-- 	<form class="container-info-sanpham"> -->
-											<div class="form-info-sanpham row">
-												<div class="info col-md-6">
-													<div class="lbl-info">
-														<label for="ten-sanpham" class="form-label">Tên
-															sản phẩm <span style="color: red;">*</span>
-														</label>
-													</div>
-													<input type="text" class="form-control" name="name"
-														value="${product.nameProduct}" id="ten-sanpham"
-														placeholder="Nhập tên sản phẩm" />
-												</div>
-
-												<div class="info col-md-6">
-													<div class="lbl-info">
-														<label for="ten-sanpham" class="form-label">Loại
-															sản phẩm <span style="color: red;">*</span>
-														</label>
-													</div>
-													<select class="form-control" name="category">
-														<c:forEach var="item" items="${listCategories}">
-															<option value="${item.id}"
-																${item.id == product.category.id?'selected':''}>${item.name}</option>
-														</c:forEach>
-													</select>
-												</div>
-
-												<div class="info col-md-6">
-													<div class="lbl-info">
-														<label for="id-sanpham" class="form-label">Mã sản
-															phẩm <span style="color: red;">*</span>
-														</label>
-													</div>
-													<input type="text" class="form-control" name="id"
-														value="${product.id}" id="id-sanpham" />
-												</div>
-
-												<div class="info col-md-6">
-													<div class="lbl-info">
-														<label for="soluong-sanpham" class="form-label">Số
-															lượng </label>
-													</div>
-													<input type="number" class="form-control" name="quantity"
-														id="soluong-sanpham" value="${product.quantity}" />
-												</div>
-
-												<div class="info col-md-12 row">
-													<div class="message"></div>
-													<div class="col-md-6 container-file-upload">
-														<label for="file-upload"
-															class="form-label custom-file-upload"> <i
-															class="fa fa-cloud-upload "></i> Đăng tải ảnh sản phẩm
-														</label>
-													</div>
-													<div class="col-md-6 save-image">
-														<div id="input-save-image">
-															<input type="file" class="form-control" id="file-upload"
-																multiple="multiple" name="photo"
-																accept="image/png, image/jpeg, imgae/jpg" />
+					<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<section class="col-lg-12 connectedSortable">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Quản lý</h3>
+								</div>
+								<form action="" method="post" enctype="multipart/form-data">
+									<div class="card-body" style="padding: 0px;">
+										<main class="container-them-sanpham ">
+											<div class="container-col-1">
+												<div class="form-info-sanpham row" style="margin-top: 10px">
+													<div class="info col-md-6">
+														<div class="lbl-info">
+															<label for="ten-sanpham" class="form-label">Tên
+																sản phẩm <span style="color: red;">${errorName} <c:if
+																		test="${errorName == null}">*</c:if>
+															</span>
+															</label>
 														</div>
-														<div class="show-img-form slider">
-															<div class="container-images slides">
-																<div class="show-img-div">
-																	<%-- 							<c:forEach var="item" items="${product.images}"
-																			varStatus="index">
+														<input type="text" class="form-control" name="name"
+															value="${product.name}" id="ten-sanpham" />
+													</div>
+													<div class="info col-md-6">
+														<div class="lbl-info">
+															<label for="ten-sanpham" class="form-label">Loại
+																sản phẩm
+															</label>
+														</div>
+														<div class="input-group">
+															<select class="form-control" name="category"
+																required="required">
+																<c:forEach var="item" items="${listCategories}">
+																	<option value="${item.id}"
+																		${item.id == product.category.id?'selected':''}>${item.name}</option>
+																</c:forEach>
+															</select> <a class="input-group-text" id="categoryButton">+</a>
+														</div>
+													</div>
 
-																			<div class="imageOld">
-																				<input type="text" name="idImage" value="${item.id}"
-																					hidden="true"> <img
-																					src="/image/${item.name}" alt="image"><span
-																					style="cursor: pointer;" id="deleteImage"
-																					onclick="deleteImage(${index.index})"
-																					class="btnDelete">×</span>
-																				<table>
-																					<col>
-																				</table>
-																			</div>
-																		</c:forEach> --%>
+													<div class="info col-md-6">
+														<div class="lbl-info">
+															<label for="id-sanpham" class="form-label">Tác
+																giả <span style="color: red;">*</span>
+															</label>
+														</div>
+														<input type="text" class="form-control" name="writerName"
+															value="${product.writerName}" id="sale"
+															required="required" />
+													</div>
+
+													<div class="info col-md-6">
+														<div class="lbl-info">
+															<label for="soluong-sanpham" class="form-label">
+																Nhà xuất bản <span style="color: red;">*</span>
+															</label>
+														</div>
+														<input type="text" class="form-control"
+															name="publishingCompany"
+															value="${product.publishingCompany}" required="required" />
+													</div>
+
+													<div class="info col-md-12 row">
+														<div class="message" style="color: red;"></div>
+														<div class="col-md-2 container-file-upload">
+															<label for="file-upload"
+																class="form-label custom-file-upload"> <i
+																class="fa fa-cloud-upload "></i> Đăng tải ảnh sản phẩm
+															</label>
+														</div>
+														<div class="col-md-10 save-image">
+															<div id="input-save-image">
+																<input type="file" class="form-control" id="file-upload"
+																	multiple="multiple"
+																	accept="image/png, image/jpeg, image/jpg" name="images"
+																	required="required" />
+															</div>
+															<div class="show-img-form slider">
+																<div class="container-images slides">
+																	<div class="show-img-div">
+																		<img alt="" src="">
+																	</div>
 																</div>
 															</div>
-															<!-- <button class="prev" onclick="prevClick()">&#10094</button>
-                                        <button class="next" onclick="nextClick()">&#10095</button> -->
+														</div>
+
+														<div class="container-price-sanpham">
+															<div class="row">
+																<div class="info col-md-4">
+																	<div class="lbl-info">
+																		<label for="price-sanpham" class="form-label">Mức
+																			giá của sản phẩm <span style="color: red;">${errorPrice}
+																				<c:if test="${errorPrice == null}">*</c:if>
+																		</span>
+																		</label>
+																	</div>
+																	<div class="input-group">
+																		<input type="number" class="form-control" name="price"
+																			required="required" id="gia-sanpham"
+																			value="${product.price}" min="1000" /> <span
+																			class="input-group-text" id="khoiluong-sanpham2">VNĐ</span>
+																	</div>
+																</div>
+																<div class="info col-md-4">
+																	<div class="lbl-info">
+																		<label for="price-sanpham" class="form-label">Số
+																			lượng <span style="color: red;">${errorQuantity}
+																				<c:if test="${errorQuantity == null}">*</c:if>
+																		</span>
+																		</label>
+																	</div>
+																	<div class="input-group">
+																		<input type="number" class="form-control"
+																			name="quantity" required="required" id="gia-sanpham"
+																			value="${product.quantity}" min="1" />
+																	</div>
+																</div>
+															<div class="info col-md-4">
+																<div class="lbl-info">
+																	<label for="price-sanpham" class="form-label">Khối lượng
+																		lượng <span style="color: red;">${errorWeight}
+																			<c:if test="${errorWeight == null}">*</c:if>
+																	</span>
+																	</label>
+																</div>
+																<div class="input-group">
+																		<input type="number" class="form-control" name="weight"
+																			required="required" id="gia-sanpham"
+																			value="${product.weight}" min="1" /> <span
+																			class="input-group-text" id="khoiluong-sanpham2">Gram</span>
+																</div>
+															</div>
+														</div>
+																<div class="row">
+															<div class="info col-md-6">
+																<div class="lbl-info">
+																	<label for="discountType" class="form-label">Loại
+																		giảm giá</label>
+																</div>
+																<div class="input-group">
+																	<select id="discountType" class="form-select"
+																		name="discountType"
+																		aria-label="Default select example">
+																		<option ${ product.discountType?'selected':''} value="true">Giảm theo %</option>
+																		<option ${ product.discountType?'':'selected'} value="false">Giảm theo tiền</option>
+																	</select>
+																</div>
+															</div>
+															<div class="info col-md-6">
+																<div class="lbl-info">
+																	<label for="gia-sanpham" class="form-label">
+																		Giảm giá <span style="color: red;" id="discountLabel">${errorSale}
+																			<c:if test="${errorSale == null}">*</c:if>
+																	</span>
+																	</label>
+																</div>
+																<div class="input-group">
+																	<input type="number" class="form-control" name="discount"
+																		required="required" id="gia-sanpham"
+																		value="${product.discount}" min="0" /> <span
+																		class="input-group-text" id="discountUnit">
+																		<c:if test="${checkSale}">%</c:if>
+																		<c:if test="${!checkSale}">VNĐ</c:if>
+																		</span>
+																</div>
+															</div>
+														</div>
+															<div class="row">
+																<div class="info col-md-12">
+																	<div class="lbl-info">
+																		<label for="sale-sanpham" class="form-label">Giới
+																			thiệu sản phẩm <span style="color: red;">*</span>
+																		</label>
+																	</div>
+																	<div class="input-group">
+																		<textarea class="form-control" rows="" cols=""
+																			name="introduce">${product.introduce}</textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="container-button">
+
+															<button type="submit" id="createButton"
+																class="btn btn-outline-success" style="width: 100px;"
+																formaction="/seller/productmanager/create">Thêm
+																mới</button>
+															<button type="submit" id="updateButton"
+																class="btn btn-outline-primary" style="width: 100px;"
+																formaction="/seller/productmanager/update">Cập
+																nhật</button>
+															<a class="btn btn-outline-dark"
+																href="/seller/productmanager/reset"
+																style="width: 100px; margin-left: 10px">Làm mới</a>
 														</div>
 													</div>
 												</div>
 											</div>
-											<!-- 		</form> -->
-
-											<div class="container-price-sanpham">
-												<div class="title">
-													<h6>Giá sản phẩm</h6>
-												</div>
-												<div class="info col-md-12">
-													<div class="lbl-info">
-														<label for="price-sanpham" class="form-label">Mức
-															giá của sản phẩm <span style="color: red;">*</span>
-														</label>
-													</div>
-													<div class="input-group">
-														<input type="number" class="form-control" name="price"
-															id="gia-sanpham" value="${product.price}" min="0" /> <span
-															class="input-group-text" id="khoiluong-sanpham2">VNĐ</span>
-													</div>
-												</div>
-												<div class="info col-md-12">
-													<div class="lbl-info">
-														<label for="sale-sanpham" class="form-label">Mô tả</label>
-													</div>
-													<div class="input-group">
-														<textarea class="form-control" rows="" cols=""
-															name="content">${product.content}</textarea>
-													</div>
-												</div>
-
-											</div>
-											<div class="container-button">
-
-												<button type="submit" class="btn btn-outline-success"
-													style="width: 100px;" formaction="/admin/create">Thêm
-													mới</button>
-												<button type="submit" class="btn btn-outline-primary"
-													style="width: 100px;" formaction="/update/${product.id}">Sửa</button>
-												<a class="btn btn-outline-dark"
-													style="width: 100px; margin-left: 10px">Mới</a>
-											</div>
-										</div>
-									</main>
-								</div>
-							</form>
-						</div>
-					</section>
+										</main>
+									</div>
+								</form>
+							</div>
+						</section>
 					<!-- Table -->
 					<section class="col-lg-12 connectedSortable">
 						<div class="card">
@@ -425,53 +502,87 @@
 										</tr>
 									</thead>
 									<tbody>
-										<%-- 					<c:forEach var="item" items="${listProduct}">
-												<tr>
-													<td class="align-middle">${item.id}</td>
-													<td class="align-middle">
-														<div class="row">
-															<c:forEach var="it" items="${item.images}">
-																<div class="col-md-6" style="padding: 0px">
-																	<img src="/image/${it.name}" alt="" width="50px">
-																</div>
-															</c:forEach>
+										<c:forEach var="product" items="${listProduct}">
+											<tr>
+												<td class="align-middle">${product.id}</td>
+												<td class="align-middle"><img alt=""
+													style="width: 60px; height: 70px; border-radius: 5px;"
+													src="/assets/img/${product.image}"> <c:forEach var="img"
+														items="${product.imageProducts}">
+														<img alt=""
+															style="width: 60px; height: 70px; border-radius: 5px;"
+															src="/assets/img/${img.name}">
+													</c:forEach></td>
 
-														</div>
-													</td>
-													<td class="align-middle">${item.nameProduct}</td>
-													<td class="align-middle">${item.quantity}</td>
-													<td class="align-middle">${item.price}</td>
-													<td class="align-middle">${item.stars}</td>
-													<td class="align-middle">${item.amountSold}</td>
-													<td class="align-middle text-center"><a
-														href="/admin/edit/${item.id}" class="btn btn-primary">Edit</a>
-														<a href="/admin/delete/${item.id}" class="btn btn-danger">
-															Xóa</a></td>
-												</tr>
-											</c:forEach> --%>
-										<tr>
-											<td class="align-middle">1</td>
-											<td class="align-middle">img</td>
-											<td class="align-middle">Sản phẩm 1</td>
-											<td class="align-middle">200</td>
-											<td class="align-middle">99.000 <sup>đ</sup></td>
-											<td class="align-middle">5*</td>
-											<td class="align-middle">150</td>
-											<td class="align-middle text-center"><a
-												href="/admin/edit/${item.id}" class="btn btn-primary">Edit</a>
-												<a href="/admin/delete/${item.id}" class="btn btn-danger">
-													Xóa</a></td>
-										</tr>
+												<td class="align-middle">${product.name}</td>
+												<td class="align-middle">${product.quantity}</td>
+												<td class="align-middle"><fmt:formatNumber
+														value="${product.price}" type="currency" pattern="#,##0"
+														currencySymbol="" /><sup>đ</sup></td>
+
+												<!-- Khởi tạo các biến totalStars và numberOfReviews -->
+												<c:set var="totalStars" value="0" />
+												<c:set var="numberOfReviews" value="0" />
+
+												<td class="align-middle">
+													<!-- Cập nhật giá trị của totalStars và numberOfReviews trong vòng lặp forEach -->
+													<c:forEach var="star" items="${product.evalues}">
+														<c:set var="totalStars" value="${totalStars + star.star}" />
+														<c:set var="numberOfReviews"
+															value="${numberOfReviews + 1}" />
+													</c:forEach> <!-- Tính giá trị trung bình của star --> <c:set
+														var="averageStars"
+														value="${numberOfReviews != 0 ? totalStars / numberOfReviews : 0}" />
+													<fmt:formatNumber value="${averageStars}" type="number"
+														minFractionDigits="1" maxFractionDigits="1" />/5*
+												</td>
+
+												<td class="align-middle"><c:set var="totalQuantity"
+														value="0" /> <c:forEach var="item"
+														items="${product.billDetails}">
+														<!-- Cập nhật giá trị của totalQuantity -->
+														<c:set var="totalQuantity"
+															value="${totalQuantity + item.quantity}" />
+													</c:forEach>${totalQuantity}</td>
+
+												<td class="align-middle text-center"><c:if
+														test="${product.active}">
+														<a href="/seller/productmanager/edit?id=${product.id}"
+															class="btn btn-primary">Edit</a>
+													</c:if> <c:if test="${product.active}">
+														<a type="button" class="btn btn-danger deleteModal"
+															data-id="${product.id}">Xóa</a>
+													</c:if></td>
+											</tr>
+
+										</c:forEach>
+
 									</tbody>
 								</table>
+								<div class="modal" id="confirmDeleteModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="confirmDeleteLabel">Thông
+													Báo</h5>
+												<button type="button" class="btn-close thoat"></button>
+											</div>
+											<div class="modal-body">Bạn có chắc chắn muốn xóa sản
+												phẩm này không?</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary thoat">Hủy</button>
+												<a type="button" class="btn btn-danger"
+													id="confirmDeleteButton">Xóa</a>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<!-- /.card-body -->
-
 					</section>
 				</div>
 				<!-- /.card -->
-
 
 
 			</div>
@@ -481,6 +592,62 @@
 		<!-- /.content -->
 		<!-- /.content-wrapper -->
 	</div>
+						<div class="modal modalCategory" id="categoryModal" >
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="confirmDeleteLabel">Thể loại</h5>
+									<button type="button" class="btn-close" id="categoryClose"></button>
+								</div>
+								<div class="modal-body">
+									<form action="" method="post">
+										<div class="mb-3">
+											<label class="form-label">Thể loại <span
+												style="color: red;">${errorNameCategory} <c:if
+														test="${errorNameCategory == null}">*</c:if>
+											</span>
+											</label> <input type="text" name="nameCategory"
+												value="${categoryNew.name}" class="form-control" required="required" />
+										</div>
+										<div class="mb-3">
+										<c:if test="${showBtnCreate == true}">
+											<button type="submit" class="btn btn-outline-success"
+												formaction="/seller/productmanager/category/create">Thêm
+												mới</button>
+										</c:if>
+										<c:if test="${showBtnUpdate == true}">
+											<button type="submit" class="btn btn-outline-primary"
+												formaction="/seller/productmanager/category/update">Cập
+												nhật</button>
+										</c:if>
+											<a type="button" class="btn btn-outline-dark"
+												href="/seller/productmanager/category/reset">Làm
+												Mới</a>
+										</div>
+									</form>
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Id</th>
+												<th scope="col">Name</th>
+												<th scope="col"></th>
+											</tr>
+										</thead>
+										<tbody id="table-body">
+											<!-- Rows will be populated by JavaScript -->
+										</tbody>
+									</table>
+									<nav aria-label="Page navigation example" id="pagination-controls">
+									<ul class="pagination"  >
+										<li id="prev-btn" class="page-link" onclick="prevPage()">Prev</li>
+										<li id="page-info" class="page-link"></li>
+										<li  id="next-btn" class="page-link" onclick="nextPage()">Next</li >
+									</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 		<!-- Control sidebar content goes here -->
@@ -511,133 +678,470 @@
 
 
 	<script>
-    let imagesArray = [];
-    let imageOld = [];
-    let imageNew = document.querySelectorAll(".image");
-    
-    var listImageOld = document.querySelectorAll(".imageOld");
-    function deleteImage(index){
-    	listImageOld[index].remove();
-    	console.log(listImageOld.length);
-    }; 
-    //INPUT
-    containerInputSaveImage = document.querySelector("#input-save-image");
-    inputSaveImage = document.querySelector("#file-upload");
-    //SHOW
-    containerShowImg = document.querySelector(".show-img-form");
-    showImg = document.querySelector(".show-img-div");
-    //Message
-    message = document.querySelector(".message");
-  //  deleteImage = [];
-    // Hàm kiểm tra xem ảnh đã tồn tại trong mảng hay chưa
-    function isImageExists(image) {
-      return imagesArray.some(existingImage => {
-        return existingImage.name === image.name; //so sánh theo tên ảnh
-      });
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var discountType = document.getElementById('discountType');
+        var discountUnit = document.getElementById('discountUnit');
 
-    //THÊM IMG
-   if (inputSaveImage) {
-      inputSaveImage.addEventListener("change", () => {
-    	//  imagesArray=[];
-        const files = inputSaveImage.files;
-        for (let index = 0; index < files.length; index++) {
-          const image = files[index];
-          const maxSize = 5 * 1024 * 1024; // 5 MB (có thể điều chỉnh theo nhu cầu)
-          const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-          const newImageCount = event.target.files.length + showImg.childElementCount;
-
-          // Kiểm tra xem ảnh đã tồn tại trong mảng hay chưa
-          if (!isImageExists(image)) {
-            imagesArray.push(image);
-            imageOld.push(imagesArray);
-          } else {
-            imagesArray.some(existingImage => {
-              existingImage === image; //so sánh theo tên ảnh
+        // Kiểm tra xem các phần tử có tồn tại không
+        if (discountType && discountUnit) {
+            discountType.addEventListener('change', function() {
+                if (this.value === 'true') {
+                    discountUnit.textContent = '%';
+                } else {
+                    discountUnit.textContent = 'VNĐ';
+                }
             });
-          };
-
-    if (event.target.files.length <= 3) {
-            message.innerHTML = "";
-            message.style.cssText = "";
-          }
-
-          if (image.size > maxSize) {
-            message.innerHTML = "Kích thước file ảnh quá lớn, vui lòng chọn file khác.";
-            message.style.cssText = "background-color: #f8d7da; color :#b71c1c";
-            return;
-          }
-          // Kiểm tra loại file
-          if (!allowedTypes.includes(image.type)) {
-            message.innerHTML('Loại file không hợp lệ, vui lòng chọn file ảnh có định dạng PNG, JPEG hoặc JPG.');
-            message.style.cssText = "background-color: #f8d7da; color :#b71c1c";
-            return;
-          }
+        } else {
+            console.error('Element not found');
         }
-        displayImage();
-      })
-    } else {
-      console.log("Element with id 'show-img-form' not found.");
-    }
-  
+    });
+  </script>
+  <script>
+	 function fetchImageAsBlob(url) {
+ 	    return fetch(url)
+ 	        .then(response => response.blob())
+ 	        .then(blob => new File([blob], url.split('/').pop(), { type: blob.type }));
+ 	}
 
-    // DISPLAY IMAGE
-    function displayImage() {
-    	 imageNew = document.querySelectorAll(".image");
-    	 if(imageNew.length>0){
-    		  
-    	    	for(var i =0; i<imageNew.length;i++){
-    			imageNew[i].remove();
-    	    	}
-    		
-    	}
-      //showImg.innerHTML = ""; // Xóa bỏ tất cả các phần tử hiện có trước khi tạo mới
-      imagesArray.forEach((imageFile, index) => {
-        // Tạo các phần tử ảnh và nút xóa
-/*         const table = document.createElement('table');
-        const col = document.createElement('col'); */
-        const input = document.createElement('input');
-        input.setAttribute('type','text');
-        input.setAttribute('hidden','true');
-        input.setAttribute('value',' ');
-        input.setAttribute('name','idImageNew');
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(imageFile);
-        img.alt = 'image';
-        const span = document.createElement('span');
-        span.textContent = '×';
-        span.style.cursor = 'pointer';
-         span.onclick = function () {
-           imagesArray.splice(index, 1);
-          displayImage();
+ 	// Add images to file input
+ 	async function addImagesToFileInput(imagesArray) {
+ 	    const inputSaveImage = document.querySelector("#file-upload");
+ 	    const dataTransfer = new DataTransfer();
+
+ 	    for (const imageUrl of imagesArray) {
+ 	        if (typeof imageUrl === "string") {
+ 	            const file = await fetchImageAsBlob(imageUrl);
+ 	            dataTransfer.items.add(file);
+ 	           imagesArray.push(file); // Add file to imagesArray
+ 	        }
+ 	    }
+
+ 	    inputSaveImage.files = dataTransfer.files;
+ 	    displayImage();
+ 	}
+
+ 	let imagesArray = [];
+ 	// Kiểm tra và thêm ảnh vào mảng imagesArray
+if ('${images[0]}'.length > 0) {
+const image = "${pageContext.request.contextPath}/assets/img/${images[0]}";
+if (!imagesArray.includes(image)) {
+	imagesArray.push(image);
+}
+
+}
+if ('${images[1]}'.length > 0) {
+const image = "${pageContext.request.contextPath}/assets/img/${images[1]}";
+if (!imagesArray.includes(image)) {
+	imagesArray.push(image);
+}
+
+}
+if ('${images[2]}'.length > 0) {
+	const image = "${pageContext.request.contextPath}/assets/img/${images[2]}";
+	if (!imagesArray.includes(image)) {
+		imagesArray.push(image);
+	}
+
+	}
+if ('${images[3]}'.length > 0) {
+	const image = "${pageContext.request.contextPath}/assets/img/${images[3]}";
+	if (!imagesArray.includes(image)) {
+		imagesArray.push(image);
+	}
+
+	}
+
+ 	// Add images to input file on page load
+ 	document.addEventListener("DOMContentLoaded", () => {
+ 	    addImagesToFileInput(imagesArray);
+ 	});
+
+ 	 const containerInputSaveImage = document.querySelector("#input-save-image");
+     const inputSaveImage = document.querySelector("#file-upload");
+     const containerShowImg = document.querySelector(".show-img-form");
+     const showImg = document.querySelector(".show-img-div");
+     const message = document.querySelector(".message");
+     const deleteImage = [];
+
+     // Hàm kiểm tra xem ảnh đã tồn tại trong mảng hay chưa
+     function isImageExists(image) {
+         return imagesArray.some(existingImage => existingImage.name === image.name);
+     }
+
+     // THÊM IMG
+     let checkValue = true;
+     if (inputSaveImage){
+         inputSaveImage.addEventListener("change", (event) => {
+        	 
+             const files = Array.from(event.target.files);
+             const maxSize = 500 * 1024 * 1024; // 500 MB
+             const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+             const currentImageCount = imagesArray.filter(item => item instanceof File).length;
+             let countListImages;
+            console.log(currentImageCount)
+             for (let index = 0; index < files.length; index++) {
+                 const image = files[index];
+                 console.log(files.length);
+                 // Kiểm tra tổng số ảnh nếu thêm ảnh hiện tại
+                 if (files.length+currentImageCount > 4){
+                     message.innerHTML = "Bạn chỉ có thể thêm tối đa 4 ảnh.";
+                     checkValue = false;
+                     return;
+                 }
+        
+
+                 if (image.size > maxSize) {
+                     message.innerHTML = "Kích thước file ảnh quá lớn, vui lòng chọn file khác.";
+                     inputSaveImage.value = ''; // Reset file input
+                     checkValue = false;
+                     return;
+                 }
+
+                 // Kiểm tra loại file
+                 if (!allowedTypes.includes(image.type)) {
+                     message.innerHTML = "Loại file không hợp lệ, vui lòng chọn file ảnh có định dạng PNG, JPEG hoặc JPG.";
+                     inputSaveImage.value = ''; // Reset file input
+                     checkValue = false;
+                     return;
+                 }
+                 checkAI(inputSaveImage,index);	
+                 imagesArray.push(image);
+             }
+
+             // Clear message and reset input
+             message.innerHTML = "";
+             inputSaveImage.value = ''; // Reset file input
+             countListImages = currentImageCount;
+
+             displayImage();
+             const showImgDivs = document.querySelectorAll('.show-img-div');
+             showImgDivs.forEach(div => {
+            	    const imgCount = div.querySelectorAll('img').length;
+            	    console.log(`Number of <img> tags in this div:`+imgCount);
+            	    countListImages = imgCount;
+            	});
+             var button = document.getElementById('updateButton');
+             var creatteButton = document.getElementById('creatteButton');
+            
+             if(checkValue == false||countListImages < 2){
+             	updateButton.disabled = true;
+                 createButton.disabled = true;
+                 message.innerHTML = "Bạn vui lòng chọn tối thiếu 2 ảnh.";
+             }else{
+             	updateButton.disabled = false;
+                 createButton.disabled = false;
+             }
+             console.log("Số ảnh:"+countListImages);
+         });
+     } else {
+         console.log("Element with id 'show-img-form' not found.");
+     }
+
+     const PAT = "c9bcfa03a89c476b91936cab785c8b0d";
+     const USER_ID = "gnwcvstmaqvo";
+     const APP_ID = "my-first-application-b21dep";
+     const MODEL_ID = "general-image-detection";
+     const MODEL_VERSION_ID = "1580bb1932594c93b7e2e04456af7c6f";
+
+     function checkAI(inputSaveImage, index,) {
+    	 
+       const file = inputSaveImage.files[index];
+   
+       if (file) {
+         const reader = new FileReader();
+         reader.onloadend = function () {
+           const base64String = reader.result
+             .replace("data:", "")
+             .replace(/^.+,/, "");
+
+           const raw = JSON.stringify({
+             user_app_id: {
+               user_id: USER_ID,
+               app_id: APP_ID,
+             },
+             inputs: [
+               {
+                 data: {
+                   image: {
+                     base64: base64String,
+                   },
+                 },
+               },
+             ],
+           });
+
+           const requestOptions = {
+             method: "POST",
+             headers: {
+               Accept: "application/json",
+               Authorization: "Key " + PAT,
+             },
+             body: raw,
+           };
+
+           fetch(
+             "https://api.clarifai.com/v2/models/" +
+               MODEL_ID +
+               "/versions/" +
+               MODEL_VERSION_ID +
+               "/outputs",
+             requestOptions
+           )
+             .then((response) => response.json())
+             .then((result) => {
+               console.log(result); 
+             // console.log(result.outputs[0].data.regions[0].data.concepts[0].name);
+            
+               const outputs = result.outputs;
+               if (
+                 outputs &&
+                 outputs.length > 0 &&
+                 outputs[0].data &&
+                 outputs[0].data.regions
+               ) {
+                 const regions = outputs[0].data.regions;
+                
+
+                 let bookDetected = false; // Biến để kiểm tra xem có sách được nhận dạng không
+
+                 regions.forEach((region) => {
+       if (region.data.concepts) {
+         region.data.concepts.forEach((concept) => {
+             console.log(concept.name);
+           if (concept.name == 'Book' || concept.name == 'Poster') {
+             outputHtml += `<p>Book.<p>`;
+             bookDetected = true;
+           }
+         });
+       }
+     });
+
+                 if (!bookDetected) {
+                	 message.innerHTML = "Ảnh không hợp lệ sau khi kiểm tra AI.";
+                   checkValue = false;
+                 }
+                 checkBTNLoad();
+                
+               } else {
+                 
+               }
+             })
+             .catch((error) => console.log("error", error));
          };
+         reader.readAsDataURL(file);
+       } else {
+         alert("Please select an image file.");
+       }
+     }
+     function checkBTNLoad() {
+    	   var button = document.getElementById('updateButton');
+    	    var creatteButton = document.getElementById('creatteButton');
+    	    
+    	    
+    	    var currentUrl = window.location.href;
+    	    var regex = /^http:\/\/localhost:8080\/seller\/productmanager\/edit\?id=\d+$/;
 
-        // Thêm các phần tử vào container
-        const imageContainer = document.createElement('div');
-        imageContainer.appendChild(input);
-        imageContainer.classList.add('image');
-        imageContainer.appendChild(img);
-        imageContainer.appendChild(span);
+    	    if (updateButton && createButton) {
+    	        if (!regex.test(currentUrl)) {
+    	            updateButton.disabled = true;
+    	            createButton.disabled = false;
+    	        } else {
+    	            updateButton.disabled = false;
+    	            createButton.disabled = true;
+    	        }
+    	    } else {
+    	        console.error("One or both buttons do not exist in the DOM.");
+    	    }
+     }
+     // DISPLAY IMAGE
+     function displayImage() {
+    	 
+         showImg.innerHTML = ""; // Xóa bỏ tất cả các phần tử hiện có trước khi tạo mới
+         const dataTransfer = new DataTransfer(); // Tạo một DataTransfer mới để cập nhật
 
-/* 
-        imageContainer.appendChild(table);
-        table.appendChild(col); */
+         imagesArray.forEach((imageFile, index) => {
+             // Kiểm tra xem imageFile có phải là một đối tượng File không
+             if (imageFile instanceof File) {
+                 // Tạo các phần tử ảnh và nút xóa
+                 const img = document.createElement('img');
+                 img.src = URL.createObjectURL(imageFile);
+                 img.alt = 'image';
 
-        // Thêm container vào showImg
-        showImg.appendChild(imageContainer);
-        // slideShow();
-      });
-     // imagesArray = []
-    }
+                 const span = document.createElement('span');
+                 span.textContent = '×';
+                 span.style.cursor = 'pointer';
+                 span.onclick = function () {
+                     imagesArray.splice(index, 1);
+                     displayImage();
+                 };
 
-    containerShowImg.addEventListener("submit", (e) => {
-      e.preventDefault();
-      sendImageToServer();
+                 // Thêm các phần tử vào container
+                 const imageContainer = document.createElement('div');
+                 imageContainer.classList.add('image');
+                 imageContainer.appendChild(img);
+                 imageContainer.appendChild(span);
+
+                 // Thêm container vào showImg
+                 showImg.appendChild(imageContainer);
+
+                 // Thêm file vào dataTransfer
+                 dataTransfer.items.add(imageFile);
+             }
+         });
+
+         // Cập nhật files trong inputSaveImage
+         inputSaveImage.files = dataTransfer.files;
+         
+         
+     }
+document.addEventListener('DOMContentLoaded', function() {
+	checkBTNLoad();
+  
+    const confirmDeleteModal = document.getElementById("confirmDeleteModal");
+    const confirmDeleteButton = document.getElementById("confirmDeleteButton");
+
+    const deleteButtons = document.querySelectorAll(".deleteModal");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const productId = button.getAttribute("data-id");
+            console.log("Product ID:", productId);  // Debugging line
+            if (productId) {
+                confirmDeleteButton.setAttribute('href', `/seller/productmanager/delete?id=`+productId);
+                confirmDeleteModal.style.display = 'block';
+            } else {
+                console.error("Product ID not found");
+            }
+        });
     });
 
-    // table
+    const buttonsDis = document.querySelectorAll(".thoat");
+    buttonsDis.forEach(button => {
+        button.addEventListener("click", (event) => {
+            confirmDeleteModal.style.display = 'none';
+        });
+    });
+  
+    
+    const categoryModal = document.getElementById("categoryModal");
+    const catergoryButton = document.getElementById("categoryButton");
+    const catergoryClose = document.getElementById("categoryClose");
+    catergoryButton.addEventListener("click", (event) => {
+    	categoryModal.style.display = 'block';
+    });
+    catergoryClose.addEventListener("click", (event) => {
+    	categoryModal.style.display = 'none';
+    });
+    const categories = [
+        <% List<Category> listCategories = (List<Category>) request.getAttribute("listCategories");
+        for (Category category : listCategories) { %>
+            { id: "<%= category.getId() %>", name: "<%= category.getName() %>" },
+        <% } %>
+    ];
+
+    const rowsPerPage = 5;
+    let currentPage = 1;
+
+    function renderTable() {
+        const tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = '';
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = Math.min(start + rowsPerPage, categories.length);
+
+        for (let i = start; i < end; i++) {
+            const category = categories[i];
+            const row = `
+                <tr>
+                    <th scope="row">${category.id}</th>
+                    <td>${category.name}</td>
+                    <td><a class="btn btn-success" href="/seller/productmanager/category/edit?id=${category.id}">Edit</a></td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        }
+
+        document.getElementById('page-info').innerText = `Page ${currentPage} of ${Math.ceil(categories.length / rowsPerPage)}`;
+    }
+
+    function nextPage() {
+        if (currentPage < Math.ceil(categories.length / rowsPerPage)) {
+            currentPage++;
+            renderTable();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    }
+
+    // Initial render
+    renderTable();
+    });
 
   </script>
+  
+   <script>
+  $(document).ready(function() {
+	    var showModal = "${showModal}";
+	    const categoryModal = document.getElementById("categoryModal");
+	    if (showModal === 'true') {
+	    	categoryModal.style.display = 'block';
+	    }
+	});
+  
+  var categories = [
+      <c:forEach var="category" items="${listCategories}">
+          {
+              "id": "${category.id}",
+              "name": "${category.name}"
+          }<c:if test="${!status.last}">,</c:if>
+      </c:forEach>
+  ];
+  var currentPage = 1;
+  var itemsPerPage = 5;
+
+  function displayTable(page) {
+      var tableBody = document.getElementById('table-body');
+      tableBody.innerHTML = ''; // Clear the current content
+
+      var start = (page - 1) * itemsPerPage;
+      var end = Math.min(start + itemsPerPage, categories.length);
+      
+      for (var i = start; i < end; i++) {
+          var row = document.createElement('tr');
+          row.innerHTML = '<th scope="row">' + categories[i].id + '</th>' +
+                          '<td>' + categories[i].name + '</td>' +
+                          '<td><a type="button" class="btn btn-success" href="/seller/productmanager/category/edit?id=' + categories[i].id + '">Edit</a></td>';
+          tableBody.appendChild(row);
+      }
+
+      document.getElementById('page-info').innerText = 'Page ' + page + ' of ' + Math.ceil(categories.length / itemsPerPage);
+
+      document.getElementById('prev-btn').disabled = page === 1;
+      document.getElementById('next-btn').disabled = page === Math.ceil(categories.length / itemsPerPage);
+  }
+
+  function prevPage() {
+      if (currentPage > 1) {
+          currentPage--;
+          displayTable(currentPage);
+      }
+  }
+
+  function nextPage() {
+      if (currentPage < Math.ceil(categories.length / itemsPerPage)) {
+          currentPage++;
+          displayTable(currentPage);
+      }
+  }
+
+  window.onload = function() {
+      displayTable(currentPage);
+  };
+</script>
 </body>
 
-</html>
+</html>	
