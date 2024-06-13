@@ -2,8 +2,6 @@ package com.foti_java.model;
 
 import java.util.List;
 
-import org.hibernate.annotations.Nationalized;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +28,6 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	@Nationalized
 	String name;
 	
 	@OneToMany(mappedBy = "role")

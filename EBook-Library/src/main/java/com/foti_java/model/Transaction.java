@@ -2,8 +2,6 @@ package com.foti_java.model;
 
 import java.util.Date;
 
-import org.hibernate.annotations.Nationalized;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,7 +33,6 @@ public class Transaction {
 	Date date;
 	double price;
 	boolean status;
-	@Nationalized
 	String banksNumber;
 	
 	@ManyToOne

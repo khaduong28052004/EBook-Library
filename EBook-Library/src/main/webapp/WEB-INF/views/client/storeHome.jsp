@@ -15,10 +15,11 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-
-
 </head>
 <body>
+	<!-- /assets/img/background/changpass.jpg -->
+	<style>
+</style>
 	<link rel="stylesheet" href="/assets/css/buyBook.css" />
 	<link rel="stylesheet" href="/assets/css/storeHome.css">
 	<div class="container">
@@ -26,37 +27,101 @@
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="introduce">
-							<div class="introduce-store">
-								<img src="/assets/img/banner/BooksDetails_banner_HocTap1.jpg"
-									alt="">
-								<div class="nameStore">
-									<h5>${account.shopName}</h5>
-									<p>${account.addresses[0].fullNameAddress}</p>
-								</div>
+						<c:if test="${account.background == null}">
 
-							</div>
-							<div class="subscribe-message">
-								<c:set var="checkFollower" value="false"></c:set>
-								<div class="subscribe">
-									<c:forEach var="item" items="${sessionScope.account.followers}">
-										<c:if test="${item.follower_id == account.id && item.status ==true}">
-											<c:set var="checkFollower" value="true"></c:set>
+							<div class="introduce"
+								style="background-image: url('/assets/img/background/changpass.jpg')">
+								<div class="introduce-store">
+									<c:if test="${account.avatar == null && account.gender ==true}">
+										<img
+											src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png"
+											alt="">
+									</c:if>
+									<c:if
+										test="${account.avatar == null && account.gender == false}">
+										<img
+											src="https://cdn.pixabay.com/photo/2017/01/30/23/52/female-2022387_1280.png"
+											alt="">
+									</c:if>
+									<c:if test="${account.avatar != null}">
+										<img
+											src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png"
+											alt="">
+									</c:if>
+									<div class="nameStore">
+										<h5>${account.shopName}</h5>
+										<p>${account.addresses[0].fullNameAddress}</p>
+									</div>
+
+								</div>
+								<div class="subscribe-message">
+									<div class="subscribe">
+
+										<c:if test="${checkFollower == true}">
+											<a href="/user/storehome/follower">Đang theo dõi</a>
 										</c:if>
-									</c:forEach>
-									<c:if test="${checkFollower == true}">
-										<a href="/user/storehome/follower">Đang theo dõi</a>
-									</c:if>
-									<c:if test="${checkFollower == false}">
-										<a href="/user/storehome/follower">Theo dõi</a>
-									</c:if>
-								</div>
-								<div class="message">
-									<a href="">Nhắn tin</a>
-								</div>
+										<c:if test="${checkFollower == false}">
+											<a href="/user/storehome/follower">Theo dõi</a>
+										</c:if>
+									</div>
+									>
+									<div class="message">
+										<a href="">Nhắn tin</a>
+									</div>
 
+								</div>
 							</div>
-						</div>
+
+
+						</c:if>
+
+						<c:if test="${account.background != null}">
+
+							<div class="introduce"
+								style="background-image: url('${account.background}')">
+								<div class="introduce-store">
+									<c:if test="${account.avatar == null && account.gender ==true}">
+										<img
+											src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png"
+											alt="">
+									</c:if>
+									<c:if
+										test="${account.avatar == null && account.gender == false}">
+										<img
+											src="https://cdn.pixabay.com/photo/2017/01/30/23/52/female-2022387_1280.png"
+											alt="">
+									</c:if>
+									<c:if test="${account.avatar != null}">
+										<img
+											src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png"
+											alt="">
+									</c:if>
+									<div class="nameStore">
+										<h5>${account.shopName}</h5>
+										<p>${account.addresses[0].fullNameAddress}</p>
+									</div>
+
+								</div>
+								<div class="subscribe-message">
+									<div class="subscribe">
+
+										<c:if test="${checkFollower == true}">
+											<a href="/user/storehome/follower">Đang theo dõi</a>
+										</c:if>
+										<c:if test="${checkFollower == false}">
+											<a href="/user/storehome/follower">Theo dõi</a>
+										</c:if>
+									</div>
+									
+									<div class="message">
+										<a href="">Nhắn tin</a>
+									</div>
+
+								</div>
+							</div>
+
+
+						</c:if>
 					</div>
 					<div class="col-md-8">
 						<div class="sales-information">

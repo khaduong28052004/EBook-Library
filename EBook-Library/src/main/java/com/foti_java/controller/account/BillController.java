@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class BillController {
 	@GetMapping("/user/bill")
 	public String getBill() {
-		return "client/bill";
+		return"client/bill";
 	}
 }

@@ -20,7 +20,6 @@ public class registerSell {
 	public String getRegisterSell03() {
 		return "client/registerseller/registerSell03";
 	}
-
 	@RequestMapping("registersell04")
 	public String getRegisterSell04() {
 		return "client/registerseller/registerSell04";

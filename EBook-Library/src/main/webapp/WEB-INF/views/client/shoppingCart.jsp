@@ -56,9 +56,7 @@
 					<div class="col-md-12 indexCard" style="margin-top: 10px;">
 						<div class="card" style="border-radius: 0px;">
 							<div class="cart-nameStore">
-								<!-- 	<input class="form-check-input" type="checkbox" id="gridCheck"> -->
 								<h3 style="margin-left: 50px">${item.account.shopName}</h3>
-
 							</div>
 						</div>
 						<div class="card" style="border-radius: 0px;">
@@ -87,21 +85,19 @@
 										<!-- <form> -->
 											<div class="btn-group me-2" role="group"
 												aria-label="First group">
-
 												<button type="submit" class="btn btn-outline-secondary"
 													onclick="decreaseValue(${index.index})"
-													formaction="/user/shoppingcart/quantity/${item.id}"
+													formaction="/user/shoppingcart/quantity"
 													formmethod="get" style="border-right: none">-</button>
+											<input type = "number" value = "${item.id}" name = "cartId" hidden>
 												<input type="number" style="width: 60px;" readonly
 													class="btn-outline-secondary text-center btnradio"
 													name="btnradio" id="btnradio1" min="1"
 													max="${item.product.quantity}" value="${item.quantity}">
 												<button type="submit" class="btn btn-outline-secondary"
-													formaction="/user/shoppingcart/quantity/${item.id}"
+													formaction="/user/shoppingcart/quantity"
 													formmethod="get" style="border-left: none"
 													onclick="increaseValue(${item.product.quantity},${index.index})">+</button>
-
-
 											</div>
 									<!-- 	</form> -->
 									</div>

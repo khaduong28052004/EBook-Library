@@ -26,6 +26,7 @@ import com.foti_java.repository.CommuneRepository;
 import com.foti_java.repository.DistrictRepository;
 import com.foti_java.repository.ProductRepository;
 import com.foti_java.repository.ProvinceRepository;
+import com.foti_java.service.SessionService;
 import com.foti_java.utils.ApiUtil;
 
 @Controller
@@ -42,6 +43,8 @@ public class HomeTestController {
 	AccountRepositoty accountRepositoty;
 	@Autowired
 	AddressRepository addressRepository;
+	@Autowired
+	SessionService sessionService;
 
 	@RequestMapping("/user/home")
 	public String requestMethodName(Model model) {
@@ -64,16 +67,16 @@ public class HomeTestController {
 //		}
 		Sort sort = Sort.by(Sort.Direction.DESC, "quantitySell");
 		Pageable pageableHot = PageRequest.of(0, 2, sort);
-		Page<Product> pageProductHot = productRepository.findAll(pageableHot);
+		Account account = sessionService.getAttribute("account");
+		Page<Product> pageProductHot = productRepository.findAllByAccountNot(account, pageableHot);
 		List<Integer> listId = new ArrayList<>();
 		for (int i = 0; i < pageProductHot.getContent().size(); i++) {
 			listId.add(pageProductHot.getContent().get(i).getId());
 		}
-		Page<Product> pageProductNew = productRepository.findAllByIdNotIn(listId,
+		Page<Product> pageProductNew = productRepository.findAllByIdNotInAndAccountNot(listId, account,
 				PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "date")));
 		model.addAttribute("listProductHot", pageProductHot.getContent());
 		model.addAttribute("listProductNew", pageProductNew.getContent());
-//		System.out.println("listProduct"+ );
 		return "client/buyBooksHome";
 	}
 

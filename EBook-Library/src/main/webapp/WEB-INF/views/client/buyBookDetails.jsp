@@ -230,7 +230,7 @@
 						</a></li> --%>
 							<button
 								class="d-inline-block bg-success border border-success px-5 py-2 rounded-5 mr-2 mb-2"
-								style="color: white">Mua ngay</button>
+								style="color: white" formaction="/user/buybookdetails/pay/${product.id}">Mua ngay</button>
 							<button
 								class="d-inline-block bg-danger border border-danger px-5 py-2 rounded-5 mr-2 mb-2"
 								style="color: white" formaction="/user/shoppingcart/add/${product.id}">Thêm vào giỏ hàng</button>

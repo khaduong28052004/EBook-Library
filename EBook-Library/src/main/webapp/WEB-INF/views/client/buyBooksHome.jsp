@@ -241,7 +241,7 @@
 					</div>
 
 					<div class="col-md-6">
-						<h6 class="xemThem" style="cursor: pointer;">Xem Thêm</h6>
+						<h6 class="xemThem" style="cursor: pointer;"><a href="/user/fillist/hot">Xem Thêm</a></h6>
 					</div>
 				</div>
 				<div class="slider-container">
@@ -308,7 +308,7 @@
 					</div>
 
 					<div class="col-md-6">
-						<h6 class="xemThem" style="cursor: pointer;">Xem Thêm</h6>
+						<h6 class="xemThem" style="cursor: pointer;"><a href="/user/fillist/new" >Xem Thêm</a></h6>
 					</div>
 				</div>
 				<div class="slider-container">

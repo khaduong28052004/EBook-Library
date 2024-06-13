@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foti_java.model.Account;
 import com.foti_java.model.Evalue;
@@ -41,26 +42,39 @@ public class StoreHomeController {
 
 	@RequestMapping("storehome/{idAccount}")
 	public String get(@PathVariable("idAccount") Integer idAccount, Model model) {
-		sessionService.setAttribute("account", accountRepositoty.getById(1));
 		id = idAccount;
+		Account client = sessionService.getAttribute("account");
+		model.addAttribute("client", client);
 		Account account = accountRepositoty.getById(idAccount);
 		List<Follower> followers = followerRepository.findAllByFollower_id(idAccount);
 		List<Evalue> evalues = evalueRepository.findAllByProductIn(account.getProducts());
 		model.addAttribute("listFollower", followers);
 		model.addAttribute("listEvalue", evalues);
-		model.addAttribute(account);
+		model.addAttribute("account", account);
+		Follower follower = followerRepository.findByFolloweAndAccount(id, client);
+		if (follower != null) {
+			if (follower.isStatus()) {
+				model.addAttribute("checkFollower", true);
+			} else {
 
+				model.addAttribute("checkFollower", false);
+			}
+
+		} else {
+			model.addAttribute("checkFollower", false);
+		}
 		Sort sort = Sort.by(Sort.Direction.DESC, "quantitySell");
 		Pageable pageableHot = PageRequest.of(0, 2, sort);
-		Page<Product> pageProductHot = productRepository.findAll(pageableHot);
+		Page<Product> pageProductHot = productRepository.findAllByAccount(account, pageableHot);
 		List<Integer> listId = new ArrayList<>();
 		for (int i = 0; i < pageProductHot.getContent().size(); i++) {
 			listId.add(pageProductHot.getContent().get(i).getId());
 		}
-		Page<Product> pageProductNew = productRepository.findAllByIdNotIn(listId,
+		Page<Product> pageProductNew = productRepository.findAllByAccountAndIdNotIn(account, listId,
 				PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "date")));
 		model.addAttribute("listProductHot", pageProductHot.getContent());
 		model.addAttribute("listProductNew", pageProductNew.getContent());
+
 		return "client/storeHome";
 	}
 
@@ -74,13 +88,16 @@ public class StoreHomeController {
 			follower.setFollower_id(id);
 			follower.setAccount(account);
 			followerRepository.save(follower);
+			System.out.println("chua co");
 		} else {
-			if(foll.isStatus()) {
+			if (foll.isStatus()) {
 				foll.setStatus(false);
 				followerRepository.save(foll);
-			}else {
+				System.out.println("false");
+			} else {
 				foll.setStatus(true);
 				followerRepository.save(foll);
+				System.out.println("true");
 			}
 		}
 

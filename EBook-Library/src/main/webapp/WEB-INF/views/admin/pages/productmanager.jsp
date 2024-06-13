@@ -1,11 +1,5 @@
-<%@page import="com.foti_java.model.Category"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@page import="com.foti_java.model.ImageProduct"%>
-<%@page import="com.foti_java.model.Product"%>
-<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,116 +32,116 @@
 		</section>
 
 		<!-- Main content -->
-			<section class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-									<h3 class="card-title">Duyệt sản phẩm bán</h3>
-								</div>
-								<!-- /.card-header -->
-								<div class="card-body">
-									<table id="example2" class="table table-bordered table-striped">
-										<thead>
-											<tr>
-												<th colspan="2" class="align-middle text-center">Sách</th>
-												<th>Loại sách</th>
-												<th>Tác giả</th>
-												<th>Nhà xuất bản</th>
-												<th>Giá</th>
-												<th>Giảm giá</th>
-												<th>Số lượng</th>
-												<th style="width: 135px;">Mô tả</th>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Duyệt sản phẩm bán</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th colspan="2" class="align-middle text-center">Sách</th>
+											<th>Loại sách</th>
+											<th>Tác giả</th>
+											<th>Nhà xuất bản</th>
+											<th>Giá</th>
+											<th>Giảm giá</th>
+											<th>Số lượng</th>
+											<th style="width: 135px;">Mô tả</th>
 
 
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="align-middle" style="width: 160px;">
-													<div class="row">
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="align-middle" style="width: 160px;">
+												<div class="row">
 
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NhanGianKhuc.jpg"
-																width="100%" height="120px" alt="">
-														</div>
-
-
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
-																height="120px" alt="">
-														</div>
-
-
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
-																width="100%" height="120px" alt="">
-														</div>
-
-
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NhanGianKhuc.jpg"
-																width="100%" height="120px" alt="">
-														</div>
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
+															height="120px" alt="">
 													</div>
-												</td>
-												<td class="align-middle">Nhân Gian Khúc</td>
-												<td class="align-middle">Truyện</td>
-												<td class="align-middle">Văn Kha</td>
-												<td class="align-middle">VanKha</td>
-												<td class="align-middle">169.000 VND</td>
-												<td class="align-middle"><span
-													style="text-decoration: line-through;">149.000 VND</span></td>
-												<td class="align-middle">200</td>
-												<td class="align-middle"><button
-														class="btn btn-primary">Đồng ý</button>
-													<button class="btn btn-danger">Từ chối</button></td>
-											</tr>
-
-											<tr>
-												<td class="align-middle" style="width: 160px;">
-													<div class="row">
-
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NhanGianKhuc.jpg"
-																width="100%" height="120px" alt="">
-														</div>
 
 
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
-																height="120px" alt="">
-														</div>
-
-
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
-																width="100%" height="120px" alt="">
-														</div>
-
-
-														<div class="col-md-6" style="padding: 3px;">
-															<img src="/img/books/Truyen/NhanGianKhuc.jpg"
-																width="100%" height="120px" alt="">
-														</div>
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
+															height="120px" alt="">
 													</div>
-												</td>
-												<td class="align-middle">Nhân Gian Khúc</td>
-												<td class="align-middle">Truyện</td>
-												<td class="align-middle">Văn Kha</td>
-												<td class="align-middle">VanKha</td>
-												<td class="align-middle">169.000 VND</td>
-												<td class="align-middle"><span
-													style="text-decoration: line-through;">149.000 VND</span></td>
-												<td class="align-middle">200</td>
-												<td class="align-middle"><button
-														class="btn btn-primary">Đồng ý</button>
-													<button class="btn btn-danger">Từ chối</button></td>
-											</tr>
 
-										</tbody>
-										<!-- <tfoot>
+
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
+															width="100%" height="120px" alt="">
+													</div>
+
+
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
+															height="120px" alt="">
+													</div>
+												</div>
+											</td>
+											<td class="align-middle">Nhân Gian Khúc</td>
+											<td class="align-middle">Truyện</td>
+											<td class="align-middle">Văn Kha</td>
+											<td class="align-middle">VanKha</td>
+											<td class="align-middle">169.000 VND</td>
+											<td class="align-middle"><span
+												style="text-decoration: line-through;">149.000 VND</span></td>
+											<td class="align-middle">200</td>
+											<td class="align-middle"><button class="btn btn-primary">Đồng
+													ý</button>
+												<button class="btn btn-danger">Từ chối</button></td>
+										</tr>
+
+										<tr>
+											<td class="align-middle" style="width: 160px;">
+												<div class="row">
+
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
+															height="120px" alt="">
+													</div>
+
+
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NhanThuong.jpg" width="100%"
+															height="120px" alt="">
+													</div>
+
+
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NgoiSaoHiVong.webp"
+															width="100%" height="120px" alt="">
+													</div>
+
+
+													<div class="col-md-6" style="padding: 3px;">
+														<img src="/img/books/Truyen/NhanGianKhuc.jpg" width="100%"
+															height="120px" alt="">
+													</div>
+												</div>
+											</td>
+											<td class="align-middle">Nhân Gian Khúc</td>
+											<td class="align-middle">Truyện</td>
+											<td class="align-middle">Văn Kha</td>
+											<td class="align-middle">VanKha</td>
+											<td class="align-middle">169.000 VND</td>
+											<td class="align-middle"><span
+												style="text-decoration: line-through;">149.000 VND</span></td>
+											<td class="align-middle">200</td>
+											<td class="align-middle"><button class="btn btn-primary">Đồng
+													ý</button>
+												<button class="btn btn-danger">Từ chối</button></td>
+										</tr>
+
+									</tbody>
+									<!-- <tfoot>
                       <tr>
                         <th>Rendering engine</th>
                         <th>Browser</th>
@@ -156,19 +150,18 @@
                         <th>CSS grade</th>
                       </tr>
                     </tfoot> -->
-									</table>
-								</div>
-								<!-- /.card-body -->
+								</table>
 							</div>
-							<!-- /.card -->
+							<!-- /.card-body -->
 						</div>
+						<!-- /.card -->
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container-fluid -->
-			</section>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
 		<!-- /.content -->
-		
 	</div>
 	<!-- /.content-wrapper -->
 

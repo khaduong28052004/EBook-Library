@@ -3,8 +3,6 @@ package com.foti_java.model;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.annotations.Nationalized;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +31,6 @@ public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	@Nationalized
 	String content;
 	Integer idTo;
 	@Temporal(TemporalType.DATE)

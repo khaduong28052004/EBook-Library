@@ -38,7 +38,7 @@ public class Voucher {
 	@Nationalized
 	String note;
 	double priceMin;
-	int sale;
+	double sale;
 	int quantity;
 	boolean status;
 	@Temporal(TemporalType.DATE)
@@ -54,8 +54,8 @@ public class Voucher {
 	@JoinColumn(name = "typeVourcher_id")
 	TypeVoucher typeVoucher;
 
-	// @OneToMany(mappedBy = "voucher")
-	// List<Bill> bills;
+//	@OneToMany(mappedBy = "voucher")
+//	List<Bill> bills;
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")

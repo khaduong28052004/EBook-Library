@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,34 +54,118 @@
 
 					</div>
 				</div>
-
-				<c:forEach var="bank" items="${listBanks}">
-					<div class="card">
-						<div class="card-custom">
-							<div class="card-body">
-								<h6 class="card-title" style="font-weight: bold;">
-									BDIV: Ngân hàng TMCP Đầu tư và Phát triển Việt Nam <span
-										style="width: 90px; margin-left: 10px; color: green; font-size: 17px;">Mặc
-										Định</span>
-								</h6>
-								<p class="card-text">
-									Họ và tên: ${bank.name} <span class="soTK">Số tài
-										khoản: ${bank.name}</span>
-								</p>
-							</div>
-							<div class="card-footer">
-								<a href="#" class="btn btn-outline-danger">Xóa</a>
-								<button type="button" class="btn btn-primary">Edit</button>
-							</div>
+			<!-- 	<div style="height: 100px;"></div> -->
+				<div class="card">
+					<div class="card-custom">
+						<div class="card-body">
+							<h6 class="card-title" style="font-weight: bold;">
+								BDIV: Ngân hàng TMCP Đầu tư và Phát triển Việt Nam <span
+									style="width: 90px; margin-left: 10px; color: green; font-size: 17px;">Mặc
+									Định</span>
+							</h6>
+							<p class="card-text">
+								Họ và tên: Phạm Trí Phúc <span class="soTK">Số tài khoản:
+									****098</span>
+							</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-outline-danger">Xóa</a>
+							<button type="button" class="btn btn-primary" disabled>Thiết
+								lập làm mặc định</button>
 						</div>
 					</div>
-				</c:forEach>
+				</div>
 
+				<div class="card">
+					<div class="card-custom">
+						<div class="card-body">
+							<h6 class="card-title" style="font-weight: bold;">BDIV: Ngân
+								hàng TMCP Đầu tư và Phát triển Việt Nam</h6>
+							<p class="card-text">
+								Họ và tên: Phạm Trí Phúc <span class="soTK">Số tài khoản:
+									****098</span>
+							</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-outline-danger">Xóa</a> <a href="#"
+								class="btn btn-primary">Thiết lập làm mặc định</a>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="card">
+					<div class="card-custom">
+						<div class="card-body">
+							<h6 class="card-title" style="font-weight: bold;">BDIV: Ngân
+								hàng TMCP Đầu tư và Phát triển Việt Nam</h6>
+							<p class="card-text">
+								Họ và tên: Phạm Trí Phúc <span class="soTK">Số tài khoản:
+									****098</span>
+							</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-outline-danger">Xóa</a> <a href="#"
+								class="btn btn-primary">Thiết lập làm mặc định</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-custom">
+						<div class="card-body">
+							<h6 class="card-title" style="font-weight: bold;">BDIV: Ngân
+								hàng TMCP Đầu tư và Phát triển Việt Nam</h6>
+							<p class="card-text">
+								Họ và tên: Phạm Trí Phúc <span class="soTK">Số tài khoản:
+									****098</span>
+							</p>
+						</div>
+						<div class="card-footer">
+							<a href="#" class="btn btn-outline-danger">Xóa</a> <a href="#"
+								class="btn btn-primary">Thiết lập làm mặc định</a>
+						</div>
+					</div>
 			</aside>
 		</div>
 	</main>
 
+	<!-- Modal -->
 	<div class="modal fade" id="themTKNH1" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Thông Tin
+						Người Dùng</h1>
+				</div>
+				<div class="modal-body">
+					<div class="Page1">
+
+						<form action="">
+							<div class="mb-3">
+								<input type="text" name="" class="form-control" id=""
+									placeholder="Tên" />
+							</div>
+							<div class="mb-3">
+								<input type="text" name="" class="form-control" id=""
+									placeholder="Số CMND" />
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Trở Lại</button>
+					<button type="button" class="btn btn-success"
+						data-bs-toggle="modal" data-bs-target="#themTKNH2">Tiếp
+						Tục</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="themTKNH2" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -90,32 +173,33 @@
 					<h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Tài
 						Khoản Ngân Hàng</h1>
 				</div>
-				<div class="modal-body Page2">
-						<form action="">
-							<div class="item">
-								<label for="" class="title-item form-label">Ngân hàng</label>
-								<div>
-									<select name="bankId" id="banks" class="form-control">
-									</select>
-								</div>
-
+				<div class="modal-body">
+					<div class="Page2">
+						<form id="registrationForm">
+							<div class="mb-3">
+								<select class="form-select" aria-label="Default select example">
+									<option>Tên ngân hàng</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								</select>
 							</div>
-							<div class="item">
-								<label for="" class="title-item form-label">Số tài khoản</label>
-								<div>
-									<input style="box-sizing: border-box;" type="text" name="accountNumber"
-										id="accountNumber" class="form-control">
-								</div>
+							<div class="mb-3">
+								<input type="text" name="accountNumber" class="form-control"
+									placeholder="Số tài khoản" required />
 							</div>
-							<div class="item">
-								<label for="" class="form-label">Tên tài khoản</label>
-								<div>
-									<input style="box-sizing: border-box;" type="text" name="accountName"
-										id="accountName" disabled class="form-control">
-								</div>
+							<div class="mb-3">
+								<input type="text" name="fullName" class="form-control"
+									placeholder="Tên đầy đủ (viết hoa, không dấu)" required />
 							</div>
-							<p id="error"></p>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value=""
+									id="flexCheckChecked" checked> <label
+									class="form-check-label" for="flexCheckChecked"> Đặt
+									làm mặc định </label>
+							</div>
 						</form>
+					</div>
 					<div id="loading" class="d-none text-center">
 						<div class="spinner-border text-primary" role="status">
 							<span class="visually-hidden">Loading...</span>
@@ -147,106 +231,29 @@
 			}
 		}
 
+		document.getElementById('completeButton').addEventListener(
+				'click',
+				function() {
+					// Ẩn form và hiển thị hiệu ứng tải
+					document.querySelector('.Page2').classList.add('d-none');
+					document.getElementById('loading').classList
+							.remove('d-none');
 
-	    const defaultApiKey = 'd3b50422-de43-4235-ba79-f2a0e86d347e';
-	    const defaultClientId = '192ad2f0-865b-4a1f-abe7-0e2ae97f3571';
+					// Giả lập việc xử lý đăng ký (sử dụng setTimeout để mô phỏng quá trình xử lý)
+					setTimeout(function() {
+						// Ẩn hiệu ứng tải và hiển thị thông báo hoàn thành
+						document.getElementById('loading').classList
+								.add('d-none');
+						document.getElementById('successMessage').classList
+								.remove('d-none');
+					}, 2000); // Thời gian xử lý giả lập là 2 giây
 
-	      async function fetchBankNames() {
-	            try {
-	                // Replace with the actual API URL
-	                const response = await fetch('https://api.vietqr.io/v2/banks');
-	                
-	                // Check if the response is ok
-	                if (!response.ok) {
-	                    throw new Error('Network response was not ok ' + response.statusText);
-	                }
-
-	                // Parse the JSON response
-	                const jsonResponse = await response.json();
-	                const bankData = jsonResponse.data; // Extract the data array from the response
-
-	                // Get the select element
-	                const selectElement = document.getElementById('banks');
-
-	                // Populate the select element with bank names
-	                bankData.forEach(bank => {
-	                    // Using string concatenation to avoid conflicts with JSP expressions
-	                    var optionHTML = '<option value="' + bank.id + '" data-bin="' + bank.bin + '" data-short-name="' + bank.shortName + '" data-thumbnail="' + bank.logo + '">(' + bank.bin + ') ' + bank.shortName + '</option>';
-	                    selectElement.insertAdjacentHTML('beforeend', optionHTML);
-	                });
-	            } catch (error) {
-	                console.error('Error fetching bank names:', error);
-	            }
-	        }
-
-
-	    function findAccountName(accountNumber, bankId) {
-            var xmlhttp = new XMLHttpRequest();
-            let params = {
-                accountNumber: accountNumber,
-                bin: bankId
-            };
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
-                    if (xmlhttp.status == 200) {
-                        console.log(JSON.parse(xmlhttp.responseText));
-                        let data = JSON.parse(xmlhttp.responseText);
-                        if (data.code == "00") {
-                            document.getElementById("error").style.display = "none";
-                            document.getElementById("accountName").value = data.data.accountName;
-                        } else {
-                            document.getElementById("error").innerText = `Số tài khoản không hợp lệ`;
-                            document.getElementById("error").style.display = "block";
-                            document.getElementById("accountName").value = '';
-                        }
-                    } else if (xmlhttp.status == 400) {
-                        alert('There was an error 400');
-                    } else {
-                        alert('something else other than 200 was returned');
-                    }
-                }
-            };
-
-            xmlhttp.open("POST", "https://api.vietqr.io/v2/lookup", true);
-            xmlhttp.setRequestHeader("Content-Type", "application/json");
-            xmlhttp.setRequestHeader("x-api-key", defaultApiKey);
-            xmlhttp.setRequestHeader("x-client-id", defaultClientId);
-            xmlhttp.send(JSON.stringify(params));
-        }
-
-        function init() {
-            let inputBankId = document.getElementById('banks');
-            let inputAccountNumber = document.getElementById('accountNumber');
-            
-            inputAccountNumber.addEventListener('focusout', async function (e) {
-                let value = e.target.value;
-                if (value.length > 0) {
-                    // Retrieve the selected option element
-                    let selectedOption = inputBankId.options[inputBankId.selectedIndex];
-                    // Get the bin from the data attribute
-                    let bankBin = selectedOption.getAttribute('data-bin');
-                    console.log(value, bankBin);
-                    findAccountName(value, bankBin);
-                }
-            });
-        }
-
-        function cutData(data) {
-            if (data.length < 5) {
-                return data;
-            } else {
-                let lastData = data.slice(data.length - 5, data.length);
-                return `***${lastData}`;
-            }
-        }
-
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', (event) => {
-            fetchBankNames();
-            init();
-        });
-
-    </script>
+					// Chuyển trang sau 2 giây
+					setTimeout(function() {
+						window.location.href = '/account/banks'; // Thay thế bằng URL trang bạn muốn chuyển tới
+					}, 4000); // 2000 milliseconds = 2 seconds
+				});
+	</script>
 
 </body>
 </html>

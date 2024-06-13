@@ -65,4 +65,5 @@ public class Bill {
 	@JoinColumn(name = "account_id")
 	Account account;
 	
+	
 }

@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MailSender {
-	private String from = "nguyentuyentctv2021@gmail.com";
+	private String from = "khaduong28052004@gmail.com";
 	private String toEmail;
 	private String subject;
 	private String content;
