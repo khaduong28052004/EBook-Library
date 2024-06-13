@@ -1,6 +1,5 @@
 package com.foti_java.controller.account;
 
-
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,24 +26,25 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("page", "");
+	   sessionService.removeAttribute("account");
 		return "client/login";
 	}
 
 	@PostMapping("login")
 	public String postLogin(@RequestParam("userName") String userName, @RequestParam("password") String passWord,
 			Model model) {
-		Account account = accountRepositoty.findByUsernameAndPassword(userName, MD5Encoder.encode(passWord));		
+		Account account = accountRepositoty.findByUsernameAndPassword(userName, MD5Encoder.encode(passWord));
 		if (account == null) {
 			model.addAttribute("error", "Sai username hoặc password");
 			return "client/login";
-		} else {	
+		} else {
 			if (account.isStatus() == false) {
 				model.addAttribute("error", "Tài khoản của bạn đã bị khóa");
 				return "client/login";
 			}
-		} else {
-			model.addAttribute("error", "Tài khoản không tồn tại!");
-			return "client/login";
+			System.out.println("address " + account.getAddresses().size());
+			sessionService.setAttribute("account", account);
+			return "redirect:/user/home";
 		}
 	}
 }
