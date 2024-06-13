@@ -30,20 +30,22 @@ public class LoginController {
 		return "client/login";
 	}
 
-	@PostMapping("login")
+	@PostMapping("/login")
 	public String postLogin(@RequestParam("userName") String userName, @RequestParam("password") String passWord,
 			Model model) {
 		Account account = accountRepositoty.findByUsernameAndPassword(userName, MD5Encoder.encode(passWord));		
 		if (account == null) {
 			model.addAttribute("error", "Sai username hoặc password");
 			return "client/login";
-		} else {	
+		} 
 			if (account.isStatus() == false) {
 				model.addAttribute("error", "Tài khoản của bạn đã bị khóa");
 				return "client/login";
 			}
-		}
-			return "client/login";
+
+			System.out.println("address " + account.getAddresses().size());
+			sessionService.setAttribute("account", account);
+			return "redirect:/user/home";
 		}
 	
 }
