@@ -56,4 +56,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	List<Product> findAllByActiveAndStatus(boolean active, boolean status);
     @Query("SELECT p FROM Product p WHERE p.status = true")
     public List<Product> findByStatus();
+    
+    //Thu
+    @Query(value = "SELECT P.* FROM Products P JOIN BillDetails BD ON BD.product_id = P.id WHERE BD.bill_id= :idBill", nativeQuery = true)
+	Product getProuct(@Param("idBill") Integer idBill);
 }
