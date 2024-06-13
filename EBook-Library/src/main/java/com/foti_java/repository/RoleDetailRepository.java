@@ -12,10 +12,6 @@ import java.util.Optional;
 public interface RoleDetailRepository extends JpaRepository<RoleDetail, Integer>{
 	@Query(value = "select * from RoleDetails where RoleDetails.account_id  = ?1", nativeQuery = true)
 	List<RoleDetail> findByAccount(Integer account);
-
-import com.foti_java.model.Account;
-
-public interface RoleDetailRepository extends JpaRepository<RoleDetail, Integer>{
 	List<RoleDetail> findByAccount(Account account);
 
 }

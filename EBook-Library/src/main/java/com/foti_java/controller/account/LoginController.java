@@ -42,9 +42,8 @@ public class LoginController {
 				model.addAttribute("error", "Tài khoản của bạn đã bị khóa");
 				return "client/login";
 			}
-		} else {
-			model.addAttribute("error", "Tài khoản không tồn tại!");
+		}
 			return "client/login";
 		}
-	}
+	
 }
