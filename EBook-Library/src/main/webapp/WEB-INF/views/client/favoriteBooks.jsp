@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<link rel="stylesheet" href="/assets/css/favorite.css">
+	<link rel="stylesheet" href="/assets/css/favorite.css">
 	<span class="top-bg-op-box"
 		style="background-image: url(&quot;https://static.cdnno.com/storage/topbox/15d256d4071bbb3d0dd2a38cf1af8e5a.webp&quot;); position: absolute; z-index: 0; left: 0px; overflow: hidden; width: 100%; height: 388px; background-repeat: no-repeat; background-position: 50% 0px; background-size: cover;"></span>
 	<div style="height: 280px;"></div>
@@ -39,333 +39,62 @@
 				</div>
 
 				<div class="row">
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
+					<c:forEach var="item" items="${listProducts}">
+						<!-- Sản phẩm -->
+						<div class="col-md-4 SP">
+							<div class="card">
+								<div class="image-container">
+									<img class="rounded-3 default-img"
+										src="/assets/img/${item.image}" alt="Title" width="100%"
+										height="" />
+									<c:forEach var="itemImg" items="${item.imageProducts}">
+										<img class="rounded-3 default-img"
+											src="/assets/img/${itemImg.name}" alt="Title" width="100%"
+											height="" />
+									</c:forEach>
 								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
+								<div class="card-body">
+									<h5 class="card-title text-ellipsis">${item.name}</h5>
+									<h5 class="card-text textOranger" style="color: red">
+										<span
+											style="text-decoration: line-through; color: rgba(0, 0, 0, 0.463)"><fmt:formatNumber>${item.price}</fmt:formatNumber><sup>đ</sup></span>
+										<fmt:formatNumber>${item.price-item.discount}</fmt:formatNumber>
+										<sup>đ</sup>
+									</h5>
+									<div class="star">
+										<span class="active" style="width: 100%;"> <c:set
+												var="totalStar" value="0" /> <c:forEach var="it"
+												items="${item.evalues}">
+												<c:set var="totalStar" value="${totalStar+it.star}" />
+											</c:forEach> <c:forEach begin="1" end="${totalStar/item.evalues.size()}">
+												<i class="bi bi-star-fill text-warning"></i>
+											</c:forEach>
+
+										</span> <span class="d-inline-block ml-2">Đã bán <fmt:formatNumber>${item.quantitySell}</fmt:formatNumber>
+										</span>
+									</div>
+									<div class="row">
+										<a class="col-md-6 btn btn-outline-danger"
+											href="/user/buybookdetails/${item.id}">Mua Ngay</a>
+										<div class="col-md-6 ">
+											<i class="bi bi-heart-fill heard"></i>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 
 
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-
-
-					<div class="col-md-3 SP">
-						<div class="card">
-							<div class="image-container">
-								<img class="rounded-3 default-img"
-									src="https://us.tiemmot.com/cdn/shop/products/2188a7bcb19258d6559bd6174f93e78c.jpg?v=1627640338"
-									alt="Title" width="100%" height="" /> <img class=" rounded-3"
-									src="https://tiki.vn/blog/wp-content/uploads/2023/08/phan-4-dac-nhan-tam-1024x1024.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://sachxua.vn/wp-content/uploads/2020/01/sung-vi-trung-thep-sach-ls.jpg"
-									alt="Title" width="100%" height="300px" /> <img
-									class=" rounded-3"
-									src="https://salt.tikicdn.com/cache/w1200/ts/product/d2/c1/38/9dbdcc20f9f122e23582eb6d455b622a.jpg"
-									alt="Title" width="100%" height="300px" />
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">Đắc nhân tâm</h5>
-								<h5 class="card-text textOranger">100.000 VNĐ</h5>
-								<div class="star">
-									<span class="active" style="width: 100%;"> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i> <i
-										class="bi bi-star-fill text-warning"></i>
-									</span> <span class="d-inline-block ml-2">Đã bán 120</span>
-								</div>
-								<div class="row">
-									<button class="col-md-6 btn btn-outline-danger">Mua
-										Ngay</button>
-									<div class="col-md-6 ">
-										<i class="bi bi-heart-fill heard"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 
 				</div>
 
 				<div class="Page navigation example">
-
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+						<c:forEach begin="1" end="${totalPages}" varStatus="index">
+							<a href="/user/favorite/page/${index.count-1}"
+								class="btn btn-outline-success pageIndex">${index.count}</a>
+						</c:forEach>
 					</ul>
 
 				</div>

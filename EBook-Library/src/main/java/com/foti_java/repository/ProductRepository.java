@@ -36,10 +36,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	Page<Product> findAllByIdIn(List<Integer> list, Pageable pageable);
 
-	Page<Product> findAllByIdInAndCategoryIn(List<Integer> listIdProduct, List<Category> categories, Pageable pageable);
+	Page<Product> findAllByIdInAndCategoryInAndAccountNot(List<Integer> listIdProduct, List<Category> categories, Account account,Pageable pageable);
 
-	Page<Product> findAllByIdInAndCategoryInAndAccountNot(List<Integer> listIdProduct, List<Category> list,
-			Account account, Pageable pageable);
+
 
 	Page<Product> findAllByIdInAndAccountNotAndPriceBetween(List<Integer> listId, Account account, double min,
 			double max, Pageable pageable);
@@ -60,5 +59,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	// Thu
 	@Query(value = "SELECT P.* FROM Products P JOIN BillDetails BD ON BD.product_id = P.id WHERE BD.bill_id= :idBill", nativeQuery = true)
 	Product getProuct(@Param("idBill") Integer idBill);
+
+//
+//	@Query("Select o From Product o Where o.likes.id In ?1")
+//	List<Product> findAllByLikes(List<Like> likes);
+
 
 }

@@ -188,7 +188,7 @@
 						<c:if test="${item.id == it.account.id}">
 							<input type="number" value="${it.id}" name="idProduct" hidden>
 							<tr style="border-bottom: 1px solid gray;">
-								<td><img src="${it.image}"
+								<td><img src="/assets/img/${it.image}"
 									style="height: 70px; width: auto;"></td>
 								<td><span style="font-weight: bold; font-size: 18px">[${it.name}]</span>
 									Mô tả : ${it.introduce}</td>

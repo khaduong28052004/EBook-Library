@@ -79,7 +79,7 @@ public class UpdateProfileController {
 		sessionService.setAttribute("account", account1);
 		Account account = sessionService.getAttribute("account");
 		// TODO: process POST request
-		account.setShopname(shopname);
+		account.setShopName(shopname);
 		account.setUsername(username);
 		account.setFullname(fullname);
 		account.setEmail(email);

@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/views/css/updateProfile.css"">
 </head>
 <body>
-	<%@include file="/views/layout/account/header.jsp"%>
+<%-- 	<%@include file="/views/layout/account/header.jsp"%> --%>
 	<main class="container" style="margin: 0px; max-width: 2000px;">
 		<div class="row">
 			<article class="col-md-2">

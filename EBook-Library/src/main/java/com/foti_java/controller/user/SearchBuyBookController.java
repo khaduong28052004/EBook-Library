@@ -45,11 +45,11 @@ public class SearchBuyBookController {
 	public String productHome(Model model, @RequestParam("searchName") String name) {
 		Account account = sessionService.getAttribute("account");
 		listIdProduct = new ArrayList<Integer>();
-		pageable = PageRequest.of(index, 6);
+		pageable = PageRequest.of(index, 8);
 		page = productRepository.findAllByAccountNotAndNameContaining(account, name, pageable);
 		list = page.getContent();
 		for (int i = 0; i < page.getTotalPages(); i++) {
-			Pageable pageableNew = PageRequest.of(i, 6);
+			Pageable pageableNew = PageRequest.of(i, 8);
 			List<Product> listTotal = productRepository.findAllByAccountNotAndNameContaining(account, name, pageableNew)
 					.getContent();
 			for (Product product : listTotal) {
@@ -67,22 +67,22 @@ public class SearchBuyBookController {
 
 	@GetMapping("category")
 	public String filterCategory(@RequestParam(name = "category", defaultValue = "") String[] category, Model model) {
+		Account account = sessionService.getAttribute("account");
 		listCategory = new ArrayList<Category>();
 		for (String string : category) {
 			listCategory.add(categoryRepository.findById(Integer.parseInt(string)).get());
 		}
-		Account account = sessionService.getAttribute("account");
-
-		pageable = PageRequest.of(index, 6);
+		pageable = PageRequest.of(index, 8);
 		page = productRepository.findAllByIdInAndCategoryInAndAccountNot(listIdProduct, listCategory, account,
 				pageable);
 		list = page.getContent();
 		if (list.size() > 0) {
 			listIdProduct = new ArrayList<Integer>();
 			for (int i = 0; i < page.getTotalPages(); i++) {
-				Pageable pageableNew = PageRequest.of(i, 6);
+				Pageable pageableNew = PageRequest.of(i, 8);
 				List<Product> listTotal = productRepository
-						.findAllByIdInAndCategoryIn(listIdProduct, listCategory, pageableNew).getContent();
+						.findAllByIdInAndCategoryInAndAccountNot(listIdProduct, listCategory, account, pageableNew)
+						.getContent();
 				for (Product product : listTotal) {
 					listIdProduct.add(product.getId());
 				}
@@ -101,18 +101,17 @@ public class SearchBuyBookController {
 
 		Account account = sessionService.getAttribute("account");
 
-		pageable = PageRequest.of(index, 6);
+		pageable = PageRequest.of(index, 8);
 		page = productRepository.findAllByIdInAndAccountNotAndPriceBetween(listIdProduct, account, priceMin, priceMax,
 				pageable);
 		list = page.getContent();
 		if (list.size() > 0) {
 			listIdProduct = new ArrayList<Integer>();
 			for (int i = 0; i < page.getTotalPages(); i++) {
-				Pageable pageableNew = PageRequest.of(i, 6);
+				Pageable pageableNew = PageRequest.of(i, 8);
 
-				List<Product> listTotal = productRepository
-						.findAllByIdInAndCategoryInAndAccountNot(listIdProduct, listCategory, account, pageableNew)
-						.getContent();
+				List<Product> listTotal = productRepository.findAllByIdInAndAccountNotAndPriceBetween(listIdProduct,
+						account, priceMin, priceMax, pageableNew).getContent();
 				for (Product product : listTotal) {
 					listIdProduct.add(product.getId());
 				}
@@ -148,27 +147,7 @@ public class SearchBuyBookController {
 	@GetMapping("page/{id}")
 	public String indexPage(@PathVariable("id") Integer id, Model model) {
 		index = id;
-//		if (Max > 0 && Min > 0 && !listCategory.isEmpty()) {
-//			pageable = PageRequest.of(index, 6);
-//			page = productRepository.findAllByCategoryInAndPriceBetween(listCategory, Min, Max, pageable);
-//			list = page.getContent();
-//		} else if (Max > 0 && Min > 0 && !nameSearch.equals("")) {
-//			pageable = PageRequest.of(index, 6);
-//			page = productRepository.findAllByNameContainingAndPriceBetween(nameSearch, Min, Max, pageable);
-//			list = page.getContent();
-//
-//		} else if (!nameSearch.equals("")) {
-//			pageable = PageRequest.of(index, 6);
-//			page = productRepository.findAllByNameContaining(nameSearch, pageable);
-//			list = page.getContent();
-//		} else if (listCategory.isEmpty() && nameSearch.equals("")) {
-//
-//		} else {
-//			pageable = PageRequest.of(index, 2);
-//			page = productRepository.findAll(pageable);
-//			list = page.getContent();
-//		}
-		pageable = PageRequest.of(index, 6);
+		pageable = PageRequest.of(index, 8);
 		page = productRepository.findAllByIdIn(listIdProduct, pageable);
 		list = page.getContent();
 		model.addAttribute("listProducts", list);
@@ -190,13 +169,13 @@ public class SearchBuyBookController {
 				listIdProductNew.add(id);
 			}
 		}
-		pageable = PageRequest.of(index, 6);
+		pageable = PageRequest.of(index, 8);
 		page = productRepository.findAllByIdIn(listIdProductNew, pageable);
 		list = page.getContent();
 		if (list.size() > 0) {
 			listIdProduct = new ArrayList<Integer>();
 			for (int i = 0; i < page.getTotalPages(); i++) {
-				Pageable pageableNew = PageRequest.of(i, 6);
+				Pageable pageableNew = PageRequest.of(i, 8);
 
 				List<Product> listTotal = productRepository.findAllByIdIn(listIdProductNew, pageableNew).getContent();
 

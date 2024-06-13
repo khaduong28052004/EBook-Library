@@ -18,10 +18,10 @@
 		<div class=" panel1 row">
 			<article class="col-md-3">
 				<div class="bigImg">
-					<img id="imgActive" src="${product.image}" alt="">
+					<img id="imgActive" src="/assets/img/${product.image}" alt="">
 				</div>
 				<div class="smallImg">
-					<img class="imgItem" src="${product.image}" alt="">
+					<img class="imgItem" src="/assets/img/${product.image}" alt="">
 					<c:forEach var="item" items="${product.imageProducts}">
 						<img class="imgItem" src="${item.name}" alt="">
 

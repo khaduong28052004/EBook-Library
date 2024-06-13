@@ -1,4 +1,4 @@
-package com.foti_java.controller.user;
+package com.foti_java.controller.account;
 
 import java.io.IOException;
 import java.nio.file.Files;

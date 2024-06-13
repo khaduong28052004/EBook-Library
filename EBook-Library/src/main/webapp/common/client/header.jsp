@@ -100,10 +100,18 @@ keyframes pulse { 0% {
 }
 
 70
+
+
  
+
+
 %
 {
 transform
+
+
+
+
 :
 
 
@@ -142,16 +150,38 @@ transform
 
 
 
+
+
                     
+
+
 scale
- 
-(
-1
-)
-;
 
-                
+
+ 
+
+
+(
+
+
+
+
+1
+
+
+
+
+)
+
+
+
+
+;
 opacity
+
+
+
+
 :
 
 
@@ -190,19 +220,37 @@ opacity
 
 
 
-                    
-0
- 
-.7
-;
 
-            
+
+                    
+
+
+0
+
+
+ 
+
+
+.7
+
+
+
+
+;
 }
 100
+
+
  
+
+
 %
 {
 transform
+
+
+
+
 :
 
 
@@ -241,18 +289,44 @@ transform
 
 
 
+
+
                     
+
+
 scale
- 
-(
-0
- 
-.9
-)
-;
 
-                
+
+ 
+
+
+(
+
+
+
+
+0
+
+
+ 
+
+
+.9
+
+
+
+
+)
+
+
+
+
+;
 opacity
+
+
+
+
 :
 
 
@@ -291,11 +365,17 @@ opacity
 
 
 
-                    
-1
-;
 
-            
+
+                    
+
+
+1
+
+
+
+
+;
 }
 }
 .close-icon {
@@ -329,42 +409,13 @@ opacity
 				<div class="col-md-5">
 					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
 						style="--bs-scroll-height: 100px;">
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> Thể loại </a>
-							<ul class="dropdown-menu" style="width: 500px;">
-								<div class=" row">
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Sách
-											giáo khoa</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Đề
-											thi tốt nghiệp</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
-											tranh</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
-											ngôn tình</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Sách
-											giáo khoa</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Đề
-											thi tốt nghiệp</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
-											tranh</a></li>
-									<li class="col-md-6 align-items-center"><a
-										class="dropdown-item" href="/Ebook/user/searchBuyBook">Truyện
-											ngôn tình</a></li>
-								</div>
-							</ul></li>
-						<li class="nav-item"></li>
 						<li class="nav-item"><a class="nav-link" aria-current="page"
-							href="/Ebook/user/buyBookHome"> Mua sách</a></li>
+							href="/user/home">Trang chủ</a></li>
+
 						<li class="nav-item"><a class="nav-link" aria-current="page"
-							href="/Ebook/user/favorite"> Yêu Thích</a></li>
+							href="/user/fillist/new"> Mua sách</a></li>
+						<li class="nav-item"><a class="nav-link" aria-current="page"
+							href="/user/favorite"> Yêu Thích</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4" style="padding: 0px">
@@ -376,7 +427,7 @@ opacity
 							onblur="this.form.submit()">
 						<div class="mic-search " id="open-record">
 							<i class="fa-solid fa-microphone"
-								style="font-size: 15px; margin: 10px; margin-left: 14px; margin-right: 14px; margin-top:12px"></i>
+								style="font-size: 15px; margin: 10px; margin-left: 14px; margin-right: 14px; margin-top: 12px"></i>
 						</div>
 
 
@@ -402,19 +453,31 @@ opacity
 						<div class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false"> <i
-								class="fa-solid fa-user" style="color: green;"></i> Tài khoản
+								class="fa-solid fa-user" style="color: green;"></i> <c:if
+									test="${account.username!=null}">${account.username}</c:if> <c:if
+									test="${account.username==null}">Tài khoản</c:if>
 							</a>
 							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/user/changepass">Đổi
+										mật khẩu</a></li>
+								<li><a class="dropdown-item" href="/user/updateprofile">Cập
+										nhật tài khoản</a></li>
 								<li><a class="dropdown-item"
-									href="/Ebook/account/changePass">Đổi mật khẩu</a></li>
-								<li><a class="dropdown-item"
-									href="/Ebook/account/changePass">Cập nhật tài khoản</a></li>
-								<li><a class="dropdown-item"
-									href="/Ebook/user/registerSell/registerSell01">Đăng ký bán
-										sách</a></li>
+									href="/user/registerSell/registerSell01">Đăng ký bán sách</a></li>
 								<!-- <hr> -->
-								<li><a class="dropdown-item" href="/Ebook/account/login">Đăng
-										xuất</a></li>
+								<li><a class="dropdown-item" href="/login">Đăng xuất</a></li>
+								<%-- 		<c:if test="${roleDetailOptional!=null}"></c:if>		 --%>
+
+								<c:forEach var="roleDetailOptional"
+									items="${roleDetailOptional}">
+									<li style="color: blue;"><a
+										href="/${roleDetailOptional.role.name}/home"
+										class="dropdown-item" href="">
+											${roleDetailOptional.role.name}</a></li>
+								</c:forEach>
+
+
+
 							</ul>
 						</div>
 					</ul>
