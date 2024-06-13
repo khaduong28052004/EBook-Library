@@ -66,7 +66,7 @@ public class HomeTestController {
 //
 //		}
 		Sort sort = Sort.by(Sort.Direction.DESC, "quantitySell");
-		Pageable pageableHot = PageRequest.of(0, 2, sort);
+		Pageable pageableHot = PageRequest.of(0, 12, sort);
 		Account account = sessionService.getAttribute("account");
 		Page<Product> pageProductHot = productRepository.findAllByAccountNot(account, pageableHot);
 		List<Integer> listId = new ArrayList<>();
@@ -74,7 +74,7 @@ public class HomeTestController {
 			listId.add(pageProductHot.getContent().get(i).getId());
 		}
 		Page<Product> pageProductNew = productRepository.findAllByIdNotInAndAccountNot(listId, account,
-				PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "date")));
+				PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "date")));
 		model.addAttribute("listProductHot", pageProductHot.getContent());
 		model.addAttribute("listProductNew", pageProductNew.getContent());
 		return "client/buyBooksHome";

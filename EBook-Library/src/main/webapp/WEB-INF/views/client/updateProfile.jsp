@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,10 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous" />
-
+<link rel="stylesheet" href="/views/css/updateProfile.css"">
 </head>
 <body>
-	<link rel="stylesheet" href="/assets/css/updateProfile.css">
+	<%@include file="/views/layout/account/header.jsp"%>
 	<main class="container" style="margin: 0px; max-width: 2000px;">
 		<div class="row">
 			<article class="col-md-2">
@@ -42,127 +43,205 @@
 						<hr>
 					</div>
 					<div class="body">
-						<form action="">
-							<div class="form-group md-3">
+						<form action="/Ebook/account/updateProfile/user" method="post"
+							enctype="multipart/form-data"">
+							<div class="form-group mb-3">
 								<label for="tenShop" class="form-label">Tên shop</label> <input
-									type="text" class="form-control" id="tenShop" value="NaBi Shop">
-								<div class="form-text text-danger">Vui lòng nhập tên shop.</div>
+									type="text" class="form-control" id="tenShop" name="shopname"
+									value="${account.shopname}" required>
+
+								<div class="form-text text-danger">${error }</div>
+								<input type="hidden" class="form-control" id="" name="id"
+									value="${account.id}">
 							</div>
 							<div class="form-group row g-3">
 								<div class="col">
-									<label for="fullname" class="form-label">Username</label> <input
-										type="text" class="form-control" id="fullname">
-									<div class="form-text text-danger">Vui lòng nhập
-										Username.</div>
+									<label for="username" class="form-label">Username</label> <input
+										type="text" class="form-control" id="username"
+										value="${account.username}" name="username" required>
 								</div>
 								<div class="col">
-									<label for="fullname" class="form-label">Password</label> <input
-										type="password" class="form-control" id="fullname" readonly
-										value="123213123123">
+									<label for="password" class="form-label">Password</label> <input
+										type="password" class="form-control" id="password" readonly
+										value="${account.password}" name="password" disabled="disabled">
 								</div>
 							</div>
 							<div class="form-group row g-3">
 								<div class="col">
 									<label for="fullname" class="form-label">Họ và tên</label> <input
-										type="text" class="form-control" id="fullname">
-									<div class="form-text text-danger">Vui lòng nhập họ và
-										tên.</div>
+										type="text" class="form-control" id="fullname"
+										value="${account.fullname}" name="fullname" required>
 								</div>
 								<div class="col">
 									<label for="email" class="form-label">Email</label> <input
-										type="email" class="form-control" id="email">
-									<div class="form-text text-danger">Vui lòng nhập Email.</div>
+										type="email" class="form-control" id="email"
+										value="${account.email}" name="email" required>
+										<span class="text-danger">${errorMail}</span>
 								</div>
 							</div>
 							<div class=" form-group row g-3">
 								<div class="col">
 									<label for="birthday" class="form-label">Ngày sinh</label> <input
-										type="date" class="form-control" id="birthday">
-									<div class="form-text text-danger">Vui lòng nhập ngày
-										tháng năm sinh.</div>
+										type="date" class="form-control" id="birthday"
+										value="${account.birthday}" name="birthday" required>
 								</div>
 								<div class="col">
 									<label for="sdt" class="form-label">Số điện thoại</label> <input
-										type="text" class="form-control" id="sdt">
-									<div class="form-text text-danger">Vui lòng nhập số điện
-										thoại.</div>
+										type="text" class="form-control" id="sdt"
+										value="${account.phone}" name="phone" required>
 								</div>
 							</div>
+
+							<span class="span">${error}</span>
 							<div class="form-group md-3 d-flex justify-content-center">
-								<button style="width: 100px;" class="btn btn-outline-success">Lưu</button>
+								<button style="width: 100px;"
+									class="register btn btn-outline-success" id='submitbtn'
+									type="submit">Lưu</button>
 							</div>
-						</form>
 					</div>
 				</article>
 				<aside class="col-md-4">
 					<div class="showImgBia">
-						<img id="displayedBia"
-							src="https://w7.pngwing.com/pngs/377/303/png-transparent-watercolor-background-watercolor-hand-painted-small-fresh-thumbnail.png"
-							alt="">
+						<img id="displayedBia" src="/img/account/${account.background}">
+
 					</div>
 					<div class="showImgAvt">
-						<img id="displayeAvt" src="/assets/img/account/anh2.jpg" alt="">
+						<img id="displayeAvt" src="/img/account/${account.avatar}">
 					</div>
 					<div class="title-TenShop">
-						<p>NaBi Shop</p>
+						<p>${account.shopname}</p>
 					</div>
+					
 					<div class="uploadImg">
 						<div class="form-group row g-3">
 							<div class="col">
 								<label for="ImgAvt" class="form-label">Ảnh đại diện</label> <input
-									type="file" class="form-control" id="ImgAvt">
-								<div class="form-text text-danger">Vui lòng thêm ảnh đại
-									diện.</div>
+									type="file" class="form-control" id="ImgAvt" name="avatar"
+									value="${account.avatar}">
 							</div>
 							<div class="col">
 								<label for="ImgBia" class="form-label">Ảnh bìa</label> <input
-									type="file" class="form-control" id="ImgBia">
-								<div class="form-text text-danger">Vui lòng thêm ảnh bìa.</div>
+									type="file" class="form-control" id="ImgBia" name="background"
+									value="${account.background}">
 							</div>
 						</div>
 					</div>
 				</aside>
 			</aside>
+			</form>
 		</div>
 	</main>
 
-	<script>
-		function toggleSubmenu() {
-			var menuItem = document.querySelector('.menu-item');
-			if (menuItem) {
-				menuItem.classList.toggle('open');
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+		
+		
+	<script type="text/javascript">   
+	
+	const container = document.getElementById('container');
+	const btnSubmit = document.getElementById('submitbtn');
+
+
+	
+   // ngăn submit
+	btnSubmit.addEventListener('click', () => {
+	    container.classList.add("active");
+	});
+   
+	/* loginBtn.addEventListener('click', () => {
+	    container.classList.remove("active");
+	}); */
+
+	/* forgotPassBtn.addEventListener('click', () => {
+	    container.classList.add("show-forgot-password");
+	});
+	loginBtn.addEventListener('click', () => {
+	    container.classList.remove("show-forgot-password");
+	}); */
+		
+ 		const profileForm = document.querySelector('.profileForm form');
+ 	    const errorSpan = document.getElementById('span');
+ 	
+
+ 	    // Thêm sự kiện submit cho form update profile
+ 	    //profileForm.addEventListener('submit', function (event) {
+ 	 
+ 	    	function validateForm() {
+ 	    	
+ 	    	//Lấy tất cả các giá trị từ form cập nhật hồ sơ
+ 	    	
+ 	   		const shopName = document.getElementById('tenshop').value
+ 	       
+ 	      const userName = document.getElementById('userName').value;
+ 	   
+          const name = document.getElementById('fullName').value;
+          const password = document.getElementById('password').value
+          const email = document.getElementById('email').value
+          const birthday = document.getElementById('birthday').value
+          const numberphone = document.getElementById('sdt').value
+          const ImgAvt = document.getElementById('ImgAvt').value
+          const ImgBia = document.getElementById('ImgBia').value
+ 	        // Xóa thông báo lỗi trước khi kiểm tra
+ 	        errorSpan.textContent = '';
+              
+			 // Kiểm tra email hợp lệ
+			 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+			 if (!emailPattern.test(email)) {
+			     errorSpan.textContent = 'Email không hợp lệ.';
+			     //event.preventDefault(); // Ngăn chặn việc submit form
+			    
+			 }
+			 
+			 // Kiem tra so dien thoai
+			 
+			const phonePattern = /^(?:\+84-?|0)(?:\d{2,3}-?)?\d{3}-?\d{4}$/
+				
+				if (!numberphone.match(birthdayPattern)) {
+					  errorSpan.textContent = 'Số điện thoại không đúng định dạng';
+					  //event.preventDefault(); // Ngăn chặn việc submit form
+					 
+				}
+					
+					
+			// Kiem tra ngay sinh dinh dang (dd-mm-yyyy)
+			
+			const birthdayPattern = /^\d{2}-\d{2}-\d{4}$/
+				
+			// Kiem tra ngay sinh co dung voi dinh dang
+			
+			if (!birthday.match(birthdayPattern)) {
+				  errorSpan.textContent = 'Ngày sinh không đúng định dang (dd-MM-yyyy)';
+				  event.preventDefault(); // Ngăn chặn việc submit form
+				
 			}
-		}
-
-		document
-				.getElementById("ImgAvt")
-				.addEventListener(
-						"change",
-						function(event) {
-							var input = event.target;
-							if (input.files && input.files[0]) {
-								var reader = new FileReader();
-								reader.onload = function(e) {
-									document.getElementById("displayeAvt").src = e.target.result;
-								}
-								reader.readAsDataURL(input.files[0]);
-							}
-						});
-		document
-				.getElementById("ImgBia")
-				.addEventListener(
-						"change",
-						function(event) {
-							var input = event.target;
-							if (input.files && input.files[0]) {
-								var reader = new FileReader();
-								reader.onload = function(e) {
-									document.getElementById("displayedBia").src = e.target.result;
-								}
-								reader.readAsDataURL(input.files[0]);
-							}
-						});
-	</script>
-
+			
+			// Kiểm tra file co duoc chon hay khong
+			
+			var fileBia = ImgBia.files[0]
+			var fileAvart = ImgAvt.files[0]
+			
+			if (!(fileBia || fileAvart)) {
+ 	    	errorSpan.textContent = 'Vui long chon file';
+			  //event.preventDefault(); // Ngăn chặn việc submit form
+	
+ 	   		 }
+			
+			if (errorSpan != "") 
+				return false
+ 	    
+ 	   		// kiem tra file .jpg .png .
+			
+				return true;
+			}
+			
+			
+   </script>
 </body>
 </html>

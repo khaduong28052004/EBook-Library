@@ -172,7 +172,7 @@
 					<div class="col-md-4 SP">
 						<div class="card">
 							<div class="image-container">
-								<img class="rounded-3 default-img" src="${item.image}"
+								<img class="rounded-3 default-img" src="/assets/img/${item.image}"
 									alt="Title" width="100%" height="" />
 								<c:forEach var="itemImg" items="${item.imageProducts}">
 									<img class="rounded-3 default-img" src="${itemImg.name}"

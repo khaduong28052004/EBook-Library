@@ -65,7 +65,7 @@
 									<div class="col-md-4">
 										<input class="form-check-input product" name="idProduct"
 											onclick="change()" value="${item.id}" type="checkbox"
-											id="gridCheck"> <img src="${item.product.image}"
+											id="gridCheck"> <img src="/assets/img/${item.product.image}"
 											alt="">
 										<div class="title-product" style="margin-left: 10px;">
 											<span style="font-weight: bold;">[${item.product.name}]</span>

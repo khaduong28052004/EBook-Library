@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Trang chủ</title>
-
-
-
-
-
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed" >
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -92,7 +87,7 @@
 						<!-- small box -->
 						<div class="small-box bg-info">
 							<div class="inner">
-								<h3>33</h3>
+								<h3>${countSellerNotCheck }</h3>
 
 								<p>Chờ duyệt</p>
 							</div>
@@ -109,7 +104,7 @@
 						<div class="small-box bg-success">
 							<div class="inner">
 								<h3>
-									30<sup style="font-size: 20px">%</sup>
+									${AvgSeller}<sup style="font-size: 20px">%</sup>
 								</h3>
 
 								<p>Seller/user</p>
@@ -126,7 +121,7 @@
 						<!-- small box -->
 						<div class="small-box bg-warning">
 							<div class="inner">
-								<h3>150</h3>
+								<h3>${countAccount }</h3>
 
 								<p>Tài khoản</p>
 							</div>
@@ -143,7 +138,7 @@
 						<div class="small-box bg-danger">
 							<div class="inner">
 								<h3>
-									70.000.000 <span>VND</span>
+									<fmt:formatNumber type="currency" value="${totalPriceAdmin }"></fmt:formatNumber>
 								</h3>
 
 								<p>Doanh thu</p>
@@ -160,8 +155,8 @@
 				<!-- /.row -->
 				<!-- Main row -->
 				<div class="row">
-					<section class="col-lg-12 connectedSortable">
-						<!-- BAR CHART -->
+			<!-- 		<section class="col-lg-12 connectedSortable">
+						BAR CHART
 						<div class="card card-success">
 							<div class="card-header">
 								<h3 class="card-title">Thông kê doanh thu và lợi nhuận</h3>
@@ -183,10 +178,10 @@
 										style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 								</div>
 							</div>
-							<!-- /.card-body -->
+							/.card-body
 						</div>
-						<!-- /.card -->
-					</section>
+						/.card
+					</section> -->
 
 
 					<!-- Left col -->
@@ -493,7 +488,7 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			// Đoạn mã JavaScript sẽ được thực thi sau khi trang và tất cả các nguồn tài nguyên đã được tải xong
-
+/* 
 			var areaChartData = {
 				labels : [ 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4',
 						'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9',
@@ -519,7 +514,7 @@
 					pointHighlightStroke : 'rgba(220,220,220,1)',
 					data : [ 65, 59, 80, 81, 56, 55, 40, 70, 40, 10, 67, 100 ]
 				}, ]
-			};
+			}; */
 
 			var barChartCanvas = document.getElementById('barChart');
 			if (barChartCanvas) {
@@ -552,15 +547,16 @@
 		});
 		// piechart
 		var pieChart = {
-			labels : [ 'Cửa hàng', 'Khách hàng',
+			labels : [ 'User', 'Seller','Admin'
 			// 'FireFox',
 			// 'Safari',
 			// 'Opera',
 			// 'Navigator',
 			],
 			datasets : [ {
-				data : [ 30, 70
-				// ,400, 600, 300, 100
+				data : [
+				 <%=request.getAttribute("countUser")%>, <%=request.getAttribute("countSeller")%>, <%=request.getAttribute("countAdmin")%> 
+				//400, 600, 300, 100
 				],
 				backgroundColor : [ '#f56954', '#00a65a',
 				// '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'
@@ -569,14 +565,14 @@
 		}
 
 		var lineChart = {
-			labels : [ 'Doanh thu', 'Lợi nhuận',
+			labels : [ 'Đang chờ duyệt', 'Seller đã duyệt',
 			// 'FireFox',
 			// 'Safari',
 			// 'Opera',
 			// 'Navigator',
 			],
 			datasets : [ {
-				data : [ 60, 40
+				data : [  <%=request.getAttribute("countSellerNotCheck")%>, <%=request.getAttribute("countSeller")%>
 				// ,400, 600, 300, 100
 				],
 				// backgroundColor: ['#f56954', '#00a65a',

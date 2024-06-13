@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,27 +21,26 @@
 	<link rel="stylesheet" href="/assets/css/evaluate.css">
 	<script type="text/javascript" src="/assets/js/evaluate.js"></script>
 	<main class="container" style="margin: 0px; max-width: 2000px;">
-		<div class="row">
-			<div class="col-9 menuNgangNe">
-				<div class="nav navbar">
-					<div class="card-header headerTrangThai"
-						style="background-color: white;">
-						<p class="tenNguoiBan">
-							<img width="30" height="30"
-								src="https://img.icons8.com/ios/50/back--v1.png" alt="back--v1"
-								alt="left-squared" /> Quay lại
-						</p>
-						<p class="noiDungPhai">
-							<button type="submit" class=" btn btn-danger trangThai" style="width: 90px"
-								data-bs-toggle="modal" data-bs-target="#successModal">
-								Gửi</button>
-						</p>
-					</div>
+		<div class="row card-header1">
+			<div class=" headerTrangThai" style="background-color: white;">
+				<div>
+					<a class="tenNguoiBan" href="/user/bill"> <img width="30"
+						height="30" src="https://img.icons8.com/ios/50/back--v1.png"
+						alt="back--v1" alt="left-squared" /> Quay lại
+					</a>
+				</div>
+				<div class="">
+					<form action="/user/evaluate/gui" method="post">
+						<button type="submit" class=" btn btn-danger trangThai"
+							style="width: 90px" data-bs-toggle="modal"
+							data-bs-target="#successModal">Gửi</button>
+					</form>
 				</div>
 			</div>
 		</div>
-
-		<form class="container-info-sanpham">
+		
+		<input type="hidden" value="${evalute.id}" name="evaluteId">
+		<form class="container-info-sanpham" enctype="multipart/form-data">
 			<div class="form-info-sanpham row">
 				<div class="info col-md-12">
 					<div class="rating-container">
@@ -62,7 +62,7 @@
 								</p>
 							</div>
 							<div class="card-body">
-								<textarea name="" class="form-control" id="" required></textarea>
+								<textarea name="content" class="form-control" id="" required>${evalute.content}</textarea>
 							</div>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 								</p>
 							</div>
 							<div class="card-body">
-								<textarea name="" class="form-control" id="" required></textarea>
+								<textarea name="quality" class="form-control" id="" required>${evalute.quality}</textarea>
 							</div>
 						</div>
 					</div>
@@ -90,23 +90,20 @@
 						<div class="col-md-8 save-image">
 							<div id="input-save-image">
 								<input type="file" class="form-control" id="file-upload"
-									multiple="multiple" accept="image/png, image/jpeg, image/jpg"
-									required />
+									multiple accept="image/png, image/jpeg, image/jpg" required />
 							</div>
 							<div class="show-img-form slider">
 								<div class="container-images slides">
 									<div class="show-img-div"></div>
 								</div>
-								<!-- <button class="prev" onclick="prevClick()">&#10094</button>
-                                  <button class="next" onclick="nextClick()">&#10095</button> -->
+								<button class="prev" onclick="prevClick()">&#10094</button>
+								<button class="next" onclick="nextClick()">&#10095</button>
 							</div>
 						</div>
 					</div>
 				</div>
 		</form>
-
-
-		<!-- </div> -->
+		</div>
 	</main>
 
 	<!-- Bootstrap JavaScript Libraries -->
@@ -143,5 +140,7 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="/assets/js/evaluate.js"></script>
+
 </body>
 </html>

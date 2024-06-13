@@ -38,16 +38,27 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	Page<Product> findAllByIdInAndCategoryIn(List<Integer> listIdProduct, List<Category> categories, Pageable pageable);
 
-	Page<Product> findAllByIdInAndCategoryIn(List<Integer> listIdProduct, List<Category> list, double min, double max,
-			Pageable pageable);
+	Page<Product> findAllByIdInAndCategoryInAndAccountNot(List<Integer> listIdProduct, List<Category> list,
+			Account account, Pageable pageable);
 
-	Page<Product> findAllByNameContainingAndPriceBetween(String nameSearch, double min, double max, Pageable pageable);
+	Page<Product> findAllByIdInAndAccountNotAndPriceBetween(List<Integer> listId, Account account, double min,
+			double max, Pageable pageable);
 
-	Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable);
+//	Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable);
 
-	Page<Product> findAllByNameContaining(String name, Pageable pageable);
-//	@Query("SELECT p FROM Product p  WHERE p.cartDetail = listCart")
-//	List<Product> listCart(@Param("listCart")CartDetail listCart);
-	
+	Page<Product> findAllByAccountNotAndNameContaining(Account account, String name, Pageable pageable);
+
+	@Query("SELECT p FROM Product p WHERE p.status = true and p.account.id =:id")
+	public List<Product> findByStatus(@Param("id") Integer id);
+
+	// Tuyen
+	List<Product> findAllByActiveAndStatus(boolean active, boolean status);
+
+	@Query("SELECT p FROM Product p WHERE p.status = true")
+	public List<Product> findByStatus();
+
+	// Thu
+	@Query(value = "SELECT P.* FROM Products P JOIN BillDetails BD ON BD.product_id = P.id WHERE BD.bill_id= :idBill", nativeQuery = true)
+	Product getProuct(@Param("idBill") Integer idBill);
 
 }

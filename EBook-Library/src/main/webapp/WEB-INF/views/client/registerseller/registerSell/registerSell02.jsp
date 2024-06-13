@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,28 +9,26 @@
  <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="/views/css/registerSell/registerSell02.css">
 </head>
 <body>
-    <link rel="stylesheet" href="/assets/css/registerSell/registerSell03.css">
-<div class="nav">
 
-        <div class="logo">
-            <div class="image">
-                <img src="/assets/img/logo/V.jpg" alt="">
-            </div>
-            <div class="logo1">
-                <a href="#">Virtual Library Web</a>
-            </div>
-        </div>
-        <div class="avatar">
-            <div class="container-avatar">
-                <img src="/assets/img/books/Truyen/NhanGianKhuc.jpg" alt="">
-                <p class="username">TeoNV</p>
-            </div>
-        </div>
-    </div>
-
+	<div class="nav">
+			<div class="logo">
+				<div class="image">
+					<img src="/views/img/logo/V.jpg" alt="">
+				</div>
+				<div class="logo1">
+					<a href="#">Virtual Library Web</a>
+				</div>
+			</div>
+			<div class="avatar">
+				<div class="container-avatar">
+					<img src="/views/img/books/Truyen/NhanGianKhuc.jpg" alt="">
+					<p class="username">TeoNV</p>
+				</div>
+			</div>
+		</div>
     <main class="container">
         <div class="container-steps">
             <div class="step1">
@@ -82,7 +81,7 @@
             <div class="container-thongbao">
                 <div class="thongbao">
                     <div class="thongbao-icon">
-                        <img src="/assets/img/icon/info-circle-svgrepo-com.png" alt="">
+                        <img src="/img/icon/info-circle-svgrepo-com.png" alt="">
                     </div>
                     <div class="thongbao-content">
                         <span>Việc thu thập Thông Tin Thuế và Thông Tin Định Danh là bắt buộc theo quy định của Luật an
@@ -92,47 +91,56 @@
                     </div>
                 </div>
             </div>
-
-            <form class="row">
-                <div class="md-12 form-radio">
-                    <label for="loaihinh-kinhdoanh-shop" class="label-control"><span style="color: red;">*</span>
-                        Loại hình </label>
-                    <div class="radios" style="display: flex">
-                        <div>
-                            <input type="radio" name="loaihinh-kinhdoanh" value="Cá nhân"> Cá nhân
-                        </div>
-                        <div>
-                            <input type="radio" name="loaihinh-kinhdoanh" value="Hộ kinh doanh"> Hộ kinh doanh
-                        </div>
-                        <div class="div">
-                            <input type="radio" name="loaihinh-kinhdoanh" value="Công ty"> Công ty
-                        </div>
-                    </div>
-                </div>
-                <div class="md-12 form">
-                    <label for="diachidk-shop" class="label-control" style="width: 250px;"><span
-                            style="color: red;">*</span> Địa chỉ đăng ký kinh doanh</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="md-12 form">
-                    <label for="hoadon-shop" class="label-control" style="width: 250px;"><span
-                            style="color: red;">*</span> Email nhận hóa đơn điện tử
-                    </label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="md-12 form">
-                    <label for="thue-shop" class="label-control" style="width: 250px; padding: 10px;">Mã số thuế <span
-                        style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-                <hr>
-                <div class="md-2 form-btn">
-                   <a href="./registerSell01" type="submit"
-						class="btn btn-outline-white btn-quaylai">Quay lại</a> <a
-						href="./registerSell03" type="submit"
-						class="btn btn-success btn-tieptheo">Tiếp theo</a>
-                </div>
-            </form>
+        <form class="row" action="/Ebook/user/registerSell/edit/registerSell02/${account.id}" method="post">
+  <div class="md-12 form-radio">
+    <label for="loaihinh-kinhdoanh-shop" class="label-control">
+      <span style="color: red;">*</span> Loại hình
+    </label>
+    <input type="hidden" name="id" class="form-control" value="${account.id }">
+         <input type="hidden" name="avatar" value="${account.avatar}" class="form-control">
+     <input type="hidden" name="background" value="${account.background}" class="form-control">
+     <input type="hidden" name="username" value="${account.username}" class="form-control">
+     <input type="hidden" name="password" value="${account.password}" class="form-control">
+        
+     <input type="hidden" name="phone" value="${account.phone}" class="form-control">
+          <input type="hidden" name="shopname" value="${account.shopname}" class="form-control">
+    <div class="radios">
+      <div>
+        <input type="radio" name="businessType" value="Cá nhân" required> Cá nhân
+      </div>
+      <div>
+        <input type="radio" name="businessType" value="Hộ kinh doanh" required> Hộ kinh doanh
+      </div>
+      <div>
+        <input type="radio" name="businessType" value="Công ty" required> Công ty
+      </div>
+    </div>
+  </div>
+  <div class="md-12 form">
+    <label for="diachidk-shop" class="label-control">
+      <span style="color: red;">*</span> Địa chỉ đăng ký kinh doanh
+    </label>
+    <input type="text" id="diachidk-shop" class="form-control" name="addresses[1].fullnameaddress" required value="${account.addresses[0].fullnameaddress}">
+  </div>
+  <div class="md-12 form">
+    <label for="hoadon-shop" class="label-control">
+      <span style="color: red;">*</span> Email nhận hóa đơn điện tử
+    </label>
+    <input type="email" id="hoadon-shop" class="form-control" name="email" required value="${account.email}">
+  </div>
+  <div class="md-12 form">
+    <label for="thue-shop" class="label-control">
+      <span style="color: red;">*</span> Mã số thuế
+    </label>
+    <input type="text" id="thue-shop" class="form-control" name="taxCode" required value="${taxCode}">
+  </div>
+  <hr>
+  <div class="md-2 form-btn">
+    <a href="/Ebook/user/registerSell/edit/${account.id}" class="btn btn-quaylai">Quay lại</a>
+    <button type="submit" class="btn btn-success btn-tieptheo">Tiếp theo</button>
+  </div>
+</form>
+</form>
         </div>
     </main>
 </body>

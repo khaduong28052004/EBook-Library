@@ -36,5 +36,8 @@ public class Bank {
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
+	@Nationalized
+	String nameBank;
+	boolean status;
 
 }

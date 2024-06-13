@@ -201,10 +201,10 @@
 									<div class="col-md-3 SP">
 										<div class="card">
 											<div class="image-container">
-												<img class="rounded-3 default-img" src="${item.image}"
+												<img class="rounded-3 default-img" src="/assets/img/${item.image}"
 													alt="Title" width="100%" height="" />
 												<c:forEach var="itemImg" items="${item.imageProducts}">
-													<img class="rounded-3 default-img" src="${itemImg.name}"
+													<img class="rounded-3 default-img" src="/assets/img/${itemImg.name}"
 														alt="Title" width="100%" height="" />
 												</c:forEach>
 											</div>
@@ -264,7 +264,7 @@
 						<c:forEach var="item" items="${listProductNew}">
 							<div class="card SP cardMoi">
 								<div class="image-container">
-									<img class="rounded-3 default-img" src="${item.image}"
+									<img class="rounded-3 default-img" src="/assets/img/${item.image}"
 										alt="Title" width="100%" height="" />
 									<c:forEach var="itemImg" items="${item.imageProducts}">
 										<img class="rounded-3 default-img" src="${itemImg.name}"
