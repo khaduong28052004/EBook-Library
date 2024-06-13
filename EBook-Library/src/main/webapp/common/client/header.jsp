@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  --%>
 <header class="container  sticky-top">
 	<style>
 .mic-search:hover {
@@ -213,19 +215,30 @@ opacity
 						<div class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false"> <i
-								class="fa-solid fa-user" style="color: green;"></i> Tài khoản
+								class="fa-solid fa-user" style="color: green;"></i> <c:if
+									test="${account.username!=null}">${account.username}</c:if> <c:if
+									test="${account.username==null}">Tài khoản</c:if>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item"
-									href="/Ebook/account/changePass">Đổi mật khẩu</a></li>
+									href="/user/changepass">Đổi mật khẩu</a></li>
 								<li><a class="dropdown-item"
-									href="/Ebook/account/changePass">Cập nhật tài khoản</a></li>
+									href="/user/changepass">Cập nhật tài khoản</a></li>
 								<li><a class="dropdown-item"
-									href="/Ebook/user/registerSell/registerSell01">Đăng ký bán
+									href="/user/registerSell/registerSell01">Đăng ký bán
 										sách</a></li>
 								<!-- <hr> -->
-								<li><a class="dropdown-item" href="/Ebook/account/login">Đăng
+								<li><a class="dropdown-item" href="/login">Đăng
 										xuất</a></li>
+								<%-- 		<c:if test="${roleDetailOptional!=null}"></c:if>		 --%>
+							
+								<c:forEach var="roleDetailOptional"
+									items="${roleDetailOptional}">
+									<li style="color: blue;"><a href="/${roleDetailOptional.role.name}/home" class="dropdown-item" href="" > ${roleDetailOptional.role.name}</a></li>
+								</c:forEach>
+
+
+
 							</ul>
 						</div>
 					</ul>

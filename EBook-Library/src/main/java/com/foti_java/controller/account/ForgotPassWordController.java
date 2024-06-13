@@ -38,7 +38,7 @@ public class ForgotPassWordController {
 			changeOTP();
 			return "client/updatePassword";
 		} else {
-			model.addAttribute("error", "Email không tồn tại");
+			model.addAttribute("errorF", "Email không tồn tại");
 			model.addAttribute("page", "ft");
 			return "client/login";
 		}
@@ -49,10 +49,10 @@ public class ForgotPassWordController {
 	public String changePassWord(@RequestParam("maOTP") String ma, @RequestParam("password") String passWord,
 			@RequestParam("confirm") String confirm, Model model) {
 		if (!maOTP.equals(maOTPOld) || !maOTPOld.equals(ma)) {
-			model.addAttribute("error", "Sai OTP hoặc OTP đã hết hạn");
+			model.addAttribute("errorF", "Sai OTP hoặc OTP đã hết hạn");
 			return "client/updatePassword";
 		} else if (!passWord.equals(confirm)) {
-			model.addAttribute("error", "Xác nhận mật khẩu không đúng");
+			model.addAttribute("errorF", "Xác nhận mật khẩu không đúng");
 			return "client/updatePassword";
 		} else {
 			account.setPassword(MD5Encoder.encode(passWord));

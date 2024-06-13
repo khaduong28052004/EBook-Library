@@ -3,6 +3,7 @@ package com.foti_java.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,14 @@ import com.foti_java.model.Commune;
 import com.foti_java.model.District;
 import com.foti_java.model.Product;
 import com.foti_java.model.Province;
+import com.foti_java.model.RoleDetail;
 import com.foti_java.repository.AccountRepositoty;
 import com.foti_java.repository.AddressRepository;
 import com.foti_java.repository.CommuneRepository;
 import com.foti_java.repository.DistrictRepository;
 import com.foti_java.repository.ProductRepository;
 import com.foti_java.repository.ProvinceRepository;
+import com.foti_java.repository.RoleDetailRepository;
 import com.foti_java.service.SessionService;
 import com.foti_java.utils.ApiUtil;
 
@@ -43,6 +46,8 @@ public class HomeTestController {
 	AccountRepositoty accountRepositoty;
 	@Autowired
 	AddressRepository addressRepository;
+	@Autowired
+	RoleDetailRepository roleDetailRepository;
 	@Autowired
 	SessionService sessionService;
 
@@ -68,6 +73,15 @@ public class HomeTestController {
 		Sort sort = Sort.by(Sort.Direction.DESC, "quantitySell");
 		Pageable pageableHot = PageRequest.of(0, 2, sort);
 		Account account = sessionService.getAttribute("account");
+		
+		
+		List<RoleDetail> roleDetailOptional = roleDetailRepository.findByAccount(account.getId());
+		
+		
+		model.addAttribute("roleDetailOptional", roleDetailOptional);
+		System.out.println("home nè");
+//		System.out.println(roleDetailOptional.);
+		model.addAttribute("account",account);	
 		Page<Product> pageProductHot = productRepository.findAllByAccountNot(account, pageableHot);
 		List<Integer> listId = new ArrayList<>();
 		for (int i = 0; i < pageProductHot.getContent().size(); i++) {

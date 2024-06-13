@@ -22,10 +22,9 @@
 						href="#" class="icon"><i class='bx bxl-github'></i></a>
 				</div>
 				<p style="color: red">${error}</p>
-				<input type="text" placeholder="Mã OTP" name="maOTP" required>
-				<input type="password" placeholder="Mật Khẩu" name="password"
-					required> <input type="password"
-					placeholder="Xác Nhận Mật Khẩu" name="confirm" required>
+				<input type="text" placeholder="Mã OTP" name="maOTP" value="" required>
+				<input type="password" placeholder="Mật Khẩu"  name="password" value="" required>
+			    <input type="password" placeholder="Xác Nhận Mật Khẩu" name="confirm" required>
 				<button id="xacNhan">Xác Nhận</button>
 			</form>
 		</div>
