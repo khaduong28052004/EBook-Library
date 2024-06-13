@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.foti_java.model.Account;
 
@@ -76,4 +77,11 @@ public interface AccountRepositoty extends JpaRepository<Account, Integer> {
 	
 	@Query(value = "SELECT * FROM Accounts WHERE ID NOT IN (SELECT account_id  FROM RoleDetails WHERE role_id = 1)",nativeQuery = true)
 	List<Account> findAllListAccountNotAdmin();
+	
+	// Thu
+	@Query(value = "SELECT * FROM Accounts WHERE Accounts.username = :username", nativeQuery = true)
+	Account getByUsername(String username);
+
+	@Query(value = "SELECT Accounts.* FROM Accounts JOIN Products P ON P.account_id =Accounts.id JOIN BillDetails BD ON BD.product_id = P.id WHERE BD.bill_id= :billId", nativeQuery = true)
+	Account getAccount(@Param("billId") Integer idBill);
 }
