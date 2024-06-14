@@ -29,6 +29,14 @@ public class LoginController {
 		model.addAttribute("page", "");
 		return "client/login";
 	}
+	
+  // thay đăng nhập 
+	@RequestMapping("/our")
+	public String our(Model model) {
+		sessionService.removeAttribute("account");
+		model.addAttribute("page", "");
+		return "redirect:/login";
+	}
 
 	@PostMapping("/login")
 	public String postLogin(@RequestParam("userName") String userName, @RequestParam("password") String passWord,

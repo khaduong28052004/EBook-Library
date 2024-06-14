@@ -67,7 +67,7 @@
 						href="#" class="icon"><i class='bx bxl-github'></i></a>
 				</div>
 				<input type="email" placeholder="Email" name="email"> <span
-					style="color: red;">${errorE}</span>
+					style="color: red;">${errorF}</span>
 				<button>Xác Nhận</button>
 
 			</form>
