@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import com.foti_java.repository.RoleRepository;
 import com.foti_java.service.SendMailService;
 import com.foti_java.service.SessionService;
 import com.foti_java.utils.MD5Encoder;
+import com.foti_java.utils.RanDom;
 @Controller
 //@RequestMapping("user")
 public class RegisterController {
@@ -61,25 +64,94 @@ public class RegisterController {
 				return "client/login";
 			}
 		}
+		maOTP = RanDom.generateRandomCode(6);
+		maOTPOld = maOTP;
+		email = mail;
 		errorR = "";
-		Account account = new Account();
+		SendOTP(email);
+		System.out.println("Mã OTP" + maOTP);
+		System.out.println("Mã OTP Old" + maOTPOld);
+		changeOTP();
+		model.addAttribute("gmail",mail);
+	    account = new Account();
 		account.setUsername(user);
 		account.setFullname(fullname);
 		account.setPassword(MD5Encoder.encode(password));
 		account.setEmail(mail);
 		account.setStatus(true);
-		accountRepository.saveAndFlush(account);
-		System.out.println(account.getFullname());
-		List<Role> role = roleRepository.findAll();
-		RoleDetail roleDetail = new RoleDetail();
-		roleDetail.setAccount(account);
-		roleDetail.setRegistrationDate(null);
-		roleDetail.setRole(role.get(3));
-		roleDetailRepository.saveAndFlush(roleDetail);
-
+//		accountRepository.saveAndFlush(account);
+//		System.out.println(account.getFullname());
+//		List<Role> role = roleRepository.findAll();
+//		RoleDetail roleDetail = new RoleDetail();
+//		roleDetail.setAccount(account);
+//		roleDetail.setRegistrationDate(null);
+//		roleDetail.setRole(role.get(3));
+//		roleDetailRepository.saveAndFlush(roleDetail);
 		model.addAttribute("errorR", "Đăng ký thành công! Vui lòng đăng nhập.");
-		return "client/login";
+		return "client/SendMailDo";
 	}
+    public String errorM=""; 
+	@GetMapping("/resendOtp/{gmail}")
+	public String resendOtp(Model model,@PathVariable(name = "gmail") String mail) {
+		maOTP = RanDom.generateRandomCode(6);
+		maOTPOld = maOTP;
+		SendOTP(mail);
+		changeOTP();
+		errorM = "Đã gửi lại vui lòng kiểm tra mail! ";
+		model.addAttribute("error",errorM);
+		return "client/SendMailDo";
+	}
+	
+	@PostMapping("/xacnhan")
+	public String xacNhan(Model model,@RequestParam("otp") String optl ) {
+		if (optl.equals(maOTP)) {		
+			accountRepository.saveAndFlush(account);
+			List<Role> role = roleRepository.findAll();
+			RoleDetail roleDetail = new RoleDetail();
+			roleDetail.setAccount(account);
+			roleDetail.setRegistrationDate(null);
+			roleDetail.setRole(role.get(2));
+			roleDetailRepository.saveAndFlush(roleDetail);
+			errorM = "đăng ký thành công!";
+			model.addAttribute("error",errorM);
+		
+			return "client/login";
+		}
+		errorM = "Xác nhận thất bại!";
+		model.addAttribute("error",errorM);
+		model.addAttribute("gmail",email);
+		return "client/SendMailDo";
+	}
+	
+	public void changeOTP() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int second = 60;
+				boolean shouldContinue = true;
+				while (shouldContinue) {
+					try {
+						Thread.sleep(1000);
+						second--;
+						if (second == 0) {
+
+							maOTP = RanDom.generateRandomCode(6);
+							while (shouldContinue) {
+								if (maOTP.equals(maOTPOld)) {
+									shouldContinue = false;
+									System.out.println("OTP đã hết hạn");
+								} else {
+									maOTP = RanDom.generateRandomCode(6);
+								}
+							}
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}	
 	
 	public void SendOTP(String email) {
 		String subject = "Xác nhận yêu cầu quên mật khẩu - Mã OTP";
@@ -90,7 +162,7 @@ public class RegisterController {
 				+ "    <title>Xác nhận yêu cầu quên mật khẩu</title>\r\n" + "</head>\r\n" + "<body>\r\n"
 				+ "    <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;\">\r\n"
 				+ "        <h2 style=\"color: #333333;\">Xác nhận yêu cầu quên mật khẩu</h2>\r\n"
-				+ "        <p style=\"color: #666666;\">Xin chào, " + account.getFullname() + "</p>\r\n"
+				+ "        <p style=\"color: #666666;\">Xin chào, </p>\r\n"
 				+ "        <p style=\"color: #666666;\">Bạn đã yêu cầu đặt lại mật khẩu cho tài khoản của mình. Dưới đây là mã OTP để xác nhận quá trình này:</p>\r\n"
 				+ "        <p style=\"background-color: #f2f2f2; padding: 10px; font-size: 15px; font-weight: bold; color: #333333;\">Mã OTP của bạn là : ["
 				+ maOTP + "]</p>\r\n"
