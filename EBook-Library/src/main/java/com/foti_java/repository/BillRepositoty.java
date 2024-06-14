@@ -42,7 +42,7 @@ public interface BillRepositoty extends JpaRepository<Bill, Integer> {
     @Query("Select count(b) FROM Bill b INNER JOIN b.billDetails bd Where b.status = false And b.finishDay is null And bd.product.account.id = :id")
     Integer billChuaDuyet(@Param("id") Integer id);
    
-    @Query("Select b FROM Bill b INNER JOIN b.billDetails bd Where b.status = true And b.finishDay is null And bd.product.account.id = :id and b.active = false")
+    @Query("Select b FROM Bill b INNER JOIN b.billDetails bd Where bd.product.account.id = :id")
     List<Bill> findByIdAccount(@Param("id") Integer id);
 
 	  //Tuyen

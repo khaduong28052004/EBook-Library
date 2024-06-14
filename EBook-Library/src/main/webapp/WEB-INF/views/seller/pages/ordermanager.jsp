@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,9 @@
 
 
 
+<style type="text/css">
 
+</style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -22,7 +25,7 @@
 			<div class="container-fluid">
 				<!-- Main row -->
 				<div class="row">
-					<section class="col-lg-12 connectedSortable">
+<%-- 					<section class="col-lg-12 connectedSortable">
 						<!-- BAR CHART -->
 						<div class="card card-success">
 							<div class="card-header">
@@ -48,7 +51,7 @@
 							<!-- /.card-body -->
 						</div>
 						<!-- /.card -->
-					</section>
+					</section> --%>
 					<!-- full col -->
 					<section class="col-lg-12 connectedSortable">
 						<div class="card">
@@ -70,6 +73,7 @@
 											<th>Phí giao hàng</th>
 											<th>Chiết khấu</th>
 											<th>Thành tiền</th>
+											<th>Trạng thái</th>
 
 											<th style="width: 200px;">Thao tác</th>
 										</tr>
@@ -82,72 +86,104 @@
 												<td class="align-middle">${bill.account.phone}</td>
 												<td class="align-middle">${bill.address}</td>
 												<td class="align-middle">${bill.quantity}</td>
-												<td class="align-middle">${bill.totalPrice}</td>
+												<td class="align-middle"> <fmt:formatNumber
+														value="${bill.totalPrice}" type="currency" pattern="#,##0"
+														currencySymbol="" /><sup>đ</sup></td>
 												<td class="align-middle">${bill.dateBuy}</td>
-												<td class="align-middle">${bill.priceShipping}</td>
+												<td class="align-middle">
+												<fmt:formatNumber
+														value="${bill.priceShipping}" type="currency" pattern="#,##0"
+														currencySymbol="" /><sup>đ</sup></td>
 												<c:set var="chietKhau" value="${bill.totalPrice * 0.01}"></c:set>
-												<td class="align-middle">${bill.totalPrice * 0.01}</td>
-												<td class="align-middle">${bill.totalPrice - chietKhau}</td>
-												<td class="align-middle"><a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#xacNhan${bill.id}">Xác nhận</a> 
-												<a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal${bill.id}">Hủy đơn</a></td>
+												<td class="align-middle"><fmt:formatNumber
+														value="${bill.totalPrice * 0.01} " type="currency" pattern="#,##0"
+														currencySymbol="" /><sup>đ</sup></td>
+												<td class="align-middle"><fmt:formatNumber
+														value="${bill.totalPrice - chietKhau} " type="currency" pattern="#,##0"
+														currencySymbol="" /><sup>đ</sup></td>
+												<td class="align-middle"><c:if
+														test="${bill.status == true && bill.finishDay ==null && bill.active == false}">Chờ duyệt</c:if>
+													<c:if
+														test="${bill.status == false && bill.finishDay !=null}">Đã hủy</c:if>
+													<c:if test="${bill.status == true && bill.active == true}">${bill.orderStatuses.name}</c:if>
+												</td>
+												<td class="align-middle"><c:if
+														test="${bill.status == true && bill.finishDay ==null && bill.active == false}">
+														<a class="btn btn-success" data-bs-toggle="modal"
+															data-bs-target="#xacNhan${bill.id}">Xác nhận</a>
+														<a class="btn btn-danger" data-bs-toggle="modal"
+															data-bs-target="#exampleModal${bill.id}">Hủy đơn</a>
+													</c:if></td>
 											</tr>
 
 											<!-- Modal XacNhan -->
-											<div class="modal fade" id="xacNhan${bill.id}"
-												tabindex="-1" aria-labelledby="exampleModalLabel"
-												aria-hidden="true">
+											<div class="modal fade" id="xacNhan${bill.id}" tabindex="-1"
+												aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h1 class="modal-title fs-5" id="exampleModalLabel">Xác Nhận
-																Đơn Hàng</h1>
+															<h1 class="modal-title fs-5" id="exampleModalLabel">Xác
+																Nhận Đơn Hàng</h1>
 															<button type="button" class="btn-close"
 																data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
 														<div class="modal-body">
-														<p>Bạn muốn xác nhận đơn hàng với mã đơn hàng là: ${bill.id} không?</p>
-															</div>
-																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary"
-																		data-bs-dismiss="modal">Thoát</button>
-																	<a type="submit" class="btn btn-primary" href="/seller/ordermanager/xacNhan?id=${bill.id}">Xác
-																		Nhận</a>
-															</div>
+															<p>Bạn muốn xác nhận đơn hàng với mã đơn hàng là:
+																${bill.id} không?</p>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" id="xacNhan"
+																>Thoát</button>
+															<a type="submit" class="btn btn-primary"
+																href="/seller/ordermanager/xacNhan?id=${bill.id}">Xác
+																Nhận</a>
+														</div>
 													</div>
 												</div>
 											</div>
 
 											<!-- Modal Huy -->
-											<div class="modal fade" id="exampleModal${bill.id}" tabindex="-1"
-												aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal fade" id="exampleModal${bill.id}"
+												tabindex="-1" aria-labelledby="exampleModalLabel"
+												aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h1 class="modal-title fs-5" id="exampleModalLabel">Hủy Đơn Hàng</h1>
+															<h1 class="modal-title fs-5" id="exampleModalLabel">Hủy
+																Đơn Hàng</h1>
 															<button type="button" class="btn-close"
 																data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
 														<div class="modal-body">
-														<form action="/seller/ordermanager/huy?id=${bill.id}" method="post">
-														<div class="mb-3">
-														<label class="form-label">Mã đơn hàng:</label> <span>${bill.id}</span>
-														<input value="${bill.account.email}" name="email${bill.id}" type="hidden">
-														<input value="${bill.billDetails[0].product.account.email}" name="emailSuprot${bill.id}" type="hidden">
-														<input value="${bill.account.fullname}" name="fullname${bill.id}" type="hidden">
-														<input value="${bill.address}" name="address${bill.id}" type="hidden">
+															<form action="/seller/ordermanager/huy?id=${bill.id}"
+																method="post">
+																<div class="mb-3">
+																	<label class="form-label">Mã đơn hàng:</label> <span>${bill.id}</span>
+																	<input value="${bill.account.email}"
+																		name="email${bill.id}" type="hidden"> <input
+																		value="${bill.billDetails[0].product.account.email}"
+																		name="emailSuprot${bill.id}" type="hidden"> <input
+																		value="${bill.account.fullname}"
+																		name="fullname${bill.id}" type="hidden"> <input
+																		value="${bill.address}" name="address${bill.id}"
+																		type="hidden">
+																</div>
+																<div class="mb-3">
+																	<label class="form-label">Lý do hủy đơn <span
+																		style="color: red;">*</span></label>
+																	<textarea rows="" cols=""
+																		name="contentCancel${bill.id}" class="form-control"
+																		required="required"></textarea>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-secondary" 
+																		data-bs-dismiss="modal">Thoát</button>
+																	<button type="submit" class="btn btn-danger">Xác
+																		Nhận</button>
+																</div>
+															</form>
 														</div>
-														<div class="mb-3">
-														<label class="form-label">Lý do hủy đơn <span style="color:red;">*</span></label>
-														<textarea rows="" cols="" name="contentCancel${bill.id}" class="form-control"required="required"></textarea>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary"
-																data-bs-dismiss="modal">Thoát</button>
-															<button type="submit" class="btn btn-danger">Xác Nhận</button>
-														</div>
-														</form>
-														</div>
-														
+
 													</div>
 												</div>
 											</div>
@@ -160,10 +196,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 
 
 	</div>
@@ -183,7 +215,7 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 
-    var billSucces = ${listSucces}; 
+/*     var billSucces = ${listSucces}; 
     var billFalse = ${listFalse};
     var billValuesSucces = billSucces.map(function(str) {
         var value = str.split('=')[1];
@@ -224,7 +256,7 @@
 					pointHighlightStroke : 'rgba(220,220,220,1)',
 					data : billValuesFalse
 				}, ]
-			};
+			}; */
 
 			var barChartCanvas = document.getElementById('barChart');
 			if (barChartCanvas) {
@@ -273,7 +305,22 @@
 				"autoWidth" : false,
 				"responsive" : true,
 			});
-		});
+		}); 
+		
+/* 		document.getElementById("example1").addEventListener('click', (event) => {
+	        let target = event.target;
+	        while (target && target.nodeName !== 'TR') {
+	            target = target.parentElement;
+	        }
+	        if (target) {
+	            const cells = target.getElementsByTagName('td');
+	            if (cells.length > 0) {
+	                const id = cells[0].innerText;
+	                window.location.href="/seller/ordermanger/billDetails?id="+id;
+	            }
+	        }
+	    });
+ */
 	</script>
 
 </body>

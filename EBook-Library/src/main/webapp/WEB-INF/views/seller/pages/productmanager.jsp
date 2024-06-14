@@ -351,7 +351,7 @@ display: block;
 																<input type="file" class="form-control" id="file-upload"
 																	multiple="multiple"
 																	accept="image/png, image/jpeg, image/jpg" name="images"
-																	required="required" />
+																	required/>
 															</div>
 															<div class="show-img-form slider">
 																<div class="container-images slides">
@@ -768,8 +768,6 @@ if ('${images[3]}'.length > 0) {
          return imagesArray.some(existingImage => existingImage.name === image.name);
      }
 
-     // THÊM IMG
-     let checkValue = true;
      if (inputSaveImage){
          inputSaveImage.addEventListener("change", (event) => {
         	 
@@ -785,7 +783,6 @@ if ('${images[3]}'.length > 0) {
                  // Kiểm tra tổng số ảnh nếu thêm ảnh hiện tại
                  if (files.length+currentImageCount > 4){
                      message.innerHTML = "Bạn chỉ có thể thêm tối đa 4 ảnh.";
-                     checkValue = false;
                      return;
                  }
         
@@ -793,7 +790,6 @@ if ('${images[3]}'.length > 0) {
                  if (image.size > maxSize) {
                      message.innerHTML = "Kích thước file ảnh quá lớn, vui lòng chọn file khác.";
                      inputSaveImage.value = ''; // Reset file input
-                     checkValue = false;
                      return;
                  }
 
@@ -801,37 +797,16 @@ if ('${images[3]}'.length > 0) {
                  if (!allowedTypes.includes(image.type)) {
                      message.innerHTML = "Loại file không hợp lệ, vui lòng chọn file ảnh có định dạng PNG, JPEG hoặc JPG.";
                      inputSaveImage.value = ''; // Reset file input
-                     checkValue = false;
                      return;
                  }
-                 checkAI(inputSaveImage,index);	
-                 imagesArray.push(image);
+                 checkAI(inputSaveImage,index, image);	
+                
              }
 
              // Clear message and reset input
              message.innerHTML = "";
              inputSaveImage.value = ''; // Reset file input
-             countListImages = currentImageCount;
 
-             displayImage();
-             const showImgDivs = document.querySelectorAll('.show-img-div');
-             showImgDivs.forEach(div => {
-            	    const imgCount = div.querySelectorAll('img').length;
-            	    console.log(`Number of <img> tags in this div:`+imgCount);
-            	    countListImages = imgCount;
-            	});
-             var button = document.getElementById('updateButton');
-             var creatteButton = document.getElementById('creatteButton');
-            
-             if(checkValue == false||countListImages < 2){
-             	updateButton.disabled = true;
-                 createButton.disabled = true;
-                 message.innerHTML = "Bạn vui lòng chọn tối thiếu 2 ảnh.";
-             }else{
-             	updateButton.disabled = false;
-                 createButton.disabled = false;
-             }
-             console.log("Số ảnh:"+countListImages);
          });
      } else {
          console.log("Element with id 'show-img-form' not found.");
@@ -843,7 +818,7 @@ if ('${images[3]}'.length > 0) {
      const MODEL_ID = "general-image-detection";
      const MODEL_VERSION_ID = "1580bb1932594c93b7e2e04456af7c6f";
 
-     function checkAI(inputSaveImage, index,) {
+     function checkAI(inputSaveImage, index, image) {
     	 
        const file = inputSaveImage.files[index];
    
@@ -909,7 +884,6 @@ if ('${images[3]}'.length > 0) {
          region.data.concepts.forEach((concept) => {
              console.log(concept.name);
            if (concept.name == 'Book' || concept.name == 'Poster') {
-             outputHtml += `<p>Book.<p>`;
              bookDetected = true;
            }
          });
@@ -917,8 +891,10 @@ if ('${images[3]}'.length > 0) {
      });
 
                  if (!bookDetected) {
-                	 message.innerHTML = "Ảnh không hợp lệ sau khi kiểm tra AI.";
-                   checkValue = false;
+                	 message.innerHTML = "Ảnh không hợp lệ.";
+                 }else{
+                	 imagesArray.push(image);
+                	 displayImage();
                  }
                  checkBTNLoad();
                 
@@ -933,6 +909,7 @@ if ('${images[3]}'.length > 0) {
          alert("Please select an image file.");
        }
      }
+
      function checkBTNLoad() {
     	   var button = document.getElementById('updateButton');
     	    var creatteButton = document.getElementById('creatteButton');

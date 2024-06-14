@@ -94,7 +94,6 @@ public class SellerProductManagerController {
 			@RequestParam("price") double price, @RequestParam("discount") double discount,
 			@RequestParam("introduce") String introduce, @RequestParam("discountType") boolean discountType,
 			@RequestParam("weight") double weight) {
-
 		Product products = new Product();
 		products.setName(name);
 		products.setAccount(account);
@@ -115,7 +114,8 @@ public class SellerProductManagerController {
 		products.setIntroduce(introduce);
 		products.setImage(getImage(images));
 		products.setWeight(weight);
-		image = getListImage(images);
+//		System.out.println("Img File: "+ images.get(0));
+//		image = getListImage(images);	
 		if (checkNameProduct(name) && checkSale(discountType, discount, price)) {
 			productRepository.saveAndFlush(products);
 			for (MultipartFile multipartFile : images) {
