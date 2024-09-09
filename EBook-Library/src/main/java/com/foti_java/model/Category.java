@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +31,7 @@ public class Category {
 	Integer id;
 	@Nationalized
 	String name;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "category")
 	List<Product> products;
 }

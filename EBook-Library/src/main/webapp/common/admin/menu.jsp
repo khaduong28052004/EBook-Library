@@ -16,14 +16,9 @@
 			</div>
 			<div class="info">
 				<a href="/admin/home" class="d-block"> 
-				<c:choose>
-					 <c:when test="${account!=null}">
-				      ${account.username}
-				    </c:when>
-					<c:otherwise>
-				        Tài khoản
-				    </c:otherwise>
-				</c:choose>
+		<c:if
+									test="${account.username!=null}">${account.username}</c:if> <c:if
+									test="${account.username==null}">Tài khoản</c:if>
 				</a>
 			</div>
 		</div>

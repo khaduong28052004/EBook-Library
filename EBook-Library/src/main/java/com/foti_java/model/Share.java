@@ -26,6 +26,7 @@ public class Share {
 	Integer id;
 	String email;
 	@ManyToOne
+	
 	@JoinColumn(name = "account_id")
 	Account account;
 

@@ -3,6 +3,8 @@ package com.foti_java.model;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,6 +39,7 @@ public class Chat {
 	@ManyToOne
 	@JoinColumn(name = "idFrom")
 	Account account;
+	 @JsonIgnore
 	@OneToMany(mappedBy = "chat")
 	List<ImageChat> imageChat;
 }

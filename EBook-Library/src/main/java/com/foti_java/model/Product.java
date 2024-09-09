@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -50,7 +53,7 @@ public class Product {
 	int quantitySell;
 	boolean active;
 	double weight;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<ImageProduct> imageProducts;
 
@@ -61,19 +64,19 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	Account account;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<CartDetail> cartDetail;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<BillDetail> billDetails;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<Evalue> evalues;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<Share> shares;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<Like> likes;
 }

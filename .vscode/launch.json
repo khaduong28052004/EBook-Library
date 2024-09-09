@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EBookLibraryApplication<EBook-Library>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.foti_java.EBookLibraryApplication",
+            "projectName": "EBook-Library",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -31,7 +31,7 @@ public class LoginController {
 	}
 	
   // thay đăng nhập 
-	@RequestMapping("/our")
+	@RequestMapping("/out")
 	public String our(Model model) {
 		sessionService.removeAttribute("account");
 		model.addAttribute("page", "");

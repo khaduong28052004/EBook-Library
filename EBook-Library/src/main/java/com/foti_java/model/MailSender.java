@@ -3,6 +3,8 @@ package com.foti_java.model;
 import java.io.File;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -18,8 +20,11 @@ public class MailSender {
 	private String toEmail;
 	private String subject;
 	private String content;
+	 @JsonIgnore
 	private List<String> cc;
+	 @JsonIgnore
 	private List<String> bcc;
+	 @JsonIgnore
 	private List<File> files;
 
 	public MailSender(String toEmail, String subject, String content) {

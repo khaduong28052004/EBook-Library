@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +34,7 @@ public class PaymentMethod {
 	Integer id;
 	@Nationalized
 	String name;
-	
+	 @JsonIgnore
 	@OneToMany(mappedBy = "paymentMethod")
 	List<Bill> bills;
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,7 +38,7 @@ public class Commune {
 	@ManyToOne
 	@JoinColumn(name = "districts_id")
 	District district;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "commune")
 	List<Address> addresses;
 }

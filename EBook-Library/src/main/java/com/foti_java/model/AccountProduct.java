@@ -2,6 +2,8 @@ package com.foti_java.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +18,7 @@ public class AccountProduct {
 	private String avatars;
 	private String shopName;
 	private Long quantity;
+	 @JsonIgnore
 	private List<Object[]> products;
 
 	public AccountProduct(String avatars, String shopName, Long quantity, List<Object[]> products) {

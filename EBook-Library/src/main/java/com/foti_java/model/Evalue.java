@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,7 +43,7 @@ public class Evalue {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	Product product;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "evalue")
 	List<ImageEvalue> imageEvalues;
 

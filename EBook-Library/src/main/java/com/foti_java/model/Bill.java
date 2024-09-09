@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,6 +46,7 @@ public class Bill {
 	String address;
 	double priceShipping;
 	Date finishDay;
+	 @JsonIgnore
 	@OneToMany(mappedBy = "bill")
 	List<BillDetail> billDetails;
 	@OneToOne(mappedBy = "bill")

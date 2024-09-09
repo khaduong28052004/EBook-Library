@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,9 +32,10 @@ public class Province {
 	@Nationalized
 	String name;
 	String provinceId;
+	 @JsonIgnore
 	@OneToMany(mappedBy = "province")
 	List<District> districts;
-
+	 @JsonIgnore
 	@OneToMany(mappedBy = "province")
 	List<Address> addresses;
 }
